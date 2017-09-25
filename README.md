@@ -6,8 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Visual Studio Code open in view menu open Integrated Terminal:
 - in terminal
-    - `git clone https://github.com/munHunger/TWBIV-frontend.git` then
-    - `cd TWBIV-frontend` then
+    - `git clone https://github.com/munHunger/Hackademy-IV-frontend.git` then
+    - `cd Hackademy-IV-frontend` then
     - `npm install` 
 
 ## Development server
