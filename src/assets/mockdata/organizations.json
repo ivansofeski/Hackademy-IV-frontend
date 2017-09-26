@@ -4,134 +4,28 @@
             "id": 1,
             "org_id": "ORG12-ISP9000-71812",
             "name": "Org. A",
-            "address": [
-                {
-                    "label": "primary",
-                    "value": {
-                        "city": "Malmö",
-                        "street": "Främsteby Karlsborg 3",
-                        "postal": 28236
-                    }
-                },
-                {
-                    "label": "secondary",
-                    "value": {
-                        "city": "Lund",
-                        "street": "Bonaröd 84",
-                        "postal": 28199
-                    }
-                }
-            ],
+            "address": "Främsteby Karlsborg 3, 28236, Malmö",
             "contact": {
-                "phone": [
-                    {
-                        "label": "primary",
-                        "value": "046-8807494"
-                    },
-                    {
-                        "label": "fax",
-                        "value": "0280-3418348"
-                    }
-                ],
-                "email": [
-                    {
-                        "label": "primary",
-                        "value": "support@orten.io"
-                    },
-                    {
-                        "label": "other",
-                        "value": "someemail@email1.net"
-                    },
-                    {
-                        "label": "other",
-                        "value": "project_nano@nano.org"
-                    }
-                ],
-                "persons": [
-                    "Ivan",
-                    "Matts",
-                    "Oscar",
-                    "Reda"
-                ]
+                "phone": "046-8807494",
+                "email": "support@orten.io",
+                "person": "Ivan"
             },
             "password": "@#aaOB23WEpp!",
-            "billing": {
-                "address": [
-                    {
-                        "label": "default",
-                        "value": {
-                            "city": "Lund",
-                            "street": "Handslagarevägen 28",
-                            "postal": 28199
-                        }
-                    }
-                ]
-            },
+            "billing": "Handslagarevägen 28, 28199, Lund",
             "description": "Hello compassionate hyena one up infectiously scowled octopus one far walrus goodness as gosh when inclusively lenient husky this bluebird underneath this where more jeepers under thoughtful."
-        },
+        }, 
         {
             "id": 2,
             "org_id": "ORG15-ISP9000-56923",
             "name": "Org. B",
-            "address": [
-                {
-                    "label": "primary",
-                    "value": {
-                        "city": "Goteborg",
-                        "street": "Norrfjäll 58",
-                        "postal": 26215
-                    }
-                },
-                {
-                    "label": "secondary",
-                    "value": {
-                        "city": "Stockholm",
-                        "street": "Kläppinge 67",
-                        "postal": 29122
-                    }
-                }
-            ],
+            "address": "Norrfjäll 58, 26215, Goteborg",
             "contact": {
-                "phone": [
-                    {
-                        "label": "primary",
-                        "value": "016-4859091"
-                    },
-                    {
-                        "label": "fax",
-                        "value": "0225-6249339"
-                    }
-                ],
-                "email": [
-                    {
-                        "label": "primary",
-                        "value": "support@jayway.com"
-                    },
-                    {
-                        "label": "other",
-                        "value": "somestupid@emailaddress.net"
-                    }
-                ],
-                "persons": [
-                    "Kasha",
-                    "Olaf",
-                    "James",
-                    "Natasha"
-                ]
+                "phone": "016-4859091",
+                "email": "support@jayway.com",
+                "person": "Olaf"
             },
             "password": "qwerty@#45",
-            "billing": {
-                "address": [
-                    {
-                        "label": "default",
-                        "value": {
-                            "city": "Stockholm",
-                            "street": "Kläppinge 67",
-                            "postal": 29122
-                        }
-                    }
-                ]
-            },
+            "billing": "Kläppinge 67, 29122, Stockholm",
             "description": "Far more some goodness alas hello jeepers hello amongst jeepers seagull anathematically well drove more one bound through while much in however overshot strived orca in burned showed however by."
         }
     ]
