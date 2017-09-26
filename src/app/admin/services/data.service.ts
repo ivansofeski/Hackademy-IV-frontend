@@ -1,19 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/Rx';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DataService {
 
-  private subject = new Subject<any>();
+  constructor(private http: Http) { }
 
-  send(data: any) {
-    this.subject.next(data);
+  get(path: string): Observable<any> {
+    if (path === undefined) {
+      return;
+    }
+
+    return this.http.get(path)
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch(this.handleError);
   }
 
-  get() {
-    return this.subject.asObservable();
+  set(data: any): void {
+
   }
 
+  private handleError(errorResponse: Response) {
+    console.log(errorResponse['message']);
+    return Observable.throw(errorResponse.json().error || 'Server error');
+  }
 }
