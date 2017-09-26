@@ -7,13 +7,16 @@ import { SharedModule } from '../shared/shared.module';
 import { OrganizationListComponent } from './organization-list/organization-list.component';
 import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
 
+// Services
+import { DataService } from './services/data.service';
+
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule
   ],
-  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent]
-  
+  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent],
+  providers: [DataService]
 })
 export class AdminModule { }
