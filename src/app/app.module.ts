@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AdminModule } from './admin/admin.module';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    ProjectsModule,
     AdminModule,
     BrowserAnimationsModule
   ],
