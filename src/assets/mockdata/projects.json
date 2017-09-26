@@ -1,0 +1,31 @@
+{
+    "projects": [
+        {
+            "id": 1,
+            "title": "Project A1",
+            "date_to": "2017/09/01",
+            "date_from": "2017/12/01",
+            "location": {
+                "cords": {
+                    "pinpointed": "false",
+                    "long": 0,
+                    "lat": 0
+                },
+                "city": "Malmö"
+            },
+            "funding": {
+                "goal": 50000,
+                "pledged": 10232,
+                "currency": "sek"
+            },
+            "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
+            "uploads": {
+                "images": [],
+                "videos": [
+                    "https://www.youtube.com/watch?v=_a0pwb9NvFE",
+                    "https://www.youtube.com/watch?v=yWyj9ORkj8w"
+                ]
+            }
+        }
+    ]
+}
