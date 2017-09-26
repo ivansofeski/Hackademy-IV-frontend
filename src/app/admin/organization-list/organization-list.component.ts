@@ -7,10 +7,10 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./organization-list.component.scss']
 })
 export class OrganizationListComponent implements OnInit, OnDestroy {
-  
+
   errorMessage: string;
   fetchedData: any[];
-  organizationsFilePath: string = '../../assets/organizations.json';
+  organizationsFilePath = '../../../assets/mockdata/organizations.json';
 
   // Constructor here
   constructor(private _dataService: DataService) { }
@@ -23,10 +23,8 @@ export class OrganizationListComponent implements OnInit, OnDestroy {
         console.log(this.fetchedData);
       },
       error => this.errorMessage = <any>error);
-  };
-  
-  ngOnDestroy(): void {
-    
   }
+
+  ngOnDestroy(): void {}
 
 }

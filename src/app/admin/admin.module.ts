@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -13,10 +14,12 @@ import { DataService } from './services/data.service';
 @NgModule({
   imports: [
     CommonModule,
+    HttpModule,
     AdminRoutingModule,
     SharedModule
   ],
   declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent],
   providers: [DataService]
 })
+
 export class AdminModule { }
