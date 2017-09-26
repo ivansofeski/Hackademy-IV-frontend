@@ -11,7 +11,7 @@ import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule,
+    SharedModule
   ],
   declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent]
   

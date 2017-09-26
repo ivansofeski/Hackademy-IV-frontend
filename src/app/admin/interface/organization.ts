@@ -1,7 +1,7 @@
 import { IContact } from './contact';
 
 export interface IOrganization {
-    id: string;
+    id: number;
     orgId: string;
     name: string;
     address: string;
