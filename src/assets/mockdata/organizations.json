@@ -2,7 +2,7 @@
     "organizations": [
         {
             "id": 1,
-            "org_id": "ORG12-ISP9000-71812",
+            "orgId": "ORG12-ISP9000-71812",
             "name": "Org. A",
             "address": "Främsteby Karlsborg 3, 28236, Malmö",
             "contact": {
@@ -16,7 +16,7 @@
         }, 
         {
             "id": 2,
-            "org_id": "ORG15-ISP9000-56923",
+            "orgId": "ORG15-ISP9000-56923",
             "name": "Org. B",
             "address": "Norrfjäll 58, 26215, Goteborg",
             "contact": {
