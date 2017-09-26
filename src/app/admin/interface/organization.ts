@@ -1,6 +1,6 @@
 import { IContact } from './contact';
 
-export interface IOrganization extends IContact {
+export interface IOrganization {
     id: string;
     orgId: string;
     name: string;
