@@ -6,12 +6,16 @@ import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
 
+// Services
+import { DataService } from './services/data.service';
+
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule,
   ],
-  declarations: [AdminComponent, AdminToolbarComponent]
+  declarations: [AdminComponent, AdminToolbarComponent],
+  providers: [DataService]
 })
 export class AdminModule { }
