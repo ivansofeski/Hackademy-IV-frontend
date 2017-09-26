@@ -6,6 +6,9 @@ const routes: Routes = [
   { path: '', component: AdminComponent , children:[
 //    {path:'admin', AdminPanelComponent},
 //    {path:'organizations', OrganizatonsListComponent}
+//    {path:'organizations/new', OrganizatonFormComponent}
+//    {path:'organizations/view/:id', OrganizatonViewComponent}
+
 ]},
 
 ];
