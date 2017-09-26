@@ -1,12 +1,13 @@
+import { OrganizationFormComponent } from './organization-form/organization-form.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 
 const routes: Routes = [
-  { path: '', component: AdminComponent , children:[
+  { path: '', component: AdminComponent , children: [
 //    {path:'admin', AdminPanelComponent},
 //    {path:'organizations', OrganizatonsListComponent}
-//    {path:'organizations/new', OrganizatonFormComponent}
+    {path: 'organizations/new', component: OrganizationFormComponent}
 //    {path:'organizations/view/:id', OrganizatonViewComponent}
 
 ]},
