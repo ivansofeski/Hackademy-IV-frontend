@@ -6,25 +6,18 @@ import { DataService } from '../services/data.service';
   templateUrl: './organization-list.component.html',
   styleUrls: ['./organization-list.component.scss']
 })
-export class OrganizationListComponent implements OnInit, OnDestroy {
 
+export class OrganizationListComponent implements OnInit, OnDestroy {
   errorMessage: string;
-  fetchedData: any[];
-  organizationsFilePath = '../../../assets/mockdata/organizations.json';
+  fetchedData: any;
 
   // Constructor here
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.get(this.organizationsFilePath)
-      .subscribe(
-      res => {
-        this.fetchedData = res;
-        console.log(this.fetchedData);
-      },
-      error => this.errorMessage = <any>error);
+    this.fetchedData = this._dataService.get.organizations();
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 
 }
