@@ -10,5 +10,5 @@ export interface Project {
     mainImage: string;
     projectManager: string;
     projectId: string;
-    organizationName: string
+    organizationName: string;
 }
