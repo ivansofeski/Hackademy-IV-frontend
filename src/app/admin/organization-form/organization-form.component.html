@@ -1,66 +1,62 @@
- <!-- form for the submission of a new organization-->
- <form class="organization-form">
- <!-- field for the organization number, name and Adress-->
-  <md-card > 
-    <md-card-header>
-      <md-card-title>Submission Form</md-card-title>
-      <md-card-subtitle>Create Account for the new Organization</md-card-subtitle>
-    </md-card-header>
+<!-- Form for the submission of a new Organization-->
+<form class="organization-form">
 
-    <md-card-content>
-      <!--Field for the Organization number-->
-      <md-form-field>
-        <input mdInput placeholder="Organization Number" type="text" required>
+    <!-- Field for the name of the organization-->
+    <md-form-field class="organization-full-width">
+      <input mdInput placeholder=" Organization Name ">
+    </md-form-field>
+
+   <!-- Field for the number of the organization limited with 6 character-->
+    <md-form-field class="organization-full-width">
+        <input mdInput #orgNumber  maxlength="6" placeholder=" Organization Number ">
+        <md-hint align="end">{{orgNumber.value.length}} / 6</md-hint>
       </md-form-field>
+
+     <!-- Field for the information of the contact person in the organization-->
+    <table class="organization-full-width" cellspacing="0"><tr>
+      <td><md-form-field class="organization-full-width">
+        <input mdInput placeholder=" Contact name ">
+      </md-form-field></td>
+      <td><md-form-field class="organization-full-width">
+        <input mdInput placeholder=" Contact Email ">
+      </md-form-field></td>
+    </tr></table>
+  
+    <!-- Field for the  street Adress of the organization-->
+    <md-form-field class="organization-full-width">
+      <textarea mdInput placeholder=" Address "></textarea>
+    </md-form-field>
     
-      <!--Field for the name of the organization-->
-      <md-form-field>
-        <input mdInput placeholder="Organization Name" type="text" required>
-      </md-form-field>
-    
-      <!--field for the primary adress of the organization-->
-      <table cellspacing="0"><tr>
-          <td><md-form-field>
-            <input mdInput placeholder="Adress1">
-          </md-form-field></td>
-          <td><md-form-field>
-            <input mdInput placeholder="City">
-          </md-form-field></td>
-          <td><md-form-field>
-            <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="">
-            <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-          </md-form-field></td>
-        </tr></table>
-    
-      <!--card for information about the contact person-->
-      <table cellspacing="0"><tr>
-        <td><md-form-field>
-          <input mdInput placeholder="Contact Name " type="text" required>
-        </md-form-field></td>
-        <td><md-form-field>
-          <input mdInput placeholder=" Contact Email" type="email" required>
-        </md-form-field></td>
-      </tr></table>
-    
-      <!--field for the secondary adress if such one exist for the organization -not required-->
-      <table cellspacing="0"><tr>
-        <td><md-form-field>
-          <input mdInput placeholder="Adress2">
-        </md-form-field></td>
-        <td><md-form-field>
-          <input mdInput placeholder="City">
-        </md-form-field></td>
-        <td><md-form-field>
-          <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="">
+    <!-- Field for the city,postcode and country of the organization-->
+    <table class="organization-full-width" cellspacing="0"><tr>
+      <td><md-form-field class="organization-full-width">
+          <input mdInput #postalCode maxlength="5" placeholder=" Postal Code " value="">
           <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-        </md-form-field></td>
-      </tr></table>
+      </md-form-field></td>
+      <td><md-form-field class="organization-full-width">
+        <input mdInput placeholder=" City ">
+      </md-form-field></td>
+      <td><md-form-field class="organization-full-width">
+        <input mdInput placeholder=" Country ">
+      </md-form-field></td>
+    </tr></table>
 
-    </md-card-content>
-            <!--Card with generic button-->
-            <md-card-actions>
-              <button md-button>Cancel</button>
-              <button md-button>Validate</button>
-            </md-card-actions>
-  </md-card>
-  </form>
+    <!--Field to save the description of the organisation-->
+    <md-form-field class="organization-full-width">
+        <textarea mdInput placeholder=" Description "></textarea>
+    </md-form-field>
+
+    <!--Field for the password-->
+    <md-form-field class="organization-full-width">
+      <input mdInput placeholder=" Password ">
+    </md-form-field>
+
+    <!--Field for the password-->
+    <md-form-field class="organization-full-width">
+      <input mdInput placeholder=" Confirm Password ">
+    </md-form-field>
+
+    <!--Button to save the form or Canceled-->
+    <button md-button>Cancel</button>
+    <button md-button>Validate</button>
+  </form> 

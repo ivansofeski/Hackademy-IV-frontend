@@ -7,7 +7,7 @@ import { OrganizationListComponent } from './organization-list/organization-list
 const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'admin/organizations', component: OrganizationListComponent },
-  // { path: 'admin/organizations/new', OrganizatonFormComponent },
+  { path: 'admin/organizations/new', component: OrganizationFormComponent },
   // { path: 'admin/organizations/view/:id', OrganizatonViewComponent }
 ];
 

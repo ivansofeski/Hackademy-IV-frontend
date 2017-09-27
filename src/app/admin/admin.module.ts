@@ -1,3 +1,6 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import { OrganizationFormComponent } from './organization-form/organization-form.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,15 +14,26 @@ import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
 
 // Services
 import { DataService } from './services/data.service';
+import { MatInputModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    MatInputModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    BrowserModule
   ],
-  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent],
+  exports: [
+    MatInputModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    BrowserModule
+  ],
+  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent, OrganizationFormComponent],
   providers: [DataService]
 })
 
