@@ -4,7 +4,7 @@ import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
 //  { path: '', component: ProjectListComponent},
-  { path:'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent }
 //  { path: '**', pathMatch: 'full', component: PageNotFoundComponent}
 ];
 
