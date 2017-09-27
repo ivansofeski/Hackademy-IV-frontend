@@ -1,18 +1,21 @@
-.project-list{
-  padding: 3vh 0 0 0;
-  md-card{
+.project-list {
+  // padding: 3vh 0 0 0;
+  margin: 0;
+  md-card {
 
-    .main-image-container{
+    .main-image-container {
       max-width: 100vw;
       max-height: 50vh;
     }
   }
 }
+
 .noshadow {
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   box-shadow: none !important;
 }
-.nopadding{
-  padding:0 !important;
+
+.nopadding {
+  padding: 0 !important;
 }
