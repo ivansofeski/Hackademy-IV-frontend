@@ -1,32 +1,59 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DataService {
+  private paths = {
+    root          : '../../../assets/mockdata/',
+    organizations : 'organizations.json',
+    projects      : 'projects.json'
+  };
 
-  constructor(private http: Http) { }
-
-  get(path: string): Observable<any> {
+  private _get(path: string): Observable<any> {
     if (path === undefined) {
       return;
     }
 
-    return this.http.get(path)
-      .map((response: Response) => {
-        return response.json();
+    this.http.get(path)
+      .catch((error: Response) => {
+        console.log(error['message']);
+        return Observable.throw(error.json().error || 'Server error');
       })
-      .catch(this.handleError);
+      .subscribe(result => {
+        console.log(result);
+        return result;
+      });
   }
 
-  set(data: any): void {
+  private _set(path: string, data: any): boolean {
+    let _inserted = false;
 
+    return _inserted;
   }
 
-  private handleError(errorResponse: Response) {
-    console.log(errorResponse['message']);
-    return Observable.throw(errorResponse.json().error || 'Server error');
-  }
+  // tslint:disable-next-line:member-ordering
+  get = {
+    organizations: () => {
+      return this._get(this.paths.root + this.paths.organizations);
+    },
+    projects: () => {
+      return this._get(this.paths.root + this.paths.projects);
+    }
+  };
+
+  // tslint:disable-next-line:member-ordering
+  set = {
+    organizations: (data: any) => {
+      return this._set(data, this.paths.root + this.paths.organizations);
+    },
+    projects: (data: any) => {
+      return this._set(data, this.paths.root + this.paths.projects);
+    }
+  };
+
+  constructor(private http: HttpClient) { }
 }
