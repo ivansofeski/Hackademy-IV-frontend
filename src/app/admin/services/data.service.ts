@@ -29,11 +29,11 @@ export class DataService {
       });
   }
 
-  private _set(path: string, data: any): boolean {
+  /* private _set(path: string, data: any): boolean {
     let _inserted = false;
 
     return _inserted;
-  }
+  } */
 
   // tslint:disable-next-line:member-ordering
   get = {
