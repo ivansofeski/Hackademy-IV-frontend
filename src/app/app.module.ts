@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ProjectsModule } from './projects/projects.module';
-import { HttpClientModule } from '@angular/common/http';
-
 
 @NgModule({
   declarations: [
