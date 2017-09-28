@@ -15,21 +15,21 @@ import 'rxjs/add/operator/map';
 })
 export class OrganizationListComponent implements OnInit, OnDestroy {
 
-  errorMessage: string;
-  fetchedData: any[];
+  errors: any[] = [];
+  fetchedData: any[] = [];
   organizationsFilePath = '../../../assets/mockdata/organizations.json';
 
   // Constructor here
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.get(this.organizationsFilePath)
-      .subscribe(
+    this._dataService.get.organizations().subscribe(
       res => {
-        this.fetchedData = res;
-        console.log(this.fetchedData);
+        //console.log(res);
+        this.fetchedData = res
       },
-      error => this.errorMessage = <any>error);
+      error => this.errors.push(error)
+    );
   }
 
   ngOnDestroy(): void {}
