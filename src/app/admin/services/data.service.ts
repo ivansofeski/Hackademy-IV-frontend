@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Headers, RequestOptions, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/Rx';
-import 'rxjs/add/operator/toPromise';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/Observable/throw';
 
 @Injectable()
 export class DataService {
-  private paths = {
-    root          : '../../../assets/mockdata/',
-    organizations : 'organizations.json',
-    projects      : 'projects.json'
+  paths = {
+    root: '../../../assets/mockdata/',
+    organizations: 'organizations.json',
+    projects: 'projects.json'
   };
 
   private _get(path: string): Observable<any> {
@@ -18,39 +18,39 @@ export class DataService {
       return;
     }
 
-    this.http.get(path)
+    return this.http.get(path)
+      .do((data: Response) => {
+        return data !== undefined ? data : [];
+      })
       .catch((error: Response) => {
         console.log(error['message']);
-        return Observable.throw(error.json().error || 'Server error');
-      })
-      .subscribe(result => {
-        console.log(result);
-        return result;
+        return Observable.throw(error || 'Server error');
       });
   }
 
-  /* private _set(path: string, data: any): boolean {
+  private _set(path: string, data: any): boolean {
+    // tslint:disable-next-line:prefer-const
     let _inserted = false;
 
     return _inserted;
-  } */
+  }
 
   // tslint:disable-next-line:member-ordering
   get = {
-    organizations: () => {
+    organizations: (): any => {
       return this._get(this.paths.root + this.paths.organizations);
     },
-    projects: () => {
+    projects: (): any => {
       return this._get(this.paths.root + this.paths.projects);
     }
   };
 
   // tslint:disable-next-line:member-ordering
   set = {
-    organizations: (data: any) => {
+    organizations: (data: any): boolean => {
       return this._set(data, this.paths.root + this.paths.organizations);
     },
-    projects: (data: any) => {
+    projects: (data: any): boolean => {
       return this._set(data, this.paths.root + this.paths.projects);
     }
   };
