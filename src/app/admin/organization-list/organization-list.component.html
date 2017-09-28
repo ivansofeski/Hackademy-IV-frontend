@@ -21,7 +21,7 @@
                 <tr *ngFor="let organization of orgList">
                     <td>{{organization.id}}</td>
                     <td>{{organization.orgId}}</td>
-                    <td>{{organization.name}}</td>
+                    <td><a href="/admin/organizations/view/{{organization.id}}">{{organization.name}}</a></td>
                     <td>{{organization.address}}</td>
                     <td>{{organization.contact.phone}}</td>
                     <td>{{organization.contact.email}}</td>
