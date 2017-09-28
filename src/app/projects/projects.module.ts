@@ -1,3 +1,5 @@
+
+import { ProjectService } from './project.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +14,7 @@ import {SharedModule} from '../shared/shared.module';
     SharedModule,
     ProjectsRoutingModule
   ],
+  providers: [ProjectService],
   declarations: [ProjectsComponent, ProjectListComponent]
 })
 export class ProjectsModule { }
