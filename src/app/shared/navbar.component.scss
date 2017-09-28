@@ -2,10 +2,16 @@
     background-color: #61bfad;
     display: flex;
     justify-content: space-around;
+    height:60px;
+
     
 }
 md-icon{
+    padding-top: 10px;
     color:white;
     font-size: 45px;
-    cursor: pointer;
+    width:45px;
+    height:45;
+    position:auto;
+    //cursor: pointer;
 }

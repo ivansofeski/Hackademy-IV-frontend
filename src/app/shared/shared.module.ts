@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModule, MdProgressBarModule } from '@angular/material';
+import { NavbarComponent } from './navbar.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModu
     MdIconModule,
     MdCardModule,
     MdProgressBarModule,
+    NavbarComponent
   ],
-  declarations: []
+  declarations: [NavbarComponent]
 })
 export class SharedModule { }
