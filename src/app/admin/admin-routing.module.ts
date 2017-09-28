@@ -1,3 +1,4 @@
+import { OrganizationFormComponent } from './organization-form/organization-form.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
@@ -7,7 +8,7 @@ import { OrganizationPageComponent } from './organization-page/organization-page
 const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'admin/organizations', component: OrganizationListComponent },
-  //{ path: 'admin/organizations/new', OrganizatonFormComponent },
+  { path: 'admin/organizations/new', component: OrganizationFormComponent },
   { path: 'admin/organizations/view/:id', component: OrganizationPageComponent }
 ];
 
