@@ -18,14 +18,14 @@ describe('DataService', () => {
   });
 
   describe('get object', () => {
-    /* it('get.organizations() should return data from organizations.json',
+    /* it('loadData.organizations() should return data from organizations.json',
       inject([DataService, XHRBackend], (service, mockBackend) => {
-        service.get.organizations().subscribe((data) => {
+        service.loadData.organizations().subscribe((data) => {
           expect(data.length).toBe(2);
         });
       })); */
 
-      /* it('get.projects() should return data from organizations.json',
+      /* it('loadData.projects() should return data from organizations.json',
       inject([DataService, XHRBackend], (service, mockBackend) => {
         service.get.projects().subscribe((data) => {
           expect(data.length).toBe(2);

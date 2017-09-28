@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
   templateUrl: './organization-list.component.html',
   styleUrls: ['./organization-list.component.scss']
 })
+
 export class OrganizationListComponent implements OnInit, OnDestroy {
 
   errors: any[] = [];
@@ -22,10 +23,10 @@ export class OrganizationListComponent implements OnInit, OnDestroy {
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.get.organizations().subscribe(
+    this._dataService.loadData.organizations().subscribe(
       res => {
-        //console.log(res);
-        this.orgList = res
+        // console.log(res);
+        this.orgList = res;
       },
       error => this.errors.push(error)
     );

@@ -1,11 +1,11 @@
-import { IContact } from './contact';
+import { Contact } from './contact';
 
-export interface IOrganization {
+export interface Organization {
     id: number;
     orgId: string;
     name: string;
     address: string;
-    contact: IContact;
+    contact: Contact;
     password: string;
     billing: string;
     description: string;
