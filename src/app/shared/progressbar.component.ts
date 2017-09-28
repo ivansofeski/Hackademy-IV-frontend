@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'progressbar',
+  selector: 'app-progressbar',
   templateUrl: './progressbar.component.html',
   styleUrls: ['./progressbar.component.scss']
 })
