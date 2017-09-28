@@ -12,7 +12,6 @@ import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModu
     MdMenuModule,
     MdToolbarModule,
     MdIconModule,
-
     MdCardModule,
     MdProgressBarModule,
   ],
@@ -23,7 +22,6 @@ import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModu
     MdMenuModule,
     MdToolbarModule,
     MdIconModule,
-
     MdCardModule,
     MdProgressBarModule,
   ],
