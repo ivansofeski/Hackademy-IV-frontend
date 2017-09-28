@@ -1,14 +1,19 @@
-
 <div class="project-list">
   <div class="project-container">
     <md-card class="noshadow nopadding">
       <div class="main-image-container">
-        <!-- <img src="" alt=""> -->
-        <div style="background: deepskyblue; width:100%; height:300px;"></div>
+        <div class="horizontal">
+          <div class="vertical">
+            <img src="./assets/Phenom-Childred-Play-631.jpg" alt="">
+          </div>
+        </div>
       </div>
-      <md-card-header>
+      <div class="project-details">
+      <md-card-header class="card-header">
         <md-card-title class="project-title">Project name</md-card-title>
-        <md-card-subtitle class="project-detail"><span class="organization-name">owner</span> <span class="project-address">storgatan</span> </md-card-subtitle>
+        <md-card-subtitle class="project-detail">
+          <span class="organization-name">owner</span>
+          <span class="project-address">storgatan</span></md-card-subtitle>
       </md-card-header>
 
 
@@ -27,8 +32,7 @@
           [value]="value"
           [bufferValue]="bufferValue"></md-progress-bar>
       </md-card-content>
-
-
+      </div>
     </md-card>
   </div>
 </div>
