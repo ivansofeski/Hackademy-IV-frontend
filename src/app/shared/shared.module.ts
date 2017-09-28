@@ -25,6 +25,7 @@ import { NavbarComponent } from './navbar.component';
     MdIconModule,
     MdCardModule,
     MdProgressBarModule,
+    NavbarComponent
   ],
   declarations: [NavbarComponent]
 })
