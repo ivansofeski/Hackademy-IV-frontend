@@ -10,7 +10,7 @@ describe('OrganizationFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ OrganizationFormComponent ]
     })
-    .compileComponents();
+    //.compileComponents();
   }));
 
   beforeEach(() => {
