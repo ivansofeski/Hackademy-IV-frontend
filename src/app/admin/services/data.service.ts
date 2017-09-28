@@ -23,7 +23,7 @@ export class DataService {
       for (let key in options) {
         if (options.hasOwnProperty(key)) {
           // tslint:disable-next-line:prefer-const
-          let _query = `${key}='${options[key]}'`;
+          let _query = `${key}='${options[key]};'`;
           path += _query;
         }
       }
