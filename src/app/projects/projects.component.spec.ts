@@ -22,5 +22,4 @@ describe('ProjectsComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
-  
 });
