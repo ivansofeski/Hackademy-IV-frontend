@@ -1,4 +1,4 @@
-<div *ngIf="organization.contact">
+<div *ngIf="organization">
   <h2>{{organization.name}}</h2>
 
   <div><span>Organization Name</span>{{organization.name}}</div>
@@ -10,4 +10,4 @@
   <div><span>Organization billing</span>{{organization.billing}}</div>
   <div><span>Organization description</span>{{organization.description}}</div>
 </div>
-<div *ngIf="!organization.contact">No Data</div>
+<div *ngIf="!organization">Waiting for Data</div>
