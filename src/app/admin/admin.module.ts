@@ -15,7 +15,7 @@ import { OrganizationPageComponent } from './organization-page/organization-page
 
 // Services
 import { DataService } from './services/data.service';
-import { MatInputModule } from '@angular/material';
+import { MdInputModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -23,14 +23,14 @@ import { MatInputModule } from '@angular/material';
     HttpModule,
     AdminRoutingModule,
     SharedModule,
-    MatInputModule,
+    MdInputModule,
     FormsModule,
     BrowserAnimationsModule,
     BrowserModule,
     ReactiveFormsModule
   ],
   exports: [
-    MatInputModule,
+    MdInputModule,
     FormsModule,
     BrowserAnimationsModule,
     BrowserModule,
