@@ -1,32 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModule, MdProgressBarModule } from '@angular/material';
-import { ProgressbarComponent } from './progressbar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     MdButtonModule,
     MdMenuModule,
     MdToolbarModule,
     MdIconModule,
-    MdCardModule,
-    MdProgressBarModule
-   
-    
-    
+    MdCardModule
   ],
   exports: [
     CommonModule,
+    HttpClientModule,
     MdButtonModule,
     MdMenuModule,
     MdToolbarModule,
     MdIconModule,
-    MdCardModule,
-    MdProgressBarModule,
-    ProgressbarComponent  
-   
+    MdCardModule
   ],
-  declarations: [ProgressbarComponent]
+  declarations: []
 })
 export class SharedModule { }
