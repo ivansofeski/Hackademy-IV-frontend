@@ -1,0 +1,38 @@
+<div class="project-list">
+  <div class="project-container" *ngFor="let project of projectList">
+    <md-card class="noshadow nopadding">
+      <div class="main-image-container">
+        <div class="horizontal">
+          <div class="vertical">
+            <img [src]="project.mainImage" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="project-details">
+        <md-card-header class="card-header">
+          <md-card-title class="project-title">{{project.projectName}}</md-card-title>
+          <md-card-subtitle class="project-detail">
+            <span class="organization-name">{{project.projectManager}}</span>
+            <span class="project-address">{{project.address}}</span></md-card-subtitle>
+        </md-card-header>
+
+
+        <md-card-content class="project-description">
+          <p class="project-description">
+            {{project.description}}
+            <br>
+            <a href="#" class="read-more">Read more</a>
+          </p>
+
+          <!--p.need-->
+          <md-progress-bar
+            class="example-margin"
+            [color]="color"
+            [mode]="mode"
+            [value]="value"
+            [bufferValue]="bufferValue"></md-progress-bar>
+          </md-card-content>
+      </div>
+    </md-card>
+  </div>
+</div>

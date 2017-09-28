@@ -1,0 +1,61 @@
+$secondary-font-color: #9B9B9B;
+
+.project-list {
+
+  margin: 0;
+  md-card {
+
+    .main-image-container {
+
+      .horizontal {
+        display: flex;
+        justify-content: center;
+        .vertical {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          img {
+            max-width: 100vw;
+            max-height: 50vh;
+          }
+        }
+      }
+    }
+    .project-details {
+      margin: 0;
+      padding: 1em;
+      .card-header {
+        margin: 0;
+        .project-title {
+          text-transform: uppercase;
+        }
+        .organization-name {
+          text-transform: uppercase;
+          color: #61BFAD;
+        }
+        .project-address {
+          font-style: italic;
+        }
+      }
+      .project-description {
+        padding: 0 1.5em 1.5em 1.5em;
+        font-family: Arial;
+        font-size: 0.9em;
+        color: $secondary-font-color;
+      }
+      .read-more {
+        color: $secondary-font-color;
+      }
+    }
+  }
+}
+
+.noshadow {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.nopadding {
+  padding: 0 !important;
+}
