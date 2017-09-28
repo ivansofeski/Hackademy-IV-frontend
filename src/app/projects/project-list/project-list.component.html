@@ -1,29 +1,28 @@
 <div class="project-list">
-  <div class="project-container">
+  <div class="project-container" *ngFor="let project of projectList">
     <md-card class="noshadow nopadding">
       <div class="main-image-container">
         <div class="horizontal">
           <div class="vertical">
-            <img src="./assets/Phenom-Childred-Play-631.jpg" alt="">
+            <img [src]="project.mainImage" alt="">
           </div>
         </div>
       </div>
-      <div class="project-details">
+      <div class="project-details" >
       <md-card-header class="card-header">
-        <md-card-title class="project-title">Project name</md-card-title>
+        <md-card-title class="project-title">{{project.projectName}}</md-card-title>
         <md-card-subtitle class="project-detail">
-          <span class="organization-name">owner</span>
-          <span class="project-address">storgatan</span></md-card-subtitle>
+          <span class="organization-name">{{project.projectManager}}</span>
+          <span class="project-address">{{project.address}}</span></md-card-subtitle>
       </md-card-header>
 
 
-      <md-card-content class="project-descreption">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-          ea commodo consequat.
+      <md-card-content class="project-description">
+        <p class="project-description">
+          {{project.description}}
+          <br>
+          <a href="#" class="read-more">Read more</a>
         </p>
-        <a href="#">Read more</a>
 
         <md-progress-bar
           class="example-margin"
