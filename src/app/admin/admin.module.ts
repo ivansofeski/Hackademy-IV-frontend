@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrganizationFormComponent } from './organization-form/organization-form.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,13 +25,15 @@ import { MatInputModule } from '@angular/material';
     MatInputModule,
     FormsModule,
     BrowserAnimationsModule,
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatInputModule,
     FormsModule,
     BrowserAnimationsModule,
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent, OrganizationFormComponent],
   providers: [DataService]
