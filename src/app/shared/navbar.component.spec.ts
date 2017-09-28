@@ -1,6 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarComponent } from './navbar.component';
+import {
+  MdButtonModule,
+  MdCardModule,
+  MdIconModule,
+  MdMenuModule,
+  MdProgressBarModule,
+  MdToolbarModule
+} from '@angular/material';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -8,7 +16,8 @@ describe('NavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavbarComponent ]
+      declarations: [ NavbarComponent],
+      imports: [MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModule, MdProgressBarModule]
     })
     .compileComponents();
   }));
