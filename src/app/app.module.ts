@@ -17,7 +17,7 @@ import { ProjectsModule } from './projects/projects.module';
     AppRoutingModule,
     SharedModule,
     ProjectsModule,
-    AdminModule,
+    AdminModule,  
     BrowserAnimationsModule
   ],
   providers: [],
