@@ -1,21 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import "~@angular/material/prebuilt-themes/indigo-pink.css";
  */
-
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@font-face {
-  font-family: 'AvenirNext-DemiBold';
-  src: url('/assets/font/AvenirNext-DemiBold.eot');
-  src: url('/assets/font/AvenirNext-DemiBold.woff2') format('woff2'),
-       url('/assets/font/AvenirNext-DemiBold.woff') format('woff'),
-       url('/assets/font/AvenirNext-DemiBold.ttf') format('truetype'),
-       url('/assets/font/AvenirNext-DemiBold.svg#AvenirNext-DemiBold') format('svg'),
-       url('/assets/font/AvenirNext-DemiBold.eot?#iefix') format('embedded-opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-body,* {
-    font-family: 'AvenirNext-DemiBold', sans-serif;
-    margin: 0;
-}
+ @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+ 
+ @font-face {
+   font-family: 'AvenirNext-DemiBold';
+   src: url('/assets/font/AvenirNext-DemiBold.eot');
+   src: url('/assets/font/AvenirNext-DemiBold.woff2') format('woff2'),
+        url('/assets/font/AvenirNext-DemiBold.woff') format('woff'),
+        url('/assets/font/AvenirNext-DemiBold.ttf') format('truetype'),
+        url('/assets/font/AvenirNext-DemiBold.svg#AvenirNext-DemiBold') format('svg'),
+        url('/assets/font/AvenirNext-DemiBold.eot?#iefix') format('embedded-opentype');
+   font-weight: normal;
+   font-style: normal;
+ }
+ 
+ body,* {
+     font-family: 'AvenirNext-DemiBold', sans-serif;
+     margin: 0;
+ }
+ 
