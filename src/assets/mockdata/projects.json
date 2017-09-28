@@ -8,7 +8,7 @@
         "neededFunding": 20000,
         "raisedFunding": 2000,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "https://cdn.pixabay.com/photo/2016/03/07/09/34/kid-1241817_960_720.jpg",
+        "mainImage": "./assets/photos/projects001.jpg",
         "projectManager": "Mats Nilsson",
         "projectId": "001",
         "organizationName": "Save the children"
@@ -22,7 +22,7 @@
         "neededFunding": 40000,
         "raisedFunding": 8000,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "https://cdn.pixabay.com/photo/2017/08/06/01/29/fence-2587475_960_720.jpg",
+        "mainImage": "./assets/photos/projects002.jpg",
         "projectManager": "Johan Ericsson",
         "projectId": "002",
         "organizationName": "Unicef"
@@ -37,7 +37,7 @@
         "neededFunding": 20000,
         "raisedFunding": 2000,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "https://cdn.pixabay.com/photo/2016/03/07/09/34/kid-1241817_960_720.jpg",
+        "mainImage": "./assets/photos/projects003.jpg",
         "projectManager": "Mats Nilsson",
         "projectId": "003",
         "organizationName": "Save the children"
@@ -51,7 +51,7 @@
         "neededFunding": 40000,
         "raisedFunding": 8000,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "https://cdn.pixabay.com/photo/2017/08/06/01/29/fence-2587475_960_720.jpg",
+        "mainImage": "./assets/photos/projects004.jpg",
         "projectManager": "Johan Ericsson",
         "projectId": "004",
         "organizationName": "Unicef"

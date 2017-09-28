@@ -1,32 +1,59 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/Rx';
-import 'rxjs/add/operator/toPromise';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/Observable/throw';
 
 @Injectable()
 export class DataService {
+  paths = {
+    root: '../../../assets/mockdata/',
+    organizations: 'organizations.json',
+    projects: 'projects.json'
+  };
 
-  constructor(private http: Http) { }
-
-  get(path: string): Observable<any> {
+  private _get(path: string): Observable<any> {
     if (path === undefined) {
       return;
     }
 
     return this.http.get(path)
-      .map((response: Response) => {
-        return response.json();
+      .do((data: Response) => {
+        return data !== undefined ? data : [];
       })
-      .catch(this.handleError);
+      .catch((error: Response) => {
+        console.log(error['message']);
+        return Observable.throw(error || 'Server error');
+      });
   }
 
-  set(data: any): void {
+  private _set(path: string, data: any): boolean {
+    // tslint:disable-next-line:prefer-const
+    let _inserted = false;
 
+    return _inserted;
   }
 
-  private handleError(errorResponse: Response) {
-    console.log(errorResponse['message']);
-    return Observable.throw(errorResponse.json().error || 'Server error');
-  }
+  // tslint:disable-next-line:member-ordering
+  get = {
+    organizations: (): any => {
+      return this._get(this.paths.root + this.paths.organizations);
+    },
+    projects: (): any => {
+      return this._get(this.paths.root + this.paths.projects);
+    }
+  };
+
+  // tslint:disable-next-line:member-ordering
+  set = {
+    organizations: (data: any): boolean => {
+      return this._set(data, this.paths.root + this.paths.organizations);
+    },
+    projects: (data: any): boolean => {
+      return this._set(data, this.paths.root + this.paths.projects);
+    }
+  };
+
+  constructor(private http: HttpClient) { }
 }
