@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminToolbarComponent } from './admin-toolbar.component';
+import { SharedModule } from '../../shared/shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AdminToolbarComponent', () => {
   let component: AdminToolbarComponent;
@@ -8,7 +10,8 @@ describe('AdminToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminToolbarComponent ]
+      declarations: [ AdminToolbarComponent ],
+      imports:[ SharedModule, RouterTestingModule]
     })
     .compileComponents();
   }));
