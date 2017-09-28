@@ -1,3 +1,5 @@
+$secondary-font-color: #9B9B9B;
+
 .project-list {
 
   margin: 0;
@@ -26,16 +28,25 @@
       .card-header{
         margin: 0;
         .project-title{
-         // font:'AvenirNext-DemiBold';
+          text-transform: uppercase;
         }
         .organization-name{
+          text-transform: uppercase;
           color: #61BFAD;
         }
         .project-address{
           font-style: italic;
         }
       }
-
+      .project-description{
+        padding: 0 1.5em 1.5em 1.5em;
+        font-family: Arial;
+        font-size: 0.9em;
+        color: $secondary-font-color;
+      }
+      .read-more{
+        color: $secondary-font-color;
+      }
     }
   }
 }
