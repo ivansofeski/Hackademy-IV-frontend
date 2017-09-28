@@ -1,0 +1,13 @@
+<div *ngIf="organization.contact">
+  <h2>{{organization.name}}</h2>
+
+  <div><span>Organization Name</span>{{organization.name}}</div>
+  <div><span>Organization ID</span>{{organization.orgId}}</div>
+  <div><span>Organization address</span>{{organization.address}}</div>
+  <div><span>Organization contact Name</span>{{organization.contact.person}}</div>
+  <div><span>Organization Contact Email</span>{{organization.contact.email}}</div>
+  <div><span>Organization contact Phone</span>{{organization.contact.phone}}</div>
+  <div><span>Organization billing</span>{{organization.billing}}</div>
+  <div><span>Organization description</span>{{organization.description}}</div>
+</div>
+<div *ngIf="!organization.contact">No Data</div>
