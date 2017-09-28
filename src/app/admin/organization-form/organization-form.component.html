@@ -43,7 +43,8 @@
 
     <!--Field to save the description of the organisation-->
     <md-form-field class="organization-full-width">
-        <textarea mdInput placeholder=" Description "></textarea>
+        <textarea mdInput #orgDesc maxlength="200" placeholder=" Description "></textarea>
+        <md-hint align="end">{{orgDesc.value.length}} / 200</md-hint>
     </md-form-field>
 
     <!--Field for the password-->
