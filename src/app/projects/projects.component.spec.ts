@@ -8,7 +8,7 @@ describe('ProjectsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectsComponent ]
+      declarations: [ ProjectsComponent ],
     })
     .compileComponents();
   }));
@@ -22,4 +22,5 @@ describe('ProjectsComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+  
 });
