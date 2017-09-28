@@ -10,6 +10,7 @@ import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
 
 // Services
 import { DataService } from './services/data.service';
+import { OrganizationPageComponent } from './organization-page/organization-page.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { DataService } from './services/data.service';
     AdminRoutingModule,
     SharedModule
   ],
-  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent],
+  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent, OrganizationPageComponent],
   providers: [DataService]
 })
 
