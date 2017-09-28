@@ -6,10 +6,11 @@ import { OrganizationListComponent } from './organization-list/organization-list
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
 
 const routes: Routes = [
-  { path: 'admin', component: AdminComponent },
-  { path: 'admin/organizations', component: OrganizationListComponent },
-  { path: 'admin/organizations/new', component: OrganizationFormComponent },
-  { path: 'admin/organizations/view/:id', component: OrganizationPageComponent }
+  { path: 'admin', component: AdminComponent, children: [
+    { path: 'organizations', component: OrganizationListComponent },
+    { path: 'organizations/new', component: OrganizationFormComponent },
+    { path: 'organizations/view/:id', component: OrganizationPageComponent }
+  ]},
 ];
 
 @NgModule({
@@ -18,4 +19,3 @@ const routes: Routes = [
 })
 
 export class AdminRoutingModule { }
-
