@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "orgId": "ORG12-ISP9000-71812",
+        "name": "Org. A",
+        "address": "Främsteby Karlsborg 3, 28236, Malmö",
+        "contact": {
+            "phone": "046-8807494",
+            "email": "support@orten.io",
+            "person": "Ivan"
+        },
+        "password": "@#aaOB23WEpp!",
+        "billing": "Handslagarevägen 28, 28199, Lund",
+        "description": "Hello compassionate hyena one up infectiously scowled octopus one far walrus goodness as gosh when inclusively lenient husky this bluebird underneath this where more jeepers under thoughtful."
+    }, 
+    {
+        "id": 2,
+        "orgId": "ORG15-ISP9000-56923",
+        "name": "Org. B",
+        "address": "Norrfjäll 58, 26215, Goteborg",
+        "contact": {
+            "phone": "016-4859091",
+            "email": "support@jayway.com",
+            "person": "Olaf"
+        },
+        "password": "qwerty@#45",
+        "billing": "Kläppinge 67, 29122, Stockholm",
+        "description": "Far more some goodness alas hello jeepers hello amongst jeepers seagull anathematically well drove more one bound through while much in however overshot strived orca in burned showed however by."
+    }
+]

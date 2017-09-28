@@ -1,0 +1,31 @@
+<br>
+<br>
+<div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>OrgID</th> 
+                <th>Name</th>
+                <th>Address</th> 
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Person</th>
+            </tr>
+            </thead>
+      <tbody>
+        <tr *ngFor="let orglist of fetchedData"> 
+            <td>{{orglist.id}}</td>
+            <td>{{orglist.orgId}}</td>
+            <td>{{orglist.name}}</td>
+            <td>{{orglist.address}}</td>
+            <td>{{orglist.contact.phone}}</td>
+            <td>{{orglist.contact.email}}</td>
+            <td>{{orglist.contact.person}}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div> 
+</div>
