@@ -1,3 +1,4 @@
+import { OrganizationPageComponent } from './organization-page/organization-page.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,7 +36,7 @@ import { MatInputModule } from '@angular/material';
     BrowserModule,
     ReactiveFormsModule
   ],
-  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent, OrganizationFormComponent],
+  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent, OrganizationFormComponent, OrganizationPageComponent],
   providers: [DataService]
 })
 
