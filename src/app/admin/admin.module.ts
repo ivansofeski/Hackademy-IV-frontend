@@ -1,4 +1,3 @@
-import { OrganizationPageComponent } from './organization-page/organization-page.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +11,7 @@ import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
 import { OrganizationListComponent } from './organization-list/organization-list.component';
 import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
+import { OrganizationPageComponent } from './organization-page/organization-page.component';
 
 // Services
 import { DataService } from './services/data.service';
