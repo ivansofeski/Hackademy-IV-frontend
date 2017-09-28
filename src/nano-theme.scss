@@ -1,0 +1,114 @@
+@import '../node_modules/@angular/material/theming';
+
+@include mat-core();
+
+/* For use in src/lib/core/theming/_palette.scss */
+$mat-nano-primary: (
+    50 : #ecf7f5,
+    100 : #d0ece6,
+    200 : #b0dfd6,
+    300 : #90d2c6,
+    400 : #79c9b9,
+    500 : #61bfad,
+    600 : #59b9a6,
+    700 : #4fb19c,
+    800 : #45a993,
+    900 : #339b83,
+    A100 : #e5fff9,
+    A200 : #b2ffec,
+    A400 : #7fffe0,
+    A700 : #65ffda,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$mat-nano-accent: (
+    50 : #eaf4f2,
+    100 : #cbe4df,
+    200 : #a9d2ca,
+    300 : #87c0b5,
+    400 : #6db3a5,
+    500 : #53a595,
+    600 : #4c9d8d,
+    700 : #429382,
+    800 : #398a78,
+    900 : #297967,
+    A100 : #beffef,
+    A200 : #8bffe3,
+    A400 : #58ffd7,
+    A700 : #3effd1,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$nano-app-primary: mat-palette($mat-nano-primary);
+$nano-app-accent:  mat-palette($mat-nano-accent, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$nano-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$nano-app-theme: mat-light-theme($nano-app-primary, $nano-app-accent, $nano-app-warn);
+
+
+/* @function nano-mat-light-theme-foreground($color) {
+    @return (
+        base:              $color,
+        divider:           $black-12-opacity,
+        dividers:          $black-12-opacity,
+        disabled:          rgba($color, 0.38),
+        disabled-button:   rgba($color, 0.38),
+        disabled-text:     rgba($color, 0.38),
+        hint-text:         rgba($color, 0.38),
+        secondary-text:    rgba($color, 0.54),
+        icon:              rgba($color, 0.54),
+        icons:             rgba($color, 0.54),
+        text:              rgba($color, 0.87),
+        slider-off:        rgba($color, 0.26),
+        slider-off-active: rgba($color, 0.38),
+    );
+};
+
+// You can put any color here. I've chosen mat-color($my-app-primary, 700)
+$nano-app-foreground: nano-mat-light-theme-foreground(#4A4A4A);
+
+$nano-app-theme-custom: map-merge($nano-app-theme, (foreground: $nano-app-foreground));
+
+ */
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($nano-app-theme);
