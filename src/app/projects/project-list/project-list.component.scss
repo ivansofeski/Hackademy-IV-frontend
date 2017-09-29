@@ -20,6 +20,15 @@ $secondary-font-color: #9B9B9B;
           }
         }
       }
+      .button-row {
+        position: absolute;
+        right: 2em;
+        margin-top: -7%;
+        md-icon {
+         color: red;
+
+        }
+      }
     }
     .project-details {
       margin: 0;
