@@ -25,12 +25,7 @@
           </p>
 
           <!--p.need-->
-          <md-progress-bar
-            class="example-margin"
-            [color]="color"
-            [mode]="mode"
-            [value]="value"
-            [bufferValue]="bufferValue"></md-progress-bar>
+          <app-progressbar raisedFunding={{project.raisedFunding}} neededFunding={{project.neededFunding}} ></app-progressbar>
           </md-card-content>
       </div>
     </md-card>

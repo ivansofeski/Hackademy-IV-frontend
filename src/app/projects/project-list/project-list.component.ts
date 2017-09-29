@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ProjectService} from '../project.service';
 
 @Component({
@@ -13,8 +13,8 @@ export class ProjectListComponent implements OnInit {
 
   color = 'primary';
   mode = 'determinate';
-  value = 44;
-  bufferValue = 75;
+  // value;
+  // bufferValue;
 
   constructor(private _projectService: ProjectService) { }
 

@@ -6,8 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./progressbar.component.scss']
 })
 export class ProgressbarComponent implements OnInit {
-  @Input() neededFunding: number = 2000;
-  @Input() raisedFunding: number = 1000;
+  @Input() neededFunding: number ;
+  @Input() raisedFunding: number ;
 
 
   constructor() { }
