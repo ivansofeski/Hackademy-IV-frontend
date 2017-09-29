@@ -7,6 +7,13 @@
             <img [src]="project.mainImage" alt="">
           </div>
         </div>
+
+        <div class="button-row">
+          <button md-fab color="white">
+            <md-icon class="md-24" aria-label="Example icon-button with a heart icon">favorite</md-icon>
+          </button>
+        </div>
+
       </div>
       <div class="project-details">
         <md-card-header class="card-header">
@@ -25,8 +32,10 @@
           </p>
 
           <!--p.need-->
+
           <app-progressbar raisedFunding={{project.raisedFunding}} neededFunding={{project.neededFunding}} ></app-progressbar>
           </md-card-content>
+
       </div>
     </md-card>
   </div>
