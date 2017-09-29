@@ -1,13 +1,14 @@
 <div *ngIf="organization">
   <h2>{{organization.name}}</h2>
-
-  <div><span>Organization Name: </span>{{organization.name}}</div>
-  <div><span>Organization ID: </span>{{organization.orgId}}</div>
-  <div><span>Organization address: </span>{{organization.address}}</div>
-  <div><span>Organization contact Name: </span>{{organization.contact.person}}</div>
-  <div><span>Organization Contact Email: </span>{{organization.contact.email}}</div>
-  <div><span>Organization contact Phone: </span>{{organization.contact.phone}}</div>
-  <div><span>Organization billing: </span>{{organization.billing}}</div>
-  <div><span>Organization description: </span>{{organization.description}}</div>
+  <md-list>
+    <md-list-item><div class="label">Organization Name: </div><div>{{organization.name}}</div></md-list-item>
+    <md-list-item><div class="label">Organization ID: </div><div>{{organization.orgId}}</div></md-list-item>
+    <md-list-item><div class="label">Organization address: </div><div>{{organization.address}}</div></md-list-item>
+    <md-list-item><div class="label">Organization contact Name: </div><div>{{organization.contact.person}}</div></md-list-item>
+    <md-list-item><div class="label">Organization Contact Email: </div><div>{{organization.contact.email}}</div></md-list-item>
+    <md-list-item><div class="label">Organization contact Phone: </div><div>{{organization.contact.phone}}</div></md-list-item>
+    <md-list-item><div class="label">Organization billing: </div><div>{{organization.billing}}</div></md-list-item>
+    <md-list-item><div class="label">Organization description: </div><div>{{organization.description}}</div></md-list-item>
+  </md-list>
 </div>
 <div *ngIf="!organization">Waiting for Data</div>
