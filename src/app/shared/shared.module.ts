@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModule, MdProgressBarModule } from '@angular/material';
 import { NavbarComponent } from './navbar.component';
+import { ProgressbarComponent } from './progressbar.component';
 
 @NgModule({
   imports: [
@@ -24,8 +25,9 @@ import { NavbarComponent } from './navbar.component';
     MdIconModule,
     MdCardModule,
     MdProgressBarModule,
-    NavbarComponent
+    NavbarComponent,
+    ProgressbarComponent
   ],
-  declarations: [NavbarComponent]
+  declarations: [NavbarComponent,ProgressbarComponent]
 })
 export class SharedModule { }
