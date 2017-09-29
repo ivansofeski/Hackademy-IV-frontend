@@ -5,6 +5,7 @@ import { OrganizationFormComponent } from './organization-form/organization-form
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { MdInputModule, MdListModule } from '@angular/material';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -15,7 +16,6 @@ import { OrganizationPageComponent } from './organization-page/organization-page
 
 // Services
 import { DataService } from './services/data.service';
-import { MdInputModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -24,6 +24,7 @@ import { MdInputModule } from '@angular/material';
     AdminRoutingModule,
     SharedModule,
     MdInputModule,
+    MdListModule,
     FormsModule,
     BrowserAnimationsModule,
     BrowserModule,

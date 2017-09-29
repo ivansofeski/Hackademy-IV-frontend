@@ -1,14 +1,16 @@
 <div *ngIf="organization">
   <h2>{{organization.name}}</h2>
   <md-list>
-    <md-list-item><div class="label">Organization Name: </div><div>{{organization.name}}</div></md-list-item>
-    <md-list-item><div class="label">Organization ID: </div><div>{{organization.orgId}}</div></md-list-item>
-    <md-list-item><div class="label">Organization address: </div><div>{{organization.address}}</div></md-list-item>
-    <md-list-item><div class="label">Organization contact Name: </div><div>{{organization.contact.person}}</div></md-list-item>
-    <md-list-item><div class="label">Organization Contact Email: </div><div>{{organization.contact.email}}</div></md-list-item>
-    <md-list-item><div class="label">Organization contact Phone: </div><div>{{organization.contact.phone}}</div></md-list-item>
-    <md-list-item><div class="label">Organization billing: </div><div>{{organization.billing}}</div></md-list-item>
-    <md-list-item><div class="label">Organization description: </div><div>{{organization.description}}</div></md-list-item>
+    <md-list-item><div md-line><div class="label">Name: </div><div>{{organization.name}}</div></div></md-list-item>
+    <md-list-item><div md-line><div class="label">ID: </div><div>{{organization.orgId}}</div></div></md-list-item>
+    <md-list-item><div md-line><div class="label">Address: </div><div>{{organization.address}}</div></div></md-list-item>
+    <md-list-item><div md-line><div class="label">Billing: </div><div>{{organization.billing}}</div></div></md-list-item>
+    <md-divider></md-divider>
+    <md-list-item><div md-line><div class="label">Contact Name: </div><div>{{organization.contact.person}}</div></div></md-list-item>
+    <md-list-item><div md-line><div class="label">Contact Email: </div><div>{{organization.contact.email}}</div></div></md-list-item>
+    <md-list-item><div md-line><div class="label">Contact Phone: </div><div>{{organization.contact.phone}}</div></div></md-list-item>
+    <md-divider></md-divider>
+    <div>{{organization.description}}</div>
   </md-list>
 </div>
 <div *ngIf="!organization">Waiting for Data</div>
