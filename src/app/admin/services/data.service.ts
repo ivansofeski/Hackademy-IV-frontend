@@ -24,6 +24,11 @@ export class DataService {
       return;
     }
 
+    // In this snippet we call specified request of HTTP where we include 'params' property of options
+    // in GET call. This way we can get a specific record of the data for instance getOrganization({id: 1})
+    // will grab that database record where organization id is 1 and no other.
+    // 'options' parameter is optional so it can be skipped therefore we let user do a full data query to the database
+    // or the path given.
     if (options !== undefined && Object.keys(options).length > 0) {
       let params = new HttpParams();
 
@@ -77,7 +82,7 @@ export class DataService {
 
   // Get all Organizations records data from the path. Requires no arguments to input.
   // Returns a set of Organization (interface) Observable.
-  getOrganizations(): Observable<Organization> {
+  getOrganizations(): Observable<Organization[]> {
     return this._get(this.paths.root + this.paths.organizations);
   }
 
@@ -94,7 +99,7 @@ export class DataService {
 
   // Get all Projects records data from the path. Requires no arguments to input.
   // Returns a set of Project (interface) Observable.
-  getProjects(): Observable<Project> {
+  getProjects(): Observable<Project[]> {
     return this._get(this.paths.root + this.paths.projects);
   }
 
