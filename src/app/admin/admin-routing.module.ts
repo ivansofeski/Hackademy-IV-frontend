@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { OrganizationListComponent } from './organization-list/organization-list.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
 
 const routes: Routes = [
   { path: 'admin', component: AdminComponent, children: [
     { path: 'organizations', component: OrganizationListComponent },
+    { path: 'projects', component: ProjectListComponent },
     { path: 'organizations/new', component: OrganizationFormComponent },
     { path: 'organizations/view/:id', component: OrganizationPageComponent }
   ]},
