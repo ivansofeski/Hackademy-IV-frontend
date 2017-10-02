@@ -11,11 +11,13 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
 import { OrganizationListComponent } from './organization-list/organization-list.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
 
 // Services
 import { DataService } from './services/data.service';
+
 
 @NgModule({
   imports: [
@@ -37,7 +39,7 @@ import { DataService } from './services/data.service';
     BrowserModule,
     ReactiveFormsModule
   ],
-  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent, OrganizationFormComponent, OrganizationPageComponent],
+  declarations: [AdminComponent, OrganizationListComponent, ProjectListComponent, AdminToolbarComponent, OrganizationFormComponent, OrganizationPageComponent],
   providers: [DataService]
 })
 
