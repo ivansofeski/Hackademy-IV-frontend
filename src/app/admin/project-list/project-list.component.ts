@@ -18,7 +18,7 @@ export class ProjectListComponent implements OnInit {
   constructor(public route: ActivatedRoute, public router: Router,private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.get.projects().subscribe(
+    this.dataService.getProjects().subscribe(
       res => {
         //console.log(res);
         this.proList = res
