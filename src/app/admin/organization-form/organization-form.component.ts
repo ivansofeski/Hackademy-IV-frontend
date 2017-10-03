@@ -26,11 +26,10 @@ export class OrganizationFormComponent implements OnInit {
       Validators.required]),
 
     city: new FormControl('', [
-      Validators.required,
-      Validators.pattern(EMAIL_REGEX)]),
+      Validators.required]),
 
     zipCode: new FormControl('', [
-      Validators.required]),
+      Validators.required,Validators.pattern('[0-9]{5}')]),
 
     description: new FormControl('', [
       Validators.required]),
@@ -42,6 +41,23 @@ export class OrganizationFormComponent implements OnInit {
       Validators.required]),
   };
 
+  rePassValid: boolean = false;
+  
+
+  checkPasswordFields(): void {
+    if (this.formControls.hasOwnProperty('password') && this.formControls.hasOwnProperty('repeatPassword')) {
+      
+      let _password = this.formControls['password'];
+      let _repassword = this.formControls['repeatPassword'];
+
+      let _pass = _password.value.trim();
+      let _repass = _repassword.value.trim();
+
+      // console.log("Input validated: " + this.rePassValid);
+       this.rePassValid = _pass === _repass ? true : false;
+       console.log("Input validated: " + this.rePassValid);
+    }
+  }
   constructor() { }
 
   ngOnInit() {
