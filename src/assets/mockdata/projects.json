@@ -2,8 +2,8 @@
     {
         "id": 1,
         "projectName": "Childrens Rights",
-        "toDate": "2017/09/01",
-        "fromDate": "2017/12/01",
+        "fromDate": "2017/09/01",
+        "toDate": "2017/12/01",
         "address": "Ormvråksgatan 2, 21562, Malmö",            
         "neededFunding": 20000,
         "raisedFunding": 2000,
@@ -16,8 +16,8 @@
     {
         "id": 2,
         "projectName": "Climate changes in Sweden",
-        "toDate": "2017/09/15",
-        "fromDate": "2017/11/15",
+        "fromDate": "2017/09/15",
+        "toDate": "2017/11/15",
         "address": "Malmögatan 2, 26252, Göteborg",            
         "neededFunding": 40000,
         "raisedFunding": 8000,
@@ -31,8 +31,8 @@
     {
         "id": 3,
         "projectName": "Childrens Rights",
-        "toDate": "2017/09/01",
-        "fromDate": "2017/12/01",
+        "fromDate": "2017/09/01",
+        "toDate": "2017/12/01",
         "address": "Ormvråksgatan 2, 21562, Malmö",            
         "neededFunding": 20000,
         "raisedFunding": 2000,
@@ -45,8 +45,8 @@
     {
         "id": 4,
         "projectName": "Climate changes in Sweden",
-        "toDate": "2017/09/15",
-        "fromDate": "2017/11/15",
+        "fromDate": "2017/09/15",
+        "toDate": "2017/11/15",
         "address": "Malmögatan 2, 26252, Göteborg",            
         "neededFunding": 40000,
         "raisedFunding": 8000,
