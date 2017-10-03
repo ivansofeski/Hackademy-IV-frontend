@@ -27,7 +27,7 @@ describe('OrganizationFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  //Isolated Tests
+  //Isolated Tests 
 
   it('Should not accept an empty organization name', () => {
     component.formControls.name.setValue("");
@@ -109,9 +109,9 @@ describe('OrganizationFormComponent', () => {
     expect(component.formControls.zipCode.valid).toBe(false);
   });
 
-  it('Should not accept letters in the postal code (12345A)', () => {
+  it('Should not accept letters in the postal code (1234A)', () => {
     component.formControls.zipCode.setValue("1234A");
-    expect(component.formControls.zipCode.valid).toBe(true);
+    expect(component.formControls.zipCode.valid).toBe(false);
   });
 
   it('Should accept a normal postal code (12345)', () => {
