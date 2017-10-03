@@ -1,9 +1,16 @@
+$primary-color: #61BFAD;
 $secondary-font-color: #9B9B9B;
+$primary-font-color: #4A4A4A;
 
 .project-list {
 
   margin: 0;
   md-card {
+
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
 
     .main-image-container {
 
@@ -37,34 +44,47 @@ $secondary-font-color: #9B9B9B;
         margin: 0;
         .project-title {
           text-transform: uppercase;
+          color: $primary-font-color;
         }
         .organization-name {
           text-transform: uppercase;
-          color: #61BFAD;
+          color: $primary-color;
         }
         .project-address {
           font-style: italic;
         }
       }
       .project-description {
-        padding: 0 1.5em 1.5em 1.5em;
-        font-family: Arial;
-        font-size: 0.9em;
+        padding: 0 30px 15px 15px;
         color: $secondary-font-color;
+        p {
+          font-family: Arial;
+          font-size: 1em;
+          line-height: 1em;
+          overflow: hidden;
+        }
+        .fade {
+          position: relative;
+          height: 3em; /* exactly three lines */
+        }
+        .fade:after {
+          content: "";
+          text-align: right;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 70%;
+          height: 1.2em;
+          background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+        }
       }
       .read-more {
         color: $secondary-font-color;
       }
+      .progress-bar {
+        display: block;
+        margin: 8px;
+      }
     }
   }
-}
-
-.noshadow {
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
-  box-shadow: none !important;
-}
-
-.nopadding {
-  padding: 0 !important;
 }
