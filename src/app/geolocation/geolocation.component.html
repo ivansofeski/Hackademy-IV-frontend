@@ -1,13 +1,12 @@
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl"></agm-marker>
   <agm-circle [latitude]="lat"
   [longitude]="lng"
   [radius]='radius'
-  fillOpacity='0.1'></agm-circle>
-  <agm-marker 
-    *ngFor="let m of markers; let i = index"
-    [latitude]="m.lat"
-    [longitude]="m.lng"
-    [label]="m.label">
+  fillOpacity='0.1'
+  ></agm-circle>
+  <agm-marker *ngFor="let m of projects"
+    [latitude]="m.location.lat"
+    [longitude]="m.location.lng">
   </agm-marker>
 </agm-map>
