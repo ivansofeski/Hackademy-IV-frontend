@@ -5,15 +5,15 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
+         <!-- <th>ID</th> -->
+          <th>Main Image</th>
           <th>Project Name</th>
           <th>From Date</th>
           <th>To Date</th>
           <th>Address</th>
           <th>Needed Funding</th>
           <th>Raised Funding</th>
-          <th>Discription</th>
-          <th>Main Image</th>
+         <!-- <th>Discription</th> -->
           <th>Project Manager</th>
           <th>Project ID</th>
           <th>Orgnization Name</th>
@@ -21,15 +21,15 @@
       </thead>
       <tbody>
         <tr *ngFor="let project of proList">
-          <td>{{project.id}}</td>
+          <!--<td>{{project.id}}</td>-->
+          <td><img [attr.src]='project.mainImage' width='100px'/></td>
           <td>{{project.projectName}}</td>
           <td>{{project.fromDate}}</td>
           <td>{{project.toDate}}</td>
           <td>{{project.address}}</td>
           <td>{{project.neededFunding}}</td>
           <td>{{project.raisedFunding}}</td>
-          <td>{{project.description}}</td>
-          <td><img [attr.src]='project.mainImage' width='100px'/></td>
+          <!-- <td>{{project.description}}</td> -->
           <td>{{project.projectManager}}</td>
           <td>{{project.projectId}}</td>
           <td>{{project.organizationName}}</td>
