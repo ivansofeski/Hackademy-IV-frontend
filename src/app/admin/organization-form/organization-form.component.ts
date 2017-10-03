@@ -9,44 +9,34 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
 })
 export class OrganizationFormComponent implements OnInit {
 
-  formControls: Object = {
-    name: new FormControl('', [
-      Validators.required]),
-    orgNumber: new FormControl('', [
-      Validators.required]),
+  formControls = {
+    name:           new FormControl('', [ Validators.required]),
+    
+    orgNumber:      new FormControl('', [ Validators.required]),
 
-    contact: new FormControl('', [
-      Validators.required]),
+    contact:        new FormControl('',  [Validators.required]),
 
-    contactEmail: new FormControl('', [
-      Validators.required,
-      Validators.pattern(EMAIL_REGEX)]),
+    contactEmail:   new FormControl('', [ Validators.required, Validators.pattern(EMAIL_REGEX)]),
 
-    adress: new FormControl('', [
-      Validators.required]),
+    adress:         new FormControl('', [ Validators.required]),
 
-    city: new FormControl('', [
-      Validators.required]),
+    city:           new FormControl('', [Validators.required]),
 
-    zipCode: new FormControl('', [
-      Validators.required,Validators.pattern('[0-9]{5}')]),
+    zipCode:        new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]),
 
-    description: new FormControl('', [
-      Validators.required]),
+    description:    new FormControl('', [Validators.required]),
 
-    password: new FormControl('', [
-      Validators.required]),
+    password:       new FormControl('', [ Validators.required]),
 
-    repeatPassword: new FormControl('', [
-      Validators.required]),
+    repeatPassword: new FormControl('', [ Validators.required]),
   };
 
   rePassValid: boolean = false;
-  
+
 
   checkPasswordFields(): void {
     if (this.formControls.hasOwnProperty('password') && this.formControls.hasOwnProperty('repeatPassword')) {
-      
+
       let _password = this.formControls['password'];
       let _repassword = this.formControls['repeatPassword'];
 
@@ -54,8 +44,8 @@ export class OrganizationFormComponent implements OnInit {
       let _repass = _repassword.value.trim();
 
       // console.log("Input validated: " + this.rePassValid);
-       this.rePassValid = _pass === _repass ? true : false;
-       console.log("Input validated: " + this.rePassValid);
+      this.rePassValid = _pass === _repass ? true : false;
+      console.log("Input validated: " + this.rePassValid);
     }
   }
   constructor() { }
