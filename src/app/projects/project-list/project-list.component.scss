@@ -2,53 +2,65 @@ $primary-color: #61BFAD;
 $secondary-font-color: #9B9B9B;
 $primary-font-color: #4A4A4A;
 
-$small-screen : 450px;
+$background-color: #eee;
 
-body{
-  background: #ededed;
+$small-screen: 450px;
+
+.container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: $background-color;
 }
-.project-list {
-  @media screen and (max-width: $small-screen) {
 
+.project-list {
+  background: $background-color;
+  @media screen and (max-width: $small-screen) {
     margin: 0;
   }
   @media screen and (min-width: $small-screen) {
-    background: red;
-    margin: 10%;
+    margin: auto;
+    width: 90%;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
   }
 
   md-card {
-    @media screen and (max-width: $small-screen) {
+    padding: 0 !important;
 
+    @media screen and (max-width: $small-screen) {
       -webkit-box-shadow: none !important;
       -moz-box-shadow: none !important;
       box-shadow: none !important;
-      padding: 0 !important;
     }
+    @media screen and (min-width: $small-screen) {
+      width: 400px;
+      margin: 2em;
+    }
+
     .main-image-container {
-
-      .horizontal {
-        display: flex;
-        justify-content: center;
-        .vertical {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          img {
-            max-width: 100%;
-
-          }
+      overflow: hidden;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $background-color;
+      img {
+        @media screen and (max-width: $small-screen) {
+          height: 300px;
+          width: auto;
+          max-height: 300px;
         }
-      }
-      .button-row {
-        position: absolute;
-        right: 2em;
-        margin-top: -7%;
-        md-icon {
-         color: red;
-
+        @media screen and (min-width: $small-screen) {
+          max-height: 300px;
         }
+
       }
+
     }
     .project-details {
       margin: 0;
@@ -65,6 +77,20 @@ body{
         }
         .project-address {
           font-style: italic;
+        }
+      }
+      .button-row {
+        position: absolute;
+        right: 2em;
+        @media screen and (max-width: $small-screen) {
+          margin-top: -10%;
+        }
+        @media screen and (min-width: $small-screen) {
+          margin-top: -12.5%;
+        }
+
+        md-icon {
+          color: red;
         }
       }
       .project-description {
@@ -87,7 +113,7 @@ body{
           bottom: 0;
           right: 0;
           width: 70%;
-          height: 1.2em;
+          height: 1em;
           background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
         }
       }
