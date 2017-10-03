@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import { Organization } from '../interface/organization';
 
 @Component({
   selector: 'app-organization-list',
@@ -16,13 +17,13 @@ import 'rxjs/add/operator/map';
 export class OrganizationListComponent implements OnInit, OnDestroy {
 
   errors: any[] = [];
-  orgList: any[] = [];
+  orgList: Organization[]= [];
 
   // Constructor here
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.get.organizations().subscribe(
+    this._dataService.getOrganizations().subscribe(
       res => {
         //console.log(res);
         this.orgList = res
