@@ -2,16 +2,29 @@ $primary-color: #61BFAD;
 $secondary-font-color: #9B9B9B;
 $primary-font-color: #4A4A4A;
 
+$small-screen : 450px;
+
+body{
+  background: #ededed;
+}
 .project-list {
+  @media screen and (max-width: $small-screen) {
 
-  margin: 0;
+    margin: 0;
+  }
+  @media screen and (min-width: $small-screen) {
+    background: red;
+    margin: 10%;
+  }
+
   md-card {
+    @media screen and (max-width: $small-screen) {
 
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
     .main-image-container {
 
       .horizontal {
@@ -22,8 +35,8 @@ $primary-font-color: #4A4A4A;
           flex-direction: column;
           justify-content: center;
           img {
-            max-width: 100vw;
-            max-height: 50vh;
+            max-width: 100%;
+
           }
         }
       }
