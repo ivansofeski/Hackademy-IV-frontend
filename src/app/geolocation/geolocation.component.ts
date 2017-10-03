@@ -10,6 +10,7 @@ export class GeolocationComponent implements OnInit {
   lat:number;
   lng:number;
   zoom:number;
+  radius:number;
   projects=[]
   constructor(private _projectService: ProjectService) { 
     this.showPosition();
@@ -19,10 +20,11 @@ export class GeolocationComponent implements OnInit {
   }
 
   showPosition(){
+    this.radius=4000;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position=>{this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
-        this.zoom = 16;
+        this.zoom = 12;
         console.log("Latitude: " + this.lat +
         " -- Longitude: " + this.lng);
       });

@@ -1,5 +1,9 @@
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  <agm-circle [latitude]="lat"
+  [longitude]="lng"
+  [radius]='radius'
+  fillOpacity='0.1'></agm-circle>
   <agm-marker 
     *ngFor="let m of markers; let i = index"
     [latitude]="m.lat"
