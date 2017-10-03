@@ -1,6 +1,6 @@
 <div class="project-list">
   <div class="project-container" *ngFor="let project of projectList">
-    <md-card class="noshadow nopadding">
+    <md-card class="">
       <div class="main-image-container">
         <div class="horizontal">
           <div class="vertical">
@@ -19,21 +19,20 @@
         <md-card-header class="card-header">
           <md-card-title class="project-title">{{project.projectName}}</md-card-title>
           <md-card-subtitle class="project-detail">
-            <span class="organization-name">{{project.projectManager}}</span>
-            <span class="project-address">{{project.address}}</span></md-card-subtitle>
+            <span class="organization-name">{{project.organizationName}}</span>
+            <span class="project-address">{{project.address}}</span>
+          </md-card-subtitle>
         </md-card-header>
 
 
-        <md-card-content class="project-description">
-          <p class="project-description">
-            {{project.description}}
-            <br>
+        <md-card-content>
+          <div class="project-description">
+            <p class="fade">
+              {{project.description}}
+            </p>
             <a href="#" class="read-more">Read more</a>
-          </p>
-
-          <!--p.need-->
-
-          <app-progressbar raisedFunding={{project.raisedFunding}} neededFunding={{project.neededFunding}} ></app-progressbar>
+          </div>
+          <app-progressbar class="progress-bar" raisedFunding={{project.raisedFunding}} neededFunding={{project.neededFunding}} ></app-progressbar>
           </md-card-content>
 
       </div>
