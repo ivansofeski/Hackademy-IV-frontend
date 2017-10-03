@@ -22,7 +22,7 @@ export class OrganizationListComponent implements OnInit, OnDestroy {
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.get.organizations().subscribe(
+    this._dataService.getOrganizations().subscribe(
       res => {
         //console.log(res);
         this.orgList = res
