@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProjectPageComponent } from './project-page.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from '../../shared/shared.module';
+import { DataService } from '../services/data.service';
 
 describe('ProjectPageComponent', () => {
   let component: ProjectPageComponent;
@@ -8,7 +11,9 @@ describe('ProjectPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectPageComponent ]
+      declarations: [ ProjectPageComponent ],
+      imports: [ SharedModule, RouterTestingModule],
+      providers: [ DataService ],
     })
     .compileComponents();
   }));
