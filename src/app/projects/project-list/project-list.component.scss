@@ -4,7 +4,8 @@ $primary-font-color: #4A4A4A;
 
 $background-color: #eee;
 
-$small-screen: 450px;
+$phone: "only screen and (max-width : 420px)";
+$tablet-desktop: "only screen and (min-width : 420px)";
 
 .container {
   height: 100%;
@@ -15,51 +16,19 @@ $small-screen: 450px;
 
 .project-list {
   background: $background-color;
-  @media screen and (max-width: $small-screen) {
-    margin: 0;
-  }
-  @media screen and (min-width: $small-screen) {
-    margin: auto;
-    width: 90%;
-    padding-top: 50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-  }
+  height: auto;
+  min-height: 100vh;
 
   md-card {
     padding: 0 !important;
 
-    @media screen and (max-width: $small-screen) {
-      -webkit-box-shadow: none !important;
-      -moz-box-shadow: none !important;
-      box-shadow: none !important;
-    }
-    @media screen and (min-width: $small-screen) {
-      width: 400px;
-      margin: 2em;
-    }
-
     .main-image-container {
       overflow: hidden;
-      height: 300px;
+      height: auto;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: $background-color;
-      img {
-        @media screen and (max-width: $small-screen) {
-          height: 300px;
-          width: auto;
-          max-height: 300px;
-        }
-        @media screen and (min-width: $small-screen) {
-          max-height: 300px;
-        }
-
-      }
+      background: #CACBCD;
 
     }
     .project-details {
@@ -82,12 +51,7 @@ $small-screen: 450px;
       .button-row {
         position: absolute;
         right: 2em;
-        @media screen and (max-width: $small-screen) {
-          margin-top: -10%;
-        }
-        @media screen and (min-width: $small-screen) {
-          margin-top: -12.5%;
-        }
+        margin-top: -42.5px;
 
         md-icon {
           color: red;
@@ -96,6 +60,7 @@ $small-screen: 450px;
       .project-description {
         padding: 0 30px 15px 15px;
         color: $secondary-font-color;
+
         p {
           font-family: Arial;
           font-size: 1em;
@@ -123,6 +88,51 @@ $small-screen: 450px;
       .progress-bar {
         display: block;
         margin: 8px;
+      }
+    }
+  }
+}
+
+@media #{$phone}{
+  .project-list {
+    margin: 0;
+
+    md-card {
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+      box-shadow: none !important;
+
+      img {
+        height: auto;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media #{$tablet-desktop}{
+  .project-list {
+    margin: auto;
+    width: 90%;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+
+    md-card {
+      width: 450px;
+      margin: 2em;
+
+      .main-image-container {
+        height: 300px;
+
+        img {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+        }
       }
     }
   }
