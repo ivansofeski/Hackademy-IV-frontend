@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { IOrganization, Organization } from '../interface/organization';
+import { Organization } from '../interface/organization';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
