@@ -68,9 +68,9 @@ export class OrganizationFormComponent implements OnInit {
   }
 
   constructor(private builder: FormBuilder) {
-    this.formControls.password.setValidators([Validators.required, (c: AbstractControl): ValidationErrors | null => {
+    /* this.formControls.password.setValidators([Validators.required, (c: AbstractControl): ValidationErrors | null => {
       return this.formControls.repeatPassword.value.trim() === c.value.trim() ? null : { 'mismatch-password': true }
-    }]);
+    }]); */
     this.formControls.repeatPassword.setValidators((c: AbstractControl): ValidationErrors | null => {
       return this.formControls.password.value.trim() === c.value.trim() ? null : { 'mismatch-repeat': true }
     });

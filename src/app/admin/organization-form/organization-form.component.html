@@ -1,128 +1,128 @@
 <!-- Form for the submission of a new Organization-->
 
 <form class="organization-form">
-
-  <!-- Field for the name of the organization-->
-  <md-form-field class="organization-full-width">
-    <input mdInput #orgName placeholder=" Organization Name " type="text" [formControl]="formControls.name">
-    <md-error *ngIf="formControls.name.hasError('required')">
-      Name is <strong>required</strong>
-    </md-error>
-  </md-form-field>
-
-  <!-- Field for the number of the organization limited with 6 character-->
-  <md-form-field class="organization-full-width">
-    <input mdInput #orgNumber maxlength="6" placeholder=" Organization Number " type="text" [formControl]="formControls.orgNumber">
-    <md-error *ngIf="formControls.orgNumber.hasError('required')">
-      The Organization number is <strong>required</strong>
-    </md-error>
-    <md-hint align="end">{{orgNumber.value.length}} / 6</md-hint>
-  </md-form-field>
-
-  <!-- Field for the information of the contact person in the organization-->
-  <table class="organization-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <md-form-field class="organization-full-width">
-          <input mdInput #contactName placeholder=" Contact name " type="text" [formControl]="formControls.contact">
-          <md-error *ngIf="formControls.contact.hasError('required')">
-            Contact Name is <strong>required</strong>
-          </md-error>
-        </md-form-field>
-      </td>
-      <td>
-        <md-form-field class="organization-full-width">
-          <input mdInput placeholder=" Contact Email " [formControl]="formControls.contactEmail">
-          <md-error *ngIf="formControls.contactEmail.hasError('pattern')">
-            Please enter a valid email address
-          </md-error>
-          <md-error *ngIf="formControls.contactEmail.hasError('required')">
-            Email is <strong>required</strong>
-          </md-error>
-        </md-form-field>
-      </td>
-    </tr>
-  </table>
-
-  <!-- Field for the  street Adress of the organization-->
-  <md-form-field class="organization-full-width">
-    <textarea mdInput #orgAdress placeholder=" Address " type="text" [formControl]="formControls.adress"></textarea>
-    <md-error *ngIf="formControls.adress.hasError('required')">
-      Adress is <strong>required</strong>
-    </md-error>
-  </md-form-field>
-
-  <!-- Field for the city,postcode and country of the organization-->
-  <table class="organization-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <md-form-field class="organization-full-width">
-          <input mdInput #postalCode maxlength="5" placeholder=" Postal Code " value="" type="number" [formControl]="formControls.zipCode">
-          <md-error *ngIf="formControls.zipCode.hasError('required')">
-            the postCode is <strong>required</strong>
-          </md-error>
-          <md-error *ngIf="formControls.zipCode.hasError('pattern')">
-            the postCode is <strong>5 digits</strong>
-          </md-error>
-          <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-        </md-form-field>
-      </td>
-      <td>
-        <md-form-field class="organization-full-width" type="text" required>
-          <input mdInput #orgCity placeholder=" City " type="text" [formControl]="formControls.city">
-          <md-error *ngIf="formControls.city.hasError('required')">
-            The city where the organisation is locate is <strong>required</strong>
-          </md-error>
-        </md-form-field>
-      </td>
-    </tr>
-  </table>
-
-  <!--Field to save the description of the organisation-->
-  <md-form-field class="organization-full-width">
-    <textarea mdInput #orgDesc maxlength="200" placeholder=" Description " type="text" [formControl]="formControls.description"></textarea>
-    <md-error *ngIf="formControls.description.hasError('required')">
-      The description of the organisation is <strong>required</strong>
-    </md-error>
-    <md-hint align="end">{{orgDesc.value.length}} / 200</md-hint>
-  </md-form-field>
-
-  <!--Field for the password-->
-  <md-form-field class="organization-full-width">
-    <input mdInput #orgPassword placeholder=" Password " type="password" [formControl]="formControls.password">
-    <md-error *ngIf="formControls.password.hasError('required')">
-      Password is <strong>required!</strong>
-    </md-error>
-    <!-- <md-error *ngIf="formControls.password.hasError('mismatch-password')">
-      Password(s) are <strong>mismatched!</strong>
-    </md-error> -->
-  </md-form-field>
-
-  <!--Field for the comfirmation of the password-->
-  <md-form-field class="organization-full-width">
-    <input mdInput #orgPasswordrepeat placeholder=" Confirm Password " type="password" [formControl]="formControls.repeatPassword">
-    <md-error *ngIf="formControls.repeatPassword.hasError('mismatch-repeat')">
-      Password(s) are <strong>mismatched!</strong>
-    </md-error>
-  </md-form-field>
-
-  <!-- <div [formGroup]="orgFormPasswords">
-    <div formGroupName="passwords">
-      <input formControlName="new_password" type="password" placeholder="Password">
-    </div>
-
-    <div formGroupName="passwords">
-      <input formControlName="repeat_new_password" type="password" class="form-control" placeholder="Confirm Password">
-      <div class="input-error" *ngIf="
-        orgFormPasswords.controls['passwords'].errors &&
-        orgFormPasswords.controls['passwords'].errors.areEqual &&
-        orgFormPasswords.controls['passwords'].controls.repeat_new_password.touched &&
-        orgFormPasswords.controls['passwords'].controls.new_password.touched">PASSWORDS do not match
+  
+    <!-- Field for the name of the organization-->
+    <md-form-field class="organization-name">
+      <input mdInput #orgName placeholder=" Organization Name " type="text" [formControl]="formControls.name">
+      <md-error *ngIf="formControls.name.hasError('required')">
+        Name is <strong>required</strong>
+      </md-error>
+    </md-form-field>
+  
+    <!-- Field for the number of the organization limited with 6 character-->
+    <md-form-field class="organization-number">
+      <input mdInput #orgNumber maxlength="6" placeholder=" Organization Number " type="text" [formControl]="formControls.orgNumber">
+      <md-error *ngIf="formControls.orgNumber.hasError('required')">
+        The Organization number is <strong>required</strong>
+      </md-error>
+      <md-hint align="end">{{orgNumber.value.length}} / 6</md-hint>
+    </md-form-field>
+  
+    <!-- Field for the information of the contact person in the organization-->
+    <table class="organization-contact" cellspacing="0">
+      <tr>
+        <td>
+          <md-form-field class="organization-contact-name">
+            <input mdInput #contactName placeholder=" Contact name " type="text" [formControl]="formControls.contact">
+            <md-error *ngIf="formControls.contact.hasError('required')">
+              Contact Name is <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </td>
+        <td>
+          <md-form-field class="organization-contact-email">
+            <input mdInput placeholder=" Contact Email " [formControl]="formControls.contactEmail">
+            <md-error *ngIf="formControls.contactEmail.hasError('pattern')">
+              Please enter a valid email address
+            </md-error>
+            <md-error *ngIf="formControls.contactEmail.hasError('required')">
+              Email is <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </td>
+      </tr>
+    </table>
+  
+    <!-- Field for the  street Adress of the organization-->
+    <md-form-field class="organization-address">
+      <textarea mdInput #orgAdress placeholder=" Address " type="text" [formControl]="formControls.adress"></textarea>
+      <md-error *ngIf="formControls.adress.hasError('required')">
+        Adress is <strong>required</strong>
+      </md-error>
+    </md-form-field>
+  
+    <!-- Field for the city,postcode of the organization-->
+    <table class="organization-location" cellspacing="0">
+      <tr>
+        <td>
+          <md-form-field class="organization-postalCode">
+            <input mdInput #postalCode maxlength="5" placeholder=" Postal Code " value="" type="number" [formControl]="formControls.zipCode">
+            <md-error *ngIf="formControls.zipCode.hasError('required')">
+              the postCode is <strong>required</strong>
+            </md-error>
+            <md-error *ngIf="formControls.zipCode.hasError('pattern')">
+              the postCode is <strong>5 digits</strong>
+            </md-error>
+            <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+          </md-form-field>
+        </td>
+        <td>
+          <md-form-field class="organization-city" type="text" required>
+            <input mdInput #orgCity placeholder=" City " type="text" [formControl]="formControls.city">
+            <md-error *ngIf="formControls.city.hasError('required')">
+              The city where the organisation is locate is <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </td>
+      </tr>
+    </table>
+  
+    <!--Field to save the description of the organisation-->
+    <md-form-field class="organization-description">
+      <textarea mdInput #orgDesc maxlength="200" placeholder=" Description " type="text" [formControl]="formControls.description"></textarea>
+      <md-error *ngIf="formControls.description.hasError('required')">
+        The description of the organisation is <strong>required</strong>
+      </md-error>
+      <md-hint align="end">{{orgDesc.value.length}} / 200</md-hint>
+    </md-form-field>
+  
+    <!--Field for the password-->
+    <md-form-field class="organization-password">
+      <input mdInput #orgPassword placeholder=" Password " type="password" [formControl]="formControls.password">
+      <md-error *ngIf="formControls.password.hasError('required')">
+        Password is <strong>required!</strong>
+      </md-error>
+      <!-- <md-error *ngIf="formControls.password.hasError('mismatch-password')">
+        Password(s) are <strong>mismatched!</strong>
+      </md-error> -->
+    </md-form-field>
+  
+    <!--Field for the comfirmation of the password-->
+    <md-form-field class="organization-repeatPassword">
+      <input mdInput #orgPasswordrepeat placeholder=" Confirm Password " type="password" [formControl]="formControls.repeatPassword">
+      <md-error *ngIf="formControls.repeatPassword.hasError('mismatch-repeat')">
+        Password(s) are <strong>mismatched!</strong>
+      </md-error>
+    </md-form-field>
+  
+    <!-- <div [formGroup]="orgFormPasswords">
+      <div formGroupName="passwords">
+        <input formControlName="new_password" type="password" placeholder="Password">
       </div>
-    </div>
-  </div> -->
-
-  <!--Button to save the form or Canceled-->
-  <button md-raised-button color="warn">Cancel</button>
-  <button md-raised-button color="primary">Validate</button>
-</form>
+  
+      <div formGroupName="passwords">
+        <input formControlName="repeat_new_password" type="password" class="form-control" placeholder="Confirm Password">
+        <div class="input-error" *ngIf="
+          orgFormPasswords.controls['passwords'].errors &&
+          orgFormPasswords.controls['passwords'].errors.areEqual &&
+          orgFormPasswords.controls['passwords'].controls.repeat_new_password.touched &&
+          orgFormPasswords.controls['passwords'].controls.new_password.touched">PASSWORDS do not match
+        </div>
+      </div>
+    </div> -->
+  
+    <!--Button to save the form or Canceled-->
+    <button md-raised-button color="warn">Cancel</button>
+    <button md-raised-button color="primary">Validate</button>
+  </form>
