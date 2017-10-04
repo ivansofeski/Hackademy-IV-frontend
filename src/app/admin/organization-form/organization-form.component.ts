@@ -24,15 +24,15 @@ export class OrganizationFormComponent implements OnInit {
 
     zipCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]),
 
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required])/* ,
 
     password: new FormControl('', [Validators.required]),
 
-    repeatPassword: new FormControl('', [])
+    repeatPassword: new FormControl('', []) */
   };
 
-  orgFormPasswords: FormGroup;
-
+  /* orgFormPasswords: FormGroup;
+ */
 
   /* rePassValid: any;
   value: any;
@@ -63,7 +63,7 @@ export class OrganizationFormComponent implements OnInit {
     }
   } */
 
-  validatePasswords() {
+ /*  validatePasswords() {
 
   }
 
@@ -74,7 +74,7 @@ export class OrganizationFormComponent implements OnInit {
     this.formControls.repeatPassword.setValidators((c: AbstractControl): ValidationErrors | null => {
       return this.formControls.password.value.trim() === c.value.trim() ? null : { 'mismatch-repeat': true }
     });
-  }
+  } */
 
   ngOnInit() {
   }
