@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
-import {ProjectListComponent} from './projects/project-list/project-list.component';
+import { DonorComponent } from './donor/donor.component';
 
 const routes: Routes = [
-  { path: '', redirectTo:'home',pathMatch:'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'admin', component: AdminComponent }
-//  { path: '**', pathMatch: 'full', component: PageNotFoundComponent}
+  //  { path: '**', pathMatch: 'full', component: PageNotFoundComponent}
 ];
 
 @NgModule({

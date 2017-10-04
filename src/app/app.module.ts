@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ProjectsModule } from './projects/projects.module';
+import {DonorModule} from './donor/donor.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProjectsModule } from './projects/projects.module';
     AppRoutingModule,
     SharedModule,
     ProjectsModule,
-    AdminModule,  
+    AdminModule,
+    DonorModule,
     BrowserAnimationsModule
   ],
   providers: [],
