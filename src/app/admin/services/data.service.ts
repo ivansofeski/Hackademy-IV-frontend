@@ -30,7 +30,7 @@ export class DataService {
     // 'options' parameter is optional so it can be skipped therefore we let user do a full data query to the database
     // or the path given.
     if (options !== undefined && Object.keys(options).length > 0) {
-      let params = new HttpParams();
+      const params = new HttpParams();
 
       for (const option in options) {
         if (options.hasOwnProperty(option)) {
@@ -42,22 +42,22 @@ export class DataService {
       return this.http.get(path, {
         params: params
       })
-      .do((data: Response) => {
-        return data !== undefined ? data : [];
-      })
-      .catch((error: Response) => {
-        console.log(error['message']);
-        return Observable.throw(error || 'Server error');
-      });
+        .do((data: Response) => {
+          return data !== undefined ? data : [];
+        })
+        .catch((error: Response) => {
+          console.log(error['message']);
+          return Observable.throw(error || 'Server error');
+        });
     } else {
       return this.http.get(path)
-      .do((data: Response) => {
-        return data !== undefined ? data : [];
-      })
-      .catch((error: Response) => {
-        console.log(error['message']);
-        return Observable.throw(error || 'Server error');
-      });
+        .do((data: Response) => {
+          return data !== undefined ? data : [];
+        })
+        .catch((error: Response) => {
+          console.log(error['message']);
+          return Observable.throw(error || 'Server error');
+        });
     }
   }
 
@@ -112,6 +112,33 @@ export class DataService {
     }
 
     return this._get(this.paths.root + this.paths.projects, options);
+  }
+
+  filterOrgBy(key: string, value: any, obj: Object): void {
+    switch (true) {
+      case key === undefined:
+      case value === undefined:
+      case obj === undefined:
+      case typeof key !== 'string':
+      case typeof obj !== 'object':
+      case key.length === 0:
+        return;
+      default:
+        break;
+    }
+
+    this._get(this.paths.root + this.paths.organizations).subscribe(
+      organizations => {
+        if (organizations !== undefined && organizations.length > 0) {
+          const _org = organizations.filter((v, k) => v[key] === value)[0];
+
+          if (_org !== undefined) {
+            obj['organization'] = _org;
+          }
+        }
+      },
+      error => console.log(error)
+    );
   }
 
   constructor(private http: HttpClient) { }
