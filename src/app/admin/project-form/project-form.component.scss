@@ -1,0 +1,60 @@
+.material-icons {
+	position: absolute;
+}
+
+.project-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    padding-bottom: 10px;
+}
+  
+.project-full-width {
+    width: 100%;
+}
+
+.image-container {
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    align-items: center;
+    width: 100%;
+    height: 30vh;
+	background: transparent;
+	background-image: url('../../../assets/default-placeholder.png');
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-origin: border-box;
+	background-position: center;
+	border: 1px dashed silver;
+	border-radius: 5px;
+	overflow: hidden;
+	cursor: pointer;
+  
+    .input-image {
+		display: block;
+		width: 0;
+		height: 0;
+		opacity: 0;
+		z-index: -1;
+	}
+
+	.image-holder {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		/* width: 200px; */
+		height: 100%;
+		margin: 0 auto;
+  }
+}
+
+.no-border {
+	border: none;
+	background: none;
+}
