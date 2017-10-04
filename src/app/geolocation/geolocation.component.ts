@@ -12,13 +12,19 @@ export class GeolocationComponent implements OnInit {
   zoom:number;
   radius:number;
   projects=[]
-  iconUrl={url:"../assets/icons/pin.svg",
+  iconUrl={url:"../assets/icons/pin.png",
             scaledSize: {
-              height: 45,
+              height: 50,
               width: 50
             }
           }
-  constructor(private _projectService: ProjectService) { 
+  iconUrlProject={url:"../assets/icons/blueMarker.png",
+          scaledSize: {
+            height: 35,
+            width: 25
+          }
+        }
+          constructor(private _projectService: ProjectService) { 
     this.showPosition();
   }
 
