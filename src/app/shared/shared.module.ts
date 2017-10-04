@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModule, MdProgressBarModule } from '@angular/material';
 import { NavbarComponent } from './navbar.component';
 import { ProgressbarComponent } from './progressbar.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ProgressbarComponent } from './progressbar.component';
     MdIconModule,
     MdCardModule,
     MdProgressBarModule,
+    RouterModule,
   ],
   exports: [
     CommonModule,
@@ -26,8 +28,12 @@ import { ProgressbarComponent } from './progressbar.component';
     MdCardModule,
     MdProgressBarModule,
     NavbarComponent,
-    ProgressbarComponent
+    ProgressbarComponent,
+    RouterModule,
   ],
-  declarations: [NavbarComponent,ProgressbarComponent]
+  declarations: [
+    NavbarComponent,
+    ProgressbarComponent
+  ]
 })
 export class SharedModule { }
