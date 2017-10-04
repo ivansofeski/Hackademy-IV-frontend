@@ -2,11 +2,12 @@
   <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl"></agm-marker>
   <agm-circle [latitude]="lat"
   [longitude]="lng"
-  [radius]='radius'
-  fillOpacity='0.1'
+  [radius]="radius"
+  fillOpacity="0.1"
   ></agm-circle>
-  <agm-marker *ngFor="let m of projects"
-    [latitude]="m.location.lat"
-    [longitude]="m.location.lng">
+  <agm-marker *ngFor="let m of projects"    
+      [latitude]="m.location.lat"
+      [longitude]="m.location.lng" 
+      [iconUrl]="iconUrlProject">
   </agm-marker>
 </agm-map>
