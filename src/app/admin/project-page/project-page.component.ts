@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
+import { Project } from '../interface/project';
 
 @Component({
   selector: 'app-project-page',
@@ -10,9 +11,25 @@ import { DataService } from '../services/data.service';
 export class ProjectPageComponent implements OnInit {
 
   _projectId: number = 0;
-  project: any;
+  _project: any;
   errors: any[] = [];
 
+  get project(){
+    return this._project;
+  }
+
+  set project(value: Project){
+    this._project = value;
+    if(value.organizationId > 0 ){ //this code must move to the data service.
+      this.dataService.getOrganizations().subscribe(
+        res => {
+          this._project.organization = res.filter((v,k) => v.id === value.organizationId)[0];
+          console.log('Fetched Organization', this._project.organization);
+        },
+        error => this.errors.push(error)
+      );
+    }else this._project.organization = null;
+  }
   get projectId():number{
     return this._projectId;
   }
