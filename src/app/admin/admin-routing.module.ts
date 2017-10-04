@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, children: [
     { path: 'organizations', component: OrganizationListComponent },
     { path: 'organizations/new', component: OrganizationFormComponent },
-    { path: 'organizations/view/:id', component: OrganizationPageComponent }
+    { path: 'organizations/view/:id', component: OrganizationPageComponent },
 
     { path: 'projects', component: ProjectListComponent },
 //    { path: 'projects/new', component: ProjectFormComponent },
