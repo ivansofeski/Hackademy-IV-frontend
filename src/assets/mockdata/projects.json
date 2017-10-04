@@ -12,7 +12,8 @@
         "mainImage": "./assets/photos/project001.jpg",
         "projectManager": "Mats Nilsson",
         "projectId": "001",
-        "organizationName": "Save the children"
+        "organizationName": "Save the children",
+        "organizationId": 1
     },
     {
         "id": 2,
@@ -27,7 +28,8 @@
         "mainImage": "./assets/photos/project002.jpg",
         "projectManager": "Johan Ericsson",
         "projectId": "002",
-        "organizationName": "Unicef"
+        "organizationName": "Unicef",
+        "organizationId": 2
 
     },
     {
@@ -43,7 +45,8 @@
         "mainImage": "./assets/photos/project003.jpg",
         "projectManager": "Mats Nilsson",
         "projectId": "003",
-        "organizationName": "Save the children"
+        "organizationName": "Save the children",
+        "organizationId": 1
     },
     {
         "id": 4,
@@ -58,7 +61,8 @@
         "mainImage": "./assets/photos/project004.jpg",
         "projectManager": "Johan Ericsson",
         "projectId": "004",
-        "organizationName": "Unicef"
+        "organizationName": "Unicef",
+        "organizationId": 2
 
     }
 ]
