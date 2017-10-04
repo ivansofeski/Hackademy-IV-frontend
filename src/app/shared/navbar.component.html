@@ -1,9 +1,21 @@
-<div class="navBar">
-    <button md-icon-button>
-        <md-icon class="md-24">person</md-icon>
-      </button>
-    <img src="../assets/Nano_Logo_White.png" style="width:84px;height:42px;padding-top:7px">
-    <button md-icon-button>
-        <md-icon class="md-24">place</md-icon>
-      </button>
-</div>
+<nav class="navbar-container">
+  <div class="nav-menu-container">
+    <ul class="navbar-menu">
+      <li>
+        <a md-button aria-label="profile" routerLink="/profile">
+          <md-icon aria-hidden="true" class="md-24">person</md-icon>
+        </a>
+      </li>
+      <li>
+        <a md-button routerLink="/home" routerLinkActive="active" class="logo">
+          <img src="../assets/Nano_Logo_White.png" alt="Nano logo">
+        </a>
+      </li>
+      <li>
+        <a md-button aria-label="geo" routerLink="/geo">
+          <md-icon aria-hidden="true" class="md-24">place</md-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
