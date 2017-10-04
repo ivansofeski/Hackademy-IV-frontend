@@ -24,7 +24,7 @@ export class GeolocationComponent implements OnInit {
             width: 25
           }
         }
-          constructor(private _projectService: ProjectService) { 
+  constructor(private _projectService: ProjectService) { 
     this.showPosition();
   }
 
