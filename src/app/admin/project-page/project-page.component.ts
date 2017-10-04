@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-project-page',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectPageComponent implements OnInit {
 
-  constructor() { }
+  _projectId: number = 0;
+  project: any;
+  errors: any[] = [];
+
+  get projectId():number{
+    return this._projectId;
+  }
+
+  set projectId(value:number){
+    this._projectId = value;
+    if(value > 0){
+      this.dataService.getProjects().subscribe(
+        res => {
+          this.project = res.filter((v, k) => v.id == value)[0];
+        },
+        error => {
+          this.errors.push(error);
+        }
+      );
+    }
+  }
+  constructor(public route: ActivatedRoute, public router: Router,private dataService: DataService) { }
 
   ngOnInit() {
+    this.projectId = +this.route.snapshot.paramMap.get('id');
   }
 
 }
