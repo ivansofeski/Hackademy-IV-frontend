@@ -18,6 +18,7 @@ import { OrganizationPageComponent } from './organization-page/organization-page
 // Services
 import { DataService } from './services/data.service';
 import { ProjectPageComponent } from './project-page/project-page.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { ProjectPageComponent } from './project-page/project-page.component';
     BrowserModule,
     ReactiveFormsModule
   ],
-  declarations: [AdminComponent, OrganizationListComponent, ProjectListComponent, AdminToolbarComponent, OrganizationFormComponent, OrganizationPageComponent, ProjectPageComponent],
+  declarations: [AdminComponent, OrganizationListComponent, ProjectListComponent, AdminToolbarComponent, OrganizationFormComponent, OrganizationPageComponent, ProjectPageComponent, ProjectFormComponent],
   providers: [DataService]
 })
 
