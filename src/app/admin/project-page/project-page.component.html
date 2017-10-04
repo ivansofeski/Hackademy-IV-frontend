@@ -25,10 +25,9 @@
     <md-list-item class="project-mainImage">
       <div md-line><div class="label">Main Image: </div><div class="project-mainImage">{{project.mainImage}}</div></div>
     </md-list-item>
-    <md-list-item class="project-organization">
-      <div md-line><div class="label">Organization: </div><div class="project-mainImage">{{project.organization}}</div></div>
+    <md-list-item class="project-organization" *ngIf="project.organization">
+      <div md-line><div class="label">Organization: </div><div class="project-organization"><a href="/admin/organizations/view/{{project.organization.id}}" [textContent]='project.organization.name'></a></div></div>
     </md-list-item>
-    <md-divider></md-divider>
     <div class="project-desc">{{project.description}}</div>
   </md-list>
 </div>

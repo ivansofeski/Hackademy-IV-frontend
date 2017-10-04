@@ -11,4 +11,5 @@ export interface Project {
     projectManager: string;
     projectId: string;
     organizationName: string;
+    organizationId: number;
 }
