@@ -95,6 +95,7 @@ $tablet-desktop: "only screen and (min-width : 420px)";
 @media #{$phone}{
   .project-list {
     margin: 0;
+    padding-top: 10vh;
 
     md-card {
       -webkit-box-shadow: none !important;
@@ -113,7 +114,7 @@ $tablet-desktop: "only screen and (min-width : 420px)";
   .project-list {
     margin: auto;
     width: 90%;
-    padding-top: 50px;
+    padding-top: 15vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

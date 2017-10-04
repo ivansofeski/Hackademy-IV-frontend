@@ -1,17 +1,51 @@
-.navBar{
-    background-color: #61bfad;
-    display: flex;
-    justify-content: space-around;
-    height:60px;
+$primary-color: #61BFAD;
 
-    
-}
-md-icon{
-    padding-top: 10px;
-    color:white;
-    font-size: 45px;
-    width:45px;
-    height:45;
-    position:auto;
-    //cursor: pointer;
+nav {
+  background-color: $primary-color;
+  height: 10vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 2;
+
+  .nav-menu-container {
+
+    ul.navbar-menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: inline;
+        text-align: center;
+        width: 33.3%;
+        height: 10vh;
+
+        box-sizing: border-box;
+        cursor: pointer;
+
+        a {
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+
+          img {
+            padding-top: 2.5vh;
+            height: 4vh;
+            width: auto;
+            cursor: pointer;
+
+          }
+          md-icon {
+            font-size: 4vh;
+            color: white;
+            cursor: pointer;
+            vertical-align: text-top;
+            padding-top: 2.5vh;
+          }
+        }
+      }
+    }
+  }
 }
