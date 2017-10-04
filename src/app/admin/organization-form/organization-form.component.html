@@ -88,23 +88,23 @@
     </md-form-field>
   
     <!--Field for the password-->
-    <md-form-field class="organization-password">
+    <!-- <md-form-field class="organization-password">
       <input mdInput #orgPassword placeholder=" Password " type="password" [formControl]="formControls.password">
       <md-error *ngIf="formControls.password.hasError('required')">
         Password is <strong>required!</strong>
-      </md-error>
+      </md-error> -->
       <!-- <md-error *ngIf="formControls.password.hasError('mismatch-password')">
         Password(s) are <strong>mismatched!</strong>
       </md-error> -->
-    </md-form-field>
+    <!-- </md-form-field> -->
   
     <!--Field for the comfirmation of the password-->
-    <md-form-field class="organization-repeatPassword">
+    <!-- <md-form-field class="organization-repeatPassword">
       <input mdInput #orgPasswordrepeat placeholder=" Confirm Password " type="password" [formControl]="formControls.repeatPassword">
       <md-error *ngIf="formControls.repeatPassword.hasError('mismatch-repeat')">
         Password(s) are <strong>mismatched!</strong>
       </md-error>
-    </md-form-field>
+    </md-form-field> -->
   
     <!-- <div [formGroup]="orgFormPasswords">
       <div formGroupName="passwords">
