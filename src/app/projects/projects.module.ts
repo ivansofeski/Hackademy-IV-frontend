@@ -14,10 +14,7 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     CommonModule,
     SharedModule,
-    ProjectsRoutingModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCHC4hLZ_ogiMaGy9kVZl4u0gjocEyw3EA'
-    })
+    ProjectsRoutingModule
   ],
   providers: [ProjectService],
   declarations: [ProjectsComponent, ProjectListComponent, GeolocationComponent]
