@@ -4,19 +4,36 @@ export const INPUT_ATTRIBUTES = {
     type: 'file',
     accept: 'image/*',
     placeholder: 'Select an image from your device',
-    title: 'Click to select an image'
+    title: 'Click to select an image',
+    'prop-name': 'mainImage'
   },
   NAME: {
     class: 'mat-input-element input-name',
     type: 'text',
     placeholder: 'Project title',
-    title: 'Type in the project title'
+    title: 'Type in the project title',
+    'prop-name': 'projectName'
+  },
+  PROJECT_ID: {
+    class: 'mat-input-element input-proj-id',
+    type: 'text',
+    placeholder: 'Project id',
+    title: 'Type in the corresponding project id',
+    'prop-name': 'projectId'
+  },
+  MANAGER: {
+    class: 'mat-input-element input-proj-manager',
+    type: 'text',
+    placeholder: 'Project manager',
+    title: 'Type in the corresponding project manager',
+    'prop-name': 'projectManager'
   },
   ORG_NAME: {
     class: 'mat-input-element input-org-name',
     type: 'text',
     placeholder: 'Organization name',
-    title: 'Type in the corresponding organization name'
+    title: 'Type in the corresponding organization name',
+    'prop-name': 'organizationName'
   },
   FROM_DATE: {
     class: 'mat-input-element input-date'
@@ -82,4 +99,9 @@ export const NUMBERS = {
   103: '7',
   104: '8',
   105: '9'
+};
+
+export const REGEX_UNITS = {
+  LETTERS: /^[a-zA-Z]*$/,
+  PROJECT: /^([A-Za-z0-9]{6})+[-]+([A-Za-z0-9]{4})/
 };

@@ -1,7 +1,9 @@
-import { FormControl, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Project } from '../interface/project';
-import { INPUT_ATTRIBUTES, NUMBERS } from './project-form.constants';
+import { INPUT_ATTRIBUTES, NUMBERS, REGEX_UNITS } from './project-form.constants';
+import { Organization } from '../interface/organization';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-project-form',
@@ -10,28 +12,41 @@ import { INPUT_ATTRIBUTES, NUMBERS } from './project-form.constants';
 })
 
 export class ProjectFormComponent implements OnInit {
-  public mytime: Date = new Date();
-  
-  projectListLink = '';
-  attributes = INPUT_ATTRIBUTES;
   @ViewChild('projectForm') projectForm: ElementRef;
-  projectControls=  {
-    descImage:        new FormControl('', [Validators.required]),
-    name:             new FormControl('', [Validators.required]),
-    fromDate:         new FormControl('', [Validators.required]),
-    toDate:           new FormControl('', [Validators.required, (c) => {return c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null}]),   
-    orgName:          new FormControl('', [Validators.required]),
-    goal:             new FormControl('', [Validators.required]),
-    address:          new FormControl('', [Validators.required]),
-    shortDesc:        new FormControl('', [Validators.required]),
-    desc:             new FormControl('', [Validators.required])
-  };
-  constructor() { 
-  
-  this.projectControls.toDate.setValidators([Validators.required, (c) => {return c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null},(c:AbstractControl):ValidationErrors | null => {
-    return this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate':true} :null }]);
 
-}
+  newProject: Project = {
+    id: 0,
+    projectName: '',
+    toDate: '',
+    fromDate: '',
+    address: '',
+    neededFunding: 0,
+    raisedFunding: 0,
+    description: '',
+    mainImage: '',
+    projectManager: '',
+    projectId: '',
+    organizationName: '',
+    organizationId: 0
+  };
+  projectListLink = '/admin/projects/';
+  attributes = INPUT_ATTRIBUTES;
+  organizations: Organization[] = [];
+  errors: any[] = [];
+  projectControls = {
+    descImage:    new FormControl('', [Validators.required]),
+    name:         new FormControl('', [Validators.required]),
+    projectId:    new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
+    manager:      new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.LETTERS)]),
+    orgName:      new FormControl('', [Validators.required]),
+    fromDate:     new FormControl(null , [Validators.required]),
+    toDate:       new FormControl(null , []),
+    goal:         new FormControl('', [Validators.required]),
+    address:      new FormControl('', [Validators.required]),
+    shortDesc:    new FormControl('', [Validators.required]),
+    desc:         new FormControl('', [Validators.required])
+  };
+
   setAttributes(options: any): void {
     console.log(options);
   }
@@ -40,6 +55,7 @@ export class ProjectFormComponent implements OnInit {
     if (elm === undefined || elm.value === '') {
       return;
     }
+
     const _imgSelector = elm.parentElement.querySelectorAll('img')[0];
 
     if (_imgSelector !== undefined) {
@@ -116,15 +132,83 @@ export class ProjectFormComponent implements OnInit {
     }
   }
 
-  validateForm(form: Element): boolean {
-    const _validateForm = false;
-    console.log(form);
-    return _validateForm;
+  setOrganizationId(value: any, input: HTMLInputElement): void {
+    input.value = value;
   }
 
-  
+  // Not implemented fully!
+  saveProject() {
+    this._fetcher.getProjects().subscribe(
+      res => {
+        if (res !== undefined && res.length > 0) {
+          const last_project = res[res.length - 1];
+
+          const all_inputs = document.querySelectorAll('input:not([type="hidden"]), textarea');
+
+          if (all_inputs !== undefined) {
+            for (const input in all_inputs) {
+            }
+          }
+
+          this.newProject = {
+            id: last_project.id++,
+            projectName: '',
+            toDate: '',
+            fromDate: '',
+            address: '',
+            neededFunding: 0,
+            raisedFunding: 0,
+            description: '',
+            mainImage: '',
+            projectManager: '',
+            projectId: '',
+            organizationName: '',
+            organizationId: 0
+          };
+          localStorage.setItem('newProject', JSON.stringify(this.newProject));
+        }
+      },
+      error => this.errors.push(error)
+    );
+  }
+
+  constructor(private _fetcher: DataService) {
+    this.projectControls.toDate.setValidators([
+      Validators.required,
+      (c: AbstractControl) => c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null,
+      (c: AbstractControl): ValidationErrors | null => {
+        return this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate': true} : null;
+      }
+    ]);
+  }
 
   ngOnInit() {
+    if (this.organizations !== undefined) {
+      this._fetcher.getOrganizations().subscribe(
+        res => {
+          if (res !== undefined && res.length > 0) {
+            this.organizations = res;
+
+            this.organizations.sort((a, b) => {
+              const _a = a.name.toLowerCase();
+              const _b = b.name.toLowerCase();
+
+              switch (true) {
+                case _a < _b:
+                  return -1;
+                case _a > _b:
+                  return 1;
+                default:
+                  return 0;
+              }
+            });
+            console.log(this.organizations);
+          }
+        },
+        error => this.errors.push(error)
+      );
+    }
+
     if (this.projectForm !== undefined) {
       const inputs = this.projectForm.nativeElement.querySelectorAll('input:not([type="hidden"]), textarea');
 

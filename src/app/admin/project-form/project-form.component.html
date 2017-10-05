@@ -16,14 +16,39 @@
     </md-error>
   </md-form-field>
 
-  <!-- FIELD: ORGANIZATION NAME -->
+  <!-- FIELD: PROJECT NUMBER ID -->
   <md-form-field class='project-full-width'>
-    <input mdInput #orgName name='ORG_NAME' placeholder='{{attributes.ORG_NAME.placeholder}}' [formControl]='projectControls.orgName'>
-    <md-error *ngIf='projectControls.orgName.hasError("required")'>
-      The organization name is <strong>required</strong>
+    <input mdInput #projectId name='PROJECT_ID' placeholder='{{attributes.PROJECT_ID.placeholder}}' [formControl]='projectControls.projectId'>
+    <md-error *ngIf='projectControls.projectId.hasError("required")'>
+      Project number is <strong>required</strong>
+    </md-error>
+    <md-error *ngIf='projectControls.projectId.hasError("pattern")'>
+      Project number must be written in this format <strong>XXXXXX-XXXX</strong>
     </md-error>
   </md-form-field>
 
+  <!-- FIELD: PROJECT MANAGER -->
+  <md-form-field class='project-full-width'>
+    <input mdInput #manager name='MANAGER' placeholder='{{attributes.MANAGER.placeholder}}' [formControl]='projectControls.manager'>
+    <md-error *ngIf='projectControls.manager.hasError("required")'>
+      Project manager is <strong>required</strong>
+    </md-error>
+    <md-error *ngIf='projectControls.manager.hasError("pattern")'>
+      Must be <strong>valid</strong> name!
+    </md-error>
+  </md-form-field>
+
+  <!-- FIELD: ORGANIZATION NAME -->
+  <!-- <md-form-field class='project-full-width'>
+    <input mdInput #orgName name='ORG_NAME' [formControl]='projectControls.orgName'>
+    <md-error *ngIf='projectControls.orgName.hasError("required")'>
+      The organization name is <strong>required</strong>
+    </md-error>
+  </md-form-field> -->
+  <md-select placeholder="Organization Name" (change)='setOrganizationId($event.value, orgName)'>
+    <input #orgName class='input-org-name'>
+    <md-option *ngFor="let org of organizations" [value]="org.id" [textContent]='org.name'></md-option>
+  </md-select>
 
   <!-- Field start and end dates -->
   <table class='project-full-width' cellspacing='0'>
@@ -67,7 +92,7 @@
 
   <!-- FIELD: PROJECT ADDRESS -->
   <md-form-field class='project-full-width'>
-    <textarea mdInput #address name='ADDRESS' placeholder='{{attributes.ADDRESS.placeholder}}' [formControl]='projectControls.address'></textarea>
+    <input mdInput #address name='ADDRESS' placeholder='{{attributes.ADDRESS.placeholder}}' [formControl]='projectControls.address'>
     <md-error *ngIf='projectControls.address.hasError("required")'>
       Address is <strong>required</strong>
     </md-error>
@@ -127,6 +152,7 @@
 
   <!--Button to save the form or Canceled-->
   <button md-raised-button color='warn'>Cancel</button>
-  <button md-raised-button color='primary' [routerLink]='projectListLink' (mouseup)='validateForm(projectForm)'>Submit
+  <button md-raised-button color='primary'>Submit
+  <!-- <button md-raised-button color='primary' [routerLink]='[projectListLink]' (mouseup)='saveProject()'>Submit -->
   </button>
 </form>
