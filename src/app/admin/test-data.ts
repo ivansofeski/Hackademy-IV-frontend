@@ -33,37 +33,42 @@ export const testData = {
         {
             "id": 1,
             "projectName": "Childrens Rights",
-            "toDate": "2017/09/01",
-            "fromDate": "2017/12/01",
-            "address": "Ormvråksgatan 2, 21562, Malmö",
-            "neededFunding": 20000,
-            "raisedFunding": 2000,
+            "fromDate": "2017/09/01",
+            "toDate": "2017/12/01",
+            "location": {"lat": 55.607543, "lng": 13.002294},
+            "address": "Ormvråksgatan 2, 21562, Malmö", 
+            "neededFunding": 50000,
+            "raisedFunding": 20000,
             "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
             "mainImage": "./assets/photos/project001.jpg",
             "projectManager": "Mats Nilsson",
             "projectId": "001",
-            "organizationName": "Save the children"
+            "organizationName": "Save the children",
+            "organizationId": 1
         },
         {
             "id": 2,
             "projectName": "Climate changes in Sweden",
-            "toDate": "2017/09/15",
-            "fromDate": "2017/11/15",
+            "fromDate": "2017/09/15",
+            "toDate": "2017/11/15",
+            "location": {"lat": 55.607495, "lng": 12.999504},
             "address": "Malmögatan 2, 26252, Göteborg",
-            "neededFunding": 40000,
-            "raisedFunding": 8000,
+            "neededFunding": 60000,
+            "raisedFunding": 38000,
             "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
             "mainImage": "./assets/photos/project002.jpg",
             "projectManager": "Johan Ericsson",
             "projectId": "002",
-            "organizationName": "Unicef"
+            "organizationName": "Unicef",
+            "organizationId": 2
     
         },
         {
             "id": 3,
             "projectName": "Childrens Rights",
-            "toDate": "2017/09/01",
-            "fromDate": "2017/12/01",
+            "fromDate": "2017/09/01",
+            "toDate": "2017/12/01",
+            "location": {"lat": 55.605556, "lng": 13.001264},
             "address": "Ormvråksgatan 2, 21562, Malmö",
             "neededFunding": 20000,
             "raisedFunding": 2000,
@@ -71,13 +76,15 @@ export const testData = {
             "mainImage": "./assets/photos/project003.jpg",
             "projectManager": "Mats Nilsson",
             "projectId": "003",
-            "organizationName": "Save the children"
+            "organizationName": "Save the children",
+            "organizationId": 1
         },
         {
             "id": 4,
             "projectName": "Climate changes in Sweden",
-            "toDate": "2017/09/15",
-            "fromDate": "2017/11/15",
+            "fromDate": "2017/09/15",
+            "toDate": "2017/11/15",
+            "location": {"lat": 55.606210, "lng": 13.006070},
             "address": "Malmögatan 2, 26252, Göteborg",
             "neededFunding": 40000,
             "raisedFunding": 8000,
@@ -85,7 +92,8 @@ export const testData = {
             "mainImage": "./assets/photos/project004.jpg",
             "projectManager": "Johan Ericsson",
             "projectId": "004",
-            "organizationName": "Unicef"
+            "organizationName": "Unicef",
+            "organizationId": 2
     
         }
     ]
