@@ -23,7 +23,7 @@
         <div md-line><div class="label">Main Image: </div><div class="project-mainImage">{{project.mainImage}}</div></div>
       </md-list-item>
       <md-list-item class="project-organization" *ngIf="project.organization">
-        <div md-line><div class="label">Organization: </div><div class="project-organization"><a href="/admin/organizations/view/{{project.organization.id}}" [textContent]='project.organization.name'></a></div></div>
+        <div md-line><div class="label">Organization: </div><div class="project-organization"><a [routerLink]="['/admin/organizations/view/',project.organization.id]" [textContent]='project.organization.name'></a></div></div>
       </md-list-item>
       <div class="project-desc">{{project.description}}</div>
     </md-list>
