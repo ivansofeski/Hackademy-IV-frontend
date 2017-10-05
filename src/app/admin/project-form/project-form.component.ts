@@ -10,6 +10,7 @@ import { INPUT_ATTRIBUTES, NUMBERS } from './project-form.constants';
 })
 
 export class ProjectFormComponent implements OnInit {
+  projectListLink = '';
   attributes = INPUT_ATTRIBUTES;
   @ViewChild('projectForm') projectForm: ElementRef;
   projectControls: Object = {
@@ -19,8 +20,7 @@ export class ProjectFormComponent implements OnInit {
     goal:             new FormControl('', [Validators.required]),
     address:          new FormControl('', [Validators.required]),
     shortDesc:        new FormControl('', [Validators.required]),
-    desc:             new FormControl('', [Validators.required]),
-    nationalProject:  new FormControl('', [Validators.required])
+    desc:             new FormControl('', [Validators.required])
   };
 
   setAttributes(options: any): void {
@@ -105,6 +105,12 @@ export class ProjectFormComponent implements OnInit {
     if (!_validate) {
       e.preventDefault();
     }
+  }
+
+  validateForm(form: Element): boolean {
+    const _validateForm = false;
+    console.log(form);
+    return _validateForm;
   }
 
   constructor() { }
