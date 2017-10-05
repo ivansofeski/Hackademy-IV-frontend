@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DonorComponent } from './donor.component';
+import {SharedModule} from '../shared/shared.module';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('DonorComponent', () => {
   let component: DonorComponent;
@@ -8,7 +10,8 @@ describe('DonorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DonorComponent ]
+      declarations: [ DonorComponent ],
+      imports:[SharedModule, RouterTestingModule]
     })
     .compileComponents();
   }));
