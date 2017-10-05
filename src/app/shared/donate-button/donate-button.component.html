@@ -1,33 +1,15 @@
-<!-- <div>
-  <fab dir="up">
-    <fab-toggle>
-      <p class="donate">DONATE swish</p>
-    </fab-toggle>
-    <fab-button>10 :-</fab-button>
-    <fab-button>20 :-</fab-button>
-    <fab-button>50 :-</fab-button>
-  </fab>
-</div> -->
-
 <div class='fab-menu'>
   <div class="fab-toggle" (click)="toggleAmounts($event.currentTarget)">
-    <span [class]="'icon-' + icon"></span>
     <p class="donate">DONATE swish</p>
-    <ng-content></ng-content>
   </div>
-  <a #anchor class="fab-item" (click)="getSwishAmount($event.currentTarget)">
-    10
-    <span line-hight="10px" [class]="'icon-' + icon"></span>
-    <ng-content></ng-content>
+  <a class="fab-item" >
+    10:-
   </a>
-  <a #anchor class="fab-item" (click)="getSwishAmount($event.currentTarget)">
-    25
-      <span line-hight="10px" [class]="'icon-' + icon"></span>
+  <a class="fab-item">
+    25:-
       <ng-content></ng-content>
   </a>
-  <a #anchor class="fab-item" (click)="getSwishAmount($event.currentTarget)">
-    50
-    <span line-hight="10px" [class]="'icon-' + icon"></span>
-    <ng-content></ng-content>
+  <a class="fab-item">
+    50:-
   </a>
 </div>

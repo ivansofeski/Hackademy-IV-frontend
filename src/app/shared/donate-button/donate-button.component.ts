@@ -1,8 +1,4 @@
-import {  Component, OnInit,Input, ContentChildren, ContentChild, ElementRef, HostListener
-} from '@angular/core';
-
-import { FabToggle } from './fab-toggle';
-import { FabButton } from './fab-button';
+import {  Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-donate-button',
@@ -21,7 +17,7 @@ export class DonateButtonComponent implements OnInit {
     }
 
     elm.parentElement.classList.toggle('expanded');
-    console.log(elm.parentElement.classList);
+    // console.log(elm.parentElement.classList);
   }
 
   ngOnInit() {

@@ -9,10 +9,13 @@ import {RouterModule} from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 =======
 import { DonateButtonComponent } from './donate-button/donate-button.component';
+<<<<<<< HEAD
 import { FabButton } from './donate-button/fab-button';
 import { FabToggle } from './donate-button/fab-toggle';
 import { Fab } from './donate-button/fab';
 >>>>>>> don't pull
+=======
+>>>>>>> I have created the Donate Button
 
 @NgModule({
   imports: [
@@ -41,6 +44,7 @@ import { Fab } from './donate-button/fab';
     NavbarComponent,
     ProgressbarComponent,
 <<<<<<< HEAD
+<<<<<<< HEAD
     RouterModule,
     AgmCoreModule
   ],
@@ -56,5 +60,10 @@ import { Fab } from './donate-button/fab';
   ],
   declarations: [NavbarComponent,ProgressbarComponent, DonateButtonComponent,FabToggle,FabButton,Fab]
 >>>>>>> don't pull
+=======
+    DonateButtonComponent
+  ],
+  declarations: [NavbarComponent,ProgressbarComponent, DonateButtonComponent]
+>>>>>>> I have created the Donate Button
 })
 export class SharedModule { }
