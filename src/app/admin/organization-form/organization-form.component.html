@@ -51,7 +51,7 @@
     <md-form-field class="organization-address">
       <textarea mdInput #orgAdress placeholder=" Address " type="text" [formControl]="formControls.adress"></textarea>
       <md-error *ngIf="formControls.adress.hasError('required')">
-        Adress is <strong>required</strong>
+        Address is <strong>required</strong>
       </md-error>
     </md-form-field>
   
@@ -62,10 +62,10 @@
           <md-form-field class="organization-postalCode">
             <input mdInput #postalCode maxlength="5" placeholder=" Postal Code " value="" type="number" [formControl]="formControls.zipCode">
             <md-error *ngIf="formControls.zipCode.hasError('required')">
-              the postCode is <strong>required</strong>
+              the post code is <strong>required</strong>
             </md-error>
             <md-error *ngIf="formControls.zipCode.hasError('pattern')">
-              the postCode is <strong>5 digits</strong>
+              the post code is <strong>5 digits</strong>
             </md-error>
             <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
           </md-form-field>
