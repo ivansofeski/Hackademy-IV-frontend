@@ -9,7 +9,7 @@
 
         <div class="project-details">
           <div class="button-row">
-            <button md-fab color="white">
+            <button md-fab color="white" (click)="onClick(project.id)">
               <md-icon class="md-24" aria-label="icon-button with a heart icon">favorite</md-icon>
             </button>
           </div>
@@ -31,8 +31,16 @@
               </p>
               <a href="#" class="read-more">Read more</a>
             </div>
-            <app-progressbar class="progress-bar" raisedFunding={{project.raisedFunding}}
-                             neededFunding={{project.neededFunding}}></app-progressbar>
+            <app-progressbar class="progress-bar"
+              [id]='project.id' 
+              [raisedFunding]='project.raisedFunding'
+              [neededFunding]='project.neededFunding'
+              ></app-progressbar>
+              <app-donate-button 
+              [project]='project'
+              [donateOption1]="donateOption1"
+              [donateOption2]="donateOption2"
+              [donateOption3]="donateOption3"></app-donate-button>
           </md-card-content>
         </div>
       </md-card>
