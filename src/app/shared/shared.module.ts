@@ -4,18 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModule, MdProgressBarModule } from '@angular/material';
 import { NavbarComponent } from './navbar.component';
 import { ProgressbarComponent } from './progressbar.component';
-<<<<<<< HEAD
 import {RouterModule} from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
-=======
 import { DonateButtonComponent } from './donate-button/donate-button.component';
-<<<<<<< HEAD
-import { FabButton } from './donate-button/fab-button';
-import { FabToggle } from './donate-button/fab-toggle';
-import { Fab } from './donate-button/fab';
->>>>>>> don't pull
-=======
->>>>>>> I have created the Donate Button
 
 @NgModule({
   imports: [
@@ -43,27 +34,14 @@ import { Fab } from './donate-button/fab';
     MdProgressBarModule,
     NavbarComponent,
     ProgressbarComponent,
-<<<<<<< HEAD
-<<<<<<< HEAD
     RouterModule,
-    AgmCoreModule
+    AgmCoreModule,
+    DonateButtonComponent
   ],
   declarations: [
     NavbarComponent,
-    ProgressbarComponent
-  ]
-=======
-    DonateButtonComponent,
-    FabButton,
-    FabToggle,
-    Fab
-  ],
-  declarations: [NavbarComponent,ProgressbarComponent, DonateButtonComponent,FabToggle,FabButton,Fab]
->>>>>>> don't pull
-=======
+    ProgressbarComponent,
     DonateButtonComponent
-  ],
-  declarations: [NavbarComponent,ProgressbarComponent, DonateButtonComponent]
->>>>>>> I have created the Donate Button
+  ]
 })
 export class SharedModule { }
