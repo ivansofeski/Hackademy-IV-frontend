@@ -21,7 +21,7 @@
         <tr *ngFor="let project of proList">
           <!--<td>{{project.id}}</td>-->
           <td><img [attr.src]='project.mainImage' width='100px'/></td>
-          <td><a href="/admin/projects/view/{{project.id}}">{{project.projectName}}</a></td>
+          <td><a [routerLink]="['/admin/projects/view/',project.id]">{{project.projectName}}</a></td>
           <td>{{project.fromDate}}</td>
           <td>{{project.toDate}}</td>
           <td>{{project.address}}</td>
