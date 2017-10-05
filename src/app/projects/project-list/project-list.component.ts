@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ProjectService} from '../project.service';
 
 
@@ -7,7 +7,7 @@ import {ProjectService} from '../project.service';
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss']
 })
-export class ProjectListComponent implements OnInit, OnChanges {
+export class ProjectListComponent implements OnInit {
   errors: any[] = [];
   projectList: any[] = [];
   
@@ -27,7 +27,7 @@ export class ProjectListComponent implements OnInit, OnChanges {
     );
   }
 
-  ngOnChanges(ID){
+  onClick(ID){
     console.log('Something changed',ID);
     let proj =this.projectList.find(o => o.id === ID);
     proj.raisedFunding = proj.raisedFunding+10000;
