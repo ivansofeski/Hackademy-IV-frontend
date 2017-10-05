@@ -25,7 +25,6 @@ describe('ProjectPageComponent', () => {
         SharedModule, 
         RouterTestingModule,  
         HttpClientModule, 
-        AgmCoreModule.forRoot({apiKey: 'AIzaSyCHC4hLZ_ogiMaGy9kVZl4u0gjocEyw3EA'}), 
       ],
       providers: [ 
         DataService,
