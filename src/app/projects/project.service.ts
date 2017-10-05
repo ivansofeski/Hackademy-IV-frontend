@@ -17,6 +17,19 @@ export class ProjectService {
                 .catch(this.handlerError);
   }
 
+  getFavoritProjects(indexes: any[]): Observable <Project[]> {
+    return this._http.get<Project[]>(this._projectUrl)
+        .map(projects => projects.filter(<Project>(project) => {
+          for(let id of indexes){
+            if (project.id === id){
+              return true;
+            }
+        }
+      })     
+      )
+        .catch(this.handlerError);
+  }
+
   private handlerError(err: HttpErrorResponse){
     return Observable.throw(err.message);
   }
