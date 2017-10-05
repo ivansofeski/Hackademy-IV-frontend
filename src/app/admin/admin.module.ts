@@ -5,7 +5,7 @@ import { OrganizationFormComponent } from './organization-form/organization-form
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { MdInputModule, MdListModule, MdDatepickerModule, MdNativeDateModule, MdRadioModule } from '@angular/material';
+import { MdInputModule, MdListModule, MdDatepickerModule, MdNativeDateModule, MdRadioModule, MdSelectModule } from '@angular/material';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -35,6 +35,7 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     MdNativeDateModule,
     MdDatepickerModule,
     MdRadioModule,
+    MdSelectModule
   ],
   exports: [
     MdInputModule,
@@ -45,6 +46,7 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     MdNativeDateModule,
     MdDatepickerModule,
     MdRadioModule,
+    MdSelectModule
   ],
   declarations: [
     AdminComponent,

@@ -80,3 +80,13 @@
 		margin-right: 10px;
 	}
 }
+
+.input-org-name {
+	position: relative;
+	display: block;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	z-index: -1;
+	pointer-events: none;
+}
