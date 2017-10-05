@@ -16,9 +16,9 @@ export class ProgressbarComponent implements OnInit {
     this.raised=(this.raisedFunding/this.neededFunding*100);
     
   }
-  onLiked(event){
-    console.log(event)
-    this.raised=(this.raisedFunding +event/this.neededFunding*100);
-  }
+  // onLiked(event){
+  //   console.log(event)
+  //   this.raised=(this.raisedFunding +event/this.neededFunding*100);
+  // }
 
 }

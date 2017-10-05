@@ -15,6 +15,9 @@ export class ProjectListComponent implements OnInit {
   color = 'primary';
   mode = 'determinate';
 
+  donateOption1=10;
+  donateOption2=25;
+  donateOption3=50;
   constructor(private _projectService: ProjectService) { }
 
   ngOnInit() {
@@ -27,9 +30,9 @@ export class ProjectListComponent implements OnInit {
     );
   }
 
-  onClick(ID){
-    console.log('Something changed',ID);
-    let proj =this.projectList.find(o => o.id === ID);
-    proj.raisedFunding = proj.raisedFunding+10000;
-  }
+  // onClick(ID){
+  //   console.log('Something changed',ID);
+  //   let proj =this.projectList.find(o => o.id === ID);
+  //   proj.raisedFunding = proj.raisedFunding+10000;
+  // }
 }

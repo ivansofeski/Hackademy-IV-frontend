@@ -36,6 +36,11 @@
               [raisedFunding]='project.raisedFunding'
               [neededFunding]='project.neededFunding'
               ></app-progressbar>
+              <app-donate-button 
+              [project]='project'
+              [donateOption1]="donateOption1"
+              [donateOption2]="donateOption2"
+              [donateOption3]="donateOption3"></app-donate-button>
           </md-card-content>
         </div>
       </md-card>
