@@ -7,6 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { DataService } from '../services/data.service';
 import { testData } from '../test-data';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('OrganizationListComponent', () => {
   let component: OrganizationListComponent;
@@ -18,7 +19,7 @@ describe('OrganizationListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ OrganizationListComponent ],
-      imports: [ SharedModule ],
+      imports: [ SharedModule, RouterTestingModule ],
       providers: [ DataService ],
     })
     .compileComponents();
