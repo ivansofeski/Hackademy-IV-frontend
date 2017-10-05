@@ -25,19 +25,31 @@
   </md-form-field>
 
 
-  <!-- Field for the city,postcode and country of the project -->
+  <!-- Field start and end dates -->
   <table class='project-full-width' cellspacing='0'>
     <tr>
       <td>
         <md-form-field>
-          <input name='FROM_DATE' mdInput [mdDatepicker]='myDatepicker' placeholder='From (date)'>
+          <input name='FROM_DATE' mdInput [mdDatepicker]='myDatepicker' placeholder='From (date)' [formControl]='projectControls.fromDate'>
+          <md-error *ngIf='projectControls.fromDate.hasError("required")'>
+            The starting Date is <strong>required</strong>
+          </md-error>
           <md-datepicker-toggle mdSuffix [for]='myDatepicker'></md-datepicker-toggle>
           <md-datepicker #myDatepicker></md-datepicker>
         </md-form-field>
       </td>
       <td>
         <md-form-field>
-          <input name='TO_DATE' mdInput [mdDatepicker]='myDatepicker2' placeholder='To (date)'>
+          <input name='TO_DATE' mdInput [mdDatepicker]='myDatepicker2' placeholder='To (date)' [formControl]='projectControls.toDate'>
+          <md-error *ngIf='projectControls.toDate.hasError("required")'>
+            The ending Date is <strong>required</strong>
+          </md-error>
+          <md-error *ngIf='projectControls.toDate.hasError("wrongdate")'>
+            The ending Date must not be <strong>in the past</strong>
+          </md-error>
+          <md-error *ngIf='projectControls.toDate.hasError("impossibleDate")'>
+            The ending Date must not be <strong>impossible</strong>
+          </md-error>
           <md-datepicker-toggle mdSuffix [for]='myDatepicker2'></md-datepicker-toggle>
           <md-datepicker #myDatepicker2></md-datepicker>
         </md-form-field>

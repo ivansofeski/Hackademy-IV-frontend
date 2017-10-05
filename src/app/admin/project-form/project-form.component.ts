@@ -1,4 +1,4 @@
-import { FormControl, Validator, Validators } from '@angular/forms';
+import { FormControl, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Project } from '../interface/project';
 import { INPUT_ATTRIBUTES, NUMBERS } from './project-form.constants';
@@ -10,19 +10,28 @@ import { INPUT_ATTRIBUTES, NUMBERS } from './project-form.constants';
 })
 
 export class ProjectFormComponent implements OnInit {
+  public mytime: Date = new Date();
+  
   projectListLink = '';
   attributes = INPUT_ATTRIBUTES;
   @ViewChild('projectForm') projectForm: ElementRef;
-  projectControls: Object = {
+  projectControls=  {
     descImage:        new FormControl('', [Validators.required]),
     name:             new FormControl('', [Validators.required]),
+    fromDate:         new FormControl('', [Validators.required]),
+    toDate:           new FormControl('', [Validators.required, (c) => {return c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null}]),   
     orgName:          new FormControl('', [Validators.required]),
     goal:             new FormControl('', [Validators.required]),
     address:          new FormControl('', [Validators.required]),
     shortDesc:        new FormControl('', [Validators.required]),
     desc:             new FormControl('', [Validators.required])
   };
+  constructor() { 
+  
+  this.projectControls.toDate.setValidators([Validators.required, (c) => {return c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null},(c:AbstractControl):ValidationErrors | null => {
+    return this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate':true} :null }]);
 
+}
   setAttributes(options: any): void {
     console.log(options);
   }
@@ -113,7 +122,7 @@ export class ProjectFormComponent implements OnInit {
     return _validateForm;
   }
 
-  constructor() { }
+  
 
   ngOnInit() {
     if (this.projectForm !== undefined) {
