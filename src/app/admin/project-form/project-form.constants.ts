@@ -18,6 +18,12 @@ export const INPUT_ATTRIBUTES = {
     placeholder: 'Organization name',
     title: 'Type in the corresponding organization name'
   },
+  FROM_DATE: {
+    class: 'mat-input-element input-date'
+  },
+  TO_DATE: {
+    class: 'mat-input-element input-date'
+  },
   GOAL: {
     class: 'mat-input-element input-goal',
     type: 'text',
@@ -41,14 +47,21 @@ export const INPUT_ATTRIBUTES = {
   DESC: {
     class: 'mat-input-element input-desc',
     type: 'text',
-    placeholder: 'Detailed description',
+    placeholder: 'Description',
     title: 'Type in a detailed description.'
+  },
+  NATIONAL_PROJECT: {
+    class: 'input-national-project'
   }
 };
 
 export const NUMBERS = {
   8: 'backspace',
   13: 'enter',
+  37: 'left-arrow',
+  38: 'up-arrow',
+  39: 'right-arrow',
+  40: 'down-arrow',
   48: '0',
   49: '1',
   50: '2',

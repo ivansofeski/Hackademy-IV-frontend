@@ -13,13 +13,14 @@ export class ProjectFormComponent implements OnInit {
   attributes = INPUT_ATTRIBUTES;
   @ViewChild('projectForm') projectForm: ElementRef;
   projectControls: Object = {
-    descImage:  new FormControl('', [Validators.required]),
-    name:       new FormControl('', [Validators.required]),
-    orgName:    new FormControl('', [Validators.required]),
-    goal:       new FormControl('', [Validators.required]),
-    address:    new FormControl('', [Validators.required]),
-    shortDesc:  new FormControl('', [Validators.required]),
-    desc:       new FormControl('', [Validators.required])
+    descImage:        new FormControl('', [Validators.required]),
+    name:             new FormControl('', [Validators.required]),
+    orgName:          new FormControl('', [Validators.required]),
+    goal:             new FormControl('', [Validators.required]),
+    address:          new FormControl('', [Validators.required]),
+    shortDesc:        new FormControl('', [Validators.required]),
+    desc:             new FormControl('', [Validators.required]),
+    nationalProject:  new FormControl('', [Validators.required])
   };
 
   setAttributes(options: any): void {
@@ -43,25 +44,62 @@ export class ProjectFormComponent implements OnInit {
     }
   }
 
-  allowNumbers(e) {
+  // This function provides a white list of characters/symbols/numbers and etc.
+  // Specific inputs use this function to enable or disable the user on Client side depending on the pattern forseen.
+  // Switch statement checks which Input by it's "name" attribute and applies a set of statements and then sets _validate.
+  // Then in the end of the function depending if it validates to TRUE or FALSE we set e.preventDefault()
+  inputWhiteList(e) {
     let _validate = true;
+    const _target = e.currentTarget;
 
-    if (!NUMBERS.hasOwnProperty(e.keyCode)) {
-      _validate = false;
-    }
+    switch (_target.name) {
+      case 'GOAL':
+        if (!NUMBERS.hasOwnProperty(e.keyCode)) {
+          _validate = false;
+        }
 
-    if ((e.shiftKey || e.altKey) && NUMBERS.hasOwnProperty(e.keyCode)) {
-      _validate = false;
-    }
+        if ((e.shiftKey || e.altKey) && NUMBERS.hasOwnProperty(e.keyCode)) {
+          _validate = false;
+        }
 
-    if (e.ctrlKey) {
-      if (e.keyCode === 65) {
-        _validate = true;
-      }
-    }
+        if (e.ctrlKey) {
+          if (e.keyCode === 65) {
+            _validate = true;
+          }
+        }
+        break;
+      case 'FROM_DATE':
+      case 'TO_DATE':
+        if (!NUMBERS.hasOwnProperty(e.keyCode)) {
+          _validate = false;
+        }
 
-    if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
-      _validate = true;
+        if ((e.shiftKey || e.altKey) && NUMBERS.hasOwnProperty(e.keyCode)) {
+          _validate = false;
+        }
+
+        if (e.ctrlKey) {
+          if (e.keyCode === 65) {
+            _validate = true;
+          }
+        }
+
+        if (e.keyCode === 191 || e.keyCode === 111) {
+          const _currValue = _target.value.trim();
+
+          if (_currValue.length > 0) {
+            const _lastChar = _currValue.charAt(_currValue.length - 1);
+
+            _validate = _lastChar === '/' ? false : true;
+
+            if (_currValue.split('/').length > 2) {
+              _validate = false;
+            }
+          }
+        }
+        break;
+      default:
+        break;
     }
 
     if (!_validate) {
@@ -75,7 +113,7 @@ export class ProjectFormComponent implements OnInit {
     if (this.projectForm !== undefined) {
       const inputs = this.projectForm.nativeElement.querySelectorAll('input:not([type="hidden"]), textarea');
 
-      if (inputs !== undefined && inputs.length === Object.keys(INPUT_ATTRIBUTES).length) {
+      if (inputs !== undefined && inputs.length > 0) {
         for (const input of inputs) {
           const _name = input['name'];
 
@@ -91,8 +129,8 @@ export class ProjectFormComponent implements OnInit {
             }
           }
 
-          if (input.name === 'GOAL') {
-            input.addEventListener('keydown', this.allowNumbers);
+          if (input.name === 'GOAL' || input.name.indexOf('DATE') > -1) {
+            input.addEventListener('keydown', this.inputWhiteList);
           }
         }
       }
