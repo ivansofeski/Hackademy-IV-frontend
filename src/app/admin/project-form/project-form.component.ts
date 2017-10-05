@@ -12,10 +12,6 @@ import { INPUT_ATTRIBUTES, NUMBERS } from './project-form.constants';
 export class ProjectFormComponent implements OnInit {
   public mytime: Date = new Date();
   
-  /* currentYear: any = this.mytime.getUTCFullYear();
-  currentDate: any = this.mytime.getUTCDate();
-  currentMonth: any = this.mytime.getUTCMonth() + 1; //months from 1-12
-  disableUntil: Date ={ month: this.currentMonth, day: this.currentDate,year: this.currentYear,} */
   projectListLink = '';
   attributes = INPUT_ATTRIBUTES;
   @ViewChild('projectForm') projectForm: ElementRef;
@@ -31,10 +27,7 @@ export class ProjectFormComponent implements OnInit {
     desc:             new FormControl('', [Validators.required])
   };
   constructor() { 
-    /* this.projectControls.toDate.setValidators([Validators.required, (c: AbstractControl): ValidationErrors | null => {
-    return this.projectControls.toDate.value.trim() === c.value.trim() ? null : { 'mismatch-password': true }
-    return this.projectControls.toDate.value.trim() === 
-  }]); */
+  
   this.projectControls.toDate.setValidators([Validators.required, (c) => {return c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null},(c:AbstractControl):ValidationErrors | null => {
     return this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate':true} :null }]);
 
