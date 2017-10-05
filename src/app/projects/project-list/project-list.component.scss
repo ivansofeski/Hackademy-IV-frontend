@@ -56,8 +56,9 @@ $tablet-desktop: "only screen and (min-width : 420px)";
         }
       }
       .project-description {
-        padding: 0 30px 15px 15px;
+        padding: 0 15px 15px 15px;
         color: $secondary-font-color;
+        width: 75%;
 
         p {
           font-family: Arial;
@@ -86,6 +87,7 @@ $tablet-desktop: "only screen and (min-width : 420px)";
       .progress-bar {
         display: block;
         margin: 8px;
+        width:70%;
       }
     }
   }

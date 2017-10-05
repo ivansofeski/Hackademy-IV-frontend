@@ -1,6 +1,9 @@
 <div class='fab-menu'>
   <div class="fab-toggle" (click)="toggleAmounts($event.currentTarget)">
-    <p class="donate">DONATE swish</p>
+    <p class="donate">
+      DONATE
+      <!--<br><span class="smaller">with swish</span>-->
+    </p>
   </div>
   <a class="fab-item" (click)="donate(donateOption1)">
     {{donateOption1}}:-
