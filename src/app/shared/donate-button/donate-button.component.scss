@@ -56,18 +56,17 @@ a.fab-menu {
     }
 
   }
-  .expanded{
-    .fab-item{
-      &:nth-child(2){
-        transform: translate3d(10px, -50px, 0);
-      }
-      &:nth-child(3){
-        transform: translate3d(10px, -95px, 0);
-      }
-      &:nth-child(4){
-        transform: translate3d(10px, -140px, 0);
-      }
+}
+.expanded{
+  .fab-item{
+    &:nth-child(2){
+      transform: translate3d(10px, -50px, 0);
+    }
+    &:nth-child(3){
+      transform: translate3d(10px, -95px, 0);
+    }
+    &:nth-child(4){
+      transform: translate3d(10px, -140px, 0);
     }
   }
-
 }
