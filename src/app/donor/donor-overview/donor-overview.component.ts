@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DonorOverviewComponent implements OnInit {
 
+  projects: any[]= [
+    {name: 'something'},
+    {name: 'something'},
+    {name: 'something'},
+    {name: 'something'},
+    {name: 'something'},
+  ];
   constructor() { }
 
   ngOnInit() {
