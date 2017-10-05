@@ -1,3 +1,120 @@
-<p>
-  project-form works!
-</p>
+<!-- Form for the submission of a new project-->
+<form class='project-form' #projectForm>
+  <!-- FIELD: PROJECT DESCRIPTIVE IMAGE -->
+  <div class='image-container' (mouseup)='$event.button === 0 ? descImage.click() : return;'>
+    <i class='material-icons'>file_upload</i>
+    <input #descImage name='DESC_IMAGE' placeholder='{{attributes.DESC_IMAGE.placeholder}}' [formControl]='projectControls.descImage'
+      (change)='setImagePath($event.currentTarget)'>
+    <img #projectImage class='image-holder' src='' alt='' title='Click to upload an image'>
+  </div>
+
+  <!-- FIELD: PROJECT NAME -->
+  <md-form-field class='project-full-width'>
+    <input mdInput #name name='NAME' placeholder='{{attributes.NAME.placeholder}}' [formControl]='projectControls.name'>
+    <md-error *ngIf='projectControls.name.hasError("required")'>
+      Name is <strong>required</strong>
+    </md-error>
+  </md-form-field>
+
+  <!-- FIELD: ORGANIZATION NAME -->
+  <md-form-field class='project-full-width'>
+    <input mdInput #orgName name='ORG_NAME' placeholder='{{attributes.ORG_NAME.placeholder}}' [formControl]='projectControls.orgName'>
+    <md-error *ngIf='projectControls.orgName.hasError("required")'>
+      The organization name is <strong>required</strong>
+    </md-error>
+  </md-form-field>
+
+
+  <!-- Field for the city,postcode and country of the project -->
+  <table class='project-full-width' cellspacing='0'>
+    <tr>
+      <td>
+        <md-form-field>
+          <input name='FROM_DATE' mdInput [mdDatepicker]='myDatepicker' placeholder='From (date)'>
+          <md-datepicker-toggle mdSuffix [for]='myDatepicker'></md-datepicker-toggle>
+          <md-datepicker #myDatepicker></md-datepicker>
+        </md-form-field>
+      </td>
+      <td>
+        <md-form-field>
+          <input name='TO_DATE' mdInput [mdDatepicker]='myDatepicker2' placeholder='To (date)'>
+          <md-datepicker-toggle mdSuffix [for]='myDatepicker2'></md-datepicker-toggle>
+          <md-datepicker #myDatepicker2></md-datepicker>
+        </md-form-field>
+      </td>
+    </tr>
+  </table>
+
+  <!-- FIELD: GOAL -->
+  <md-form-field class='project-full-width'>
+    <input mdInput name='GOAL' placeholder='{{attributes.GOAL.placeholder}}' [formControl]='projectControls.goal'>
+    <md-error *ngIf='projectControls.goal.hasError("required")'>
+      The goal is <strong>required</strong>
+    </md-error>
+  </md-form-field>
+
+  <!-- FIELD: PROJECT ADDRESS -->
+  <md-form-field class='project-full-width'>
+    <textarea mdInput #address name='ADDRESS' placeholder='{{attributes.ADDRESS.placeholder}}' [formControl]='projectControls.address'></textarea>
+    <md-error *ngIf='projectControls.address.hasError("required")'>
+      Address is <strong>required</strong>
+    </md-error>
+  </md-form-field>
+
+  <!-- Field for the city,postcode and country of the project
+    <table class='project-full-width' cellspacing='0'>
+      <tr>
+        <td>
+          <md-form-field class='project-full-width'>
+            <input mdInput #postalCode maxlength='5' placeholder=' Postal Code ' value='' type='number' [formControl]='projectControls.zipCode'>
+            <md-error *ngIf='projectControls.zipCode.hasError('required')'>
+              the ppstCode is <strong>required</strong>
+            </md-error>
+            <md-hint align='end'>{{postalCode.value.length}} / 5</md-hint>
+          </md-form-field>
+        </td>
+        <td>
+          <md-form-field class='project-full-width'  required>
+            <input mdInput #orgCity placeholder=' City '  [formControl]='projectControls.city'>
+            <md-error *ngIf='projectControls.city.hasError('required')'>
+              The city where the project is locate is <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </td>
+      </tr>
+    </table> -->
+
+  <!-- FIELD: PROJECT DESCRIPTION -->
+  <!-- <md-form-field class='project-full-width'>
+    <input mdInput #shortDesc name='SHORT_DESC' placeholder='{{attributes.SHORT_DESC.placeholder}}' [formControl]='projectControls.shortDesc'>
+    <md-error *ngIf='projectControls.shortDesc.hasError("required")'>
+      A Short description of the project is <strong>required</strong>
+    </md-error>
+    <md-hint align='end'>{{shortDesc.value.length}} / {{shortDesc['max-length']}}</md-hint>
+  </md-form-field> -->
+
+
+  <!--Field to save the description of the organisation-->
+  <md-form-field class='project-full-width'>
+    <textarea mdInput #desc name='DESC' placeholder='{{attributes.DESC.placeholder}}' [formControl]='projectControls.desc'></textarea>
+    <md-error *ngIf='projectControls.desc.hasError("required")'>
+      The description of the project is <strong>required</strong>
+    </md-error>
+    <md-hint align='end'>{{desc.value.length}} /400</md-hint>
+  </md-form-field>
+
+  <!--Field to save the description of the organisation-->
+  <!-- <input #nationalProject name='NATIONAL_PROJECT' [formControl]='projectControls.nationalProject'> -->
+  <div class='project-data-row'>
+    <label class='nat-project-label'>National Project</label>
+    <md-radio-group class="nat-project-radio">
+      <md-radio-button value="yes">Yes</md-radio-button>
+      <md-radio-button [checked]='true' value="no">No</md-radio-button>
+    </md-radio-group>
+  </div>
+
+  <!--Button to save the form or Canceled-->
+  <button md-raised-button color='warn'>Cancel</button>
+  <button md-raised-button color='primary' [routerLink]='projectListLink' (mouseup)='validateForm(projectForm)'>Submit
+  </button>
+</form>

@@ -5,7 +5,7 @@ import { OrganizationFormComponent } from './organization-form/organization-form
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { MdInputModule, MdListModule } from '@angular/material';
+import { MdInputModule, MdListModule, MdDatepickerModule, MdNativeDateModule, MdRadioModule } from '@angular/material';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -19,8 +19,6 @@ import { OrganizationPageComponent } from './organization-page/organization-page
 import { DataService } from './services/data.service';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
-import { AgmCoreModule } from '@agm/core';
-
 
 @NgModule({
   imports: [
@@ -34,9 +32,9 @@ import { AgmCoreModule } from '@agm/core';
     BrowserAnimationsModule,
     BrowserModule,
     ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCHC4hLZ_ogiMaGy9kVZl4u0gjocEyw3EA'
-    })
+    MdNativeDateModule,
+    MdDatepickerModule,
+    MdRadioModule,
   ],
   exports: [
     MdInputModule,
@@ -44,8 +42,20 @@ import { AgmCoreModule } from '@agm/core';
     BrowserAnimationsModule,
     BrowserModule,
     ReactiveFormsModule,
+    MdNativeDateModule,
+    MdDatepickerModule,
+    MdRadioModule,
   ],
-  declarations: [AdminComponent, OrganizationListComponent, ProjectListComponent, AdminToolbarComponent, OrganizationFormComponent, OrganizationPageComponent, ProjectPageComponent, ProjectFormComponent],
+  declarations: [
+    AdminComponent,
+    OrganizationListComponent,
+    ProjectListComponent,
+    AdminToolbarComponent,
+    OrganizationFormComponent,
+    OrganizationPageComponent,
+    ProjectPageComponent,
+    ProjectFormComponent,
+  ],
   providers: [DataService]
 })
 
