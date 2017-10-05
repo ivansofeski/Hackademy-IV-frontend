@@ -49,16 +49,19 @@ describe('OrganizationFormComponent', () => {
     expect(component.formControls.orgNumber.valid).toBe(false);
   });
 
-  it('Should not accept a long organization number (1234567)', () => {
+  it('Should not accept a malformed organization number (1234567)', () => {
     component.formControls.orgNumber.setValue("1234567");
     expect(component.formControls.orgNumber.valid).toBe(false);
   });
 
-  it('Should accept a normal organization number (123456)', () => {
-    component.formControls.orgNumber.setValue("123456");
+  it('Should accept a wellformed organization number (123456-as12)', () => {
+    component.formControls.orgNumber.setValue("123456-as12");
     expect(component.formControls.orgNumber.valid).toBe(true);
   });
-
+  it('Should accept another wellformed organization number (1Az456-as12)', () => {
+    component.formControls.orgNumber.setValue("1Az456-as12");
+    expect(component.formControls.orgNumber.valid).toBe(true);
+  });
   it('Should not accept an empty contact name', () => {
     component.formControls.contact.setValue("");
     expect(component.formControls.contact.valid).toBe(false);
