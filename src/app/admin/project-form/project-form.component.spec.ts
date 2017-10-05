@@ -15,7 +15,13 @@ describe('ProjectFormComponent', () => {
       declarations: [ ProjectFormComponent ],
       imports: [
         SharedModule,
-        FormsModule, ReactiveFormsModule, MdDatepickerModule, MdNativeDateModule, MdRadioModule, RouterTestingModule ]
+        FormsModule,
+        ReactiveFormsModule,
+        MdDatepickerModule,
+        MdNativeDateModule,
+        MdRadioModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
