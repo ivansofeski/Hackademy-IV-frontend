@@ -1,0 +1,45 @@
+<div class="container">
+  <md-card class="">
+
+    <div class="image-container">
+      <img class="profile-image" src="">
+    </div>
+
+    <md-card-header class="card-header">
+      <div class="user-info">
+        <span class="user-name">Owen</span>
+        <br>
+        <span class="user-slogan">I am calm</span>
+      </div>
+
+      <div class="user-wallet">
+        <span class="donated-amount">Total: 2000</span>
+        <span class="amount-left">Donated: 100</span>
+      </div>
+    </md-card-header>
+
+    <hr>
+
+  </md-card>
+
+  <div class="saved-projects">
+    <div class="menu-container">
+      <ul class="toolbar-menu">
+        <li><a href="" class="project-link liked-projects active">Saved project</a></li>
+        <li><a href="" class="project-link funded-projects">funded project</a></li>
+      </ul>
+    </div>
+  </div>
+
+<div class="projects-list-container">
+  <div class="project-container" *ngFor="let p of projects">
+    <div class="project-image-container">
+      <div class="project-image">
+        <div class="project-name">
+          {{p.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
