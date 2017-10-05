@@ -12,11 +12,14 @@
   
     <!-- Field for the number of the organization limited with 6 character-->
     <md-form-field class="organization-number">
-      <input mdInput #orgNumber maxlength="6" placeholder=" Organization Number " type="text" [formControl]="formControls.orgNumber">
+      <input mdInput #orgNumber maxlength="11" placeholder=" Organization Number " type="text" [formControl]="formControls.orgNumber">
       <md-error *ngIf="formControls.orgNumber.hasError('required')">
         The Organization number is <strong>required</strong>
       </md-error>
-      <md-hint align="end">{{orgNumber.value.length}} / 6</md-hint>
+      <md-error *ngIf="formControls.orgNumber.hasError('pattern')">
+        The Organization number must be written in this format <strong>XXXXXX-XXXX</strong>
+      </md-error>
+      <md-hint align="end">{{orgNumber.value.length}} / 11</md-hint>
     </md-form-field>
   
     <!-- Field for the information of the contact person in the organization-->
