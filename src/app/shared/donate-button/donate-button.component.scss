@@ -1,0 +1,66 @@
+a.fab-item,
+a.fab-menu {
+  text-decoration: none;
+}
+.fab-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;    
+  box-sizing: border-box;
+  font-size: 14px;
+  text-align: left;
+  .fab-item {
+    background: #61BFAD;
+    border-radius: 45px;
+    width: 40px;
+    height: 40px;
+    margin-left: -10px;
+    margin-top: 2px;
+    position: absolute;
+    top: 10px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    transform: translate3d(0, 0, 0);
+    transition: transform ease-out 200ms;
+    transition-duration: 180ms;
+    &:hover {
+        background: #53A595;
+        color: #FFFFFF;
+      }
+  }
+  .fab-toggle {
+    background: #61BFAD;
+    border-radius: 50px;
+    width: 78px;
+    height: 50px;
+    margin-left: -40px;
+    position: absolute;
+    top: 10px;
+    color: #FFFFFF;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1em;
+    z-index: 1;
+    cursor: pointer;
+    &:hover {
+        transform: scale(1, 1) translate3d(0, 0, 0);
+      }
+    .donate {
+      padding-top: 12px;
+  }
+
+  }
+ 
+}
+
+.fab-menu.expanded .fab-item:nth-child(4) {
+  transform: translate3d(10px, -140px, 0);
+}
+.fab-menu.expanded .fab-item:nth-child(2) {
+    transform: translate3d(10px, -50px, 0);
+  }
+  .fab-menu.expanded .fab-item:nth-child(3) {
+    transform: translate3d(10px, -95px, 0);
+  }

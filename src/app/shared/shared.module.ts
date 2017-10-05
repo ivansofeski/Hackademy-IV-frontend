@@ -6,6 +6,7 @@ import { NavbarComponent } from './navbar.component';
 import { ProgressbarComponent } from './progressbar.component';
 import {RouterModule} from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
+import { DonateButtonComponent } from './donate-button/donate-button.component';
 
 @NgModule({
   imports: [
@@ -34,11 +35,13 @@ import { AgmCoreModule } from '@agm/core';
     NavbarComponent,
     ProgressbarComponent,
     RouterModule,
-    AgmCoreModule
+    AgmCoreModule,
+    DonateButtonComponent
   ],
   declarations: [
     NavbarComponent,
-    ProgressbarComponent
+    ProgressbarComponent,
+    DonateButtonComponent
   ]
 })
 export class SharedModule { }
