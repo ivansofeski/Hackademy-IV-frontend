@@ -19,6 +19,7 @@ import { OrganizationPageComponent } from './organization-page/organization-page
 import { DataService } from './services/data.service';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -32,14 +33,17 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     FormsModule,
     BrowserAnimationsModule,
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCHC4hLZ_ogiMaGy9kVZl4u0gjocEyw3EA'
+    })
   ],
   exports: [
     MdInputModule,
     FormsModule,
     BrowserAnimationsModule,
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [AdminComponent, OrganizationListComponent, ProjectListComponent, AdminToolbarComponent, OrganizationFormComponent, OrganizationPageComponent, ProjectPageComponent, ProjectFormComponent],
   providers: [DataService]
