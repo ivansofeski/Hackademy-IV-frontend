@@ -7,6 +7,7 @@ import { GeolocationComponent } from '../geolocation/geolocation.component';
 const routes: Routes = [
   { path: '', component: ProjectsComponent , children: [
     {path: 'home', component: ProjectListComponent},
+    { path: 'geo', component: GeolocationComponent}
   ]}
 ];
 

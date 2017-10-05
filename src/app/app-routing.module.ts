@@ -5,8 +5,7 @@ import {ProjectListComponent} from './projects/project-list/project-list.compone
 import { GeolocationComponent } from './geolocation/geolocation.component';
 
 const routes: Routes = [
-  { path: '', redirectTo:'home',pathMatch:'full'},
-  { path: 'geo', component: GeolocationComponent}, 
+  { path: '', redirectTo:'home',pathMatch:'full'}, 
   { path: 'admin', component: AdminComponent }
 //  { path: '**', pathMatch: 'full', component: PageNotFoundComponent}
 ];
