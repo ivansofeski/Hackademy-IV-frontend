@@ -4,6 +4,7 @@ import { ProjectPageComponent } from './project-page.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from '../../shared/shared.module';
 import { DataService } from '../services/data.service';
+import { AgmCoreModule } from '@agm/core';
 
 describe('ProjectPageComponent', () => {
   let component: ProjectPageComponent;
@@ -12,7 +13,7 @@ describe('ProjectPageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProjectPageComponent ],
-      imports: [ SharedModule, RouterTestingModule],
+      imports: [ SharedModule, RouterTestingModule, AgmCoreModule ],
       providers: [ DataService ],
     })
     .compileComponents();
