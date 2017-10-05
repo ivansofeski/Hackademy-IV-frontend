@@ -5,6 +5,7 @@ import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModu
 import { NavbarComponent } from './navbar.component';
 import { ProgressbarComponent } from './progressbar.component';
 import {RouterModule} from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -17,6 +18,9 @@ import {RouterModule} from '@angular/router';
     MdCardModule,
     MdProgressBarModule,
     RouterModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCHC4hLZ_ogiMaGy9kVZl4u0gjocEyw3EA'
+    })
   ],
   exports: [
     CommonModule,
@@ -30,6 +34,7 @@ import {RouterModule} from '@angular/router';
     NavbarComponent,
     ProgressbarComponent,
     RouterModule,
+    AgmCoreModule
   ],
   declarations: [
     NavbarComponent,
