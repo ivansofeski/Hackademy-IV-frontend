@@ -2,7 +2,7 @@
 <form class='project-form' #projectForm>
   <!-- FIELD: PROJECT DESCRIPTIVE IMAGE -->
   <div class='image-container' (mouseup)='$event.button === 0 ? descImage.click() : return;'>
-    <i class='material-icons'>file_upload</i>
+    <!-- <i class='material-icons'>file_upload</i> -->
     <input #descImage name='DESC_IMAGE' placeholder='{{attributes.DESC_IMAGE.placeholder}}' [formControl]='projectControls.descImage'
       (change)='setImagePath($event.currentTarget)'>
     <img #projectImage class='image-holder' src='' alt='' title='Click to upload an image'>
@@ -58,13 +58,8 @@
             The ending Date is
             <strong>required</strong>
           </md-error>
-          <md-error *ngIf='projectControls.toDate.hasError("wrongdate")'>
-            The ending Date must not be
-            <strong>in the past</strong>
-          </md-error>
-          <md-error *ngIf='projectControls.toDate.hasError("impossibleDate")'>
-            The ending Date must not be
-            <strong>impossible</strong>
+          <md-error *ngIf='projectControls.toDate.hasError("wrongdate") || projectControls.toDate.hasError("impossibleDate")'>
+            The ending Date must not be <strong>before start </strong>
           </md-error>
           <md-datepicker-toggle mdSuffix [for]='myDatepicker2'></md-datepicker-toggle>
           <md-datepicker #myDatepicker2></md-datepicker>
@@ -149,7 +144,7 @@
   <!--Button to save the form or Canceled-->
   <div class='buttons-wrapper'>
     <button md-raised-button color='warn' (mouseup)='hardReset($event, projectForm)'>Cancel</button>
-    <button md-raised-button color='primary'>Submit</button>
+    <button md-raised-button color='primary'>Validate</button>
     <!-- <button md-raised-button color='primary' [routerLink]='[projectListLink]' (mouseup)='saveProject()'>Submit -->
   </div>
 </form>
