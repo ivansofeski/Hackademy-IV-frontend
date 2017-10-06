@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ProjectService} from '../project.service';
+import { ProjectService } from '../project.service';
 
 
 @Component({
@@ -21,13 +21,14 @@ export class ProjectListComponent implements OnInit {
   constructor(private _projectService: ProjectService) { }
 
   ngOnInit() {
+
     this._projectService.getProjects().subscribe(
       res => {
         console.log(res);
         this.projectList = res;
       },
       error => this.errors.push(error)
-    );
+    ); 
   }
 
   // onClick(ID){
