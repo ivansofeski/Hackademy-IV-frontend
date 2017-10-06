@@ -1,5 +1,5 @@
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
 import { Project } from '../interface/project';
 import { INPUT_ATTRIBUTES, NUMBERS, REGEX_UNITS } from './project-form.constants';
 import { Organization } from '../interface/organization';
@@ -11,9 +11,9 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./project-form.component.scss']
 })
 
-export class ProjectFormComponent implements OnInit {
+export class ProjectFormComponent implements OnInit, DoCheck {
   @ViewChild('projectForm') projectForm: ElementRef;
-
+  errorsTwo: QueryList<String>;
   newProject: Project = {
     id: 0,
     projectName: '',
@@ -29,22 +29,26 @@ export class ProjectFormComponent implements OnInit {
     organizationName: '',
     organizationId: 0
   };
-  projectListLink = '/admin/projects/';
+  links = {
+    list: '/admin/projects/',
+    new: '/admin/projects/new/'
+  };
   attributes = INPUT_ATTRIBUTES;
   organizations: Organization[] = [];
   errors: any[] = [];
   projectControls = {
-    descImage:    new FormControl('', [Validators.required]),
+    descImage:    new FormControl('', []),
     name:         new FormControl('', [Validators.required]),
     projectId:    new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
     manager:      new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.LETTERS)]),
-    orgName:      new FormControl('', [Validators.required]),
-    fromDate:     new FormControl(null , [Validators.required]),
-    toDate:       new FormControl(null , []),
+    orgId:        new FormControl('', [Validators.required]),
+    fromDate:     new FormControl(null, [Validators.required]),
+    toDate:       new FormControl(null, []),
     goal:         new FormControl('', [Validators.required]),
     address:      new FormControl('', [Validators.required]),
     shortDesc:    new FormControl('', [Validators.required]),
-    desc:         new FormControl('', [Validators.required])
+    desc:         new FormControl('', [Validators.required]),
+    national:     new FormControl('0', [Validators.required])
   };
 
   setAttributes(options: any): void {
@@ -132,8 +136,15 @@ export class ProjectFormComponent implements OnInit {
     }
   }
 
+  setHiddenInputs(inputName: string, value: any): void {
+    if (this.projectControls[inputName] !== undefined) {
+      this.projectControls[inputName].setValue(value);
+    }
+  }
+
   setOrganizationId(value: any, input: HTMLInputElement): void {
-    input.value = value;
+    this.projectControls.orgId.setValue(value);
+    // this.projectControls.orgId.updateValueAndValidity();
   }
 
   // Not implemented fully!
@@ -172,7 +183,22 @@ export class ProjectFormComponent implements OnInit {
     );
   }
 
-  constructor(private _fetcher: DataService) {
+  hardReset(evt): void {
+    let form = this.fb.group(
+      this.projectControls
+    );
+
+    if (form !== undefined) {
+      for (const name in form.controls) {
+        if (form.controls.hasOwnProperty(name)) {
+          form.controls[name].setValue(null);
+          form.controls[name].setErrors(null);
+        }
+      }
+    }
+  }
+
+  constructor(private _fetcher: DataService, private fb: FormBuilder) {
     this.projectControls.toDate.setValidators([
       Validators.required,
       (c: AbstractControl) => c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null,
@@ -235,4 +261,6 @@ export class ProjectFormComponent implements OnInit {
       }
     }
   }
+
+  ngDoCheck(): void {}
 }

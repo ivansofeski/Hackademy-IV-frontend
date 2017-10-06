@@ -3,6 +3,7 @@ export const INPUT_ATTRIBUTES = {
     class: 'input-image',
     type: 'file',
     accept: 'image/*',
+    src: '../../../assets/default-placeholder.png',
     placeholder: 'Select an image from your device',
     title: 'Click to select an image',
     'prop-name': 'mainImage'
@@ -28,12 +29,10 @@ export const INPUT_ATTRIBUTES = {
     title: 'Type in the corresponding project manager',
     'prop-name': 'projectManager'
   },
-  ORG_NAME: {
-    class: 'mat-input-element input-org-name',
+  ORG_ID: {
+    class: 'mat-input-element input-org-id hidden',
     type: 'text',
-    placeholder: 'Organization name',
-    title: 'Type in the corresponding organization name',
-    'prop-name': 'organizationName'
+    'prop-name': 'organizationId'
   },
   FROM_DATE: {
     class: 'mat-input-element input-date'
@@ -68,7 +67,8 @@ export const INPUT_ATTRIBUTES = {
     title: 'Type in a detailed description.'
   },
   NATIONAL_PROJECT: {
-    class: 'input-national-project'
+    class: 'input-national-project hidden',
+    'max-length': 1,
   }
 };
 
