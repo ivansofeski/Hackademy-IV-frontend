@@ -5,7 +5,7 @@ export interface Donor {
     userImage: string;
     wallet: {
         total: number;
-        donatet: number;
+        donated: number;
     };
     savedProject: number[];
 }
