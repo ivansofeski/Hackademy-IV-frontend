@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "userName": "Natasa Pavicevic",
+        "userName": "Natasa",
         "userSlogan": "Do your home work in time",
         "userImage": "./userImage1.jpg",
         "wallet": { "total": 0, "donatet": 125 },
