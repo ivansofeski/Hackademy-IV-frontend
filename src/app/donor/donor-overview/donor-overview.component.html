@@ -1,20 +1,20 @@
-<div class="container">
+<div class="container" *ngIf="donor">
   <md-card class="">
 
     <div class="image-container">
-      <img class="profile-image" src="">
+      <img class="profile-image" [src]="donor.userImage">
     </div>
 
     <md-card-header class="card-header">
       <div class="user-info">
-        <span class="user-name">Owen</span>
+        <span class="user-name">{{donor.userName}}</span>
         <br>
-        <span class="user-slogan">I am calm</span>
+        <span class="user-slogan">{{donor.userSlogan}}</span>
       </div>
 
       <div class="user-wallet">
-        <span class="donated-amount">Total: 2000</span>
-        <span class="amount-left">Donated: 100</span>
+        <span class="donated-amount">Total: {{donor.wallet.total}}</span>
+        <span class="amount-left">Donated: {{donor.wallet.donated}}</span>
       </div>
     </md-card-header>
 
@@ -32,11 +32,14 @@
   </div>
 
 <div class="projects-list-container">
-  <div class="project-container" *ngFor="let p of projects">
+  <div class="project-container" *ngFor="let p of projectList">
     <div class="project-image-container">
       <div class="project-image">
+        <div class="project-image">
+          <img [src]="p.mainImage" alt="">
+        </div>
         <div class="project-name">
-          {{p.name}}
+          {{p.projectName}}
         </div>
       </div>
     </div>

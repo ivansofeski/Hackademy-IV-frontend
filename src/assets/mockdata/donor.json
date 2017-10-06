@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "userName": "Natasa Pavicevic",
+        "userSlogan": "Do your home work in time",
+        "userImage": "./assets/photos/userImage1.jpeg",
+        "wallet": { "total": 0, "donated": 125 },
+        "savedProject": [1,2,3,4]
+    }
+]

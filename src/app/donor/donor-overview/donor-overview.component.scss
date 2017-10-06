@@ -14,11 +14,14 @@ $width: 85%;
     height: 30vh;
     width: 100%;
     background: #CACBCD;
-
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
     .profile-image {
       width: 100%;
       height: auto;
       object-fit: cover;
+      margin-top: -20px;
     }
   }
   md-card {
@@ -127,6 +130,23 @@ $width: 85%;
       .project-image-container {
         width: 100%;
         height: auto;
+        .project-image{
+          overflow: hidden;
+          height: 150px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #CACBCD;
+          img{
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+          }
+        }
+        .project-name{
+          position: absolute;
+          top: 25px;
+        }
       }
     }
   }
