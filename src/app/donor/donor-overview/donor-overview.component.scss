@@ -130,28 +130,39 @@ $width: 85%;
       .project-image-container {
         width: 100%;
         height: auto;
-        .project-image{
+        .project-image {
           overflow: hidden;
+          position: relative;
           height: 150px;
           display: flex;
           justify-content: center;
           align-items: center;
           background: #CACBCD;
-          img{
+          img {
             object-fit: cover;
             height: 100%;
             width: 100%;
           }
         }
-        .project-name{
+        .project-name {
           position: absolute;
           color: white;
           margin-top: 50px;
           text-align: right;
-          width: 40%;
+          width: 70%;
+          z-index: 2;
+        }
+        .overlay {
+          background-image: linear-gradient(to bottom, transparent 0%, black 100%);
+          bottom: 0;
+          left: 0;
+          opacity: 0.5;
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: 1;
         }
       }
     }
   }
-
 }
