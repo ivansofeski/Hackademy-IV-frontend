@@ -73,7 +73,7 @@
 	display: block;
 	width: 100%;
 	padding: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	overflow: hidden;
 
 	md-radio-button {
@@ -81,12 +81,39 @@
 	}
 }
 
-.input-org-name {
-	position: relative;
+.hidden {
+	position: absolute;
 	display: block;
 	width: 0;
 	height: 0;
-	overflow: hidden;
-	z-index: -1;
+	border: 0;
+	outline: 0;
 	pointer-events: none;
+}
+
+::ng-deep .custom-md-select .mat-select-underline {
+    display: none;
+}
+
+::ng-deep .mat-primary .mat-option:hover {
+	background-color: #61bfad;
+	color: white;
+}
+
+.buttons-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 10px 0;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.buttons-wrapper > button {
+	position: relative;
+	margin: 0 10px;
+	padding: 0 40px;
 }
