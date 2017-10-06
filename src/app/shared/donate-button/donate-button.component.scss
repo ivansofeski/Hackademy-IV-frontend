@@ -2,13 +2,14 @@ a.fab-item,
 a.fab-menu {
   text-decoration: none;
 }
+
 .fab-menu {
   position: absolute;
-  top: 50%;
-  left: 50%;    
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
+  right: 75px;
+  bottom: 90px;
   .fab-item {
     background: #61BFAD;
     border-radius: 45px;
@@ -26,14 +27,14 @@ a.fab-menu {
     transition: transform ease-out 200ms;
     transition-duration: 180ms;
     &:hover {
-        background: #53A595;
-        color: #FFFFFF;
-      }
+      background: #53A595;
+      color: #FFFFFF;
+    }
   }
   .fab-toggle {
     background: #61BFAD;
     border-radius: 50px;
-    width: 78px;
+    width: 80px;
     height: 50px;
     margin-left: -40px;
     position: absolute;
@@ -41,26 +42,31 @@ a.fab-menu {
     color: #FFFFFF;
     text-align: center;
     vertical-align: middle;
-    line-height: 1em;
+    line-height: 1.5em;
     z-index: 1;
     cursor: pointer;
     &:hover {
-        transform: scale(1, 1) translate3d(0, 0, 0);
-      }
+      transform: scale(1, 1) translate3d(0, 0, 0);
+    }
     .donate {
-      padding-top: 12px;
-  }
+      padding-top: 16px;
+      .smaller {
+        font-size: 9px;
+      }
+    }
 
   }
- 
 }
-
-.fab-menu.expanded .fab-item:nth-child(4) {
-  transform: translate3d(10px, -140px, 0);
+.expanded{
+  .fab-item{
+    &:nth-child(2){
+      transform: translate3d(10px, -50px, 0);
+    }
+    &:nth-child(3){
+      transform: translate3d(10px, -95px, 0);
+    }
+    &:nth-child(4){
+      transform: translate3d(10px, -140px, 0);
+    }
+  }
 }
-.fab-menu.expanded .fab-item:nth-child(2) {
-    transform: translate3d(10px, -50px, 0);
-  }
-  .fab-menu.expanded .fab-item:nth-child(3) {
-    transform: translate3d(10px, -95px, 0);
-  }
