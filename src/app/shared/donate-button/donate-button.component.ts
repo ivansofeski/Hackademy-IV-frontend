@@ -24,7 +24,24 @@ export class DonateButtonComponent implements OnInit {
     // console.log(elm.parentElement.classList);
   }
 
+  toggleThings(e) {
+    let _target = e.srcElement || e.currentTarget;
+
+    if (_target['localName'] !== 'fab') {
+      let donateButton = e.currentTarget.querySelectorAll('.fab-menu.expanded')[0];
+
+      if (donateButton !== undefined) {
+        donateButton.classList.remove('expanded');
+      }
+    }
+  } 
+
   ngOnInit() {
+    let body = document;
+    
+    if (body !== undefined) {
+      body.addEventListener('mouseup', this.toggleThings);
+    }
   }
 
   donate(amount: number) {
