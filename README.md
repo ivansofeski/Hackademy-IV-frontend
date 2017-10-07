@@ -5,9 +5,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Important application upgrade instructions
 
 Major upgrades were implemented after sprint 2. If you want have an older development version, you need to run 
-    - `git checkout development`
-    - `git pull`
-    - `npm install`
+- `git checkout development`
+- `git pull`
+- `npm install`
 
 then rebase your branches with development
 
