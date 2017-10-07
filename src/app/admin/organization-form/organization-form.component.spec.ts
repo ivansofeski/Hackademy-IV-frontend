@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrganizationFormComponent } from './organization-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -12,7 +11,7 @@ describe('OrganizationFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ OrganizationFormComponent ],
-      imports: [ SharedModule, FormsModule, ReactiveFormsModule ],
+      imports: [ SharedModule],
     })
     .compileComponents();
   }));

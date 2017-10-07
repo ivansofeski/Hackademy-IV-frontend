@@ -24,7 +24,7 @@ $width: 85%;
       margin-top: -20px;
     }
   }
-  md-card {
+  mat-card {
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
@@ -35,7 +35,7 @@ $width: 85%;
       width: 100%;
     }
 
-    md-card-header {
+    mat-card-header {
       width: $width;
       justify-content: space-between;
       margin: 20px auto;

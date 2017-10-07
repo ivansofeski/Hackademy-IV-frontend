@@ -32,7 +32,7 @@ describe('AdminToolbarComponent', () => {
 
   it('should render a material toolbar', () => {
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('md-toolbar.mat-toolbar'));
+    de = fixture.debugElement.query(By.css('mat-toolbar.mat-toolbar'));
     //el = de.nativeElement;
     expect(de).toBeTruthy();
   });

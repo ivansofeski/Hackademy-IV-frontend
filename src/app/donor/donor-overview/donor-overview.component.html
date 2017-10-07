@@ -1,11 +1,11 @@
 <div class="container" *ngIf="donor">
-  <md-card class="">
+  <mat-card class="">
 
     <div class="image-container">
       <img class="profile-image" [src]="donor.userImage">
     </div>
 
-    <md-card-header class="card-header">
+    <mat-card-header class="card-header">
       <div class="user-info">
         <span class="user-name">{{donor.userName}}</span>
         <br>
@@ -16,11 +16,11 @@
         <span class="donated-amount">Total: {{donor.wallet.total}}</span>
         <span class="amount-left">Donated: {{donor.wallet.donated}}</span>
       </div>
-    </md-card-header>
+    </mat-card-header>
 
     <hr>
 
-  </md-card>
+  </mat-card>
 
   <div class="saved-projects">
     <div class="menu-container">

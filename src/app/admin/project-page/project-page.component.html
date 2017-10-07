@@ -1,32 +1,32 @@
 <div *ngIf="project">
     <h2 class="project-title">{{project.projectName}}</h2>
-    <md-list>
-      <md-list-item class="project-name">
-        <div md-line><div class="label">Name: </div><div class="project-name">{{project.projectName}}</div></div>
-      </md-list-item>
-      <md-list-item class="project-fromDate">
-        <div md-line><div class="label">From Date: </div><div class="project-fromDate">{{project.fromDate}}</div></div>
-      </md-list-item>
-      <md-list-item class="project-toDate">
-        <div md-line><div class="label">To Date: </div><div class="project-toDate">{{project.toDate}}</div></div>
-      </md-list-item>
-      <md-list-item class="project-address">
-        <div md-line><div class="label">Address: </div><div class="project-address">{{project.address}}</div></div>
-      </md-list-item>
-      <md-list-item class="project-neededFunding">
-        <div md-line><div class="label">Needed Funding: </div><div class="project-neededFunding">{{project.neededFunding}}</div></div>
-      </md-list-item>
-      <md-list-item class="project-raisedFunding">
-        <div md-line><div class="label">Raised Funding: </div><div class="project-raisedFunding">{{project.raisedFunding}}</div></div>
-      </md-list-item>
-      <md-list-item class="project-mainImage">
-        <div md-line><div class="label">Main Image: </div><div class="project-mainImage">{{project.mainImage}}</div></div>
-      </md-list-item>
-      <md-list-item class="project-organization" *ngIf="project.organization">
-        <div md-line><div class="label">Organization: </div><div class="project-organization"><a [routerLink]="['/admin/organizations/view/',project.organization.id]" [textContent]='project.organization.name'></a></div></div>
-      </md-list-item>
+    <mat-list>
+      <mat-list-item class="project-name">
+        <div mat-line><div class="label">Name: </div><div class="project-name">{{project.projectName}}</div></div>
+      </mat-list-item>
+      <mat-list-item class="project-fromDate">
+        <div mat-line><div class="label">From Date: </div><div class="project-fromDate">{{project.fromDate}}</div></div>
+      </mat-list-item>
+      <mat-list-item class="project-toDate">
+        <div mat-line><div class="label">To Date: </div><div class="project-toDate">{{project.toDate}}</div></div>
+      </mat-list-item>
+      <mat-list-item class="project-address">
+        <div mat-line><div class="label">Address: </div><div class="project-address">{{project.address}}</div></div>
+      </mat-list-item>
+      <mat-list-item class="project-neededFunding">
+        <div mat-line><div class="label">Needed Funding: </div><div class="project-neededFunding">{{project.neededFunding}}</div></div>
+      </mat-list-item>
+      <mat-list-item class="project-raisedFunding">
+        <div mat-line><div class="label">Raised Funding: </div><div class="project-raisedFunding">{{project.raisedFunding}}</div></div>
+      </mat-list-item>
+      <mat-list-item class="project-mainImage">
+        <div mat-line><div class="label">Main Image: </div><div class="project-mainImage">{{project.mainImage}}</div></div>
+      </mat-list-item>
+      <mat-list-item class="project-organization" *ngIf="project.organization">
+        <div mat-line><div class="label">Organization: </div><div class="project-organization"><a [routerLink]="['/admin/organizations/view/',project.organization.id]" [textContent]='project.organization.name'></a></div></div>
+      </mat-list-item>
       <div class="project-desc">{{project.description}}</div>
-    </md-list>
+    </mat-list>
     <h4>Location: </h4>
     <div class="project-location">
       <agm-map [latitude]="project.location.lat" [longitude]="project.location.lng" [zoom]="12" style="height:300px">
