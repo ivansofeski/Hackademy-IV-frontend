@@ -11,6 +11,7 @@ import { ProjectFormComponent } from './project-form/project-form.component';
 const routes: Routes = [
   {
     path: 'admin', component: AdminComponent, children: [
+      { path: 'dashboard', component: AdminComponent },
       { path: 'organizations', component: OrganizationListComponent },
       { path: 'organizations/new', component: OrganizationFormComponent },
       { path: 'organizations/view/:id', component: OrganizationPageComponent },
@@ -18,7 +19,7 @@ const routes: Routes = [
       { path: 'projects/new', component: ProjectFormComponent },
       { path: 'projects/view/:id', component: ProjectPageComponent }
     ]
-  },
+  }
 ];
 
 @NgModule({
