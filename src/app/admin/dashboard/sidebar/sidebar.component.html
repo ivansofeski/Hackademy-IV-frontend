@@ -1,3 +1,29 @@
-<p>
-  sidebar works!
-</p>
+<div class='nano-logo'></div>
+<div class='sidebar-container'>
+  <nav class='admin-links'>
+    <ul class='list'>
+      <li mat-raised-li color="primary" data-item='Organizations'>
+        <span class='item-label'>Organizations</span>
+        <ul class='sub-list'>
+          <li mat-raised-li color='primary' data-item='org-list'>
+              <a [routerLink]="['/admin/organizations']">List</a>
+          </li>
+          <li mat-raised-li color='primary' data-item='org-new'>
+              <a [routerLink]="['/admin/organizations/new']">New</a>
+          </li>
+        </ul>
+      </li>
+      <li mat-raised-li color="primary" data-item='Projects'>
+          <span class='item-label'>Projects</span>
+          <ul class='sub-list'>
+            <li mat-raised-li color='primary' data-item='proj-list'>
+                <a [routerLink]="['/admin/projects']">List</a>
+            </li>
+            <li mat-raised-li color='primary' data-item='proj-new'>
+                <a [routerLink]="['/admin/projects/new']">New</a>
+            </li>
+          </ul>
+        </li>
+    </ul>
+  </nav>
+</div>

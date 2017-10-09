@@ -1,0 +1,36 @@
+.nano-logo {
+    position: relative;
+    display: block;
+    height: 75px;
+    background: url('../../../../assets/Nano_Logo_Primary.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.nano-logo::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 80%;
+    height: 1px;
+    background-color: darkgrey;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+}
+
+.sidebar-container {
+    position: relative;
+    display: block;
+    width: 260px;
+    height: calc(100vh - 75px);
+    z-index: 4;
+}
+
+.admin-links {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
