@@ -1,0 +1,32 @@
+<div class='nano-logo' title='Click to return to the admin starting page'>
+  <a [routerLink]='[links.admin.dashboard]'></a>
+</div>
+<div class='sidebar-container'>
+  <div class='flex sidebar-label' [textContent]='strings.menu[lng]'></div>
+  <nav class='admin-links'>
+    <ul class='item-list'>
+      <li class='item hasItems' data-item='Organizations'>
+        <span class='flex item-label' [textContent]='strings.organizations[lng]'></span>
+        <ul class='trans-15s item-list sub'>
+          <li class='item' data-item='org-list'>
+            <a class='flex' [routerLink]='[links.admin.organizationsList]' [textContent]='strings.list[lng]'></a>
+          </li>
+          <li class='item' data-item='org-new'>
+            <a class='flex' [routerLink]='[links.admin.organizationsNew]' [textContent]='strings.add[lng]'></a>
+          </li>
+        </ul>
+      </li>
+      <li class='item hasItems' data-item='Projects'>
+        <span class='flex item-label' [textContent]='strings.projects[lng]'></span>
+        <ul class='trans-15s item-list sub'>
+          <li class='item' data-item='proj-list'>
+            <a class='flex' [routerLink]='[links.admin.projectsList]' [textContent]='strings.list[lng]'></a>
+          </li>
+          <li class='item' data-item='proj-new'>
+            <a class='flex' [routerLink]='[links.admin.projectsNew]' [textContent]='strings.add[lng]'></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>
