@@ -1,4 +1,4 @@
-<br>
+<!-- <br>
 <br>
 <div>
     <div>
@@ -21,7 +21,7 @@
                 <tr *ngFor="let organization of orgList">
                     <td>{{organization.id}}</td>
                     <td>{{organization.orgId}}</td>
-                    <td><a [routerLink]="['/admin/organizations/view/',organization.id]">{{organization.name}}</a></td>
+                    <td><a [routerLink]="['/admin/organizations/view/',organization.id]">{{organization.name}}</a></td> 
                     <td>{{organization.address}}</td>
                     <td>{{organization.contact.phone}}</td>
                     <td>{{organization.contact.email}}</td>
@@ -31,3 +31,40 @@
         </table>
     </div>
 </div>
+-->
+
+<div class="organization-container mat-elevation-z8">
+    <md-table #table [dataSource]="dataSource">
+  
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Position Column -->
+      <ng-container mdColumnDef="id">
+        <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
+        <md-cell *mdCellDef="let organization"> {{organzation.Id}} </md-cell>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container mdColumnDef="name">
+        <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
+        <md-cell *mdCellDef="let organization"> {{organization.name}} </md-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container mdColumnDef="manager">
+        <md-header-cell *mdHeaderCellDef> Manager </md-header-cell>
+        <md-cell *mdCellDef="let organization"> {{organization.manager}} </md-cell>
+      </ng-container>
+  
+      <!-- Color Column -->
+      <ng-container mdColumnDef="adress">
+        <md-header-cell *mdHeaderCellDef> Adress </md-header-cell>
+        <md-cell *mdCellDef="let organization"> {{organization.adress}} </md-cell>
+      </ng-container>
+  
+      <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+      <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+  </div>
+  

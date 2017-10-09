@@ -34,4 +34,14 @@ export class OrganizationListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void { }
 
+
+}
+
+export class ExampleDataSource extends DataSource<any> {
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  connect(): Observable<Element[]> {
+    return Observable.of(data);
+  }
+
+  disconnect() {}
 }
