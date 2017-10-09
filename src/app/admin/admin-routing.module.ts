@@ -1,17 +1,20 @@
-import { OrganizationFormComponent } from './organization-form/organization-form.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+// Components
 import { AdminComponent } from './admin.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrganizationListComponent } from './organization-list/organization-list.component';
-import { ProjectListComponent } from './project-list/project-list.component';
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
+import { OrganizationFormComponent } from './organization-form/organization-form.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 
 const routes: Routes = [
   {
     path: 'admin', component: AdminComponent, children: [
-      { path: 'dashboard', component: AdminComponent },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'organizations', component: OrganizationListComponent },
       { path: 'organizations/new', component: OrganizationFormComponent },
       { path: 'organizations/view/:id', component: OrganizationPageComponent },
