@@ -3,111 +3,111 @@
 <form class="organization-form">
   
     <!-- Field for the name of the organization-->
-    <md-form-field class="organization-name">
-      <input mdInput #orgName placeholder=" Organization Name " type="text" [formControl]="formControls.name">
-      <md-error *ngIf="formControls.name.hasError('required')">
+    <mat-form-field class="organization-name">
+      <input matInput #orgName placeholder=" Organization Name " type="text" [formControl]="formControls.name">
+      <mat-error *ngIf="formControls.name.hasError('required')">
         Name is <strong>required</strong>
-      </md-error>
-    </md-form-field>
+      </mat-error>
+    </mat-form-field>
   
     <!-- Field for the number of the organization limited with 6 character-->
-    <md-form-field class="organization-number">
-      <input mdInput #orgNumber maxlength="11" placeholder=" Organization Number " type="text" [formControl]="formControls.orgNumber">
-      <md-error *ngIf="formControls.orgNumber.hasError('required')">
+    <mat-form-field class="organization-number">
+      <input matInput #orgNumber maxlength="11" placeholder=" Organization Number " type="text" [formControl]="formControls.orgNumber">
+      <mat-error *ngIf="formControls.orgNumber.hasError('required')">
         The Organization number is <strong>required</strong>
-      </md-error>
-      <md-error *ngIf="formControls.orgNumber.hasError('pattern')">
+      </mat-error>
+      <mat-error *ngIf="formControls.orgNumber.hasError('pattern')">
         The Organization number must be written in this format <strong>XXXXXX-XXXX</strong>
-      </md-error>
-      <md-hint align="end">{{orgNumber.value.length}} / 11</md-hint>
-    </md-form-field>
+      </mat-error>
+      <mat-hint align="end">{{orgNumber.value.length}} / 11</mat-hint>
+    </mat-form-field>
   
     <!-- Field for the information of the contact person in the organization-->
     <table class="organization-contact" cellspacing="0">
       <tr>
         <td>
-          <md-form-field class="organization-contact-name">
-            <input mdInput #contactName placeholder=" Contact name " type="text" [formControl]="formControls.contact">
-            <md-error *ngIf="formControls.contact.hasError('required')">
+          <mat-form-field class="organization-contact-name">
+            <input matInput #contactName placeholder=" Contact name " type="text" [formControl]="formControls.contact">
+            <mat-error *ngIf="formControls.contact.hasError('required')">
               Contact Name is <strong>required</strong>
-            </md-error>
-          </md-form-field>
+            </mat-error>
+          </mat-form-field>
         </td>
         <td>
-          <md-form-field class="organization-contact-email">
-            <input mdInput placeholder=" Contact Email " [formControl]="formControls.contactEmail">
-            <md-error *ngIf="formControls.contactEmail.hasError('pattern')">
+          <mat-form-field class="organization-contact-email">
+            <input matInput placeholder=" Contact Email " [formControl]="formControls.contactEmail">
+            <mat-error *ngIf="formControls.contactEmail.hasError('pattern')">
               Please enter a valid email address
-            </md-error>
-            <md-error *ngIf="formControls.contactEmail.hasError('required')">
+            </mat-error>
+            <mat-error *ngIf="formControls.contactEmail.hasError('required')">
               Email is <strong>required</strong>
-            </md-error>
-          </md-form-field>
+            </mat-error>
+          </mat-form-field>
         </td>
       </tr>
     </table>
   
     <!-- Field for the  street Adress of the organization-->
-    <md-form-field class="organization-address">
-      <textarea mdInput #orgAdress placeholder=" Address " type="text" [formControl]="formControls.adress"></textarea>
-      <md-error *ngIf="formControls.adress.hasError('required')">
+    <mat-form-field class="organization-address">
+      <textarea matInput #orgAdress placeholder=" Address " type="text" [formControl]="formControls.adress"></textarea>
+      <mat-error *ngIf="formControls.adress.hasError('required')">
         Address is <strong>required</strong>
-      </md-error>
-    </md-form-field>
+      </mat-error>
+    </mat-form-field>
   
     <!-- Field for the city,postcode of the organization-->
     <table class="organization-location" cellspacing="0">
       <tr>
         <td>
-          <md-form-field class="organization-postalCode">
-            <input mdInput #postalCode maxlength="5" placeholder=" Postal Code " value="" type="number" [formControl]="formControls.zipCode">
-            <md-error *ngIf="formControls.zipCode.hasError('required')">
+          <mat-form-field class="organization-postalCode">
+            <input matInput #postalCode maxlength="5" placeholder=" Postal Code " value="" type="number" [formControl]="formControls.zipCode">
+            <mat-error *ngIf="formControls.zipCode.hasError('required')">
               the post code is <strong>required</strong>
-            </md-error>
-            <md-error *ngIf="formControls.zipCode.hasError('pattern')">
+            </mat-error>
+            <mat-error *ngIf="formControls.zipCode.hasError('pattern')">
               the post code is <strong>5 digits</strong>
-            </md-error>
-            <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-          </md-form-field>
+            </mat-error>
+            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+          </mat-form-field>
         </td>
         <td>
-          <md-form-field class="organization-city" type="text" required>
-            <input mdInput #orgCity placeholder=" City " type="text" [formControl]="formControls.city">
-            <md-error *ngIf="formControls.city.hasError('required')">
+          <mat-form-field class="organization-city" type="text" required>
+            <input matInput #orgCity placeholder=" City " type="text" [formControl]="formControls.city">
+            <mat-error *ngIf="formControls.city.hasError('required')">
               The city where the organisation is locate is <strong>required</strong>
-            </md-error>
-          </md-form-field>
+            </mat-error>
+          </mat-form-field>
         </td>
       </tr>
     </table>
   
     <!--Field to save the description of the organisation-->
-    <md-form-field class="organization-description">
-      <textarea mdInput #orgDesc maxlength="200" placeholder=" Description " type="text" [formControl]="formControls.description"></textarea>
-      <md-error *ngIf="formControls.description.hasError('required')">
+    <mat-form-field class="organization-description">
+      <textarea matInput #orgDesc maxlength="200" placeholder=" Description " type="text" [formControl]="formControls.description"></textarea>
+      <mat-error *ngIf="formControls.description.hasError('required')">
         The description of the organisation is <strong>required</strong>
-      </md-error>
-      <md-hint align="end">{{orgDesc.value.length}} / 200</md-hint>
-    </md-form-field>
+      </mat-error>
+      <mat-hint align="end">{{orgDesc.value.length}} / 200</mat-hint>
+    </mat-form-field>
   
     <!--Field for the password-->
-    <!-- <md-form-field class="organization-password">
-      <input mdInput #orgPassword placeholder=" Password " type="password" [formControl]="formControls.password">
-      <md-error *ngIf="formControls.password.hasError('required')">
+    <!-- <mat-form-field class="organization-password">
+      <input matInput #orgPassword placeholder=" Password " type="password" [formControl]="formControls.password">
+      <mat-error *ngIf="formControls.password.hasError('required')">
         Password is <strong>required!</strong>
-      </md-error> -->
-      <!-- <md-error *ngIf="formControls.password.hasError('mismatch-password')">
+      </mat-error> -->
+      <!-- <mat-error *ngIf="formControls.password.hasError('mismatch-password')">
         Password(s) are <strong>mismatched!</strong>
-      </md-error> -->
-    <!-- </md-form-field> -->
+      </mat-error> -->
+    <!-- </mat-form-field> -->
   
     <!--Field for the comfirmation of the password-->
-    <!-- <md-form-field class="organization-repeatPassword">
-      <input mdInput #orgPasswordrepeat placeholder=" Confirm Password " type="password" [formControl]="formControls.repeatPassword">
-      <md-error *ngIf="formControls.repeatPassword.hasError('mismatch-repeat')">
+    <!-- <mat-form-field class="organization-repeatPassword">
+      <input matInput #orgPasswordrepeat placeholder=" Confirm Password " type="password" [formControl]="formControls.repeatPassword">
+      <mat-error *ngIf="formControls.repeatPassword.hasError('mismatch-repeat')">
         Password(s) are <strong>mismatched!</strong>
-      </md-error>
-    </md-form-field> -->
+      </mat-error>
+    </mat-form-field> -->
   
     <!-- <div [formGroup]="orgFormPasswords">
       <div formGroupName="passwords">
@@ -126,6 +126,6 @@
     </div> -->
   
     <!--Button to save the form or Canceled-->
-    <button md-raised-button color="warn">Cancel</button>
-    <button md-raised-button color="primary">Validate</button>
+    <button mat-raised-button color="warn">Cancel</button>
+    <button mat-raised-button color="primary">Validate</button>
   </form>

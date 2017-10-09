@@ -76,7 +76,7 @@
 	margin-bottom: 10px;
 	overflow: hidden;
 
-	md-radio-button {
+	mat-radio-button {
 		margin-right: 10px;
 	}
 }
@@ -91,7 +91,7 @@
 	pointer-events: none;
 }
 
-::ng-deep .custom-md-select .mat-select-underline {
+::ng-deep .custom-mat-select .mat-select-underline {
     display: none;
 }
 

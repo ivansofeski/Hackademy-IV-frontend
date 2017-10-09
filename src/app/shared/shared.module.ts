@@ -1,40 +1,76 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { MdCardModule, MdIconModule, MdToolbarModule, MdMenuModule, MdButtonModule, MdProgressBarModule } from '@angular/material';
+import { MatCardModule, 
+         MatIconModule, 
+         MatToolbarModule, 
+         MatMenuModule, 
+         MatButtonModule, 
+         MatProgressBarModule,
+         MatNativeDateModule,
+         MatDatepickerModule,
+         MatRadioModule,
+         MatSelectModule,
+         MatInputModule,
+         MatListModule,
+        } from '@angular/material';
 import { NavbarComponent } from './navbar.component';
 import { ProgressbarComponent } from './progressbar.component';
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 import { DonateButtonComponent } from './donate-button/donate-button.component';
+import { FormsModule, 
+         ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
     CommonModule,
     HttpClientModule,
-    MdButtonModule,
-    MdMenuModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdCardModule,
-    MdProgressBarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatInputModule,
+    MatListModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCHC4hLZ_ogiMaGy9kVZl4u0gjocEyw3EA'
     })
   ],
   exports: [
+    BrowserAnimationsModule,
+    BrowserModule,
     CommonModule,
     HttpClientModule,
-    MdButtonModule,
-    MdMenuModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdCardModule,
-    MdProgressBarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatInputModule,
+    MatListModule,
     NavbarComponent,
     ProgressbarComponent,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     AgmCoreModule,
     DonateButtonComponent
   ],

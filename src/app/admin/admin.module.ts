@@ -1,11 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrganizationFormComponent } from './organization-form/organization-form.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
-import { MdInputModule, MdListModule, MdDatepickerModule, MdNativeDateModule, MdRadioModule, MdSelectModule } from '@angular/material';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -22,31 +16,10 @@ import { ProjectFormComponent } from './project-form/project-form.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    HttpModule,
     AdminRoutingModule,
     SharedModule,
-    MdInputModule,
-    MdListModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    MdNativeDateModule,
-    MdDatepickerModule,
-    MdRadioModule,
-    MdSelectModule
   ],
   exports: [
-    MdInputModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    MdNativeDateModule,
-    MdDatepickerModule,
-    MdRadioModule,
-    MdSelectModule
   ],
   declarations: [
     AdminComponent,
