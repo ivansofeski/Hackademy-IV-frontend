@@ -2,28 +2,54 @@
     <h2 class="project-title">{{project.projectName}}</h2>
     <mat-list>
       <mat-list-item class="project-name">
-        <div mat-line><div class="label">Name: </div><div class="project-name">{{project.projectName}}</div></div>
+        <div mat-line>
+          <div class="label">Name: </div>
+          <div class="project-name">{{project.projectName}}</div>
+        </div>
       </mat-list-item>
       <mat-list-item class="project-fromDate">
-        <div mat-line><div class="label">From Date: </div><div class="project-fromDate">{{project.fromDate}}</div></div>
+        <div mat-line>
+          <div class="label">From Date: </div>
+          <div class="project-fromDate">{{project.fromDate}}</div>
+        </div>
       </mat-list-item>
       <mat-list-item class="project-toDate">
-        <div mat-line><div class="label">To Date: </div><div class="project-toDate">{{project.toDate}}</div></div>
+        <div mat-line>
+          <div class="label">To Date: </div>
+          <div class="project-toDate">{{project.toDate}}</div>
+        </div>
       </mat-list-item>
       <mat-list-item class="project-address">
-        <div mat-line><div class="label">Address: </div><div class="project-address">{{project.address}}</div></div>
+        <div mat-line>
+          <div class="label">Address: </div>
+          <div class="project-address">{{project.address}}</div>
+        </div>
       </mat-list-item>
       <mat-list-item class="project-neededFunding">
-        <div mat-line><div class="label">Needed Funding: </div><div class="project-neededFunding">{{project.neededFunding}}</div></div>
+        <div mat-line>
+          <div class="label">Needed Funding: </div>
+          <div class="project-neededFunding">{{project.neededFunding}}</div>
+        </div>
       </mat-list-item>
       <mat-list-item class="project-raisedFunding">
-        <div mat-line><div class="label">Raised Funding: </div><div class="project-raisedFunding">{{project.raisedFunding}}</div></div>
+        <div mat-line>
+          <div class="label">Raised Funding: </div>
+          <div class="project-raisedFunding">{{project.raisedFunding}}</div>
+        </div>
       </mat-list-item>
       <mat-list-item class="project-mainImage">
-        <div mat-line><div class="label">Main Image: </div><div class="project-mainImage">{{project.mainImage}}</div></div>
+        <div mat-line>
+          <div class="label">Main Image: </div>
+          <div class="project-mainImage"><img [attr.src]='project.mainImage' width='100px'/></div>
+        </div>
       </mat-list-item>
       <mat-list-item class="project-organization" *ngIf="project.organization">
-        <div mat-line><div class="label">Organization: </div><div class="project-organization"><a [routerLink]="['/admin/organizations/view/',project.organization.id]" [textContent]='project.organization.name'></a></div></div>
+        <div mat-line>
+          <div class="label">Organization: </div>
+          <div class="project-organization">
+            <a [routerLink]="['/admin/organizations/view/',project.organization.id]" [textContent]='project.organization.name'></a>
+          </div>
+        </div>
       </mat-list-item>
       <div class="project-desc">{{project.description}}</div>
     </mat-list>
