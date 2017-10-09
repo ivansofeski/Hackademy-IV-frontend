@@ -19,6 +19,7 @@ import { OrganizationPageComponent } from './organization-page/organization-page
 import { DataService } from './services/data.service';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -57,6 +58,7 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     OrganizationPageComponent,
     ProjectPageComponent,
     ProjectFormComponent,
+    SidebarComponent,
   ],
   providers: [DataService]
 })
