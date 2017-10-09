@@ -4,8 +4,10 @@ import { MonthFundingComponent } from './month-funding/month-funding.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    
   ],
-  declarations: [MonthFundingComponent]
+  declarations: [MonthFundingComponent],
+  providers: []
 })
 export class ReportsModule { }
