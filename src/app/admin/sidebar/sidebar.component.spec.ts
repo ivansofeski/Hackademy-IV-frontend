@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 
 // Components
@@ -48,7 +48,7 @@ describe('SidebarComponent', () => {
   it('should render proper nested menu items', () => {
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('li.item.hasItems'));
-    //el = de.nativeElement;
+    // el = de.nativeElement;
     expect(de).toBeTruthy();
   });
 });

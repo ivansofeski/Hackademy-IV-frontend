@@ -6,7 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AdminComponent } from './admin.component';
 import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
-import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
