@@ -30,6 +30,13 @@ export class ProjectService {
         .catch(this.handlerError);
   }
 
+  getSelectedProject(index: number): Observable <Project> {
+    return this._http.get<Project[]>(this._projectUrl)
+        .map(projects =>(projects.find(project=> project.id == index)))
+        .do(project => {console.log("the project with" + index +" has been requested:")
+        console.log(project)})
+        .catch(this.handlerError);
+  }
   private handlerError(err: HttpErrorResponse){
     return Observable.throw(err.message);
   }
