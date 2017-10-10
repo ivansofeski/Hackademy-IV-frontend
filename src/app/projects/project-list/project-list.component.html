@@ -29,7 +29,7 @@
               <p class="fade">
                 {{project.description}}
               </p>
-              <a href="#" class="read-more">Read more</a>
+              <a [routerLink]="['/projects', project.id]" class="read-more">Read more</a>
             </div>
             <div class="donate-container">
               <app-progressbar class="progress-bar"
