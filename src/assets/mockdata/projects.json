@@ -22,7 +22,11 @@
         "projectId": "001",
         "organizationName": "Save the children",
         "organizationId": 1,
+<<<<<<< HEAD
         "openProject": "true"
+=======
+        "open":"true"
+>>>>>>> adding a filter for open projects
     },
     {
         "id": 2,
@@ -47,7 +51,8 @@
         "projectId": "002",
         "organizationName": "Unicef",
         "organizationId": 2,
-        "openProject": "true"
+        "open":"true"
+        
     },
     {
         "id": 3,
@@ -72,7 +77,7 @@
         "projectId": "003",
         "organizationName": "Save the children",
         "organizationId": 1,
-        "openProject": "true"
+        "open":"true"
     },
     {
         "id": 4,
@@ -97,6 +102,53 @@
         "projectId": "004",
         "organizationName": "Unicef",
         "organizationId": 2,
-        "openProject": "true"
+        "open":"true"
+        
+    },
+    {
+        "id": 5,
+        "projectName": "Brighten my home",
+        "fromDate": "2017/09/15",
+        "toDate": "2017/10/01",
+        "location": {"lat": 55.606210, "lng": 13.006070},
+        "address": "Östergatan 4",
+        "neededFunding": 1000,
+        "raisedFunding": 700,
+        "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
+        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "images":[
+            "./assets/photos/project004/main/001.jpg",
+            "./assets/photos/project004/main/002.jpg",
+            "./assets/photos/project004/main/003.jpg",
+        ],
+        "projectManager": "Mia Larsson",
+        "projectId": "004",
+        "organizationName": "Unicef",
+        "organizationId": 2,
+        "open":"false"
+        
+    },
+    {
+        "id": 6,
+        "projectName": "More green, More Life",
+        "fromDate": "2017/09/15",
+        "toDate": "2017/11/15",
+        "location": {"lat": 55.606210, "lng": 13.006070},
+        "address": "Östergatan 4",
+        "neededFunding": 1000,
+        "raisedFunding": 1000,
+        "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
+        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "images":[
+            "./assets/photos/project004/main/001.jpg",
+            "./assets/photos/project004/main/002.jpg",
+            "./assets/photos/project004/main/003.jpg",
+        ],
+        "projectManager": "Johan Ericsson",
+        "projectId": "004",
+        "organizationName": "Unicef",
+        "organizationId": 2,
+        "open":"false"
+        
     }
 ]

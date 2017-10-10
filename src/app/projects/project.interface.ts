@@ -17,5 +17,5 @@ export interface Project {
     projectId: string;
     organizationName: string;
     organizationId: number;
-    openProject: boolean;
+    open: string;
 }
