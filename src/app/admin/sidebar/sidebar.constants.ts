@@ -6,7 +6,7 @@ export const STRINGS = {
         SQ: 'meny',
         SV: 'meny',
         BH: 'meni',
-        AR: 'قائمة طعام',
+        AR: 'القائمة',
         FA: 'فهرست'
     },
     organizations: {
@@ -26,7 +26,7 @@ export const STRINGS = {
         SQ: 'projektet',
         SV: 'projekt',
         BH: 'projekata',
-        AR: 'مشاريع',
+        AR: 'المشاريع',
         FA: 'پروژه ها'
     },
     list: {
@@ -36,7 +36,7 @@ export const STRINGS = {
         SQ: 'listo',
         SV: 'lista',
         BH: 'navedite',
-        AR: 'درج في بيان',
+        AR: 'اللائحة',
         FA: 'فهرست کردن'
     },
     add: {
