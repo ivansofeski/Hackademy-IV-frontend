@@ -18,14 +18,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let organization of orgList">
-                    <td>{{organization.id}}</td>
-                    <td>{{organization.orgId}}</td>
-                    <td><a [routerLink]="['/admin/organizations/view/',organization.id]">{{organization.name}}</a></td> 
-                    <td>{{organization.address}}</td>
-                    <td>{{organization.contact.phone}}</td>
-                    <td>{{organization.contact.email}}</td>
-                    <td>{{organization.contact.person}}</td>
+                <tr *ngFor="let row of orgList">
+                    <td>{{row.id}}</td>
+                    <td>{{row.orgId}}</td>
+                    <td><a [routerLink]="['/admin/rows/view/',row.id]">{{row.name}}</a></td> 
+                    <td>{{row.address}}</td>
+                    <td>{{row.contact.phone}}</td>
+                    <td>{{row.contact.email}}</td>
+                    <td>{{row.contact.person}}</td>
                 </tr>
             </tbody>
         </table>
@@ -34,37 +34,55 @@
 -->
 
 <div class="organization-container mat-elevation-z8">
-    <md-table #table [dataSource]="dataSource">
+    <cdk-table #table [dataSource]="dataSource">
   
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
   
-      <!-- Position Column -->
-      <ng-container mdColumnDef="id">
-        <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
-        <md-cell *mdCellDef="let organization"> {{organzation.Id}} </md-cell>
+      <!-- Id Column -->
+      <ng-container cdkColumnDef="id">
+        <cdk-header-cell *cdkHeaderCellDef> ID </cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row"> {{row.id}} </cdk-cell>
+      </ng-container>
+        
+      <!-- row Id Column -->
+      <ng-container cdkColumnDef="orgId">
+        <cdk-header-cell *cdkHeaderCellDef> organization ID </cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row"> {{row.orgId}} </cdk-cell>
+      </ng-container>
+
+      <!-- row Name Column -->
+      <ng-container cdkColumnDef="name">
+        <cdk-header-cell *cdkHeaderCellDef> Name </cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row"> {{row.name}} </cdk-cell>
       </ng-container>
   
-      <!-- Name Column -->
-      <ng-container mdColumnDef="name">
-        <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
-        <md-cell *mdCellDef="let organization"> {{organization.name}} </md-cell>
+      <!-- Adress Column -->
+      <ng-container cdkColumnDef="address">
+        <cdk-header-cell *cdkHeaderCellDef> Address </cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row"> {{row.address}} </cdk-cell>
       </ng-container>
-  
-      <!-- Weight Column -->
-      <ng-container mdColumnDef="manager">
-        <md-header-cell *mdHeaderCellDef> Manager </md-header-cell>
-        <md-cell *mdCellDef="let organization"> {{organization.manager}} </md-cell>
+
+      <!-- Contact Name Column -->
+      <ng-container cdkColumnDef="person">
+        <cdk-header-cell *cdkHeaderCellDef> Contact </cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row"> {{row.contact.person}} </cdk-cell>
       </ng-container>
-  
-      <!-- Color Column -->
-      <ng-container mdColumnDef="adress">
-        <md-header-cell *mdHeaderCellDef> Adress </md-header-cell>
-        <md-cell *mdCellDef="let organization"> {{organization.adress}} </md-cell>
+      
+      <!-- Contact Email Column -->
+      <ng-container cdkColumnDef="email">
+        <cdk-header-cell *cdkHeaderCellDef> Contact Email </cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row"> {{row.contact.email}} </cdk-cell>
       </ng-container>
-  
-      <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-      <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-    </md-table>
+      
+      <!-- Contact Phone Column -->
+      <ng-container cdkColumnDef="Phone">
+        <cdk-header-cell *cdkHeaderCellDef> Contact Phone </cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row"> {{row.contact.phone}} </cdk-cell>
+      </ng-container>
+    
+      <cdk-header-row *cdkHeaderRowDef="displayedColumns"></cdk-header-row>
+      <cdk-row *cdkRowDef="let row; columns: displayedColumns;"></cdk-row>
+    </cdk-table>
   </div>
   

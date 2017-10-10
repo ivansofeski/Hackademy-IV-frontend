@@ -21,6 +21,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
   imports: [
     AdminRoutingModule,
     SharedModule,
+    CdkTableModule
   ],
   exports: [
   ],

@@ -1,4 +1,45 @@
-table, tr, th, td{
-    border: 1px solid black;
-    margin: auto;    
-}
+// table, tr, th, td{
+//     border: 1px solid black;
+//     margin: auto;    
+// }
+
+/* Structure */
+.organization-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  /*
+   * Styles to make the demo's cdk-table match the material design spec
+   * https://material.io/guidelines/components/data-tables.html
+   */
+  .organization-table {
+    flex: 1 1 auto;
+    overflow: auto;
+    max-height: 500px;
+  }
+  
+  .organization-header-row, .organization-row {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+    height: 32px;
+    padding: 0 8px;
+  }
+  
+  .organization-cell, .organization-header-cell {
+    flex: 1;
+  }
+  
+  .organization-header-cell {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  .organization-cell {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  
