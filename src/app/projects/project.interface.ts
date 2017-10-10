@@ -12,6 +12,7 @@ export interface Project {
     raisedFunding: number;
     description: string;
     mainImage: string;
+    images:string[];
     projectManager: string;
     projectId: string;
     organizationName: string;
