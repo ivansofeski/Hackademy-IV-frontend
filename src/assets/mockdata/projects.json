@@ -9,11 +9,24 @@
         "neededFunding": 1000,
         "raisedFunding": 550,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project001.jpg",
+        "mainImage": "./assets/photos/project001/main/project001.jpg",
         "projectManager": "Mats Nilsson",
         "projectId": "001",
         "organizationName": "Save the children",
-        "organizationId": 1
+        "organizationId": 1,
+        "openProject":true,
+        "events":[{"eventId": 1,
+            "eventTitle":"educating children about their rights",
+            "eventDescription": "lkmlcdsmcödmlödkmcldsklkcädslklöldcä ömdcmlkd lkmvcdlmslödv",
+            "eventDate":"201712/20",
+            "eventImage":"./assets/photos/project001/events/001.jpg"},
+            {"eventId": 2,
+            "eventTitle":"educating parents how to treat their children",
+            "eventDescription": "lkmlcdsmcödmlödkmcldsklkcädslklöldcä ömdcmlkd lkmvcdlmslödv",
+            "eventDate":"201712/25",
+            "eventImage":"./assets/photos/project001/events/002.jpg"
+
+        }]
     },
     {
         "id": 2,
@@ -25,11 +38,12 @@
         "neededFunding": 1000,
         "raisedFunding": 380,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project002.jpg",
+        "mainImage": "./assets/photos/project002/main/project002.jpg",
         "projectManager": "Johan Ericsson",
         "projectId": "002",
         "organizationName": "Unicef",
-        "organizationId": 2
+        "organizationId": 2,
+        "openProject":true
 
     },
     {
@@ -42,11 +56,12 @@
         "neededFunding": 2000,
         "raisedFunding": 400,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project003.jpg",
+        "mainImage": "./assets/photos/project003/main/project003.jpg",
         "projectManager": "Mats Nilsson",
         "projectId": "003",
         "organizationName": "Save the children",
-        "organizationId": 1
+        "organizationId": 1,
+        "openProject":true
     },
     {
         "id": 4,
@@ -58,11 +73,12 @@
         "neededFunding": 1000,
         "raisedFunding": 700,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project004.jpg",
+        "mainImage": "./assets/photos/project004/main/project004.jpg",
         "projectManager": "Johan Ericsson",
         "projectId": "004",
         "organizationName": "Unicef",
-        "organizationId": 2
+        "organizationId": 2,
+        "openProject":true
 
     }
 ]

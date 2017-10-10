@@ -7,6 +7,13 @@ export interface Project {
         lat: number;
         lng: number;
     };
+    events:[{
+        eventId: number;
+        eventTitle: string;
+        eventDescription:string;
+        eventDate: string;
+        eventImage: string;
+    }]
     address: string;            
     neededFunding: number;
     raisedFunding: number;
@@ -16,4 +23,5 @@ export interface Project {
     projectId: string;
     organizationName: string;
     organizationId: number;
+    openProject: boolean;
 }
