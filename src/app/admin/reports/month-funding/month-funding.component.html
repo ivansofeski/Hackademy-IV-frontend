@@ -1,34 +1,31 @@
-<div>
   <div>
-    <table>
-      <thead>
-        <tr>
-         <!-- <th>ID</th> -->
-          <th>Project Name</th>
-          <th>From Date</th>
-          <th>To Date</th>
-          <th>Address</th>
-          <th style="padding: 0 10px;">Collected</th>
-         <!-- <th>Discription</th> -->
-          <th>Project Manager</th>
-          <th>Project ID</th>
-          <th>Orgnization Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let project of proList">
-          <!--<td>{{project.id}}</td>-->
-          <td>{{project.projectName}}</td>
-          <td>{{project.fromDate}}</td>
-          <td>{{project.toDate}}</td>
-          <td>{{project.address}}</td>
-          <td align="center">{{project.raisedFunding}} <span style='color: #8E8D8D;'>/</span> {{project.neededFunding}}</td>
-          <!-- <td>{{project.description}}</td> -->
-          <td>{{project.projectManager}}</td>
-          <td>{{project.projectId}}</td>
-          <td>{{project.organizationName}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <!-- <th>ID</th> -->
+        <th>Project Name</th>
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>Address</th>
+        <th style="padding: 0 10px;">Collected</th>
+        <!-- <th>Discription</th> -->
+        <th>Project Manager</th>
+        <th>Project ID</th>
+        <th>Orgnization Name</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let project of proList">
+      <!--<td>{{project.id}}</td>-->
+      <td>{{project.projectName}}</td>
+      <td>{{project.fromDate}}</td>
+      <td>{{project.toDate}}</td>
+      <td>{{project.address}}</td>
+      <td align="center">{{project.raisedFunding}} <span style='color: #8E8D8D;'>/</span> {{project.neededFunding}}</td>
+      <!-- <td>{{project.description}}</td> -->
+      <td>{{project.projectManager}}</td>
+      <td>{{project.projectId}}</td>
+      <td>{{project.organizationName}}</td>
+      <tr></tr>
+    </tbody>
+  </table>
 </div>

@@ -12,21 +12,26 @@ export class MonthFundingComponent implements OnInit {
 
   color = 'primary';
   mode = 'determinate';
-  proList: any[];
+  proList: any[] = [];
   projectId: number = 0;
   project: any;
   errors: any[] = [];
 
-  constructor(public route: ActivatedRoute, public router: Router,private dataService: DataService) { }
+  constructor(public route: ActivatedRoute, public router: Router, private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.getProjects().subscribe(
       res => {
         //console.log(res);
-        this.proList = res
+        this.proList = res.filter((v, k) => {
+          return v.open === 'false';
+        });
       },
       error => this.errors.push(error)
     );
+
+    /* this.proList = this.dataService.getClosedProjects(this.proList, { open: "false" });
+    console.log(this.proList); */
   }
 
 }
