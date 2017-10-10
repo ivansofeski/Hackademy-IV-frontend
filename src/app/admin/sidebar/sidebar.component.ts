@@ -14,6 +14,23 @@ export class SidebarComponent implements OnInit {
   links = LINKS;
   lng = 'US';
 
+  toggleSidebar(toggler: HTMLElement): void {
+    if (toggler === undefined) {
+      return;
+    }
+
+    const sidebar = toggler.parentElement;
+    const mainPanel = toggler.parentElement.nextElementSibling;
+
+    if (sidebar !== undefined && mainPanel !== undefined && mainPanel.classList.contains('main-panel')) {
+      sidebar.classList.toggle('expanded');
+      mainPanel.classList.toggle('expanded');
+      toggler.classList.toggle('expanded');
+
+      console.log(toggler.parentElement.classList);
+    }
+  }
+
   constructor() { }
 
   ngOnInit() {

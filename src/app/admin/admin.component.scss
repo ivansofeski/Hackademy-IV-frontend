@@ -1,3 +1,71 @@
+$desktop: 'only screen and (min-width : 720px)';
+$phone-tablet: 'only screen and (max-width : 720px)';
+$sidebarClosedVal: '0';
+
+@media #{$desktop} {
+    $sidebarExpandedVal: '260px';
+
+    app-sidebar {
+        width: #{$sidebarExpandedVal};
+    }
+
+    .main-panel {
+        float: right;
+        width: calc(100% - 260px);
+    }
+}
+
+@media #{$phone-tablet} {
+    $sidebarExpandedVal: '200px';
+
+    app-sidebar {
+        width: #{$sidebarExpandedVal};
+    }
+
+    .wrapper {
+        position: relative;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .wrapper::after {
+        content: "";
+        position: absolute;
+        display: block;
+        bottom: 0;
+        right: 0;
+        clear: both;
+    }
+
+    .main-panel {
+        width: 100%;
+    }
+
+    app-sidebar {
+        width: #{$sidebarClosedVal};
+    }
+
+    app-sidebar.expanded {
+        width: #{$sidebarExpandedVal};
+    }
+
+    .main-panel.expanded {
+        margin-left: #{$sidebarExpandedVal};
+        pointer-events: none;
+    }
+
+    .main-panel.expanded::before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.5);
+        overflow: hidden;
+    }
+}
+
 app-sidebar {
     position: fixed;
     display: block;
@@ -17,8 +85,14 @@ app-sidebar {
 .main-panel {
     position: relative;
     display: block;
-    float: right;
-    width: calc(100% - 260px);
     padding: 20px;
     box-sizing: border-box;
+}
+
+.trans-15s {
+    -webkit-transition: .15s all ease-in-out;
+    -moz-transition: .15s all ease-in-out;
+    -ms-transition: .15s all ease-in-out;
+    -o-transition: .15s all ease-in-out;
+    transition: .15s all ease-in-out;
 }

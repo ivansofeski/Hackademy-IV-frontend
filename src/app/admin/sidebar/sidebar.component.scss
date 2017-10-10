@@ -1,3 +1,134 @@
+$desktop: "only screen and (min-width : 720px)";
+$phone-tablet: "only screen and (max-width : 720px)";
+
+@media #{$desktop} {
+    .nano-logo > .sidebar-toggle {
+        display: none;
+    }
+
+    .item:hover {
+        background-color: #61bfad;
+        color: white;
+        z-index: 9999;
+    }
+    
+    .item.hasItems:hover::after {
+        display: block;
+    }
+    
+    .item:hover > .item-list.sub {
+        z-index: 9999;
+        width: 60%;
+    }
+    
+    .item-list.sub > .item:hover > a {
+        color: white;
+    }
+}
+
+@media #{$phone-tablet}{
+    $menuColor: 'dodgerblue';
+    .sidebar-toggle {
+        position: absolute;
+        display: block;
+        width: 30px;
+        height: 30px;
+        top: 20%;
+        right: -15px;
+        background-color: #{$menuColor};
+        border-radius: 0 3px 3px 0;
+        color: white;
+        font-size: 24px;
+        opacity: .75;
+        overflow: hidden;
+        
+        -webkit-transform: translateY(-56%);
+        -moz-transform: translateY(-56%);
+        -ms-transform: translateY(-56%);
+        -o-transform: translateY(-56%);
+        transform: translateY(-56%);
+        z-index: 100;
+    }
+
+    .sidebar-toggle,
+    .sidebar-toggle > * {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+    .sidebar-toggle::after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        bottom: 0;
+        right: -30px;
+        background-color: rgba(89, 175, 255, 1);
+        border-radius: 50%;
+
+        -webkit-transition: .15s all ease-in-out, .30s opacity ease-in-out;
+        -moz-transition: .15s all ease-in-out, .30s opacity ease-in-out;
+        -ms-transition: .15s all ease-in-out, .30s opacity ease-in-out;
+        -o-transition: .15s all ease-in-out, .30s opacity ease-in-out;
+        transition: .15s all ease-in-out, .30s opacity ease-in-out;
+
+        -webkit-transform: rotateZ(90deg);
+        -moz-transform: rotateZ(90deg);
+        -ms-transform: rotateZ(90deg);
+        -o-transform: rotateZ(90deg);
+        transform: rotateZ(90deg);
+
+        z-index: -1;
+    }
+
+    .sidebar-toggle:active::after {
+        width: 300%;
+        height: 100%;
+        opacity: .75;
+    }
+
+    .sidebar-toggle > i {
+        position: relative;
+        display: block;
+        width: 20px;
+        height: 15px;
+        overflow: hidden;
+        border-top: 1px solid white;
+    }
+
+    .sidebar-toggle > i::before,
+    .sidebar-toggle > i::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 50%;
+        bottom: 0;
+        left: 0;
+    }
+
+    .sidebar-toggle > i::before {
+        left: 10%;
+        width: 80%;
+        border-top: 1px solid white;
+    }
+
+    .sidebar-toggle > i::after {
+        border-bottom: 1px solid white;
+    }
+
+    .sidebar-toggle.expanded {
+        opacity: 1;
+    }
+
+    .sidebar-container {
+        overflow: hidden;
+    }
+}
+
 .flex {
     display: flex;
     flex-direction: column;
@@ -43,7 +174,7 @@
 .sidebar-container {
     position: relative;
     display: block;
-    width: 260px;
+    width: 100%;
     height: calc(100vh - 75px);
     z-index: 4;
 }
@@ -159,24 +290,6 @@
 // USER ACTIONS
 
 //HOVERS
-.item:hover {
-    background-color: #61bfad;
-    color: white;
-    z-index: 9999;
-}
-
-.item.hasItems:hover::after {
-    display: block;
-}
-
-.item:hover > .item-list.sub {
-    z-index: 9999;
-    width: 60%;
-}
-
-.item-list.sub > .item:hover > a {
-    color: white;
-}
 
 .trans-15s {
     -webkit-transition: .15s all ease-in-out;
