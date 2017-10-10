@@ -7,6 +7,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import { ProjectBlogComponent } from './project-blog/project-blog.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
       { path: 'organizations/view/:id', component: OrganizationPageComponent },
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/new', component: ProjectFormComponent },
-      { path: 'projects/view/:id', component: ProjectPageComponent }
+      { path: 'projects/view/:id', component: ProjectPageComponent },
+      { path: 'blogs', component: ProjectBlogComponent },
     ]
   },
 ];

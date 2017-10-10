@@ -8,13 +8,15 @@ import 'rxjs/add/Observable/throw';
 // Interfaces
 import { Organization } from '../interface/organization';
 import { Project } from '../interface/project';
+import { Blog } from '../interface/blog';
 
 @Injectable()
 export class DataService {
   paths = {
     root: '../../../assets/mockdata/',
     organizations: 'organizations.json',
-    projects: 'projects.json'
+    projects: 'projects.json',
+    blogs: 'blogs.json',
   };
 
   // Updated!
@@ -101,6 +103,10 @@ export class DataService {
   // Returns a set of Project (interface) Observable.
   getProjects(): Observable<Project[]> {
     return this._get(this.paths.root + this.paths.projects);
+  }
+
+  getBlogs(): Observable<Blog[]> {
+    return this._get(this.paths.root + this.paths.blogs);
   }
 
   // Get only 1 Project record data with parameterized query. options is an Object argument which

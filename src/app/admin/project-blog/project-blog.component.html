@@ -1,0 +1,7 @@
+<h2>Project Blog</h2>
+<div *ngFor="let entry of blogList">
+  <h3>{{entry.title}}</h3>
+  <div>{{entry.content}}</div>
+  <div>{{entry.date | date}}</div>
+  <hr />
+</div>

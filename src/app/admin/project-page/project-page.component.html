@@ -59,5 +59,7 @@
         <agm-marker [latitude]="project.location.lat" [longitude]="project.location.lng"></agm-marker>
       </agm-map>
     </div>
+    <app-project-blog [projectId]="project.id"></app-project-blog>
   </div>
+
   <div *ngIf="!project">Waiting for Data</div>
