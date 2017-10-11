@@ -10,13 +10,13 @@ import { ProjectService } from '../project.service';
 export class ProjectListComponent implements OnInit {
   errors: any[] = [];
   projectList: any[] = [];
-  donatedAmount= {};
+  donatedAmount = {};
   color = 'primary';
   mode = 'determinate';
 
-  donateOption1= 10;
-  donateOption2= 25;
-  donateOption3= 50;
+  donateOption1 = 10;
+  donateOption2 = 25;
+  donateOption3 = 50;
   constructor(private _projectService: ProjectService) { }
 
   ngOnInit() {
@@ -24,10 +24,13 @@ export class ProjectListComponent implements OnInit {
     this._projectService.getProjects().subscribe(
       res => {
         console.log(res);
-        this.projectList = res;
-      },
-      error => this.errors.push(error)
-    ); 
-  }
+        this.projectList = res.filter((v, k) => {
+          return v.open === 'true';
 
+        },
+          error => this.errors.push(error)
+        );
+      }
+    )
+  }
 }
