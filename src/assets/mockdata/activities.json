@@ -1,0 +1,17 @@
+[
+    {
+        "activityId": 1,
+        "projectId":1,
+        "activityTitle":"educating children about their rights",
+        "activityDescription": "lkmlcdsmcödmlödkmcldsklkcädslklöldcä ömdcmlkd lkmvcdlmslödv",
+        "activityDate":"201712/20",
+        "activityImage":"./assets/photos/project001/events/001.jpg"},
+    {
+        "activityId": 2,
+        "projectId":1,
+        "activityTitle":"educating parents how to treat their children",
+        "activityDescription": "lkmlcdsmcödmlödkmcldsklkcädslklöldcä ömdcmlkd lkmvcdlmslödv",
+        "activityDate":"201712/25",
+        "activityImage":"./assets/photos/project001/events/002.jpg"
+    }
+]
