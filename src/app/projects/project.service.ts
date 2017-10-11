@@ -5,10 +5,12 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/Observable/throw';
 import {Observable} from 'rxjs/Observable';
 import { Project } from './project.interface';
+import { Activity } from './activity.interface';
 
 @Injectable()
 export class ProjectService {
   _projectUrl = '../assets/mockdata/projects.json';
+  _activityUrl = '../assets/mockdata/events.json';
   constructor(private _http: HttpClient){}
 
   getProjects(): Observable <Project[]> {
@@ -30,13 +32,22 @@ export class ProjectService {
         .catch(this.handlerError);
   }
 
-  getSelectedProject(index: number): Observable <Project> {
-    return this._http.get<Project[]>(this._projectUrl)
-        .map(projects =>(projects.find(project=> project.id == index)))
-        .do(project => {console.log("the project with" + index +" has been requested:")
-        console.log(project)})
-        .catch(this.handlerError);
+  getSelectedProject(projectId: number): [Observable <Project>,Observable <Activity>] {
+    return [this._http.get<Project[]>(this._projectUrl)
+        .map(projects =>(projects.find(project=> project.id == projectId)))
+        // .do(project => {console.log("the project with" + projectId +" has been requested:")
+        // console.log(project)})
+        .catch(this.handlerError), this.getProjectActivities(projectId)];
   }
+
+  getProjectActivities(projectId: number){
+    return this._http.get<Activity[]>(this._activityUrl)
+    .map(activities =>(activities.find(activity=> activity.projectId == projectId)))
+    //.do(project => {console.log("the events with" + projectId +" has been requested:")
+    //console.log(project)})
+    .catch(this.handlerError);
+  }
+
   private handlerError(err: HttpErrorResponse){
     return Observable.throw(err.message);
   }
