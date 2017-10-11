@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../project.service';
 import { Project } from '../project.interface';
+import { Activity } from '../activity.interface';
 
 @Component({
   selector: 'app-project-page',
@@ -11,8 +12,8 @@ import { Project } from '../project.interface';
 export class ProjectPageComponent implements OnInit {
 
   _projectId: number;
-  _projectInfo: any;
-  _projectActivities: any;
+  projectInfo: any;
+  projectActivities: Activity[];
   errors: any[] = [];
 
   donateOption1= 10;
@@ -31,15 +32,16 @@ export class ProjectPageComponent implements OnInit {
     ngOnInit() {
       this._projectId = +this.route.snapshot.paramMap.get('id');
       let project = this.projectService.getSelectedProject(this._projectId);
-      this._projectInfo = project[0].subscribe(
+      project[0].subscribe(
         res => {
-          this._projectInfo = res;
+          this.projectInfo = res;
         },
         error => this.errors.push(error)
       );
-      this._projectActivities = project[1].subscribe(
+      project[1].subscribe(
         res => {
-          this._projectInfo = res;
+          console.log(res)
+          this.projectActivities = res;
         },
         error => this.errors.push(error)
       );
