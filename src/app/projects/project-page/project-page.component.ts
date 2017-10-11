@@ -10,8 +10,9 @@ import { Project } from '../project.interface';
 })
 export class ProjectPageComponent implements OnInit {
 
-  _projectId: number = 0;
-  _project: any;
+  _projectId: number;
+  _projectInfo: any;
+  _projectActivities: any;
   errors: any[] = [];
 
   donateOption1= 10;
@@ -24,41 +25,27 @@ export class ProjectPageComponent implements OnInit {
     private projectService: ProjectService) {  
     }
 
-    get projectId():number{
-      return this._projectId;
-    }
 
-    set projectId(value:number){
-      this._projectId = value;
-      if(value > 0){
-        this.projectService.getProjects().subscribe(
-          res => {
-            this._project = res.filter((v, k) => v.id == value)[0];
-          },
-          error => {
-            console.log(error);
-            this.errors.push(error);
-          }
-        );
-      }
-    }
-
-    get project(){
-      return this._project;
-    }
   
   
     ngOnInit() {
-      this.projectService.getProjects().subscribe(
+      this._projectId = +this.route.snapshot.paramMap.get('id');
+      let project = this.projectService.getSelectedProject(this._projectId);
+      this._projectInfo = project[0].subscribe(
         res => {
-          console.log(res);
-          this._project = res;
+          this._projectInfo = res;
         },
         error => this.errors.push(error)
-      ); 
+      );
+      this._projectActivities = project[1].subscribe(
+        res => {
+          this._projectInfo = res;
+        },
+        error => this.errors.push(error)
+      );
     
 
-      this.projectId = +this.route.snapshot.paramMap.get('id');
+      
     }
   
 
