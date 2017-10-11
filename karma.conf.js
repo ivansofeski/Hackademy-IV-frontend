@@ -28,7 +28,6 @@ module.exports = function (config) {
     ],
     
     preprocessors: {
-      './src/app/admin/organization-form/organization-form.component.scss' : ['scss'],
       './src/styles.scss': ['scss']
     },
     reporters: ['progress', 'kjhtml'],
