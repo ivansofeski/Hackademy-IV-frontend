@@ -32,18 +32,18 @@ export class ProjectService {
         .catch(this.handlerError);
   }
 
-  getSelectedProject(index: number): [Observable <Project>,Observable <Activity>] {
+  getSelectedProject(projectId: number): [Observable <Project>,Observable <Activity>] {
     return [this._http.get<Project[]>(this._projectUrl)
-        .map(projects =>(projects.find(project=> project.id == index)))
-        // .do(project => {console.log("the project with" + index +" has been requested:")
+        .map(projects =>(projects.find(project=> project.id == projectId)))
+        // .do(project => {console.log("the project with" + projectId +" has been requested:")
         // console.log(project)})
-        .catch(this.handlerError), this.getProjectActivities(index)];
+        .catch(this.handlerError), this.getProjectActivities(projectId)];
   }
 
-  getProjectActivities(projectIndex: number){
-    return this._http.get<Activity[]>(this._eventUrl)
-    .map(activities =>(activities.find(activity=> activity.projectId == projectIndex)))
-    //.do(project => {console.log("the events with" + index +" has been requested:")
+  getProjectActivities(projectId: number){
+    return this._http.get<Activity[]>(this._activityUrl)
+    .map(activities =>(activities.find(activity=> activity.projectId == projectId)))
+    //.do(project => {console.log("the events with" + projectId +" has been requested:")
     //console.log(project)})
     .catch(this.handlerError);
   }
