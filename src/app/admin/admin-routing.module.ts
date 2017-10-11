@@ -7,6 +7,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import { ClosedProjectsComponent } from './reporting/closed-projects/closed-projects.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'organizations', component: OrganizationListComponent },
       { path: 'organizations/new', component: OrganizationFormComponent },
       { path: 'organizations/view/:id', component: OrganizationPageComponent },
+      { path: 'reporting', component: ClosedProjectsComponent },
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/new', component: ProjectFormComponent },
       { path: 'projects/view/:id', component: ProjectPageComponent }

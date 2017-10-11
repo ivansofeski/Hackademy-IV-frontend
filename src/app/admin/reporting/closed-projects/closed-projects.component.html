@@ -1,0 +1,65 @@
+<table class='project-full-width' cellspacing='0'>
+  <tr>
+    <td>
+      <mat-form-field>
+        <input name='FROM_DATE' matInput [matDatepicker]='myDatepicker' placeholder='From (date)' [formControl]='controls.fromDate' (dateChange)="filterProjects()">
+        <mat-error *ngIf='controls.fromDate.hasError("required")'>
+          The starting Date is
+          <strong>required</strong>
+        </mat-error>
+        <mat-datepicker-toggle mdSuffix [for]='myDatepicker'></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field>
+        <input name='TO_DATE' matInput [matDatepicker]='myDatepicker2' placeholder='To (date)' [formControl]='controls.toDate' (dateChange)="filterProjects()">
+        <mat-error *ngIf='controls.toDate.hasError("required")'>
+          The ending Date is
+          <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf='controls.toDate.hasError("wrongdate") || controls.toDate.hasError("impossibleDate")'>
+          The ending Date must not be <strong>before start </strong>
+        </mat-error>
+        <mat-datepicker-toggle mdSuffix [for]='myDatepicker2'></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker2></mat-datepicker>
+      </mat-form-field>
+    </td>
+  </tr>
+</table>
+
+
+<div>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Project Name</th>
+          <th>From Date</th>
+          <th>Closing Date</th>
+          <th>Address</th>
+          <th>Needed Funding</th>
+          <th>Raised Funding</th>
+          <th>Billing Info</th>
+          <th>Project Manager</th>
+          <th>Project ID</th>
+          <th>Orgnization Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of projectList">
+          <td><a [routerLink]="['/admin/projects/view/',project.id]">{{project.projectName}}</a></td>
+          <td>{{project.fromDate}}</td>
+          <td>{{project.toDate}}</td>
+          <td>{{project.address}}</td>
+          <td>{{project.neededFunding}}</td>
+          <td>{{project.raisedFunding}}</td>
+          <td>{{project.billingInfo}}</td>
+          <td>{{project.projectManager}}</td>
+          <td>{{project.projectId}}</td>
+          <td>{{project.organizationName}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
