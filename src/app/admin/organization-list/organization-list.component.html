@@ -1,88 +1,54 @@
-<!-- <br>
-<br>
-<div>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th rowspan='2'>ID</th>
-                    <th rowspan='2'>OrgID</th>
-                    <th rowspan='2'>Name</th>
-                    <th rowspan='2'>Address</th>
-                    <th colspan='3'>Contact</th> 
-                </tr>
-                <tr>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Person</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let row of orgList">
-                    <td>{{row.id}}</td>
-                    <td>{{row.orgId}}</td>
-                    <td><a [routerLink]="['/admin/rows/view/',row.id]">{{row.name}}</a></td> 
-                    <td>{{row.address}}</td>
-                    <td>{{row.contact.phone}}</td>
-                    <td>{{row.contact.email}}</td>
-                    <td>{{row.contact.person}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
--->
-
+<!-- Material Mat-table to display the list of organization-->
 <div class="organization-container mat-elevation-z8">
-    <cdk-table #table [dataSource]="dataSource" class="organization-table">
+    <mat-table #table [dataSource]="dataSource" class="organization-table" matSort>
   
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
   
       <!-- Id Column -->
-      <ng-container cdkColumnDef="id">
-        <cdk-header-cell *cdkHeaderCellDef class="organization-header-cell"> ID </cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row" class="organization-cell"> {{row.id}} </cdk-cell>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef class="organization-header-cell"  mat-sort-header> ID </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="organization-cell"> {{row.id}} </mat-cell>
       </ng-container>
         
       <!-- row Id Column -->
-      <ng-container cdkColumnDef="orgId">
-        <cdk-header-cell *cdkHeaderCellDef class="organization-header-cell"> organization ID </cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row" class="organization-cell"> {{row.orgId}} </cdk-cell>
+      <ng-container matColumnDef="orgId">
+        <mat-header-cell *matHeaderCellDef class="organization-header-cell"  mat-sort-header> Organization Number </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="organization-cell"> {{row.orgId}} </mat-cell>
       </ng-container>
 
       <!-- row Name Column -->
-      <ng-container cdkColumnDef="name">
-        <cdk-header-cell *cdkHeaderCellDef class="organization-header-cell"> Name </cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row" class="organization-cell"> {{row.name}} </cdk-cell>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef class="organization-header-cell"  mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="organization-cell"> {{row.name}} </mat-cell>
       </ng-container>
   
       <!-- Adress Column -->
-      <ng-container cdkColumnDef="address">
-        <cdk-header-cell *cdkHeaderCellDef class="organization-header-cell"> Address </cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row" class="organization-cell"> {{row.address}} </cdk-cell>
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef class="organization-header-cell" mat-sort-header> Address </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="organization-cell"> {{row.address}} </mat-cell>
       </ng-container>
 
       <!-- Contact Name Column -->
-      <ng-container cdkColumnDef="person">
-        <cdk-header-cell *cdkHeaderCellDef class="organization-header-cell"> Contact </cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row" class="organization-cell"> {{row.contact.person}} </cdk-cell>
+      <ng-container matColumnDef="person">
+        <mat-header-cell *matHeaderCellDef class="organization-header-cell"> Contact </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="organization-cell"> {{row.contact.person}} </mat-cell>
       </ng-container>
       
       <!-- Contact Email Column -->
-      <ng-container cdkColumnDef="email">
-        <cdk-header-cell *cdkHeaderCellDef class="organization-header-cell"> Contact Email </cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row" class="organization-cell"> {{row.contact.email}} </cdk-cell>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef class="organization-header-cell"> Contact Email </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="organization-cell"> {{row.contact.email}} </mat-cell>
       </ng-container>
       
       <!-- Contact Phone Column -->
-      <ng-container cdkColumnDef="phone">
-        <cdk-header-cell *cdkHeaderCellDef class="organization-header-cell"> Contact Phone </cdk-header-cell>
-        <cdk-cell *cdkCellDef="let row" class="organization-cell"> {{row.contact.phone}} </cdk-cell>
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef class="organization-header-cell"> Contact Phone </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="organization-cell"> {{row.contact.phone}} </mat-cell>
       </ng-container>
     
-      <cdk-header-row *cdkHeaderRowDef="displayedColumns" class="organization-header-row"></cdk-header-row>
-      <cdk-row *cdkRowDef="let row; columns: displayedColumns;" class="organization-row"></cdk-row>
-    </cdk-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns" class="organization-header-row"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="organization-row"></mat-row>
+    </mat-table>
   </div>
   

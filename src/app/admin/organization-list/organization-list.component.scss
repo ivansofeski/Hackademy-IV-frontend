@@ -17,7 +17,7 @@
   .organization-table {
     flex: 1 1 auto;
     overflow: auto;
-    max-height: 500px;
+    max-height: 1000px;
   }
   
   .organization-header-row, .organization-row {
@@ -41,5 +41,8 @@
   .organization-cell {
     font-size: 13px;
     color: rgba(0, 0, 0, 0.87);
+  }
+  mat-row:hover{
+    background-color: #aad1e4;
   }
   
