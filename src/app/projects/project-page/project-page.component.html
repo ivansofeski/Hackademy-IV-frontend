@@ -34,11 +34,11 @@
                    
 
                 <mat-card-header class="card-header">
-                  <mat-card-title class="project-title">{{project.projectName}}</mat-card-title>
+                  <mat-card-title class="project-title">{{projectInfo.projectName}}</mat-card-title>
                   <mat-card-subtitle class="project-detail">
-                    <span class="organization-name">{{project.organizationName}}</span>
+                    <span class="organization-name">{{projectInfo.organizationName}}</span>
                     <br>
-                    <span class="project-address">{{project.address}}</span>
+                    <span class="project-address">{{projectInfo.address}}</span>
                   </mat-card-subtitle>
                 </mat-card-header>
       
@@ -46,18 +46,18 @@
                 <mat-card-content>
                   <div class="project-description">
                     <p>
-                      {{project.description}}
+                      {{projectInfo.description}}
                     </p>
                    
                   </div>
                   <div class="donate-container">
                     <app-progressbar class="progress-bar"
-                                     [id]='project.id'
-                                     [raisedFunding]='project.raisedFunding'
-                                     [neededFunding]='project.neededFunding'>
+                                     [id]='projectInfo.id'
+                                     [raisedFunding]='projectInfo.raisedFunding'
+                                     [neededFunding]='projectInfo.neededFunding'>
                     </app-progressbar>
                     <app-donate-button
-                      [project]='project'
+                      [project]='projectInfo'
                       [donateOption1]="donateOption1"
                       [donateOption2]="donateOption2"
                       [donateOption3]="donateOption3">
@@ -69,21 +69,21 @@
           </div>
         </div>
       </div>
-      <div class="activity">
-          <div class="activity-container">
+      <div class="activity-list">
+          <div class="activity-container" *ngIf="projectActivities">
               <mat-card class="">
-                  <mat-card-title class="activity-title">Events:</mat-card-title>
+                  <mat-card-title class="activity-title">Activities:</mat-card-title>
                   <mat-card-content>
-                      <mat-expansion-panel>
+                      <mat-expansion-panel *ngFor="let activity of projectActivities">
                           <mat-expansion-panel-header>
                             <mat-panel-description>
-                              11/10/2017
+                              {{activity.activityDate}}
                             </mat-panel-description>
                             <mat-panel-title>
-                             Events titel goes here ...
+                                {{activity.activityTitle}}
                             </mat-panel-title>
                           </mat-expansion-panel-header>
-                          <div>Events description goes here ...</div>
+                          <div>{{activity.activityDescription}}</div>
                         </mat-expansion-panel>
                   </mat-card-content>
               </mat-card>
