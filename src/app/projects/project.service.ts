@@ -42,7 +42,7 @@ export class ProjectService {
 
   getProjectActivities(projectId: number){
     return this._http.get<Activity[]>(this._activityUrl)
-    .map(activities =>(activities.find(activity=> activity.projectId == projectId)))
+    .map(activities =>(activities.filter((k,v)=> k.projectId == projectId)))
     //.do(project => {console.log("the events with" + projectId +" has been requested:")
     //console.log(project)})
     .catch(this.handlerError);
