@@ -10,24 +10,23 @@ import { STRINGS, LINKS } from './sidebar.constants';
 })
 
 export class SidebarComponent implements OnInit {
-  strings = STRINGS;
-  links = LINKS;
-  lng = 'US';
-  listItemEventName = 'touchend';
-  functions: Functions = new Functions();
-  mediaChanged = this.functions.mediaChanged;
-  toggleSidebar = this.functions.toggleSidebar;
-  toggle = this.functions.toggle;
+  strings           = STRINGS;                            // Constant from another file.
+  links             = LINKS;                              // Constant from another file.
+  lng               = 'US';                               // Defines which language strings to load.
+  mq                = matchMedia('(max-width: 1366px)');  // Defines a window.matchMedia object.
+  listItemEventName = 'touchend';                         // Defines which JavaScript event to handle.
+  functions         = new Functions();                    // New instance of Functions class
+  mediaChanged      = this.functions.mediaChanged;        // A function from Functions class.
+  toggleSidebar     = this.functions.toggleSidebar;       // A function from Functions class.
+  toggle            = this.functions.toggle;              // A function from Functions class.
 
   constructor() { }
 
   ngOnInit() {
     if (matchMedia) {
-      const mq = matchMedia('(max-width: 1366px)');
-
-      mq['eventName'] = this.listItemEventName;
-      mq.addListener(this.mediaChanged);
-      this.mediaChanged(mq);
+      this.mq['eventName'] = this.listItemEventName;
+      this.mq.addListener(this.mediaChanged);
+      this.mediaChanged(this.mq);
     }
   }
 
@@ -134,7 +133,6 @@ export class Functions {
     // Since there are nested elements of "li" and both parent and child trigger this function,
     // we have to stop propagation/delegation to not trigger both at the same time.
     // To do that we use/implement "stopPropagation", "preventDefault" pre-defined methods of JavaScript events.
-    evt.preventDefault();
     evt.stopPropagation();
   }
 }
