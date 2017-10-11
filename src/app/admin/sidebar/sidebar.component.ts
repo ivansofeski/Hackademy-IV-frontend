@@ -18,13 +18,13 @@ export class SidebarComponent implements OnInit {
   functions         = new Functions();                    // New instance of Functions class
   mediaChanged      = this.functions.mediaChanged;        // A function from Functions class.
   toggleSidebar     = this.functions.toggleSidebar;       // A function from Functions class.
-  toggle            = this.functions.toggle;              // A function from Functions class.
 
   constructor() { }
 
   ngOnInit() {
     if (matchMedia) {
       this.mq['eventName'] = this.listItemEventName;
+      this.mq['fn'] = this.functions.toggle;
       this.mq.addListener(this.mediaChanged);
       this.mediaChanged(this.mq);
     }
@@ -44,12 +44,13 @@ export class Functions {
   mediaChanged(media) {
     const allItems = Array.from(document.querySelectorAll('li.item'));
     const eventName = media.eventName ? media.eventName : media.currentTarget.eventName;
+    const fn = media.fn ? media.fn : media.currentTarget.fn;
 
     if (allItems !== undefined && allItems.length > 0) {
       for (const item of allItems) {
         media.matches ?
-          item.addEventListener(eventName, this.toggle) :
-          item.removeEventListener(eventName, this.toggle);
+          item.addEventListener(eventName, fn) :
+          item.removeEventListener(eventName, fn);
       }
     }
   }
