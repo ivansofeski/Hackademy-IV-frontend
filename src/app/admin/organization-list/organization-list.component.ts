@@ -18,7 +18,7 @@ import { Organization } from '../interface/organization';
 
 export class OrganizationListComponent implements OnInit, OnDestroy {
   dataSource: OrganizationDataSource | null;
-
+  displayedColumns = ['id', 'name', 'orgId', 'person', 'email', 'phone'];
 
   // Constructor here
   constructor(private _dataService: DataService) {
