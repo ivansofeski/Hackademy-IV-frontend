@@ -14,9 +14,21 @@ export class ProjectPageComponent implements OnInit {
   _project: any;
   errors: any[] = [];
 
-  donateOption1= 10;
+   donateOption1= 10;
   donateOption2= 25;
   donateOption3= 50;
+
+/*image-slider start*/
+  favoriteSeason: string;
+  
+    seasons = [
+      'Winter',
+      'Spring',
+      'Summer',
+      'Autumn',
+    ];
+
+/*image-slider end*/
 
   constructor(
     public route: ActivatedRoute, 
