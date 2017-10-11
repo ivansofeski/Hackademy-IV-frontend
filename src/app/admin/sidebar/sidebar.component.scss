@@ -1,9 +1,46 @@
-$desktop: "only screen and (min-width : 720px)";
-$phone-tablet: "only screen and (max-width : 720px)";
+$desktop: "only screen and (min-width : 1366px)";
+$phone-tablet: "only screen and (max-width : 1366px)";
+$listItemLabelHeight: "40px";
 
 @media #{$desktop} {
     .nano-logo > .sidebar-toggle {
         display: none;
+    }
+
+    .item.hasItems::after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: 50%;
+        right: 5px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 4px 0 4px 6.9px;
+        border-color: transparent transparent transparent #818181;
+        line-height: 0px;
+        _border-color: #000000 #000000 #000000 #818181;
+        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+    
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .item-list.sub {
+        position: absolute;
+        width: 0;
+        height: auto;
+        top: 0;
+        left: 102%;
+        background-color: whitesmoke;
+        overflow: hidden;
+    
+        -webkit-box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+        box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
     }
 
     .item:hover {
@@ -11,14 +48,14 @@ $phone-tablet: "only screen and (max-width : 720px)";
         color: white;
         z-index: 9999;
     }
-    
+
+    .item.hasItems:hover > .item-list.sub {
+        width: 60%;
+        z-index: 9999;
+    }
+
     .item.hasItems:hover::after {
         display: block;
-    }
-    
-    .item:hover > .item-list.sub {
-        z-index: 9999;
-        width: 60%;
     }
     
     .item-list.sub > .item:hover > a {
@@ -28,12 +65,17 @@ $phone-tablet: "only screen and (max-width : 720px)";
 
 @media #{$phone-tablet}{
     $menuColor: 'dodgerblue';
+    
+    .sidebar-container {
+        overflow: hidden;
+    }
+
     .sidebar-toggle {
         position: absolute;
         display: block;
         width: 30px;
         height: 30px;
-        top: 20%;
+        bottom: calc(100% - 138px);
         right: -15px;
         background-color: #{$menuColor};
         border-radius: 0 3px 3px 0;
@@ -41,12 +83,6 @@ $phone-tablet: "only screen and (max-width : 720px)";
         font-size: 24px;
         opacity: .75;
         overflow: hidden;
-        
-        -webkit-transform: translateY(-56%);
-        -moz-transform: translateY(-56%);
-        -ms-transform: translateY(-56%);
-        -o-transform: translateY(-56%);
-        transform: translateY(-56%);
         z-index: 100;
     }
 
@@ -124,8 +160,27 @@ $phone-tablet: "only screen and (max-width : 720px)";
         opacity: 1;
     }
 
-    .sidebar-container {
+    .item-list.sub {
+        height: 0;
         overflow: hidden;
+    }
+
+    .item.hasItems.expanded {
+        -webkit-box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+        box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+    }
+
+    .item.hasItems.expanded > .item-list.sub {
+        height: auto;
+        margin-bottom: 15px;
+        color: white;
+    }
+
+    .item.hasItems.expanded .item.selected {
+        background-color: #61bfad;
+        color: white;
+        z-index: 9999;
     }
 }
 
@@ -195,20 +250,16 @@ $phone-tablet: "only screen and (max-width : 720px)";
     user-select: none;
 }
 
-.admin-links {
+.sidebar-menu {
     position: relative;
     display: block;
     width: 100%;
 }
 
-.admin-links a {
+.sidebar-menu a {
     color: inherit;
-    height: 100%;
+    height: calc(#{$listItemLabelHeight} - 10px);
     text-decoration: none;
-}
-
-.admin-links a:visited {
-    color: initial;
 }
 
 .item-list {
@@ -222,7 +273,6 @@ $phone-tablet: "only screen and (max-width : 720px)";
     display: block;
     width: 100%;
     text-align: center;
-    height: 40px;
     padding: 5px;
     border-bottom: 1px solid silver;
     cursor: pointer;
@@ -246,48 +296,16 @@ $phone-tablet: "only screen and (max-width : 720px)";
 .item-label {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: #{$listItemLabelHeight};
     align-items: stretch;
     overflow: hidden;
 }
 
-.item.hasItems::after {
-    content: "";
-    position: absolute;
-    display: none;
-    top: 50%;
-    right: 5px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 4px 0 4px 6.9px;
-    border-color: transparent transparent transparent #818181;
-    line-height: 0px;
-    _border-color: #000000 #000000 #000000 #818181;
-    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
-
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-
-.item-list.sub {
-    position: absolute;
-    width: 0;
-    height: auto;
-    top: 0;
-    left: 102%;
-    background-color: whitesmoke;
-    overflow: hidden;
-
-    -webkit-box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
-    box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
-}
-
 // USER ACTIONS
+
+.sidebar-menu a:visited {
+    color: initial;
+}
 
 //HOVERS
 

@@ -1,5 +1,5 @@
-$desktop: 'only screen and (min-width : 720px)';
-$phone-tablet: 'only screen and (max-width : 720px)';
+$desktop: 'only screen and (min-width : 1366px)';
+$phone-tablet: 'only screen and (max-width : 1366px)';
 $sidebarClosedVal: '0';
 
 @media #{$desktop} {
@@ -19,7 +19,11 @@ $sidebarClosedVal: '0';
     $sidebarExpandedVal: '200px';
 
     app-sidebar {
-        width: #{$sidebarExpandedVal};
+        width: #{$sidebarClosedVal};
+    }
+
+    .main-panel {
+        width: 100%;
     }
 
     .wrapper {
@@ -27,6 +31,19 @@ $sidebarClosedVal: '0';
         display: block;
         width: 100%;
         overflow: hidden;
+    }
+
+    .wrapper::before {
+        content: "";
+        position: fixed;
+        display: none;
+        top: 0;
+        left: #{$sidebarExpandedVal};
+        width: calc(100% - #{$sidebarExpandedVal});
+        height: 100%;
+        background-color: rgba(0,0,0,.5);
+        overflow: hidden;
+        z-index: 1;
     }
 
     .wrapper::after {
@@ -38,15 +55,20 @@ $sidebarClosedVal: '0';
         clear: both;
     }
 
-    .main-panel {
-        width: 100%;
+    .wrapper.expanded > app-sidebar {
+        width: #{$sidebarExpandedVal};
     }
 
-    app-sidebar {
-        width: #{$sidebarClosedVal};
+    .wrapper.expanded::before {
+        display: block;
     }
 
-    app-sidebar.expanded {
+    .wrapper.expanded > .main-panel {
+        margin-left: #{$sidebarExpandedVal};
+        pointer-events: none;
+    }
+
+    /* app-sidebar.expanded {
         width: #{$sidebarExpandedVal};
     }
 
@@ -63,7 +85,7 @@ $sidebarClosedVal: '0';
         height: 100%;
         background-color: rgba(0,0,0,.5);
         overflow: hidden;
-    }
+    } */
 }
 
 app-sidebar {
