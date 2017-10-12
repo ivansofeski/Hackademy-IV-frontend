@@ -15,15 +15,15 @@ export interface Organization {
     description: string;
 }
 
-
-// Depricated
-export interface IOrganization {
+export interface NewOrganization {
     id: number;
     orgId: string;
     name: string;
     address: string;
-    contact: Contact;
-    password: string;
+    contactName: string;
+    contactPhone: number;
+    contactEmail: string;
+    bankAccount: string;
     billing: string;
     description: string;
 }
