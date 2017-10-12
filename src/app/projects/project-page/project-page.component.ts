@@ -10,20 +10,8 @@ import { Activity } from '../activity.interface';
   styleUrls: ['./project-page.component.scss']
 })
 export class ProjectPageComponent implements OnInit {
-  projectImages=[
-      {   
-          image: "./assets/photos/project001/main/001.jpg",
-          visible: true
-      },
-      {
-          image: "./assets/photos/project001/main/002.jpg",
-          visible: false
-      },
-      {
-          image: "./assets/photos/project001/main/003.jpg",
-          visible: false
-      }
-  ]
+ 
+  projectImages=[];
   _projectId: number = 0;
   project: any;
   projectActivities:Activity[];
@@ -58,10 +46,15 @@ export class ProjectPageComponent implements OnInit {
         res => {
            console.log(res)
           this.projectActivities = res;
+          for (let projectImage of this.project.images){
+            this.projectImages.push({visible:false, image: projectImage});
+            console.log(this.projectImages);
+          } 
+          this.projectImages[0].visible=true;
         },
         error => this.errors.push(error)
       );
-      //this.paginatorInit();
+
   
       
     }
@@ -102,11 +95,5 @@ paginatorChange(previousIndex:number, nextIndex:number){
   toBeActivePage.style.backgroundColor="gray";
 
 }
-paginatorInit(){
-    let toBeActivePage= <HTMLElement>document.querySelectorAll(".circle-page")[0];
-    toBeActivePage.style.backgroundColor="gray";
-  
-  }
-
 
 }
