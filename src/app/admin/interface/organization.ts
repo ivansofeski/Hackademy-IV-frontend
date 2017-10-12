@@ -24,6 +24,8 @@ export interface NewOrganization {
     contactPhone: number;
     contactEmail: string;
     bankAccount: string;
+    city: string;
+    zipCode: string;
     billing: string;
     description: string;
 }

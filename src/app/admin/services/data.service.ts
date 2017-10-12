@@ -6,15 +6,18 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/Observable/throw';
 
 // Interfaces
-import { Organization } from '../interface/organization';
-import { Project } from '../interface/project';
+import { Organization,NewOrganization } from '../interface/organization';
+import { Project, NewProject } from '../interface/project';
 
 @Injectable()
 export class DataService {
   paths = {
     root: '../../../assets/mockdata/',
     organizations: 'organizations.json',
-    projects: 'projects.json'
+    newOrganizations: 'newOrganizations.json',
+    projects: 'projects.json',
+    newProjects: 'newProjects.json'
+    
   };
 
   // Updated!
@@ -86,6 +89,10 @@ export class DataService {
     return this._get(this.paths.root + this.paths.organizations);
   }
 
+  getNewOrganizations(): Observable<NewOrganization[]> {
+    return this._get(this.paths.root + this.paths.newOrganizations);
+  }
+
   // Get only 1 Organization record data with parameterized query. options is an Object argument which
   // should have at least 1 property + value.
   // Returns a Organization (interface) Observable.
@@ -102,7 +109,9 @@ export class DataService {
   getProjects(): Observable<Project[]> {
     return this._get(this.paths.root + this.paths.projects);
   }
-
+  getNewProjects(): Observable<NewProject[]> {
+    return this._get(this.paths.root + this.paths.newProjects);
+  }
   // Get only 1 Project record data with parameterized query. options is an Object argument which
   // should have at least 1 property + value.
   // Returns a Project (interface) Observable.
@@ -112,6 +121,25 @@ export class DataService {
     }
 
     return this._get(this.paths.root + this.paths.projects, options);
+  }
+
+  getClosedProjects(list: any[], options: Object): any {
+    if (list === undefined) {
+      return;
+    }
+
+    this._get(this.paths.root + this.paths.projects).subscribe(
+      res => {
+        if (res !== undefined && res.length > 0) {
+          list = res.filter((v, k) => {
+            return v.open === 'false';
+          });
+        }
+      },
+      error => console.log(error)
+    );
+
+    return list;
   }
 
   constructor(private http: HttpClient) { }

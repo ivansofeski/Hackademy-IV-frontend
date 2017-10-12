@@ -48,6 +48,16 @@ export const STRINGS = {
         BH: 'dodati',
         AR: 'إضافة',
         FA: 'اضافه کردن'
+    },
+    reports: {
+        US: 'reports',
+        GB: 'reports',
+        SO: 'ku dar',
+        SQ: 'Raportet',
+        SV: 'lägg till',
+        BH: 'dodati',
+        AR: 'إضافة',
+        FA: 'اضافه کردن'
     }
 };
 
@@ -57,6 +67,9 @@ export const LINKS = {
         organizationsList: '/admin/organizations',
         organizationsNew: '/admin/organizations/new',
         projectsList: '/admin/projects',
-        projectsNew: '/admin/projects/new'
+        projectsNew: '/admin/projects/new',
+        reports: {
+            closedProjects: '/admin/reports/closed-projects'
+        }
     }
 };
