@@ -7,15 +7,9 @@
     </mat-card-subtitle>
     <mat-list>
       <mat-card-content>
-        <mat-list-item class="org-name">
-          <div mat-line>
-            <div class="label">Name: </div>
-            <div class="org-name">{{organization.name}}</div>
-          </div>
-        </mat-list-item>
         <mat-list-item class="org-id">
           <div mat-line>
-            <div class="label">ID: </div>
+            <div class="label">Number: </div>
             <div class="org-id">{{organization.orgId}}</div>
           </div>
         </mat-list-item>
@@ -68,6 +62,7 @@
         </ul>
       </div>
     </div>
+    <br>
     <h4>About {{organization.name}}</h4>
     <div class="org-desc">{{organization.description}}</div>
   </mat-card>
