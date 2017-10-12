@@ -17,13 +17,15 @@ import { OrganizationListComponent } from './organization-list/organization-list
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { ReportsModule } from './reports/reports.module';
 
 @NgModule({
   imports: [
     AdminRoutingModule,
     SharedModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    ReportsModule
   ],
   exports: [
   ],

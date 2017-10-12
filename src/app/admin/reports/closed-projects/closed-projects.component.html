@@ -1,0 +1,35 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <!-- <th>ID</th> -->
+        <th>Project Name</th>
+        <th>Orgnization Name</th>
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>Address</th>
+        <th style="padding: 0 10px;">Collected</th>
+        <!-- <th>Discription</th> -->
+        <th>Project Manager</th>
+        <th>Project ID</th>
+        <th>Bank Account</th>
+        
+      </tr>
+    </thead>
+    <tbody *ngFor="let project of proList">
+      <!--<td>{{project.id}}</td>-->
+      <td>{{project.title}}</td>
+      <td>{{project.organizationName}}</td>
+      <td>{{project.startDate}}</td>
+      <td>{{project.dueDate}}</td>
+      <td>{{project.address}}</td>
+      <td align="center">{{project.fundsRaised}} <span style='color: #8E8D8D;'>/</span> {{project.fundsGoal}}</td>
+      <!-- <td>{{project.description}}</td> -->
+      <td>{{project.manager}}</td>
+      <td>{{project.prId}}</td>
+      <td></td>
+      
+      <tr></tr>
+    </tbody>
+  </table>
+</div>

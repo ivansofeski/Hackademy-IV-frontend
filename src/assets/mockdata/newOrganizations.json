@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1,
+        "orgId": "ORG12-ISP9000-71812",
+        "name": "Save The Children",
+        "address": "Främsteby Karlsborg 3, 28236, Malmö",
+        "contactName": "Ivan",
+        "contactPhone": "046-8807494",
+        "contactEmail": "support@orten.io",
+        "bankAccount": "@#aaOB23WEpp!",
+        "city": "Lund",
+        "zipCode": "12345",
+        "description": "Hello compassionate hyena one up infectiously scowled octopus one far walrus goodness as gosh when inclusively lenient husky this bluebird underneath this where more jeepers under thoughtful."
+    },
+    {
+        "id": 2,
+        "orgId": "ORG15-ISP9000-56923",
+        "name": "Unicef",
+        "address": "Norrfjäll 58, 26215, Goteborg",
+        "contactName": "Ivan",
+        "contactPhone": "046-8807494",
+        "contactEmail": "support@orten.io",
+        "bankAccount": "qwerty@#45",
+        "city": "Stockholm",
+        "zipCode": "56345",
+        "description": "Far more some goodness alas hello jeepers hello amongst jeepers seagull anathematically well drove more one bound through while much in however overshot strived orca in burned showed however by."
+    },
+    {
+        "id": 3,
+        "orgId": "262559b0-6264-42e2-b0e9-6245394bdb79",
+        "name": "Remotion",
+        "address": "Stockton Street, Broadlands",
+        "contactName": "Ivan",
+        "contactPhone": "046-8807494",
+        "contactEmail": "support@orten.io",
+        "bankAccount": "59d6277005660094ca1d8150",
+        "city": "Forbestown",
+        "zipCode": "76453",
+        "description": "proident exercitation aute enim aliqua cupidatat culpa eu ex et"
+    },
+    {
+        "id": 4,
+        "orgId": "baa4c9d1-1c2e-4b17-8f51-be3c26ab0d6f",
+        "name": "Exodoc",
+        "address": "Albemarle Road, Edneyville",
+        "contactName": "Ivan",
+        "contactPhone": "046-8807494",
+        "contactEmail": "support@orten.io",
+        "bankAccount": "59d6277096e63b3d91f79c5e",
+        "city": "Ada",
+        "zipCode": "32412",
+        "description": "consequat ut ea nisi cupidatat excepteur aute excepteur ex id"
+    }
+]

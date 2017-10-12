@@ -25,8 +25,10 @@ export interface NewProject {
     description: string;
     address: string;
     mainImage: string;
-    closedStatus: boolean | string; // Subject to change: String -> Boolean
+    status: boolean | string; // Subject to change: String -> Boolean
     closedDate: Date | string;
     orgId: number;
+    organizationName: string;
+    
 }
 
