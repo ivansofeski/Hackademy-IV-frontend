@@ -49,7 +49,7 @@ describe('OrganizationPageComponent', () => {
   it('Display the name of the organization',() => {
     component.organizationId = testData.orgList[index].id;
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('div.org-name'));
+    de = fixture.debugElement.query(By.css('h2.org-title'));
     el = de.nativeElement;
     expect(el.textContent).toBe(testData.orgList[index].name); 
   });
