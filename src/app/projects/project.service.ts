@@ -10,7 +10,7 @@ import { Activity } from './activity.interface';
 @Injectable()
 export class ProjectService {
   _projectUrl = '../assets/mockdata/projects.json';
-  _activityUrl = '../assets/mockdata/events.json';
+  _activityUrl = '../assets/mockdata/activities.json';
   constructor(private _http: HttpClient){}
 
   getProjects(): Observable <Project[]> {
@@ -32,12 +32,12 @@ export class ProjectService {
         .catch(this.handlerError);
   }
 
-  getSelectedProject(projectId: number): [Observable <Project>,Observable <Activity>] {
-    return [this._http.get<Project[]>(this._projectUrl)
+  getSelectedProject(projectId: number): Observable <Project> {
+    return this._http.get<Project[]>(this._projectUrl)
         .map(projects =>(projects.find(project=> project.id == projectId)))
         // .do(project => {console.log("the project with" + projectId +" has been requested:")
         // console.log(project)})
-        .catch(this.handlerError), this.getProjectActivities(projectId)];
+        .catch(this.handlerError);
   }
 
   getProjectActivities(projectId: number){

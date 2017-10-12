@@ -4,19 +4,35 @@
        
             <mat-card class="">
 
-             
-              <div >
-                       <!-- image-slider start -->
-                       <div>
-                          <md-radio-group class="example-radio-group" [(ngModel)]="favoriteSeason">
-                              <md-radio-button class="example-radio-button" *ngFor="let season of seasons" value="season">
-            
-                              </md-radio-button>
-                            </md-radio-group>
-                            <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div>
-                          </div>
-                          <!-- image-slider end -->
-              </div>
+                <div class="ctn">
+                    <div class="inner-ctn">
+                      <div class="ui card swipe-box" 
+                        *ngFor="let image of projectImages; let idx=index"
+                        (swipeleft)="swipe(idx, $event.type)" (swiperight)="swipe(idx, $event.type)" 
+                        [class.visible]="image.visible" [class.hidden]="!image.visible">
+                        <div class="image">
+                          <img [src]="image.image">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      <div class="main-image-container">
+                        <img [src]="project.mainImage" [alt]="project.projectName">
+                      </div>
+              
       
               <div class="project-details">
       
