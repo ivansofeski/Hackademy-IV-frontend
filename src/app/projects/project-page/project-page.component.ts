@@ -12,7 +12,7 @@ import { Activity } from '../activity.interface';
 export class ProjectPageComponent implements OnInit {
  
   projectImages=[];
-  _projectId: number = 0;
+  _projectId: number;
   project: any;
   projectActivities:Activity[];
   errors: any[] = [];
