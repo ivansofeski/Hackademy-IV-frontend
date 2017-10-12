@@ -20,16 +20,17 @@ export class SidebarComponent implements OnInit {
   mediaChanged      = this.functions.mediaChanged;        // A function from Functions class.
   toggleSidebar     = this.functions.toggleSidebar;       // A function from Functions class.
   @ViewChild('sidebarMenu') sidebarMenu: ElementRef;
-  currentLink       = this.router.routerState.snapshot.url;
+  currentLink       = '';
   checkLink         = this.functions.checkLink;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.currentLink = router.routerState.snapshot.url;
+  }
 
   ngOnInit() {
     if (matchMedia) {
       this.mq['eventName'] = this.listItemEventName;
       this.mq['fn'] = this.functions.toggle;
-      this.mq['currentUrl'] = this.router.routerState.snapshot.url;
       this.mq['sidebarMenu'] = this.sidebarMenu.nativeElement;
       this.mq.addListener(this.mediaChanged);
       this.mediaChanged(this.mq);
@@ -51,7 +52,6 @@ export class Functions {
     const allItems = Array.from(document.querySelectorAll('li.item'));
     const eventName = media.eventName ? media.eventName : media.currentTarget.eventName;
     const fn = media.fn ? media.fn : media.currentTarget.fn;
-    const currentUrl: Router = media.currentUrl ? media.currentUrl : media.currentTarget.currentUrl;
     const sidebar: HTMLElement = media.sidebarMenu ? media.sidebarMenu : media.currentTarget.sidebarMenu;
 
     if (allItems !== undefined && allItems.length > 0) {
@@ -59,16 +59,6 @@ export class Functions {
         media.matches ?
           item.addEventListener(eventName, fn) :
           item.removeEventListener(eventName, fn);
-
-        if (media.matches) {
-          const query = 'a[href="' + currentUrl + '"]';
-          const linkItem = sidebar.querySelectorAll(query);
-
-          if (linkItem !== undefined) {
-           /*  linkItem.parentElement.classList.add('selected');
-            linkItem.parentElement.parentElement.parentElement.classList.add('expanded'); */
-          }
-        }
       }
     }
   }
