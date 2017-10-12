@@ -32,15 +32,15 @@ export class ProjectService {
         .catch(this.handlerError);
   }
 
-  getSelectedProject(projectId: number): [Observable <Project>,Observable <Activity[]>] {
-    return [this._http.get<Project[]>(this._projectUrl)
+  getSelectedProject(projectId: number): Observable <Project> {
+    return this._http.get<Project[]>(this._projectUrl)
         .map(projects =>(projects.find(project=> project.id == projectId)))
         // .do(project => {console.log("the project with" + projectId +" has been requested:")
         // console.log(project)})
-        .catch(this.handlerError), this.getProjectActivities(projectId)];
+        .catch(this.handlerError);
   }
 
-  getProjectActivities(projectId: number){
+  getProjectActivities(projectId: number): Observable <Activity[]>{
     return this._http.get<Activity[]>(this._activityUrl)
     .map(activities =>(activities.filter((k,v)=> k.projectId == projectId)))
     //.do(project => {console.log("the events with" + projectId +" has been requested:")
