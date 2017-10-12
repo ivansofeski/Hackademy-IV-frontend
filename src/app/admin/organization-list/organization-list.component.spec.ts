@@ -28,8 +28,8 @@ describe('OrganizationListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OrganizationListComponent);
     component = fixture.componentInstance;
-    let dataService = fixture.debugElement.injector.get(DataService);
-    let spy = spyOn(dataService,'getOrganizations').and.returnValue(Observable.of(testData.orgList));
+    const dataService = fixture.debugElement.injector.get(DataService);
+    const spy = spyOn(dataService, 'getOrganizations').and.returnValue(Observable.of(testData.orgList));
     fixture.detectChanges();
   });
 
@@ -38,63 +38,42 @@ describe('OrganizationListComponent', () => {
   });
 
   it('should display all organizations in rows', () => {
-    des = fixture.debugElement.queryAll(By.css('table tbody tr'));
+    des = fixture.debugElement.queryAll(By.css('mat-table mat-row'));
     expect(des.length).toBe(testData.orgList.length);
   });
 
-  it('should display organization names',() => {
-    let index:number = Math.floor(testData.orgList.length * Math.random());  
-    de = fixture.debugElement.query(By.css('tbody'));
+  it('should display organization row number', () => {
+    const index = Math.floor(testData.orgList.length * Math.random());
+    de = fixture.debugElement.query(By.css('mat-table'));
+    el = de.nativeElement;
+    expect(el.textContent).toContain(testData.orgList[index].id.toString());
+  });
+
+  it('should display organization names', () => {
+    const index = Math.floor(testData.orgList.length * Math.random());
+    de = fixture.debugElement.query(By.css('mat-table'));
     el = de.nativeElement;
     expect(el.textContent).toContain(testData.orgList[index].name);
   });
 
-  it('should display organization Ids',() => {
-    let index:number = Math.floor(testData.orgList.length * Math.random());  
-    de = fixture.debugElement.query(By.css('tbody'));
-    el = de.nativeElement;
-    expect(el.textContent).toContain(testData.orgList[index].orgId);
-  });
-  
-  it('should display organization addresses',() => {
-    let index:number = Math.floor(testData.orgList.length * Math.random());  
-    de = fixture.debugElement.query(By.css('tbody'));
+  it('should display organization addresses', () => {
+    const index = Math.floor(testData.orgList.length * Math.random());
+    de = fixture.debugElement.query(By.css('mat-table'));
     el = de.nativeElement;
     expect(el.textContent).toContain(testData.orgList[index].address);
   });
 
-  it('should display organization billing contact persons',() => {
-    let index:number = Math.floor(testData.orgList.length * Math.random());  
-    de = fixture.debugElement.query(By.css('tbody'));
+  it('should display organization contact persons', () => {
+    const index = Math.floor(testData.orgList.length * Math.random());
+    de = fixture.debugElement.query(By.css('mat-table'));
     el = de.nativeElement;
     expect(el.textContent).toContain(testData.orgList[index].contact.person);
   });
 
-  it('should display organization billing contact emails',() => {
-    let index:number = Math.floor(testData.orgList.length * Math.random());  
-    de = fixture.debugElement.query(By.css('tbody'));
-    el = de.nativeElement;
-    expect(el.textContent).toContain(testData.orgList[index].contact.email);
-  });
-
-  it('should display organization billing contact phones',() => {
-    let index:number = Math.floor(testData.orgList.length * Math.random());  
-    de = fixture.debugElement.query(By.css('tbody'));
+  it('should display organization contact phones', () => {
+    const index = Math.floor(testData.orgList.length * Math.random());
+    de = fixture.debugElement.query(By.css('mat-table'));
     el = de.nativeElement;
     expect(el.textContent).toContain(testData.orgList[index].contact.phone);
-  });
-
-  it('should NOT display organization billing addresses',() => {
-    let index:number = Math.floor(testData.orgList.length * Math.random());  
-    de = fixture.debugElement.query(By.css('tbody'));
-    el = de.nativeElement;
-    expect(el.textContent).not.toContain(testData.orgList[index].billing);
-  });
-
-  it('should NOT display organization descriptions',() => {
-    let index:number = Math.floor(testData.orgList.length * Math.random());  
-    de = fixture.debugElement.query(By.css('tbody'));
-    el = de.nativeElement;
-    expect(el.textContent).not.toContain(testData.orgList[index].description);
   });
 });

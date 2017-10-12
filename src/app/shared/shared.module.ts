@@ -13,6 +13,9 @@ import { MatCardModule,
          MatSelectModule,
          MatInputModule,
          MatListModule,
+         MatTableModule,
+         MatSortModule,
+         MatPaginatorModule
         } from '@angular/material';
 import { NavbarComponent } from './navbar.component';
 import { ProgressbarComponent } from './progressbar.component';
@@ -42,6 +45,9 @@ import { BrowserModule } from '@angular/platform-browser';
     MatSelectModule,
     MatInputModule,
     MatListModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -66,6 +72,9 @@ import { BrowserModule } from '@angular/platform-browser';
     MatSelectModule,
     MatInputModule,
     MatListModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     NavbarComponent,
     ProgressbarComponent,
     RouterModule,
