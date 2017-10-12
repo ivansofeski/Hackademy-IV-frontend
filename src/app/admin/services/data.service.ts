@@ -114,5 +114,24 @@ export class DataService {
     return this._get(this.paths.root + this.paths.projects, options);
   }
 
+  getClosedProjects(list: any[], options: Object): any {
+    if (list === undefined) {
+      return;
+    }
+
+    this._get(this.paths.root + this.paths.projects).subscribe(
+      res => {
+        if (res !== undefined && res.length > 0) {
+          list = res.filter((v, k) => {
+            return v.open === 'false';
+          });
+        }
+      },
+      error => console.log(error)
+    );
+
+    return list;
+  }
+
   constructor(private http: HttpClient) { }
 }

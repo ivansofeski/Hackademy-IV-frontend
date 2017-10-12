@@ -27,7 +27,8 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     projectManager: '',
     projectId: '',
     organizationName: '',
-    organizationId: 0
+    organizationId: 0,
+    open: 'true'
   };
   links = {
     list: '/admin/projects/',
@@ -174,7 +175,8 @@ export class ProjectFormComponent implements OnInit, DoCheck {
             projectManager: '',
             projectId: '',
             organizationName: '',
-            organizationId: 0
+            organizationId: 0,
+            open: 'true'
           };
           localStorage.setItem('newProject', JSON.stringify(this.newProject));
         }

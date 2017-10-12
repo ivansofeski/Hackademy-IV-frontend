@@ -12,6 +12,7 @@ export interface Project {
     projectId: string;
     organizationName: string;
     organizationId: number;
+    open: string;
 }
 
 export interface NewProject {
