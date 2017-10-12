@@ -1,6 +1,12 @@
+<br>
 <div *ngIf="project">
+    <mat-card class="example-card">
+        <mat-card-subtitle>
     <h2 class="project-title">{{project.projectName}}</h2>
+    <mat-divider></mat-divider>
+  </mat-card-subtitle>
     <mat-list>
+        <mat-card-content>
       <mat-list-item class="project-name">
         <div mat-line>
           <div class="label">Name: </div>
@@ -37,6 +43,7 @@
           <div class="project-raisedFunding">{{project.raisedFunding}}</div>
         </div>
       </mat-list-item>
+      <br>
       <mat-list-item class="project-mainImage">
         <div mat-line>
           <div class="label">Main Image: </div>
@@ -52,7 +59,10 @@
         </div>
       </mat-list-item>
       <div class="project-desc">{{project.description}}</div>
+    </mat-card-content>
     </mat-list>
+
+</mat-card>
     <h4>Location: </h4>
     <div class="project-location">
       <agm-map [latitude]="project.location.lat" [longitude]="project.location.lng" [zoom]="12" style="height:300px">
