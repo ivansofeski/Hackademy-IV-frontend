@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../project.service';
 import { Project } from '../project.interface';
+import { Activity } from '../activity.interface';
 
 @Component({
   selector: 'app-project-page',
@@ -9,26 +10,30 @@ import { Project } from '../project.interface';
   styleUrls: ['./project-page.component.scss']
 })
 export class ProjectPageComponent implements OnInit {
-
+  projectImages=[
+      {
+          image: "./assets/photos/project001/main/001.jpg",
+          visible: true
+      },
+      {
+          image: "./assets/photos/project001/main/002.jpg",
+          visible: false
+      },
+      {
+          image: "./assets/photos/project001/main/003.jpg",
+          visible: false
+      }
+  ]
   _projectId: number = 0;
-  _project: any;
+  project: any;
+  projectActivities:Activity[];
   errors: any[] = [];
 
    donateOption1= 10;
   donateOption2= 25;
   donateOption3= 50;
 
-/*image-slider start*/
-  favoriteSeason: string;
-  
-    seasons = [
-      'Winter',
-      'Spring',
-      'Summer',
-      'Autumn',
-    ];
-
-/*image-slider end*/
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   constructor(
     public route: ActivatedRoute, 
@@ -36,47 +41,52 @@ export class ProjectPageComponent implements OnInit {
     private projectService: ProjectService) {  
     }
 
-    get projectId():number{
-      return this._projectId;
-    }
-
-    set projectId(value:number){
-      this._projectId = value;
-      if(value > 0){
-        this.projectService.getProjects().subscribe(
-          res => {
-            this._project = res.filter((v, k) => v.id == value)[0];
-          },
-          error => {
-            console.log(error);
-            this.errors.push(error);
-          }
-        );
-      }
-    }
-
-    get project(){
-      return this._project;
-    }
-  
-  
     ngOnInit() {
-      this.projectService.getProjects().subscribe(
+      this._projectId = +this.route.snapshot.paramMap.get('id');
+      console.log(this._projectId)
+      let project_activity = this.projectService.getProjectActivities(this._projectId)
+      let project = this.projectService.getSelectedProject(this._projectId);
+      project.subscribe(
         res => {
-          console.log(res);
-          this._project = res;
+          console.log(res)
+          this.project = res;
+          },
+        error => this.errors.push(error)
+      );
+      project_activity.subscribe(
+        res => {
+           console.log(res)
+          this.projectActivities = res;
         },
         error => this.errors.push(error)
-      ); 
+      );
     
-
-      this.projectId = +this.route.snapshot.paramMap.get('id');
+  
+      
     }
   
+  swipe(currentIndex: number, action: string = this.SWIPE_ACTION.RIGHT) {
+    console.log(currentIndex);
+    if (currentIndex > this.projectImages.length || currentIndex < 0) return;
+
+    let nextIndex = 0;
+    
+    // next
+    if (action === this.SWIPE_ACTION.RIGHT) {
+        const isLast = currentIndex === this.projectImages.length - 1;
+        nextIndex = isLast ? 0 : currentIndex + 1;
+    }
+
+    // previous
+    if (action === this.SWIPE_ACTION.LEFT) {
+        const isFirst = currentIndex === 0;
+        nextIndex = isFirst ? this.projectImages.length - 1 : currentIndex - 1;
+    }
+
+    // toggle avatar visibility
+    this.projectImages.forEach((x, i) => x.visible = (i === nextIndex));
+}
 
 
-  onBack(): void {
-    this.router.navigate(['home']);
-  }
 
 }
