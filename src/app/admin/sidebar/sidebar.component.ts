@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Constants
 import { STRINGS, LINKS } from './sidebar.constants';
@@ -18,13 +19,18 @@ export class SidebarComponent implements OnInit {
   functions         = new Functions();                    // New instance of Functions class
   mediaChanged      = this.functions.mediaChanged;        // A function from Functions class.
   toggleSidebar     = this.functions.toggleSidebar;       // A function from Functions class.
+  @ViewChild('sidebarMenu') sidebarMenu: ElementRef;
+  currentLink       = this.router.routerState.snapshot.url;
+  checkLink         = this.functions.checkLink;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     if (matchMedia) {
       this.mq['eventName'] = this.listItemEventName;
       this.mq['fn'] = this.functions.toggle;
+      this.mq['currentUrl'] = this.router.routerState.snapshot.url;
+      this.mq['sidebarMenu'] = this.sidebarMenu.nativeElement;
       this.mq.addListener(this.mediaChanged);
       this.mediaChanged(this.mq);
     }
@@ -45,12 +51,24 @@ export class Functions {
     const allItems = Array.from(document.querySelectorAll('li.item'));
     const eventName = media.eventName ? media.eventName : media.currentTarget.eventName;
     const fn = media.fn ? media.fn : media.currentTarget.fn;
+    const currentUrl: Router = media.currentUrl ? media.currentUrl : media.currentTarget.currentUrl;
+    const sidebar: HTMLElement = media.sidebarMenu ? media.sidebarMenu : media.currentTarget.sidebarMenu;
 
     if (allItems !== undefined && allItems.length > 0) {
       for (const item of allItems) {
         media.matches ?
           item.addEventListener(eventName, fn) :
           item.removeEventListener(eventName, fn);
+
+        if (media.matches) {
+          const query = 'a[href="' + currentUrl + '"]';
+          const linkItem = sidebar.querySelectorAll(query);
+
+          if (linkItem !== undefined) {
+           /*  linkItem.parentElement.classList.add('selected');
+            linkItem.parentElement.parentElement.parentElement.classList.add('expanded'); */
+          }
+        }
       }
     }
   }
@@ -68,6 +86,7 @@ export class Functions {
 
     if (wrapper !== undefined && wrapper.classList.contains('wrapper')) {
       wrapper.classList.toggle('expanded');
+      toggler.classList.toggle('expanded');
     }
   }
 
@@ -135,5 +154,17 @@ export class Functions {
     // we have to stop propagation/delegation to not trigger both at the same time.
     // To do that we use/implement "stopPropagation", "preventDefault" pre-defined methods of JavaScript events.
     evt.stopPropagation();
+  }
+
+  checkLink(link: string, currentLink: string): boolean {
+    if (link === undefined || currentLink === undefined) {
+      return false;
+    }
+
+    let validate = true;
+
+    validate = link === currentLink ? true : false;
+
+    return validate;
   }
 }

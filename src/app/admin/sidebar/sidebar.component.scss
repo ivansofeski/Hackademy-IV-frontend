@@ -1,6 +1,9 @@
 $desktop: "only screen and (min-width : 1366px)";
 $phone-tablet: "only screen and (max-width : 1366px)";
 $listItemLabelHeight: "40px";
+$menuLabelWidth: 103%;
+$menuColor: '#4cb19e';
+$lighterMenuColor: '#6bc1b1';
 
 @media #{$desktop} {
     .nano-logo > .sidebar-toggle {
@@ -63,9 +66,7 @@ $listItemLabelHeight: "40px";
     }
 }
 
-@media #{$phone-tablet}{
-    $menuColor: 'dodgerblue';
-    
+@media #{$phone-tablet} {
     .sidebar-container {
         overflow: hidden;
     }
@@ -81,7 +82,7 @@ $listItemLabelHeight: "40px";
         border-radius: 0 3px 3px 0;
         color: white;
         font-size: 24px;
-        opacity: .75;
+        opacity: .6;
         overflow: hidden;
         z-index: 100;
     }
@@ -160,21 +161,36 @@ $listItemLabelHeight: "40px";
         opacity: 1;
     }
 
+    .item.hasItems {
+        opacity: .5;
+    }
+
     .item-list.sub {
         height: 0;
         overflow: hidden;
     }
 
     .item.hasItems.expanded {
+        opacity: 1;
         -webkit-box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
         -moz-box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
         box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
     }
 
-    .item.hasItems.expanded > .item-list.sub {
+    .item.hasItems.expanded > .item-label {
+        background-color: #8adccc;
+        color: #32695e;
+    }
+
+    .item.hasItems.expanded > .item-list.sub {width: 98%;
         height: auto;
-        margin-bottom: 15px;
-        color: white;
+        margin: 0 auto 15px auto;
+        border-top: 2px solid transparent;
+        border-radius: 0 0 2px 2px;
+
+        -webkit-box-shadow: inset 0px 0px 8px 2px rgba(0,0,0,0.35);
+        -moz-box-shadow: inset 0px 0px 8px 2px rgba(0,0,0,0.35);
+        box-shadow: inset 0px 0px 6px 1px rgba(0,0,0,0.35);
     }
 
     .item.hasItems.expanded .item.selected {
@@ -240,14 +256,52 @@ $listItemLabelHeight: "40px";
 }
 
 .sidebar-label {
-    width: 100%;
+    width: #{$menuLabelWidth};
     padding: 20px 10px;
-    background-color: dodgerblue;
+    background-color: #4cb19e;
     color: white;
     cursor: default;
     overflow: hidden;
     text-transform: uppercase;
     user-select: none;
+}
+
+.sidebar-underline {
+    position: relative;
+    display: block;
+    width: #{$menuLabelWidth};
+    height: 5px;
+    background-color: #{$lighterMenuColor};
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-sizing: border-bix;
+}
+
+.sidebar-underline::before,
+.sidebar-underline::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    top: 0;
+    line-height: 0;
+    border-style: solid;
+    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+}
+
+.sidebar-underline::before {
+    left: 0;
+    border-width: 5px 0 0 10px;
+    border-color: transparent transparent transparent #f5f5f5;
+    _border-color: #000000 #000000 #000000 #f5f5f5;
+}
+
+.sidebar-underline::after {
+    right: 0;
+    border-width: 0 0 5px 10px;
+    border-color: transparent transparent #f5f5f5 transparent;
+    _border-color: #000000 #000000 #f5f5f5 #000000;
 }
 
 .sidebar-menu {
