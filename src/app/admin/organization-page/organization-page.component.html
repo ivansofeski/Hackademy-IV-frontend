@@ -1,28 +1,71 @@
+<br>
 <div *ngIf="organization">
-    <h2 class="org-title">{{organization.name}}</h2>
+  <mat-card class="example-card">
+    <mat-card-subtitle>
+      <h2 class="org-title">{{organization.name}}</h2>
+      <mat-divider></mat-divider>
+    </mat-card-subtitle>
     <mat-list>
-      <mat-list-item class="org-name"><div mat-line><div class="label">Name: </div><div class="org-name">{{organization.name}}</div></div></mat-list-item>
-      <mat-list-item class="org-id"><div mat-line><div class="label">ID: </div><div class="org-id">{{organization.orgId}}</div></div></mat-list-item>
-      <mat-list-item class="org-address"><div mat-line><div class="label">Address: </div><div class="org-address">{{organization.address}}</div></div></mat-list-item>
-      <mat-list-item class="org-billing"><div mat-line><div class="label">Billing: </div><div class="org-billing">{{organization.billing}}</div></div></mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class="org-person"><div mat-line><div class="label">Contact Name: </div><div class="org-person">{{organization.contact.person}}</div></div></mat-list-item>
-      <mat-list-item class="org-email"><div mat-line><div class="label">Contact Email: </div><div class="org-email">{{organization.contact.email}}</div></div></mat-list-item>
-      <mat-list-item class="org-phone"><div mat-line><div class="label">Contact Phone: </div><div class="org-phone">{{organization.contact.phone}}</div></div></mat-list-item>
-      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-list-item class="org-id">
+          <div mat-line>
+            <div class="label">Organization ID: </div>
+            <div class="org-id">{{organization.orgId}}</div>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="org-address">
+          <div mat-line>
+            <div class="label">Address: </div>
+            <div class="org-address">{{organization.address}}</div>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="org-billing">
+          <div mat-line>
+            <div class="label">Billing: </div>
+            <div class="org-billing">{{organization.billing}}</div>
+          </div>
+        </mat-list-item>
+
+        <mat-list-item class="org-person">
+          <div mat-line>
+            <div class="label">Contact Name: </div>
+            <div class="org-person">{{organization.contact.person}}</div>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="org-email">
+          <div mat-line>
+            <div class="label">Contact Email: </div>
+            <div class="org-email">{{organization.contact.email}}</div>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="org-phone">
+          <div mat-line>
+            <div class="label">Contact Phone: </div>
+            <div class="org-phone">{{organization.contact.phone}}</div>
+          </div>
+        </mat-list-item>
+      </mat-card-content>
     </mat-list>
-    
+
+
     <div class="project-list">
+
+
       <div mat-line>
         <h4>Projects of {{organization.name}}</h4>
+
         <ul class="project-list">
-            <li *ngFor="let project of organization.projects">
-              <a [routerLink]="['/admin/projects/view/', project.id]">{{project.projectName}}</a>
-            </li>
-          </ul>
+          <li *ngFor="let project of organization.projects">
+
+            <a [routerLink]="['/admin/projects/view/', project.id]">{{project.projectName}}</a>
+          </li>
+        </ul>
       </div>
     </div>
+    <br>
     <h4>About {{organization.name}}</h4>
     <div class="org-desc">{{organization.description}}</div>
-  </div>
-  <div *ngIf="!organization">Waiting for Data</div>
+  </mat-card>
+</div>
+
+<div *ngIf="!organization">Waiting for Data</div>
