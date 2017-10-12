@@ -1,3 +1,4 @@
+import { MatTableModule, MatSortModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -21,6 +22,8 @@ import { ProjectListComponent } from './project-list/project-list.component';
   imports: [
     AdminRoutingModule,
     SharedModule,
+    MatTableModule,
+    MatSortModule
   ],
   exports: [
   ],

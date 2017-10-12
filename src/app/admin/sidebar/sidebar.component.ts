@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   links             = LINKS;                              // Constant from another file.
   lng               = 'US';                               // Defines which language strings to load.
   mq                = matchMedia('(max-width: 1366px)');  // Defines a window.matchMedia object.
-  listItemEventName = 'touchend';                         // Defines which JavaScript event to handle.
+  listItemEventName = 'mouseup';                          // Defines which JavaScript event to handle.
   functions         = new Functions();                    // New instance of Functions class
   mediaChanged      = this.functions.mediaChanged;        // A function from Functions class.
   toggleSidebar     = this.functions.toggleSidebar;       // A function from Functions class.
