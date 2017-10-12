@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ProjectsModule } from './projects/projects.module';
 import {DonorModule} from './donor/donor.module';
+import {LocalStorageService} from './service/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {DonorModule} from './donor/donor.module';
     DonorModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
