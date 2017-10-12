@@ -27,7 +27,7 @@ import { Organization } from '../interface/organization';
 /** */
 export class OrganizationListComponent implements OnInit, OnDestroy {
   dataSource: OrganizationDataSource | null;
-  displayedColumns = ['id', 'orgId', 'name', 'address', 'person', 'email', 'phone'];
+  displayedColumns = ['id', 'name', 'address', 'person', 'phone'];
 
   @ViewChild(MatSort) sort: MatSort;
 
