@@ -13,3 +13,20 @@ export interface Project {
     organizationName: string;
     organizationId: number;
 }
+
+export interface NewProject {
+    prId: string;
+    title: string;
+    manager: string;
+    startDate: string;
+    dueDate: string;
+    fundsGoal: number;
+    fundsRaised: number;
+    description: string;
+    address: string;
+    mainImage: string;
+    closedStatus: boolean | string; // Subject to change: String -> Boolean
+    closedDate: Date | string;
+    orgId: number;
+}
+
