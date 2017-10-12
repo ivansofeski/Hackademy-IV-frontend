@@ -1,9 +1,8 @@
 <div class="container">
         <div class="project-list">
-          <div class="project-container" *ngIf="project">
+          <div class="project-container">
        
             <mat-card class="">
-
                 <div class="ctn">
                     <div class="inner-ctn">
                       <div class="ui card swipe-box" 
@@ -14,28 +13,26 @@
                           <img [src]="image.image">
                         </div>
                       </div>
+                      
                     </div>
-                  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                      <div class="main-image-container">
-                        <img [src]="project.mainImage" [alt]="project.projectName">
+                    <div class="button-row">
+                        <button mat-fab color="white"> 
+                          <mat-icon class="mat-24" aria-label="icon-button with a heart icon">favorite</mat-icon>
+                        </button>
                       </div>
+                    <div class="pgc-wrapper">
+                      <div  class="paginator-container">
+                      <div *ngFor="let index of projectImages; let idx=index" class="circle-page" [class.selected]='idx===0'></div>
+                    </div>
+                    </div>
+                  </div>      
               
-      
-              <div class="project-details">
-      
+
+
+                <div class="project-details">
+                  
+                   
+
                 <mat-card-header class="card-header">
                   <mat-card-title class="project-title">{{project.projectName}}</mat-card-title>
                   <mat-card-subtitle class="project-detail">
@@ -70,6 +67,4 @@
               </div>
             </mat-card>
           </div>
-        </div>
-      </div>
       

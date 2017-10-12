@@ -11,7 +11,7 @@ import { Activity } from '../activity.interface';
 })
 export class ProjectPageComponent implements OnInit {
   projectImages=[
-      {
+      {   
           image: "./assets/photos/project001/main/001.jpg",
           visible: true
       },
@@ -42,6 +42,7 @@ export class ProjectPageComponent implements OnInit {
     }
 
     ngOnInit() {
+      
       this._projectId = +this.route.snapshot.paramMap.get('id');
       console.log(this._projectId)
       let project_activity = this.projectService.getProjectActivities(this._projectId)
@@ -60,7 +61,7 @@ export class ProjectPageComponent implements OnInit {
         },
         error => this.errors.push(error)
       );
-    
+      //this.paginatorInit();
   
       
     }
@@ -72,21 +73,40 @@ export class ProjectPageComponent implements OnInit {
     let nextIndex = 0;
     
     // next
-    if (action === this.SWIPE_ACTION.RIGHT) {
+    if (action === this.SWIPE_ACTION.LEFT) {
+      console.log("this right");
         const isLast = currentIndex === this.projectImages.length - 1;
         nextIndex = isLast ? 0 : currentIndex + 1;
     }
 
     // previous
-    if (action === this.SWIPE_ACTION.LEFT) {
+    if (action === this.SWIPE_ACTION.RIGHT) {
+        console.log("this left");
+      
         const isFirst = currentIndex === 0;
         nextIndex = isFirst ? this.projectImages.length - 1 : currentIndex - 1;
     }
 
     // toggle avatar visibility
     this.projectImages.forEach((x, i) => x.visible = (i === nextIndex));
+    console.log(currentIndex);
+    this.paginatorChange(currentIndex, nextIndex);
+    
 }
 
+paginatorChange(previousIndex:number, nextIndex:number){
+
+  let activePage= <HTMLElement>document.querySelectorAll(".circle-page")[previousIndex];
+  activePage.style.backgroundColor="white";
+  let toBeActivePage= <HTMLElement>document.querySelectorAll(".circle-page")[nextIndex];
+  toBeActivePage.style.backgroundColor="gray";
+
+}
+paginatorInit(){
+    let toBeActivePage= <HTMLElement>document.querySelectorAll(".circle-page")[0];
+    toBeActivePage.style.backgroundColor="gray";
+  
+  }
 
 
 }

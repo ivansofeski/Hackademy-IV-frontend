@@ -21,13 +21,22 @@ $tablet-desktop: "only screen and (min-width : 420px)";
   mat-card {
     padding: 0 !important;
 
-    .main-image-container {
+    .ctn.inner-ctn.ui :card :swipe-box {
       overflow: hidden;
       height: auto;
       display: flex;
       justify-content: center;
       align-items: center;
       background: #CACBCD;
+    }
+    .button-row {
+      position: absolute;
+      right: 2em;
+      margin-top: -30px;
+
+      mat-icon {
+        color: red;
+      }
     }
     .project-details {
       margin: 0;
@@ -46,15 +55,7 @@ $tablet-desktop: "only screen and (min-width : 420px)";
           font-style: italic;
         }
       }
-      .button-row {
-        position: absolute;
-        right: 2em;
-        margin-top: -42.5px;
-
-        mat-icon {
-          color: red;
-        }
-      }
+      
       .project-description {
         padding: 0 15px 15px 15px;
         color: $secondary-font-color;
@@ -102,11 +103,15 @@ $tablet-desktop: "only screen and (min-width : 420px)";
       -webkit-box-shadow: none !important;
       -moz-box-shadow: none !important;
       box-shadow: none !important;
-
+      .ctn{
+        height: 300px;
+      
       img {
-        height: auto;
+        object-fit: cover;
+        height: 100%;
         width: 100%;
       }
+    }
     }
   }
 }
@@ -126,9 +131,9 @@ $tablet-desktop: "only screen and (min-width : 420px)";
       width:900px;
       margin: 2em;
 
-      .main-image-container {
-        height: 300px;
-
+      .ctn {
+        max-width: 400px;
+        margin: 0 auto;
         img {
           object-fit: cover;
           height: 100%;
@@ -137,4 +142,46 @@ $tablet-desktop: "only screen and (min-width : 420px)";
       }
     }
   }
+}
+
+
+.swipe-box{
+  width: 100%;
+  height: 100%;
+}
+.inner-ctn {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+.image{
+  width: 100%;
+  height: 100%;
+}
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+.circle-page{
+  background: white;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  border:#9B9B9B 1px solid;
+  display:inline-block;
+  margin:2px;
+}
+.paginator-container{
+  display: inline;
+  margin: auto;
+}
+.pgc-wrapper{
+  display: flex;
+}
+.circle-page.selected{
+  background: #9B9B9B;
 }
