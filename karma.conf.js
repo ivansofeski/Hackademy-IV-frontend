@@ -28,6 +28,9 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false
+    singleRun: false,
+    files: [
+      { pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css', watched: false }
+    ]
   });
 };
