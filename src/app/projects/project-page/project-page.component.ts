@@ -9,19 +9,12 @@ import { Activity } from '../activity.interface';
   templateUrl: './project-page.component.html',
   styleUrls: ['./project-page.component.scss']
 })
-<<<<<<< HEAD
 export class ProjectPageComponent implements OnInit {
  
   projectImages=[];
   _projectId: number = 0;
   project: any;
   projectActivities:Activity[];
-=======
-export class ProjectPageComponent implements OnInit  {
-  _projectId: number;
-  project: any;  
-  projectActivities: Activity[];
->>>>>>> Added the events of the project
   errors: any[] = [];
 
    donateOption1= 10;
