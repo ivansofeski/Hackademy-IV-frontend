@@ -68,25 +68,69 @@
             </mat-card>
           </div>
         </div>
-      </div>
-      <div class="activity-list">
-          <div class="activity-container" *ngIf="projectActivities">
-              <mat-card class="">
-                  <mat-card-title class="activity-title">Activities:</mat-card-title>
-                  <mat-card-content>
-                      <mat-expansion-panel *ngFor="let activity of projectActivities">
-                          <mat-expansion-panel-header>
-                            <mat-panel-description>
-                              {{activity.activityDate}}
-                            </mat-panel-description>
-                            <mat-panel-title>
-                                {{activity.activityTitle}}
-                            </mat-panel-title>
-                          </mat-expansion-panel-header>
-                          <div>{{activity.activityDescription}}</div>
-                        </mat-expansion-panel>
-                  </mat-card-content>
-              </mat-card>
+
+        <div class="project-details">
+          <div class="button-row">
+            <button mat-fab color="white">
+              <!--(click)="onClick(project.id)"-->
+              <mat-icon class="mat-24" aria-label="icon-button with a heart icon">favorite</mat-icon>
+            </button>
           </div>
-      </div>
-      
+
+          <mat-card-header class="card-header">
+            <mat-card-title class="project-title">{{project.projectName}}</mat-card-title>
+            <mat-card-subtitle class="project-detail">
+              <span class="organization-name">{{project.organizationName}}</span>
+              <br>
+              <span class="project-address">{{project.address}}</span>
+            </mat-card-subtitle>
+          </mat-card-header>
+
+
+          <mat-card-content>
+            <div class="project-description">
+              <p class="">
+                {{project.description}}
+              </p>
+
+            </div>
+            <div class="donate-container">
+              <app-progressbar class="progress-bar" [id]='project.id' [raisedFunding]='project.raisedFunding' [neededFunding]='project.neededFunding'>
+              </app-progressbar>
+              <app-donate-button [project]='project' [donateOption1]="donateOption1" [donateOption2]="donateOption2" [donateOption3]="donateOption3">
+              </app-donate-button>
+            </div>
+          </mat-card-content>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="activity-list" *ngIf="projectActivities && projectActivities.length">
+    <div class="activity-container">
+      <mat-card class="activity-card">
+        <mat-card-title class="event-title">Events:</mat-card-title>
+        <mat-card-content>
+          <mat-accordion multi="false">
+
+
+            <mat-expansion-panel *ngFor="let activity of projectActivities">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="activity-title">
+                  {{activity.activityTitle}}
+                </mat-panel-title>
+                <mat-panel-description class="activity-date">
+                  {{activity.activityDate}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div>
+                <img class="activity-image" [src]="activity.activityImage" [alt]="activity.activityTitle">
+              </div>
+              <div class="activity-description">{{activity.activityDescription}}</div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

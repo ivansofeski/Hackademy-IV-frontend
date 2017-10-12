@@ -16,11 +16,12 @@ $tablet-desktop: "only screen and (min-width : 420px)";
 .project-list {
   background: $background-color;
   height: auto;
-  min-height: 100vh;
+  // min-height: 100vh;
+}
 .activity-list {
   background: $background-color;
   height: auto;
-  min-height: 100vh;
+  // min-height: 100vh;
 }
 
   mat-card {
@@ -96,17 +97,36 @@ $tablet-desktop: "only screen and (min-width : 420px)";
         width:60%;
       }
     }
-  }
+    .activity-image {
+      width: 300px;
+      height: 250px;
+    }
+    .event-title {
+      margin: 2px;
+      padding-top: 15px;
+      padding-left: 22px;
+    }
+    // .activity-title {
+    //   padding-top: 10px;
+    //   padding-left: 15px;    
+    // }
+    
+    .activity-date {
+      text-align: right;
+      align-items: right;
+    }
+     
 }
 
 @media #{$phone}{
   .project-list {
     margin: 0;
     padding-top: 10vh;
+  }
 
   .activity-list {
     margin: 0;
-    padding-top: 10vh;
+    padding-top: 0;
   }
 
     mat-card {
@@ -136,19 +156,24 @@ $tablet-desktop: "only screen and (min-width : 420px)";
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+  }
   .activity-list {
     margin: auto;
     width: 90%;
-    padding-top: 15vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+    mat-card{
+      margin: 1em;
+      padding: 1em;
+      
+    }
   }
 
     mat-card {
-      width:900px;
+      width:720px;
       margin: 2em;
 
       .ctn {
@@ -160,8 +185,11 @@ $tablet-desktop: "only screen and (min-width : 420px)";
           width: 100%;
         }
       }
+      .activity-image {
+        width: 300px;
+      }
     }
-  }
+  
 }
 
 

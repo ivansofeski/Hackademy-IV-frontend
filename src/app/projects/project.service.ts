@@ -40,7 +40,7 @@ export class ProjectService {
         .catch(this.handlerError);
   }
 
-  getProjectActivities(projectId: number){
+  getProjectActivities(projectId: number): Observable <Activity[]>{
     return this._http.get<Activity[]>(this._activityUrl)
     .map(activities =>(activities.filter((k,v)=> k.projectId == projectId)))
     //.do(project => {console.log("the events with" + projectId +" has been requested:")

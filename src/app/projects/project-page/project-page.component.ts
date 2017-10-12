@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../project.service';
 import { Project } from '../project.interface';
@@ -9,12 +9,19 @@ import { Activity } from '../activity.interface';
   templateUrl: './project-page.component.html',
   styleUrls: ['./project-page.component.scss']
 })
+<<<<<<< HEAD
 export class ProjectPageComponent implements OnInit {
  
   projectImages=[];
   _projectId: number = 0;
   project: any;
   projectActivities:Activity[];
+=======
+export class ProjectPageComponent implements OnInit  {
+  _projectId: number;
+  project: any;  
+  projectActivities: Activity[];
+>>>>>>> Added the events of the project
   errors: any[] = [];
 
    donateOption1= 10;
@@ -26,8 +33,7 @@ export class ProjectPageComponent implements OnInit {
   constructor(
     public route: ActivatedRoute, 
     public router: Router,
-    private projectService: ProjectService) {  
-    }
+    private projectService: ProjectService) { }
 
     ngOnInit() {
       
