@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { DataSource } from '@angular/cdk/table';
@@ -31,7 +32,7 @@ export class OrganizationListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   // Constructor here
-  constructor(private _dataService: DataService) {
+  constructor(private _dataService: DataService, private _router: Router ) {
   }
 
   ngOnInit() {
@@ -40,6 +41,11 @@ export class OrganizationListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void { }
+
+  handleRowClick(row) {
+    // alert('your click on the row with the organization  name ' + row.name);
+    this._router.navigateByUrl('/admin/organizations/view/' + row.id);
+  }
 
 
 }
