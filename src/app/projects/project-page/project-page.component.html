@@ -26,56 +26,15 @@
                     </div>
                     </div>
                   </div>      
-              
 
-
-                <div class="project-details">
-                  
-                   
-
-                <mat-card-header class="card-header">
-                  <mat-card-title class="project-title">{{projectInfo.projectName}}</mat-card-title>
-                  <mat-card-subtitle class="project-detail">
-                    <span class="organization-name">{{projectInfo.organizationName}}</span>
-                    <br>
-                    <span class="project-address">{{projectInfo.address}}</span>
-                  </mat-card-subtitle>
-                </mat-card-header>
-      
-      
-                <mat-card-content>
-                  <div class="project-description">
-                    <p>
-                      {{projectInfo.description}}
-                    </p>
-                   
-                  </div>
-                  <div class="donate-container">
-                    <app-progressbar class="progress-bar"
-                                     [id]='projectInfo.id'
-                                     [raisedFunding]='projectInfo.raisedFunding'
-                                     [neededFunding]='projectInfo.neededFunding'>
-                    </app-progressbar>
-                    <app-donate-button
-                      [project]='projectInfo'
-                      [donateOption1]="donateOption1"
-                      [donateOption2]="donateOption2"
-                      [donateOption3]="donateOption3">
-                    </app-donate-button>
-                  </div>
-                </mat-card-content>
-              </div>
-            </mat-card>
-          </div>
-        </div>
 
         <div class="project-details">
-          <div class="button-row">
+          <!-- <div class="button-row">
             <button mat-fab color="white">
-              <!--(click)="onClick(project.id)"-->
+
               <mat-icon class="mat-24" aria-label="icon-button with a heart icon">favorite</mat-icon>
             </button>
-          </div>
+          </div> -->
 
           <mat-card-header class="card-header">
             <mat-card-title class="project-title">{{project.projectName}}</mat-card-title>
