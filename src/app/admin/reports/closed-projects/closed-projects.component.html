@@ -1,35 +1,54 @@
-<div>
-  <table>
-    <thead>
-      <tr>
-        <!-- <th>ID</th> -->
-        <th>Project Name</th>
-        <th>Orgnization Name</th>
-        <th>From Date</th>
-        <th>To Date</th>
-        <th>Address</th>
-        <th style="padding: 0 10px;">Collected</th>
-        <!-- <th>Discription</th> -->
-        <th>Project Manager</th>
-        <th>Project ID</th>
-        <th>Bank Account</th>
-        
-      </tr>
-    </thead>
-    <tbody *ngFor="let project of proList">
-      <!--<td>{{project.id}}</td>-->
-      <td>{{project.title}}</td>
-      <td>{{project.organizationName}}</td>
-      <td>{{project.startDate}}</td>
-      <td>{{project.dueDate}}</td>
-      <td>{{project.address}}</td>
-      <td align="center">{{project.fundsRaised}} <span style='color: #8E8D8D;'>/</span> {{project.fundsGoal}}</td>
-      <!-- <td>{{project.description}}</td> -->
-      <td>{{project.manager}}</td>
-      <td>{{project.prId}}</td>
-      <td></td>
-      
-      <tr></tr>
-    </tbody>
-  </table>
-</div>
+<div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class='card-title'>Closed Projects</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- Material Mat-table to display the list of organization-->
+        <div class="organization-container mat-elevation-z8">
+          <mat-table #table [dataSource]="dataSource" class="organization-table" matSort>
+  
+            <!-- PROJECT NAME -->
+            <ng-container matColumnDef="projectName">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Project Name </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="customWidth"> {{row.title}} </mat-cell>
+            </ng-container>
+  
+            <!-- ORGANIZATION NAME -->
+            <ng-container matColumnDef="orgName">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Organization Name </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.organization?.name}} </mat-cell>
+            </ng-container>
+  
+            <!-- ORG. BANK ACCOUNT -->
+            <ng-container matColumnDef="bankAccount">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Bank Account </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.organization?.bankAccount}} </mat-cell>
+            </ng-container>
+  
+            <!-- COLLECTED AMOUNT -->
+            <ng-container matColumnDef="fundsRaised">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Collected Amount </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.fundsRaised}} / {{row.fundsGoal}} </mat-cell>
+            </ng-container>
+
+            <!-- DUE DATE -->
+            <ng-container matColumnDef="dueDate">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Due Date </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.dueDate}} </mat-cell>
+            </ng-container>
+  
+            <!-- CLOSED DATE -->
+            <ng-container matColumnDef="closedDate">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Closed Date </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.closedDate}} </mat-cell>
+            </ng-container>
+  
+            <mat-header-row *matHeaderRowDef="displayedColumns" class="organization-header-row"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="organization-row"></mat-row>
+          </mat-table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
