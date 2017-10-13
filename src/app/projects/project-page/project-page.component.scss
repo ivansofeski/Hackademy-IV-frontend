@@ -232,3 +232,10 @@ $tablet-desktop: "only screen and (min-width : 420px)";
 .circle-page.selected{
   background: #9B9B9B;
 }
+
+mat-panel-description{
+  display:block;
+}
+mat-expansion-panel-header{
+  background: #E4F7F2;
+}
