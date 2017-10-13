@@ -1,6 +1,7 @@
 $desktop: 'only screen and (min-width : 1366px)';
 $phone-tablet: 'only screen and (max-width : 1366px)';
 $sidebarClosedVal: '0';
+$trans: '.35s all ease-in-out';
 
 @media #{$desktop} {
     $sidebarExpandedVal: '260px';
@@ -36,14 +37,21 @@ $sidebarClosedVal: '0';
     .wrapper::before {
         content: "";
         position: fixed;
-        display: none;
+        display: block;
         top: 0;
-        left: #{$sidebarExpandedVal};
-        width: calc(100% - #{$sidebarExpandedVal});
+        left: 0;
+        width: 0;
+        opacity: 0;
         height: 100%;
-        background-color: rgba(0,0,0,.5);
+        background-color: rgba(0, 0, 0, 0.5);
         overflow: hidden;
-        z-index: 1;
+        z-index: -1;
+
+        -webkit-transition: #{$trans};
+        -moz-transition: #{$trans};
+        -ms-transition: #{$trans};
+        -o-transition: #{$trans};
+        transition: #{$trans};
     }
 
     .wrapper::after {
@@ -60,32 +68,15 @@ $sidebarClosedVal: '0';
     }
 
     .wrapper.expanded::before {
-        display: block;
+        width: 100%;
+        opacity: 1;
+        z-index: 2;
     }
 
     .wrapper.expanded > .main-panel {
         margin-left: #{$sidebarExpandedVal};
         pointer-events: none;
     }
-
-    /* app-sidebar.expanded {
-        width: #{$sidebarExpandedVal};
-    }
-
-    .main-panel.expanded {
-        margin-left: #{$sidebarExpandedVal};
-        pointer-events: none;
-    }
-
-    .main-panel.expanded::before {
-        content: "";
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,.5);
-        overflow: hidden;
-    } */
 }
 
 app-sidebar {
@@ -112,9 +103,9 @@ app-sidebar {
 }
 
 .trans-15s {
-    -webkit-transition: .15s all ease-in-out;
-    -moz-transition: .15s all ease-in-out;
-    -ms-transition: .15s all ease-in-out;
-    -o-transition: .15s all ease-in-out;
-    transition: .15s all ease-in-out;
+    -webkit-transition: #{$trans};
+    -moz-transition: #{$trans};
+    -ms-transition: #{$trans};
+    -o-transition: #{$trans};
+    transition: #{$trans};
 }

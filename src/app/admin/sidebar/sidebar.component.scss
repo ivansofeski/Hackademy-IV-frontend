@@ -4,6 +4,13 @@ $listItemLabelHeight: "40px";
 $menuLabelWidth: 103%;
 $menuColor: '#4cb19e';
 $lighterMenuColor: '#6bc1b1';
+$menuPaddingWidth: '10px';
+$menuPaddingHeight: '20px';
+$underlineHeight: '5px';
+$underlineMarginHeight: '10px';
+$defaultFontSize: '16px';
+$previousChilds: calc(100% - #{$menuPaddingHeight}*2 - #{$defaultFontSize} - #{$underlineHeight} - #{$underlineMarginHeight});
+
 
 @media #{$desktop} {
     .nano-logo > .sidebar-toggle {
@@ -246,7 +253,7 @@ $lighterMenuColor: '#6bc1b1';
     position: relative;
     display: block;
     width: 100%;
-    height: calc(100vh - 75px);
+    height: calc(100% - 95px);
     z-index: 4;
 }
 
@@ -257,7 +264,7 @@ $lighterMenuColor: '#6bc1b1';
 
 .sidebar-label {
     width: #{$menuLabelWidth};
-    padding: 20px 10px;
+    padding: #{$menuPaddingHeight} #{$menuPaddingWidth};
     background-color: #4cb19e;
     color: white;
     cursor: default;
@@ -270,9 +277,9 @@ $lighterMenuColor: '#6bc1b1';
     position: relative;
     display: block;
     width: #{$menuLabelWidth};
-    height: 5px;
+    height: #{$underlineHeight};
     background-color: #{$lighterMenuColor};
-    margin-bottom: 10px;
+    margin-bottom: #{$underlineMarginHeight};
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -308,6 +315,7 @@ $lighterMenuColor: '#6bc1b1';
     position: relative;
     display: block;
     width: 100%;
+    height: #{$previousChilds};
 }
 
 .sidebar-menu a {
