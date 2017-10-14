@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../project.service';
+import {LocalStorageService} from '../../service/local-storage.service';
+import {Project} from '../project.interface';
 
 
 @Component({
@@ -10,16 +12,18 @@ import { ProjectService } from '../project.service';
 export class ProjectListComponent implements OnInit {
   errors: any[] = [];
   projectList: any[] = [];
-  donatedAmount = {};
-  color = 'primary';
-  mode = 'determinate';
+  project: Project;
+  currentUser: any;
 
   donateOption1 = 10;
   donateOption2 = 25;
   donateOption3 = 50;
-  constructor(private _projectService: ProjectService) { }
+  constructor(private _projectService: ProjectService,
+              private _localStorageService: LocalStorageService) { }
 
   ngOnInit() {
+
+    this.currentUser = this._localStorageService.getCurrentUser();
 
     this._projectService.getProjects().subscribe(
       res => {
@@ -31,6 +35,17 @@ export class ProjectListComponent implements OnInit {
           error => this.errors.push(error)
         );
       }
-    )
+    );
+  }
+
+  clickLike(id: number): void {
+    this._projectService.getSelectedProject(id).subscribe(
+      res => {
+         this.project = res;
+         this.currentUser.savedProject = [];
+         this.currentUser.savedProject.push(this.project.id);
+      }
+    );
+
   }
 }
