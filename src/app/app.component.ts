@@ -8,14 +8,13 @@ import {LocalStorageService} from './service/local-storage.service';
 })
 
 export class AppComponent implements OnInit {
-  title = 'app';
 
   constructor (private _localStorageService: LocalStorageService) {
   }
 
   ngOnInit(): void {
 
-    this._localStorageService.create_localStorage_user();
+    this._localStorageService.createLocalStorageUser();
     this._localStorageService.getCurrentUser();
   }
 }
