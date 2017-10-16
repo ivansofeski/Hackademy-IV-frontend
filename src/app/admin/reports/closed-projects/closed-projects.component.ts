@@ -41,7 +41,6 @@ export class ClosedProjectsComponent implements OnInit {
   }
 
   filterProjects(){
-    console.log("Dates changed");
     this.dataSource.fromDate = this.controls.fromDate.value;
     this.dataSource.toDate = this.controls.toDate.value;
     this.dataSource.connect();
@@ -115,12 +114,10 @@ export class ProjectDataSource extends DataSource<any> {
 
   getSortedData(): NewProject[] {
     let data = this.subject.value.slice();
-    console.log("Acquiring projects, slice size is: " + data.length);    
     data = data.filter((v,k) => {
       let date = new Date(<string>v.closedDate);
       return date >= this.fromDate && date <= this.toDate
     });
-    console.log("filtering projects, slice size is: " + data.length);    
     
     if (!this._sorter.active || this._sorter.direction === '') {
       return data;
