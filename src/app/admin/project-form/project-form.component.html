@@ -9,7 +9,7 @@
   </div>
 
   <!-- FIELD: PROJECT NAME -->
-  <mat-form-field class='project-full-width'>
+  <mat-form-field class='project-full-width project-name'>
     <input matInput #name name='NAME' placeholder='{{attributes.NAME.placeholder}}' [formControl]='projectControls.name'>
     <mat-error *ngIf='projectControls.name.hasError("required")'>Name is<strong>required</strong></mat-error>
   </mat-form-field>
