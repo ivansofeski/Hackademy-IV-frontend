@@ -2,7 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DataSource } from '@angular/cdk/table';
 import { MatSort } from '@angular/material';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewProject } from '../../interface/project';
@@ -10,6 +10,10 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import { FormControl, Validators } from '@angular/forms';
+
+
+const monthAsMicroSeconds = 30*24*60*60*1000;
 
 @Component({
   selector: 'app-closed-projects',
@@ -20,6 +24,11 @@ import 'rxjs/add/operator/map';
 export class ClosedProjectsComponent implements OnInit {
   color = 'primary';
   mode = 'determinate';
+
+  controls = {
+    toDate:     new FormControl(new Date(), [Validators.required]),
+    fromDate:   new FormControl(new Date(new Date().valueOf() - monthAsMicroSeconds), [Validators.required]),
+  };
   
   errors: any[] = [];
   dataSource: ProjectDataSource | null;
@@ -29,6 +38,13 @@ export class ClosedProjectsComponent implements OnInit {
 
   // Constructor here
   constructor(private _dataService: DataService, private _router: Router) {
+  }
+
+  filterProjects(){
+    console.log("Dates changed");
+    this.dataSource.fromDate = this.controls.fromDate.value;
+    this.dataSource.toDate = this.controls.toDate.value;
+    this.dataSource.connect();
   }
 
   ngOnInit() {
@@ -41,6 +57,10 @@ export class ClosedProjectsComponent implements OnInit {
 export class ProjectDataSource extends DataSource<any> {
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   errors: any[] = [];
+
+  fromDate:Date = new Date(new Date().valueOf() - monthAsMicroSeconds);
+  toDate:Date = new Date();
+
 
   constructor(private dataService: DataService, private _sorter: MatSort) {
     super();
@@ -94,8 +114,14 @@ export class ProjectDataSource extends DataSource<any> {
   }
 
   getSortedData(): NewProject[] {
-    const data = this.subject.value.slice();
-
+    let data = this.subject.value.slice();
+    console.log("Acquiring projects, slice size is: " + data.length);    
+    data = data.filter((v,k) => {
+      let date = new Date(<string>v.closedDate);
+      return date >= this.fromDate && date <= this.toDate
+    });
+    console.log("filtering projects, slice size is: " + data.length);    
+    
     if (!this._sorter.active || this._sorter.direction === '') {
       return data;
     }
