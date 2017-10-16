@@ -51,9 +51,6 @@ $tablet-desktop: "only screen and (min-width : 420px)";
         right: 2em;
         margin-top: -42.5px;
 
-        mat-icon {
-          color: red;
-        }
       }
       .project-description {
         padding: 0 15px 15px 15px;
@@ -137,4 +134,12 @@ $tablet-desktop: "only screen and (min-width : 420px)";
       }
     }
   }
+}
+
+.heart-red {
+    color: red;
+}
+
+.heart-gray {
+    color: gray;
 }
