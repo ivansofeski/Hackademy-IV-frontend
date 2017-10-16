@@ -6,11 +6,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 // Components
 import { SidebarComponent } from './sidebar.component';
+import { testData } from '../test-data';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
   let de:      DebugElement;
+  let des:    DebugElement[];
   let el:      HTMLElement;
 
   beforeEach(async(() => {
@@ -51,4 +53,10 @@ describe('SidebarComponent', () => {
     // el = de.nativeElement;
     expect(de).toBeTruthy();
   });
+
+it('all links should be clickable', () => {
+  fixture.detectChanges();
+  des = fixture.debugElement.queryAll(By.css('li.item > a[href]'));
+  expect(des.length).toBeGreaterThanOrEqual(4)
+});
 });
