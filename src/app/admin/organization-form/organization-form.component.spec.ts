@@ -32,13 +32,13 @@ describe('OrganizationFormComponent', () => {
   });
 
   it('Should not accept an empty organization name', () => {
-    component.formControls.name.setValue('');
+    component.formControls.name.setValue(' ');
     fixture.detectChanges();
     expect(component.formControls.name.valid).toBe(false);
   });
 
   it('Should show an error when an empty organization name is supplied', () => {
-    component.formControls.name.setValue('');
+    component.formControls.name.setValue(' ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
     button.click();
@@ -72,13 +72,13 @@ describe('OrganizationFormComponent', () => {
   });
 
   it('Should not accept an empty organization number', () => {
-    component.formControls.orgNumber.setValue('');
+    component.formControls.orgNumber.setValue(' ');
     fixture.detectChanges();
     expect(component.formControls.orgNumber.valid).toBe(false);
   });
 
   it('Should show an error when an empty organization number is supplied', () => {
-    component.formControls.orgNumber.setValue('');
+    component.formControls.orgNumber.setValue(' ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
     button.click();
@@ -128,13 +128,13 @@ describe('OrganizationFormComponent', () => {
   });
 
   it('Should not accept an empty contact name', () => {
-    component.formControls.contactName.setValue('');
+    component.formControls.contactName.setValue(' ');
     fixture.detectChanges();
     expect(component.formControls.contactName.valid).toBe(false);
   });
 
   it('Should show an error when an empty contact name is supplied', () => {
-    component.formControls.contactName.setValue('');
+    component.formControls.contactName.setValue(' ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
     button.click();
@@ -161,13 +161,13 @@ describe('OrganizationFormComponent', () => {
   });
 
   it('Should not accept an empty contact email', () => {
-    component.formControls.contactEmail.setValue('');
+    component.formControls.contactEmail.setValue(' ');
     fixture.detectChanges();
     expect(component.formControls.contactEmail.valid).toBe(false);
   });
 
   it('Should show an error when an empty contact email is supplied', () => {
-    component.formControls.contactEmail.setValue('');
+    component.formControls.contactEmail.setValue(' ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
     button.click();
@@ -211,13 +211,13 @@ describe('OrganizationFormComponent', () => {
   });
 
   it('Should not accept an empty contact address', () => {
-    component.formControls.address.setValue('');
+    component.formControls.address.setValue(' ');
     fixture.detectChanges();
     expect(component.formControls.address.valid).toBe(false);
   });
 
   it('Should show an error when an empty contact address is supplied', () => {
-    component.formControls.address.setValue('');
+    component.formControls.address.setValue(' ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
     button.click();
@@ -244,13 +244,13 @@ describe('OrganizationFormComponent', () => {
   });
 
   it('Should not accept an empty postal code', () => {
-    component.formControls.zipCode.setValue('');
+    component.formControls.zipCode.setValue(' ');
     fixture.detectChanges();
     expect(component.formControls.zipCode.valid).toBe(false);
   });
 
   it('Should show an error when an empty postal code is supplied', () => {
-    component.formControls.zipCode.setValue('');
+    component.formControls.zipCode.setValue(' ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
     button.click();
@@ -328,13 +328,13 @@ describe('OrganizationFormComponent', () => {
   });
 
   it('Should not accept an empty city', () => {
-    component.formControls.city.setValue('');
+    component.formControls.city.setValue(' ');
     fixture.detectChanges();
     expect(component.formControls.city.valid).toBe(false);
   });
 
   it('Should show an error when an empty city is supplied', () => {
-    component.formControls.city.setValue('');
+    component.formControls.city.setValue(' ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
     button.click();
@@ -361,13 +361,13 @@ describe('OrganizationFormComponent', () => {
   });
 
   it('Should not accept an empty description', () => {
-    component.formControls.description.setValue('');
+    component.formControls.description.setValue(' ');
     fixture.detectChanges();
     expect(component.formControls.description.valid).toBe(false);
   });
 
   it('Should show an error when an empty description is supplied', () => {
-    component.formControls.description.setValue('');
+    component.formControls.description.setValue(' ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
     button.click();
