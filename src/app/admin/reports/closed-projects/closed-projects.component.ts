@@ -5,12 +5,12 @@ import { MatSort } from '@angular/material';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NewProject } from '../../interface/project';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 import { FormControl, Validators } from '@angular/forms';
+import { Project } from '../../interface/project';
 
 
 const monthAsMicroSeconds = 30*24*60*60*1000;
@@ -66,9 +66,9 @@ export class ProjectDataSource extends DataSource<any> {
   }
 
 
-  subject: BehaviorSubject<NewProject[]> = new BehaviorSubject<NewProject[]>([]);
+  subject: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
 
-  connect(): Observable<NewProject[]> {
+  connect(): Observable<Project[]> {
 
     const displayDataChanges = [
       this.subject,
@@ -76,21 +76,19 @@ export class ProjectDataSource extends DataSource<any> {
     ];
 
     if (!this.subject.isStopped) {
-      this.dataService.getNewProjects().subscribe(
+      this.dataService.getProjects().subscribe(
         projects => {
-          projects = projects.filter((v, k) => {
-            return v.status === 'false';
-          });
+          projects = projects.filter((v, k) => new Date(v.toDate) <= new Date());
 
-          this.dataService.getNewOrganizations().subscribe(
+          this.dataService.getOrganizations().subscribe(
             orgs => {
               for (const proj of projects) {
                 proj['organization'] = orgs.filter((v, k) => {
-                  return v.id === proj.orgId;
+                  return v.id === proj.organizationId;
                 })[0];
 
-                delete proj.orgId;
-                delete proj.organizationName;
+//                delete proj.organizationId;
+//                delete proj.organizationName;
               }
 
               this.subject.next(projects);
@@ -112,10 +110,10 @@ export class ProjectDataSource extends DataSource<any> {
     console.log('disconnected!');
   }
 
-  getSortedData(): NewProject[] {
+  getSortedData(): Project[] {
     let data = this.subject.value.slice();
     data = data.filter((v,k) => {
-      let date = new Date(<string>v.closedDate);
+      let date = new Date(v.toDate);
       return date >= this.fromDate && date <= this.toDate
     });
     
@@ -127,14 +125,13 @@ export class ProjectDataSource extends DataSource<any> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
 
-      ['projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate', 'closedDate']
+      ['projectName', 'orgName', 'bankAccount', 'fundsRaised', 'closedDate']
       switch (this._sorter.active) {
-        case 'title': [propertyA, propertyB] = [a.title, b.title]; break;
+        case 'title': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
         case 'orgName': [propertyA, propertyB] = [a['organization'].name, b['organization'].name]; break;
         case 'bankAccount': [propertyA, propertyB] = [a['organization'].bankAccount, b['organization'].bankAccount]; break;
-        case 'fundsRaised': [propertyA, propertyB] = [a.fundsRaised, b.fundsRaised]; break;
-        case 'dueDate': [propertyA, propertyB] = [a.dueDate, b.dueDate]; break;
-        case 'closedDate': [propertyA, propertyB] = [<string>a.closedDate, <string>b.closedDate]; break;
+        case 'fundsRaised': [propertyA, propertyB] = [a.raisedFunding, b.raisedFunding]; break;
+        case 'closedDate': [propertyA, propertyB] = [new Date(a.toDate).valueOf(), new Date(b.toDate).valueOf()]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
