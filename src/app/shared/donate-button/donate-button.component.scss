@@ -1,3 +1,4 @@
+
 a.fab-item,
 a.fab-menu {
   text-decoration: none;
@@ -11,7 +12,7 @@ a.fab-menu {
   right: 75px;
   bottom: 90px;
   .fab-item {
-    background: #61BFAD;
+    // background: #61BFAD;
     border-radius: 45px;
     width: 40px;
     height: 40px;
@@ -27,12 +28,12 @@ a.fab-menu {
     transition: transform ease-out 200ms;
     transition-duration: 180ms;
     &:hover {
-      background: #53A595;
+      // background: #53A595;
       color: #FFFFFF;
     }
   }
   .fab-toggle {
-    background: #61BFAD;
+    // background: #61BFAD;
     border-radius: 50px;
     width: 80px;
     height: 50px;
