@@ -1,3 +1,7 @@
+/**
+ * @desc: this service will take care of register, get and update the current user in/from the local storage
+ */
+
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -11,7 +15,9 @@ export class LocalStorageService {
   constructor() {
   }
 
-
+  /**
+   * @desc: check if the localStorage user exist and if not create one
+   */
   createLocalStorageUser() {
     this.user = localStorage.getItem(this.localStorageKey);
 
@@ -19,32 +25,32 @@ export class LocalStorageService {
 
       this.currentUser['id'] = Math.floor(Math.random() * 100000) + 1;
       this.currentUser['userImage'] = './assets/photos/userImage1.jpeg';
-      console.log('creating local storage user');
-      console.log(this.currentUser);
-
       this.user = JSON.stringify(this.currentUser);
-      console.log('current user stringfied');
-      console.log(this.user);
       localStorage.setItem(this.localStorageKey, this.user);
     }
   }
 
+  /**
+   * @desc this function will return the user from the localStorage and return it as an object
+   * @returns {any}
+   */
   getCurrentUser() {
     this.user = localStorage.getItem(this.localStorageKey);
     let userObject: any;
-    console.log('getcuurentUser()')
-    if (this.user == null || this.user === undefined){
-      console.log('user undefined --- create one')
+    if (this.user == null || this.user === undefined) {
       this.createLocalStorageUser();
       this.user = localStorage.getItem(this.localStorageKey);
       userObject = JSON.parse(this.user);
     } else if (this.user !== null || this.user !== undefined) {
-      console.log('get current user');
       userObject = JSON.parse(this.user);
     }
     return userObject;
   }
 
+  /**
+   * @desc this function will stringify the given user and update the existing user in the localStorage
+   * @param user
+   */
   updateCurrnetUser(user: any): void {
     this.user = localStorage.getItem(this.localStorageKey);
 

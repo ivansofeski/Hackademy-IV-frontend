@@ -9,8 +9,8 @@
 
         <div class="project-details">
           <div class="button-row">
-            <button mat-fab color="white" (click)="clickLike(project.id)">
-              <mat-icon class="mat-24" aria-label="icon-button with a heart icon">favorite</mat-icon>
+            <button mat-fab color="white" (click)="toggleLikeButton(project.id)">
+              <mat-icon class="mat-24" [ngClass]="likeButtonColor(project.id)" aria-label="icon-button with a heart icon">favorite</mat-icon>
             </button>
           </div>
 
