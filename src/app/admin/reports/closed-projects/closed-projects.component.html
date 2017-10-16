@@ -6,6 +6,36 @@
       <mat-card-content>
         <!-- Material Mat-table to display the list of organization-->
         <div class="organization-container mat-elevation-z8">
+          <table class='project-full-width' cellspacing='0'>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <input name='FROM_DATE' matInput [matDatepicker]='myDatepicker' placeholder='From (date)' [formControl]='controls.fromDate' (dateChange)="filterProjects()">
+                    <mat-error *ngIf='controls.fromDate.hasError("required")'>
+                      The starting Date is
+                      <strong>required</strong>
+                    </mat-error>
+                    <mat-datepicker-toggle mdSuffix [for]='myDatepicker'></mat-datepicker-toggle>
+                    <mat-datepicker #myDatepicker></mat-datepicker>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field>
+                    <input name='TO_DATE' matInput [matDatepicker]='myDatepicker2' placeholder='To (date)' [formControl]='controls.toDate' (dateChange)="filterProjects()">
+                    <mat-error *ngIf='controls.toDate.hasError("required")'>
+                      The ending Date is
+                      <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf='controls.toDate.hasError("wrongdate") || controls.toDate.hasError("impossibleDate")'>
+                      The ending Date must not be <strong>before start </strong>
+                    </mat-error>
+                    <mat-datepicker-toggle mdSuffix [for]='myDatepicker2'></mat-datepicker-toggle>
+                    <mat-datepicker #myDatepicker2></mat-datepicker>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
+              
           <mat-table #table [dataSource]="dataSource" class="organization-table" matSort>
   
             <!-- PROJECT NAME -->
