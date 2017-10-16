@@ -20,7 +20,26 @@ import 'rxjs/add/operator/map';
 export class ClosedProjectsComponent implements OnInit {
   color = 'primary';
   mode = 'determinate';
-  
+  years: string[] = [];
+  yearNow = new Date().getFullYear();
+  selectedMonth: any;
+  chosenMonth: any = "";
+  chosenYear: any = "";
+  months = [
+    { value: '01', viewValue: 'January' },
+    { value: '02', viewValue: 'February' },
+    { value: '03', viewValue: 'March' },
+    { value: '04', viewValue: 'April' },
+    { value: '05', viewValue: 'May' },
+    { value: '06', viewValue: 'June' },
+    { value: '07', viewValue: 'July' },
+    { value: '08', viewValue: 'August' },
+    { value: '09', viewValue: 'September' },
+    { value: '10', viewValue: 'October' },
+    { value: '11', viewValue: 'November' },
+    { value: '12', viewValue: 'December' },
+
+  ];
   errors: any[] = [];
   dataSource: ProjectDataSource | null;
   displayedColumns = ['projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate', 'closedDate'];
@@ -31,22 +50,60 @@ export class ClosedProjectsComponent implements OnInit {
   constructor(private _dataService: DataService, private _router: Router) {
   }
 
+  initDataSource: Function = (filter?: string): void => {
+    this.dataSource = new ProjectDataSource(this._dataService, this.sort, filter);
+  }
+
   ngOnInit() {
-    this.dataSource = new ProjectDataSource(this._dataService, this.sort);
+    this.yearsGenerator();
+    this.initDataSource();
+  }
+
+  yearsGenerator(): void {
+    let year = new Date;
+    var yearNow = year.getFullYear();
+    let years: any[] = [];
+
+    for (let i = 2000; i <= yearNow; i++) {
+      this.years.push(i.toString());
+    }
+  }
+
+  filterClosedProjects: Function = (date: Object): void => {
+    if (date === undefined || typeof date !== 'object') {
+      return;
+    }
+
+    if (Object.keys(date).length > 0) {
+      for (const key in date) {
+        if (date.hasOwnProperty(key)) {
+          this[key] = date[key];
+        }
+      }
+    }
+
+    const fullPeriod = `${this.chosenYear}/${this.chosenMonth}`;
+
+    this.initDataSource(fullPeriod);
+
+    console.log(fullPeriod);
   }
 
   ngOnDestroy(): void { }
 }
 export class DatepickerStartViewExample {
-  startDate = new Date(2017, 1);
 
-  
+
 }
+
+
+
+
 export class ProjectDataSource extends DataSource<any> {
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   errors: any[] = [];
 
-  constructor(private dataService: DataService, private _sorter: MatSort) {
+  constructor(private dataService: DataService, private _sorter: MatSort, private filter?: string) {
     super();
   }
 
@@ -64,7 +121,9 @@ export class ProjectDataSource extends DataSource<any> {
       this.dataService.getNewProjects().subscribe(
         projects => {
           projects = projects.filter((v, k) => {
-            return v.status === 'false';
+            return this.filter ?
+              v.status === 'false' &&  v.closedDate.toString().trim().slice(0, -2).indexOf(this.filter) > -1 :
+              v.status === 'false';
           });
 
           this.dataService.getNewOrganizations().subscribe(
@@ -97,7 +156,7 @@ export class ProjectDataSource extends DataSource<any> {
     console.log('disconnected!');
   }
 
-  
+
   getSortedData(): NewProject[] {
     const data = this.subject.value.slice();
 
@@ -125,4 +184,5 @@ export class ProjectDataSource extends DataSource<any> {
       return (valueA < valueB ? -1 : 1) * (this._sorter.direction === 'asc' ? 1 : -1);
     });
   }
+
 }
