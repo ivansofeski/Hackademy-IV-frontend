@@ -1,5 +1,5 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-  <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl"></agm-marker>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
+<agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" [markerDraggable]="true" (dragEnd)="dragEnd($event)"></agm-marker>
   <agm-circle [latitude]="lat"
   [longitude]="lng"
   [radius]="radius"

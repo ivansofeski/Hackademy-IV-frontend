@@ -50,5 +50,18 @@ export class GeolocationComponent implements OnInit {
       });
   }
 
+  dragEnd(event){
+    console.log(this.lat);
+    this.lat=event.coords.lat;
+    console.log(this.lat);
+    console.log(this.lng);
+    this.lng=event.coords.lng;
+    console.log(this.lng);
+  }
+
+  mapClicked(event) {
+      this.lat = event.coords.lat;
+      this.lng = event.coords.lng;
+  }
   
 }
