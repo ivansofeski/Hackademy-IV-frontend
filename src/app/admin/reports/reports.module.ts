@@ -8,10 +8,6 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
-    MatTableModule,
-    MatSortModule,
-    MatCardModule,
-    MatDatepickerModule
   ],
   declarations: [ClosedProjectsComponent]
 })
