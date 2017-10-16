@@ -37,7 +37,11 @@ export class ClosedProjectsComponent implements OnInit {
 
   ngOnDestroy(): void { }
 }
+export class DatepickerStartViewExample {
+  startDate = new Date(2017, 1);
 
+  
+}
 export class ProjectDataSource extends DataSource<any> {
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   errors: any[] = [];
@@ -93,6 +97,7 @@ export class ProjectDataSource extends DataSource<any> {
     console.log('disconnected!');
   }
 
+  
   getSortedData(): NewProject[] {
     const data = this.subject.value.slice();
 
