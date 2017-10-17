@@ -30,7 +30,7 @@
           <!-- row Name Column -->
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef class="organization-header-cell" mat-sort-header> Name </mat-header-cell>
-            <mat-cell *matCellDef="let row" class="organization-cell"> {{row.name}} </mat-cell>
+            <mat-cell *matCellDef="let row" class="organization-cell"><a [routerLink]="['/admin/organizations/view/', row.id]">{{row.name}} </a> </mat-cell>
           </ng-container>
 
           <!-- Adress Column -->
