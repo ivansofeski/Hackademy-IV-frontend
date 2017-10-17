@@ -26,8 +26,8 @@ export class ClosedProjectsComponent implements OnInit {
   mode = 'determinate';
 
   controls = {
-    toDate:     new FormControl(new Date(), [Validators.required]),
-    fromDate:   new FormControl(new Date(new Date().valueOf() - monthAsMicroSeconds), [Validators.required]),
+    toDate:     new FormControl(new Date()),
+    fromDate:   new FormControl(new Date(new Date().valueOf() - monthAsMicroSeconds)),
   };
   
   errors: any[] = [];
@@ -41,6 +41,13 @@ export class ClosedProjectsComponent implements OnInit {
   }
 
   filterProjects(){
+    if(!this.controls.fromDate.valid){
+      this.controls.fromDate.setValue(new Date(2017,10,1,0,0,0,0));
+    }
+    if(!this.controls.toDate.valid){
+      this.controls.fromDate.setValue(new Date());
+    }
+
     this.dataSource.fromDate = this.controls.fromDate.value;
     this.dataSource.toDate = this.controls.toDate.value;
     this.dataSource.connect();

@@ -13,11 +13,6 @@
                     <input name='FROM_DATE' matInput [matDatepicker]='myDatepicker' placeholder='From (date)' [formControl]='controls.fromDate' (dateChange)="filterProjects()">
                     <mat-datepicker-toggle matSuffix [for]='myDatepicker'></mat-datepicker-toggle>
                     <mat-datepicker #myDatepicker></mat-datepicker>
-                    <mat-error *ngIf='controls.fromDate.hasError("required")'>
-                      The starting Date is
-                      <strong>required</strong>
-                    </mat-error>
-
                   </mat-form-field>
                 </td>
                 <td>
@@ -25,13 +20,6 @@
                     <input name='TO_DATE' matInput [matDatepicker]='myDatepicker2' placeholder='To (date)' [formControl]='controls.toDate' (dateChange)="filterProjects()">
                     <mat-datepicker-toggle matSuffix [for]='myDatepicker2'></mat-datepicker-toggle>
                     <mat-datepicker #myDatepicker2></mat-datepicker>
-                    <mat-error *ngIf='controls.toDate.hasError("required")'>
-                      The ending Date is
-                      <strong>required</strong>
-                    </mat-error>
-                    <mat-error *ngIf='controls.toDate.hasError("wrongdate") || controls.toDate.hasError("impossibleDate")'>
-                      The ending Date must not be <strong>before start </strong>
-                    </mat-error>
                   </mat-form-field>
                 </td>
               </tr>
@@ -42,13 +30,13 @@
             <!-- PROJECT NAME -->
             <ng-container matColumnDef="projectName">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Project Name </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="customWidth"> {{row.projectName}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="customWidth"><a [routerLink]="['/admin/projects/view/',row.id]">{{row.projectName}}</a></mat-cell>
             </ng-container>
   
             <!-- ORGANIZATION NAME -->
             <ng-container matColumnDef="orgName">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Organization Name </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="project-cell"> {{row.organization?.name}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"><a [routerLink]="['/admin/organizations/view/',row.organization?.id]"> {{row.organization?.name}} </a></mat-cell>
             </ng-container>
   
             <!-- ORG. BANK ACCOUNT -->
@@ -65,7 +53,7 @@
 
             <!-- DUE DATE -->
             <ng-container matColumnDef="toDate">
-              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Due Date </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Closed on </mat-header-cell>
               <mat-cell *matCellDef="let row" class="project-cell"> {{row.toDate}} </mat-cell>
             </ng-container>
     
