@@ -32,7 +32,7 @@
           <!-- row project Column -->
           <ng-container matColumnDef="projectName">
             <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Name </mat-header-cell>
-            <mat-cell *matCellDef="let row" class="customWidth"> {{row.projectName}} </mat-cell>
+            <mat-cell *matCellDef="let row" class="customWidth"><a [routerLink]="['/admin/projects/view/',row.id]"> {{row.projectName}} </a></mat-cell>
           </ng-container>
 
           <!-- row from date Column -->
