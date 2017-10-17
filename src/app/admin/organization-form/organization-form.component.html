@@ -38,11 +38,11 @@
         <td>
           <mat-form-field class="organization-contact-email">
             <input matInput placeholder=" Contact Email " [formControl]="formControls.contactEmail">
-            <mat-error *ngIf="formControls.contactEmail.hasError('pattern')">
-              Please enter a valid email address
-            </mat-error>
             <mat-error *ngIf="formControls.contactEmail.hasError('required')">
               Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="formControls.contactEmail.hasError('email')">
+              Please enter a valid email address
             </mat-error>
           </mat-form-field>
         </td>
