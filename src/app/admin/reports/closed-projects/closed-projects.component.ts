@@ -25,7 +25,7 @@ export class ClosedProjectsComponent implements OnInit {
   selectedMonth: any;
   chosenMonth: any = "";
   chosenYear: any = "";
-  months = [
+ months = [
     { value: '01', viewValue: 'January' },
     { value: '02', viewValue: 'February' },
     { value: '03', viewValue: 'March' },
@@ -64,7 +64,7 @@ export class ClosedProjectsComponent implements OnInit {
     var yearNow = year.getFullYear();
     let years: any[] = [];
 
-    for (let i = 2000; i <= yearNow; i++) {
+    for (let i = yearNow; i >= 2000; i--) {
       this.years.push(i.toString());
     }
   }

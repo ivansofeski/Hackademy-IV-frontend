@@ -101,5 +101,22 @@
         "orgId": 2,
         "status": "false",
         "closedDate": "2017/11/12"        
+    },
+    {
+        "prId": 7,
+        "title": "More green, More Life",
+        "startDate": "2017/09/15",
+        "dueDate": "2017/11/15",
+        "address": "Östergatan 4",
+        "fundsGoal": 1000,
+        "fundsRaised": 1000,
+        "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
+        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "manager": "Johan Ericsson",
+        "projectId": "004",
+        "organizationName": "Unicef",
+        "orgId": 2,
+        "status": "false",
+        "closedDate": "2016/11/12"        
     }
 ]
