@@ -1,4 +1,6 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { EventsService } from './../services/events.service';
+import { constructDependencies } from '@angular/core/src/di/reflective_provider';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
 import { Activity } from '../interface/activity';
@@ -12,7 +14,10 @@ import { DataService } from '../services/data.service';
 })
 export class ActivityFormComponent implements OnInit {
   @ViewChild('activityForm') activityForm: ElementRef;
+  functions: ActivityFormFunctions;
+  inputs: Function;
   errorsTwo: QueryList<String>;
+  loadedProject: Object;
   newActivity: Activity = {
     projectId: 0,
     activityId: 1,
@@ -28,11 +33,12 @@ export class ActivityFormComponent implements OnInit {
   attributes = INPUT_ATTRIBUTES;
   errors: any[] = [];
   activityControls = {
-    activityImage:    new FormControl('', []),
-    name:             new FormControl('', [Validators.required]),
-    projectId:        new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
-    activityDate:     new FormControl('', [Validators.required]),
-    desc:             new FormControl('', [Validators.required]),
+
+    descImage: new FormControl('', []),
+    name: new FormControl('', [Validators.required]),
+    projectId: new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
+    activityDate: new FormControl('', [Validators.required]),
+    desc: new FormControl('', [Validators.required]),
   };
 
   setAttributes(options: any): void {
@@ -41,10 +47,12 @@ export class ActivityFormComponent implements OnInit {
 
   setImagePath(elm: HTMLInputElement): void {
     if (elm === undefined || elm.value === '') {
+      console.log('elm', elm);
       return;
     }
 
     const _imgSelector = elm.parentElement.querySelectorAll('img')[0];
+    console.log('image selector', _imgSelector);
 
     if (_imgSelector !== undefined) {
       const fReader = new FileReader();
@@ -53,6 +61,7 @@ export class ActivityFormComponent implements OnInit {
       fReader.onloadend = function (event) {
         _imgSelector.src = event.target['result'];
         _imgSelector.parentElement.classList.add('no-border');
+        console.log();
       };
     }
   }
@@ -115,9 +124,74 @@ export class ActivityFormComponent implements OnInit {
     // this.projectControls.orgId.updateValueAndValidity();
   }
 
+  getEventsProject: Function = (): void => {
+    this._eventsService.project.subscribe(
+      project => {
+        if (project !== undefined && Object.keys(project).length > 0) {
+          this.loadedProject = project;
+          console.log(project);
+        } else {
+          const projId = +this._router.snapshot.paramMap.get('id');
+          this._dataService.getProjects().subscribe(
+            projects => {
+              if (projects !== undefined && projects.length > 0) {
+                this.loadedProject = projects.filter((v, k) => {
+                  return v.id = projId;
+                })[0];
+              }
+            }
+          );
+        }
+      }
+    );
+  }
 
-  constructor(private _router: Router) { }
+  constructor(private _router: ActivatedRoute, private _dataService: DataService, private _eventsService: EventsService) { }
 
   ngOnInit() {
+    this.functions = new ActivityFormFunctions(this.activityForm, this._eventsService);
+    this.inputs = this.functions.setInputAttributes;
+    this.getEventsProject();
+    if (this.inputs !== undefined) {
+      this.inputs();
+    }
   }
+
+}
+
+export class ActivityFormFunctions {
+  setInputAttributes: Function = (): void => {
+    if (this._form !== undefined) {
+      const inputs = this._form.nativeElement.querySelectorAll('input:not([type="hidden"]), textarea');
+
+      if (inputs !== undefined && inputs.length > 0) {
+        for (const input of inputs) {
+          const _name = input['name'];
+
+          if (INPUT_ATTRIBUTES.hasOwnProperty(_name)) {
+            const attributes = INPUT_ATTRIBUTES[_name];
+
+            for (const key in attributes) {
+              if (attributes.hasOwnProperty(key)) {
+                if (key !== 'placeholder') {
+                  input.setAttribute(key, attributes[key]);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* getEventsProject: Function = (proj: Object): void => {
+    this._eventsService.project.subscribe(
+      project => {
+         proj = project;
+         console.log(project);
+      }
+    );
+  } */
+
+  constructor(private _form: ElementRef, private _eventsService: EventsService) { }
 }
