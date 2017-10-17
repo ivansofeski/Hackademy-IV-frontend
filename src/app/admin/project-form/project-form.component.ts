@@ -169,7 +169,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
 
   constructor(private _fetcher: DataService, private fb: FormBuilder) {
     this.projectControls.toDate.setValidators([
-      Validators.required,
+      NanoValidators.required,
       (c: AbstractControl) => c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null,
       (c: AbstractControl): ValidationErrors | null => {
         return this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate': true} : null;
