@@ -1,13 +1,22 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
-<agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" [markerDraggable]="true" (dragEnd)="dragEnd($event)"></agm-marker>
-  <agm-circle [latitude]="lat"
-  [longitude]="lng"
-  [radius]="radius"
-  fillOpacity="0.1"
-  ></agm-circle>
-  <agm-marker *ngFor="let m of projects"    
-      [latitude]="m.location.lat"
-      [longitude]="m.location.lng" 
-      [iconUrl]="iconUrlProject">
-  </agm-marker>
-</agm-map>
+<div class="container">
+    <form>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="search for location" type="text" class="form-control" #search>
+
+        </mat-form-field>
+    </form>
+    <a mat-button id="searchButton"  (click)="onClick()">
+           <mat-icon class="md-24 material-icons search" aria-label="search icon">search</mat-icon>
+    </a>
+
+    <div class="map-container">
+
+        <agm-map *ngIf="lat && lng" [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
+            <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" [markerDraggable]="true" (dragEnd)="dragEnd($event)"></agm-marker>
+            <agm-circle [latitude]="lat" [longitude]="lng" [radius]="radius" fillOpacity="0.1"></agm-circle>
+            <agm-marker *ngFor="let m of projects" [latitude]="m.location.lat" [longitude]="m.location.lng" [iconUrl]="iconUrlProject">
+            </agm-marker>
+        </agm-map>
+
+    </div>
+</div>
