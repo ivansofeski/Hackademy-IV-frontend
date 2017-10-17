@@ -112,7 +112,7 @@
         "neededFunding": 1000,
         "raisedFunding": 700,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "mainImage": "./assets/photos/project005/main/001.jpg",
         "images": [
             "./assets/photos/project005/main/001.jpg",
             "./assets/photos/project005/main/002.jpg",
@@ -137,7 +137,7 @@
         "neededFunding": 1000,
         "raisedFunding": 1000,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "mainImage": "./assets/photos/project006/main/001.jpg",
         "images": [
             "./assets/photos/project006/main/001.jpg",
             "./assets/photos/project006/main/002.jpg",
@@ -153,7 +153,7 @@
         "id": 7,
         "projectName": "Rusty Cage",
         "fromDate": "2017/02/21",
-        "toDate": "2017/06/1",
+        "toDate": "2017/06/01",
         "location": {
             "lat": 55.606210,
             "lng": 13.006070
@@ -162,7 +162,7 @@
         "neededFunding": 1500,
         "raisedFunding": 1500,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "mainImage": "./assets/photos/project007/main/001.jpg",
         "images": [
             "./assets/photos/project007/main/001.jpg",
             "./assets/photos/project007/main/002.jpg",
@@ -187,7 +187,7 @@
         "neededFunding": 9000,
         "raisedFunding": 3000,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "mainImage": "./assets/photos/project008/main/001.jpg",
         "images": [
             "./assets/photos/project008/main/001.jpg",
             "./assets/photos/project008/main/002.jpg",
@@ -212,7 +212,7 @@
         "neededFunding": 7350,
         "raisedFunding": 2250,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "mainImage": "./assets/photos/project009/main/001.jpg",
         "images": [
             "./assets/photos/project009/main/001.jpg",
             "./assets/photos/project009/main/002.jpg",
@@ -237,7 +237,7 @@
         "neededFunding": 2000,
         "raisedFunding": 2000,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "mainImage": "./assets/photos/project010/main/001.jpg",
         "images": [
             "./assets/photos/project010/main/001.jpg",
             "./assets/photos/project010/main/002.jpg",

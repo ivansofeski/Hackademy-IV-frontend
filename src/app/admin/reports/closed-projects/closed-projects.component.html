@@ -17,11 +17,16 @@
         <!-- Material Mat-table to display the list of organization-->
         <div class="organization-container mat-elevation-z8">
           <mat-table #table [dataSource]="dataSource" class="organization-table" matSort>
-  
+            <!-- ID -->
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell counter" mat-sort-header> # </mat-header-cell>
+              <mat-cell *matCellDef="let row;" class="project-cell counter"> {{row.id}} </mat-cell>
+            </ng-container>
+
             <!-- PROJECT NAME -->
             <ng-container matColumnDef="projectName">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Project Name </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="customWidth"> {{row.projectName}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.projectName}} </mat-cell>
             </ng-container>
   
             <!-- ORGANIZATION NAME -->

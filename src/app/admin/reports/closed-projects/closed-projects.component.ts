@@ -27,7 +27,7 @@ export class ClosedProjectsComponent implements OnInit {
   chosenYear: any = "";
   errors: any[] = [];
   dataSource: ProjectDataSource | null;
-  displayedColumns = ['projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate'];
+  displayedColumns = ['id', 'projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate'];
   months = [
     { value: '01', viewValue: 'January' },
     { value: '02', viewValue: 'February' },
@@ -128,7 +128,14 @@ export class ProjectDataSource extends DataSource<any> {
                 delete proj.organizationName;
               }
 
-              this.subject.next(projects);
+              let _reorderedProj = [];
+
+              for (let proj of projects) {
+                proj.id = projects.indexOf(proj) + 1;
+                _reorderedProj.push(proj)
+              }
+
+              this.subject.next(_reorderedProj);
             },
             error => this.errors.push(error)
           )
@@ -158,8 +165,8 @@ export class ProjectDataSource extends DataSource<any> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
 
-      ['projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate'/* , 'closedDate' */]
       switch (this._sorter.active) {
+        case 'id': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
         case 'title': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
         case 'orgName': [propertyA, propertyB] = [a['organization'].name, b['organization'].name]; break;
         case 'bankAccount': [propertyA, propertyB] = [a['organization'].billing, b['organization'].billing]; break;
