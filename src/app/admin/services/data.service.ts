@@ -6,141 +6,167 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/Observable/throw';
 
 // Interfaces
-import { Organization,NewOrganization } from '../interface/organization';
+import { Organization, NewOrganization } from '../interface/organization';
 import { Project, NewProject } from '../interface/project';
 
 @Injectable()
 export class DataService {
-  paths = {
+  /**
+   * @property
+   * `_paths` is an JS Object that enables the user a segmented view of _paths/links,
+   * where `root` must always be supplied in conjuction with another property.
+   *
+   * E.g.: `this._paths.root` + `this._paths.anyOtherProperty`, where the latter is one of the predefined
+   * properties of the `_paths`.
+   */
+  private _paths = {
     root: '../../../assets/mockdata/',
     organizations: 'organizations.json',
     newOrganizations: 'newOrganizations.json',
     projects: 'projects.json',
     newProjects: 'newProjects.json'
-    
   };
 
-  // Updated!
-  // Doesn't break code which calls this function.
+  /**
+   * @argument path as a string e.g. (API) `'/someurlsegment/api/'` or (file) `'/somepath/somefile.json'`
+   * @argument options as JS Object as optional
+   * E.g. `{ id: 1 }` or multiple properties `{ name: 'someName', 'date': '2018/01/01' }`
+   * @description
+   * Function that retrieves data from an API (or a string path) with HttpClient GET method.
+   * It provides both parameterized and non-parameterized call methods depending on what use provide.
+   * @return an `Observable` of any depending on where or what API was provided in the request.
+   */
   private _get(path: string, options?: Object): Observable<any> {
     if (path === undefined) {
       return;
     }
 
-    // In this snippet we call specified request of HTTP where we include 'params' property of options
-    // in GET call. This way we can get a specific record of the data for instance getOrganization({id: 1})
-    // will grab that database record where organization id is 1 and no other.
-    // 'options' parameter is optional so it can be skipped therefore we let user do a full data query to the database
-    // or the path given.
-    if (options !== undefined && Object.keys(options).length > 0) {
-      let params = new HttpParams();
+    // tslint:disable-next-line:prefer-const
+    let _params = new HttpParams();
 
+    if (options !== undefined && Object.keys(options).length > 0) {
       for (const option in options) {
         if (options.hasOwnProperty(option)) {
-          const value = options[option];
-          params.set(option, value);
+          _params.set(option, options[option]);
         }
       }
-
-      return this.http.get(path, {
-        params: params
-      })
-      .do((data: Response) => {
-        return data !== undefined ? data : [];
-      })
-      .catch((error: Response) => {
-        console.log(error['message']);
-        return Observable.throw(error || 'Server error');
-      });
-    } else {
-      return this.http.get(path)
-      .do((data: Response) => {
-        return data !== undefined ? data : [];
-      })
-      .catch((error: Response) => {
-        console.log(error['message']);
-        return Observable.throw(error || 'Server error');
-      });
     }
+
+    // Even if the `params` is blank/unset it will still execute a clean Http GET call.
+    return this.http.get(path, { params: _params })
+    .do((data: Response) => {
+      return data !== undefined ? data : [];
+    })
+    .catch((error: Response) => {
+      return Observable.throw(error || 'Server error');
+    });
   }
 
+  /**
+   * @argument path as string e.g. (API) '/someurlsegment/api/' or (file) '/somepath/somefile.json'
+   * 'options' as JS Object as optional e.g. { id: 1 } or multiple properties { name: 'someName', 'date': '2018/01/01' }
+   * @description
+   * Function that sends data to an API (or a string path) with HttpClient POST/PUT method(s).
+   * It provides both parameterized and non-parameterized call methods depending on what use provide.
+   *
+   * @experimental
+   * Under construction!
+   *
+   * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+   */
   private _set(path: string, data: any): boolean {
-    // tslint:disable-next-line:prefer-const
-    let _inserted = false;
+    const _inserted = false;
 
     return _inserted;
   }
 
-  // DEPRICATED!
-  // Use either of getOrganizations/getProjects/getOrganization(arg)/getProject(arg)!
-  // tslint:disable-next-line:member-ordering
-  get = {
-    organizations: (): any => {
-      return this._get(this.paths.root + this.paths.organizations);
-    },
-    projects: (): any => {
-      return this._get(this.paths.root + this.paths.projects);
-    }
-  };
-
-  // Get all Organizations records data from the path. Requires no arguments to input.
-  // Returns a set of Organization (interface) Observable.
+  /**
+   * @description
+   * GET all Projects records.
+   *
+   * Returns an Observable Array of `Organization`(interface).
+   *
+   * @return an Observable Array of `Organization`(interface).
+   */
   getOrganizations(): Observable<Organization[]> {
-    return this._get(this.paths.root + this.paths.organizations);
+    return this._get(this._paths.root + this._paths.organizations);
   }
 
-  getNewOrganizations(): Observable<NewOrganization[]> {
-    return this._get(this.paths.root + this.paths.newOrganizations);
-  }
-
-  // Get only 1 Organization record data with parameterized query. options is an Object argument which
-  // should have at least 1 property + value.
-  // Returns a Organization (interface) Observable.
+  /**
+   * @param options Accepts minimum 1 key+value pair from the Organization interface.
+   *
+   * @description
+   * GET only 1 Organization record data with parameterized query.
+   * `options` is an Object argument which should have at least 1 property + value.
+   *
+   * Returns an Observable of `Organization`(interface).
+   *
+   * @returns an Observable of `Organization`(interface).
+   */
   getOrganization(options: Object): Observable<Organization> {
     if (options === undefined || typeof options === 'object' || Object.keys(options).length <= 0) {
       return;
     }
 
-    return this._get(this.paths.root + this.paths.organizations, options);
+    return this._get(this._paths.root + this._paths.organizations, options);
   }
 
-  // Get all Projects records data from the path. Requires no arguments to input.
-  // Returns a set of Project (interface) Observable.
+  /**
+   * @description
+   * GET all Projects records.
+   *
+   * Returns an Observable Array of `Project`(interface).
+   *
+   * @returns an Observable Array of `Project`(interface).
+   */
   getProjects(): Observable<Project[]> {
-    return this._get(this.paths.root + this.paths.projects);
+    return this._get(this._paths.root + this._paths.projects);
   }
-  getNewProjects(): Observable<NewProject[]> {
-    return this._get(this.paths.root + this.paths.newProjects);
-  }
-  // Get only 1 Project record data with parameterized query. options is an Object argument which
-  // should have at least 1 property + value.
-  // Returns a Project (interface) Observable.
+
+  /**
+   * @argument options Accepts minimum 1 key+value pair from the Project interface.
+   *
+   * @description
+   * GET only 1 Project record data with parameterized query.
+   * `options` is an Object argument which should have at least 1 property + value.
+   *
+   * Returns an Observable of `Project`(interface).
+   *
+   * @returns an Observable of `Project`(interface).
+   */
   getProject(options: Object): Observable<Project> {
     if (options === undefined || typeof options === 'object' || Object.keys(options).length <= 0) {
       return;
     }
 
-    return this._get(this.paths.root + this.paths.projects, options);
+    return this._get(this._paths.root + this._paths.projects, options);
   }
 
-  getClosedProjects(list: any[], options: Object): any {
-    if (list === undefined) {
-      return;
-    }
+  /* ////////////////////////////////////////////////////////////////////////
+  *  /////////////////////////                      /////////////////////////
+  *  ///////////////////////// TESTING PURPOSE ONLY /////////////////////////
+  *  /////////////////////////                      /////////////////////////
+  *  ////////////////////////////////////////////////////////////////////////
+  */
 
-    this._get(this.paths.root + this.paths.projects).subscribe(
-      res => {
-        if (res !== undefined && res.length > 0) {
-          list = res.filter((v, k) => {
-            return v.open === 'false';
-          });
-        }
-      },
-      error => console.log(error)
-    );
-
-    return list;
+  /**
+   * @experimental
+   * Functions to try something new for Closed Projects with different set of interfaces.
+   */
+  getNewProjects(): Observable<NewProject[]> {
+    return this._get(this._paths.root + this._paths.newProjects);
   }
 
+  /**
+   * @experimental
+   * Functions to try something new for Closed Projects with different set of interfaces.
+   */
+  getNewOrganizations(): Observable<NewOrganization[]> {
+    return this._get(this._paths.root + this._paths.newOrganizations);
+  }
+
+  /**
+   * @param http An instance of HttpClient to enable functions in this service to use HTTP requests like GET, POST, PUT etc.
+   */
   constructor(private http: HttpClient) { }
 }
