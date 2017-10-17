@@ -4,6 +4,7 @@ import { Project } from '../interface/project';
 import { INPUT_ATTRIBUTES, NUMBERS, REGEX_UNITS } from './project-form.constants';
 import { Organization } from '../interface/organization';
 import { DataService } from '../services/data.service';
+import { NanoValidators } from '../services/nano-validators';
 
 @Component({
   selector: 'app-project-form',
@@ -23,17 +24,17 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   errors: any[] = [];
   projectControls = {
     descImage:    new FormControl('', []),
-    name:         new FormControl('', [Validators.required]),
-    projectId:    new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
-    manager:      new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.LETTERS)]),
-    orgId:        new FormControl('', [Validators.required]),
-    fromDate:     new FormControl(null, [Validators.required]),
+    name:         new FormControl('', [NanoValidators.required]),
+    projectId:    new FormControl('', [NanoValidators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
+    manager:      new FormControl('', [NanoValidators.required, Validators.pattern(REGEX_UNITS.LETTERS)]),
+    orgId:        new FormControl('', [NanoValidators.required]),
+    fromDate:     new FormControl(null, [NanoValidators.required]),
     toDate:       new FormControl(null, []),
-    goal:         new FormControl('', [Validators.required]),
-    address:      new FormControl('', [Validators.required]),
-    shortDesc:    new FormControl('', [Validators.required]),
-    desc:         new FormControl('', [Validators.required]),
-    national:     new FormControl('0', [Validators.required])
+    goal:         new FormControl('', [NanoValidators.required]),
+    address:      new FormControl('', [NanoValidators.required]),
+    shortDesc:    new FormControl('', [NanoValidators.required]),
+    desc:         new FormControl('', [NanoValidators.required]),
+    national:     new FormControl('0', [NanoValidators.required])
   };
 
   setAttributes(options: any): void {
