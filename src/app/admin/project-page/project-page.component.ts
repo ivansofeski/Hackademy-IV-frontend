@@ -1,3 +1,4 @@
+import { EventsService } from './../services/events.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
@@ -47,7 +48,8 @@ export class ProjectPageComponent implements OnInit {
       );
     }
   }
-  constructor(public route: ActivatedRoute, public router: Router,private dataService: DataService) { }
+  constructor(public route: ActivatedRoute, public router: Router,private dataService: DataService,
+     private _eventsService: EventsService) { }
 
   ngOnInit() {
     this.projectId = +this.route.snapshot.paramMap.get('id');
@@ -55,6 +57,7 @@ export class ProjectPageComponent implements OnInit {
 
   EventButton() {
     // alert('your click on the row with the Project  name ' + row.projectName);
+    this._eventsService.storeProject(this.project);
     this.router.navigateByUrl('/admin/projects/view/' + this.projectId + '/new');
   }
 }

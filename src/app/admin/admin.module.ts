@@ -5,6 +5,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 
 // Services
 import { DataService } from './services/data.service';
+import { EventsService } from './services/events.service';
 
 // Components
 import { AdminComponent } from './admin.component';
@@ -43,7 +44,7 @@ import { ActivityFormComponent } from './activity-form/activity-form.component';
     DashboardComponent,
     ActivityFormComponent,
   ],
-  providers: [DataService]
+  providers: [DataService, EventsService]
 })
 
 export class AdminModule { }
