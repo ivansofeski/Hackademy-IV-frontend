@@ -41,7 +41,7 @@
             <!-- PROJECT NAME -->
             <ng-container matColumnDef="projectName">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Project Name </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="customWidth"> {{row.title}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="customWidth"> {{row.projectName}} </mat-cell>
             </ng-container>
   
             <!-- ORGANIZATION NAME -->
@@ -51,29 +51,23 @@
             </ng-container>
   
             <!-- ORG. BANK ACCOUNT -->
-            <ng-container matColumnDef="bankAccount">
+            <ng-container matColumnDef="billing">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Bank Account </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="project-cell"> {{row.organization?.bankAccount}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.organization?.billing}} </mat-cell>
             </ng-container>
   
             <!-- COLLECTED AMOUNT -->
-            <ng-container matColumnDef="fundsRaised">
+            <ng-container matColumnDef="raisedFunding">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Collected Amount </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="project-cell"> {{row.fundsRaised}} / {{row.fundsGoal}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.raisedFunding}} / {{row.neededFunding}} </mat-cell>
             </ng-container>
 
             <!-- DUE DATE -->
-            <ng-container matColumnDef="dueDate">
+            <ng-container matColumnDef="toDate">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Due Date </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="project-cell"> {{row.dueDate}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.toDate}} </mat-cell>
             </ng-container>
-  
-            <!-- CLOSED DATE -->
-            <ng-container matColumnDef="closedDate">
-              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Closed Date </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="project-cell"> {{row.closedDate}} </mat-cell>
-            </ng-container>
-  
+    
             <mat-header-row *matHeaderRowDef="displayedColumns" class="organization-header-row"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;" class="organization-row"></mat-row>
           </mat-table>

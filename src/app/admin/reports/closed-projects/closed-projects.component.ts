@@ -32,7 +32,7 @@ export class ClosedProjectsComponent implements OnInit {
   
   errors: any[] = [];
   dataSource: ProjectDataSource | null;
-  displayedColumns = ['projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate', 'closedDate'];
+  displayedColumns = ['projectName', 'orgName', 'billing', 'raisedFunding', 'toDate'];
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -60,11 +60,9 @@ export class ProjectDataSource extends DataSource<any> {
   fromDate:Date = new Date(new Date().valueOf() - monthAsMicroSeconds);
   toDate:Date = new Date();
 
-
   constructor(private dataService: DataService, private _sorter: MatSort) {
     super();
   }
-
 
   subject: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
 
@@ -82,11 +80,11 @@ export class ProjectDataSource extends DataSource<any> {
 
           this.dataService.getOrganizations().subscribe(
             orgs => {
-              for (const proj of projects) {
+              for (let proj of projects) {
                 proj['organization'] = orgs.filter((v, k) => {
                   return v.id === proj.organizationId;
                 })[0];
-
+                proj['billing'] = proj['organization'].billing
 //                delete proj.organizationId;
 //                delete proj.organizationName;
               }
@@ -125,13 +123,13 @@ export class ProjectDataSource extends DataSource<any> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
 
-      ['projectName', 'orgName', 'bankAccount', 'fundsRaised', 'closedDate']
+      ['projectName', 'orgName', 'billing', 'raisedFunding', 'closedDate']
       switch (this._sorter.active) {
-        case 'title': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
+        case 'projectName': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
         case 'orgName': [propertyA, propertyB] = [a['organization'].name, b['organization'].name]; break;
-        case 'bankAccount': [propertyA, propertyB] = [a['organization'].bankAccount, b['organization'].bankAccount]; break;
-        case 'fundsRaised': [propertyA, propertyB] = [a.raisedFunding, b.raisedFunding]; break;
-        case 'closedDate': [propertyA, propertyB] = [new Date(a.toDate).valueOf(), new Date(b.toDate).valueOf()]; break;
+        case 'billing': [propertyA, propertyB] = [a['organization'].billing, b['organization'].billing]; break;
+        case 'raisedFunding': [propertyA, propertyB] = [a.raisedFunding, b.raisedFunding]; break;
+        case 'toDate': [propertyA, propertyB] = [new Date(a.toDate).valueOf(), new Date(b.toDate).valueOf()]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
