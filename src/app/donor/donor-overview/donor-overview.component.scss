@@ -2,7 +2,7 @@ $secondary-font-color: #9B9B9B;
 $primary-color: #61BFAD;
 $line-color: #CACBCD;
 
-$width: 85%;
+$width: 98%;
 
 .container {
   height: 100%;
@@ -37,19 +37,20 @@ $width: 85%;
 
     mat-card-header {
       width: $width;
-      justify-content: space-between;
+      justify-content: flex-start;
       margin: 20px auto;
 
       .user-info {
-        width: 50%;
+        width: 60%;
 
         .user-slogan {
           color: $secondary-font-color;
         }
       }
       .user-wallet {
+        margin-right: 1%;
         text-align: right;
-        width: 50%;
+        width: 30%;
         color: $secondary-font-color;
         span {
           display: block;
