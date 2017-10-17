@@ -5,7 +5,7 @@ interface Contact {
 }
 
 export interface Organization {
-    id: number;
+    id: number; // Subject to change (Remove) - This is a property only get/set from the database!
     orgId: string;
     name: string;
     address: string;
@@ -15,8 +15,9 @@ export interface Organization {
     description: string;
 }
 
+// TESTING PURPOSE ONLY! USE AT YOUR OWN RISK!
 export interface NewOrganization {
-    id: number;
+    id: number; // Subject to change (Remove) - This is a property only get/set from the database!
     orgId: string;
     name: string;
     address: string;
