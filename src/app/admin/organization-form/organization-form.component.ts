@@ -15,26 +15,16 @@ const BANK_REGEX = /^([0-9]{4})+[-]+([0-9]{4})+[-]+([0-9]{4})+[-]+([0-9]{4})/;
 export class OrganizationFormComponent implements OnInit {
 
   formControls = {
-
-    orgNumber: new FormControl('', [NanoValidators.required, Validators.pattern(ORG_REGEX)]),
-
-    name: new FormControl('', [NanoValidators.required]),
-
-    address: new FormControl('', [NanoValidators.required]),
-
-    contactName: new FormControl('', [NanoValidators.required]),
-
+    orgNumber:    new FormControl('', [NanoValidators.required, Validators.pattern(ORG_REGEX)]),
+    name:         new FormControl('', [NanoValidators.required]),
+    address:      new FormControl('', [NanoValidators.required]),
+    contactName:  new FormControl('', [NanoValidators.required]),
     contactPhone: new FormControl('', [NanoValidators.required]),
-
     contactEmail: new FormControl('', [NanoValidators.required, Validators.email]),
-
-    bankAccount: new FormControl('', [NanoValidators.required, Validators.pattern(BANK_REGEX)]),
-
-    city: new FormControl('', [NanoValidators.required, Validators.pattern(CITY_REGEX)]),
-
-    zipCode: new FormControl('', [NanoValidators.required, Validators.pattern('[0-9]{5}')]),
-
-    description: new FormControl('', [NanoValidators.required])
+    bankAccount:  new FormControl('', [NanoValidators.required, Validators.pattern(BANK_REGEX)]),
+    city:         new FormControl('', [NanoValidators.required, Validators.pattern(CITY_REGEX)]),
+    zipCode:      new FormControl('', [NanoValidators.required, Validators.pattern('[0-9]{5}')]),
+    description:  new FormControl('', [NanoValidators.required])
   };
 
   ngOnInit() {
