@@ -47,7 +47,7 @@
             The starting Date is
             <strong>required</strong>
           </mat-error>
-          <mat-datepicker-toggle mdSuffix [for]='myDatepicker'></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]='myDatepicker'></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>
         </mat-form-field>
       </td>
@@ -61,7 +61,7 @@
           <mat-error *ngIf='projectControls.toDate.hasError("wrongdate") || projectControls.toDate.hasError("impossibleDate")'>
             The ending Date must not be <strong>before start </strong>
           </mat-error>
-          <mat-datepicker-toggle mdSuffix [for]='myDatepicker2'></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]='myDatepicker2'></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker2></mat-datepicker>
         </mat-form-field>
       </td>
