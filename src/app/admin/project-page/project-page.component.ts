@@ -53,4 +53,8 @@ export class ProjectPageComponent implements OnInit {
     this.projectId = +this.route.snapshot.paramMap.get('id');
   }
 
+  EventButton() {
+    // alert('your click on the row with the Project  name ' + row.projectName);
+    this.router.navigateByUrl('/admin/projects/view/' + this.projectId + '/new');
+  }
 }

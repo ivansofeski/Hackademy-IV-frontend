@@ -18,6 +18,7 @@ import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ReportsModule } from './reports/reports.module';
+import { ActivityFormComponent } from './activity-form/activity-form.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { ReportsModule } from './reports/reports.module';
     ProjectFormComponent,
     SidebarComponent,
     DashboardComponent,
+    ActivityFormComponent,
   ],
   providers: [DataService]
 })
