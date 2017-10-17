@@ -1,3 +1,4 @@
+import { ActivityFormComponent } from './activity-form/activity-form.component';
 import { OrganizationFormComponent } from './organization-form/organization-form.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -20,7 +21,8 @@ const routes: Routes = [
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/new', component: ProjectFormComponent },
       { path: 'projects/view/:id', component: ProjectPageComponent },
-      { path: 'reports/closed-projects', component: ClosedProjectsComponent }
+      { path: 'reports/closed-projects', component: ClosedProjectsComponent },
+      { path: 'projects/view/:id/new', component: ActivityFormComponent}
     ]
   },
 ];
