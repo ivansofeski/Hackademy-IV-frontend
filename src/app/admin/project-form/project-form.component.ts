@@ -14,21 +14,6 @@ import { DataService } from '../services/data.service';
 export class ProjectFormComponent implements OnInit, DoCheck {
   @ViewChild('projectForm') projectForm: ElementRef;
   errorsTwo: QueryList<String>;
-  newProject: Project = {
-    id: 0,
-    projectName: '',
-    toDate: '',
-    fromDate: '',
-    address: '',
-    neededFunding: 0,
-    raisedFunding: 0,
-    description: '',
-    mainImage: '',
-    projectManager: '',
-    projectId: '',
-    organizationName: '',
-    organizationId: 0
-  };
   links = {
     list: '/admin/projects/',
     new: '/admin/projects/new/'
@@ -160,23 +145,6 @@ export class ProjectFormComponent implements OnInit, DoCheck {
             for (const input in all_inputs) {
             }
           }
-
-          this.newProject = {
-            id: last_project.id++,
-            projectName: '',
-            toDate: '',
-            fromDate: '',
-            address: '',
-            neededFunding: 0,
-            raisedFunding: 0,
-            description: '',
-            mainImage: '',
-            projectManager: '',
-            projectId: '',
-            organizationName: '',
-            organizationId: 0
-          };
-          localStorage.setItem('newProject', JSON.stringify(this.newProject));
         }
       },
       error => this.errors.push(error)
