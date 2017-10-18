@@ -26,7 +26,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     descImage:    new FormControl('', []),
     name:         new FormControl('', [NanoValidators.required]),
     projectId:    new FormControl('', [NanoValidators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
-    manager:      new FormControl('', [NanoValidators.required ),
+    manager:      new FormControl('', [NanoValidators.required]),
     orgId:        new FormControl('', [NanoValidators.required]),
     fromDate:     new FormControl(null, [NanoValidators.required]),
     toDate:       new FormControl(null, []),
