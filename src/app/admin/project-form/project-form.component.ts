@@ -26,7 +26,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     descImage:    new FormControl('', []),
     name:         new FormControl('', [NanoValidators.required]),
     projectId:    new FormControl('', [NanoValidators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
-    manager:      new FormControl('', [NanoValidators.required, Validators.pattern(REGEX_UNITS.LETTERS)]),
+    manager:      new FormControl('', [NanoValidators.required ),
     orgId:        new FormControl('', [NanoValidators.required]),
     fromDate:     new FormControl(null, [NanoValidators.required]),
     toDate:       new FormControl(null, []),
@@ -38,7 +38,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   };
 
   setAttributes(options: any): void { //@bani: Is this use anywhere?
-    console.log(options);
+//    console.log(options);
   }
 
   setImagePath(elm: HTMLInputElement): void {
@@ -197,7 +197,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
                   return 0;
               }
             });
-            console.log(this.organizations);
+//            console.log(this.organizations);
           }
         },
         error => this.errors.push(error)
