@@ -86,6 +86,10 @@ export class ClosedProjectsComponent implements OnInit {
     console.log(fullPeriod);
   }
   ngOnDestroy(): void { }
+  handleRowClick(row) {
+    // alert('your click on the row with the Project  name ' + row.projectName);
+    this._router.navigateByUrl('/admin/projects/view/' + row.id);
+  }
 }
 
 export class ProjectDataSource extends DataSource<any> {

@@ -56,7 +56,7 @@
           
   
             <mat-header-row *matHeaderRowDef="displayedColumns" class="organization-header-row"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;" class="organization-row"></mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="organization-row" title='Double click to go to this project detailed page.' (dblclick)="handleRowClick(row)"></mat-row>
           </mat-table>
         </div>
       </mat-card-content>
