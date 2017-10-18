@@ -4,9 +4,9 @@
 
 @import "./nano-theme.scss";
 
-@import "app/shared/donate-button/_donate-button.component-theme.scss";
+// @import "app/shared/donate-button/_donate-button.component-theme.scss";
 
-@include app-donate-button-theme($nano-app-theme);  
+// @include app-donate-button-theme($nano-app-theme);  
 
 @font-face {
   font-family: 'AvenirNext-DemiBold';
