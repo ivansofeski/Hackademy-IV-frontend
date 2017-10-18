@@ -210,8 +210,7 @@ describe('ProjectFormComponent', () => {
     fixture.detectChanges();
     expect(component.projectControls.fromDate.valid).toBe(true);
   });
-  /*
-
+/*
   it('should not show an error message when a valid project start date is supplied (now)',() => {
     component.projectControls.fromDate.setValue(new Date());
     fixture.detectChanges();
@@ -222,7 +221,6 @@ describe('ProjectFormComponent', () => {
     expect(de).not.toBeTruthy();
   });
 */
-
   it('should not accept an empty project end date',() => {
     component.projectControls.toDate.setValue('');
     fixture.detectChanges();
@@ -267,6 +265,91 @@ describe('ProjectFormComponent', () => {
 
 */
 
+
+it('should not accept an empty goal',() => {
+  component.projectControls.goal.setValue(' ');
+  fixture.detectChanges();
+  expect(component.projectControls.goal.valid).toBe(false);
+});
+
+it('should show an error message when an empty goal is supplied',() => {
+  component.projectControls.goal.setValue(' ');
+  fixture.detectChanges();
+  button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+  button.click();
+  fixture.detectChanges();
+  de = fixture.debugElement.query(By.css('mat-form-field.project-goal mat-error'));
+  el = de.nativeElement;
+  expect(el.textContent).toContain('required');
+});
+
+it('should not accept letters in goal (123 3)',() => {
+  component.projectControls.goal.setValue('123 3');
+  fixture.detectChanges();
+  expect(component.projectControls.goal.valid).toBe(false);
+});
+
+it('should show an error message when an invalid goal is supplied (123 3)',() => {
+  component.projectControls.goal.setValue('123 3');
+  fixture.detectChanges();
+  button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+  button.click();
+  fixture.detectChanges();
+  de = fixture.debugElement.query(By.css('mat-form-field.project-goal mat-error'));
+  el = de.nativeElement;
+  expect(el.textContent).toContain('required');
+});
+
+it('should not accept zero goal (0)',() => {
+  component.projectControls.goal.setValue('0');
+  fixture.detectChanges();
+  expect(component.projectControls.goal.valid).toBe(false);
+});
+
+it('should show an error message when a zero goal is supplied (0)',() => {
+  component.projectControls.goal.setValue('0');
+  fixture.detectChanges();
+  button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+  button.click();
+  fixture.detectChanges();
+  de = fixture.debugElement.query(By.css('mat-form-field.project-goal mat-error'));
+  el = de.nativeElement;
+  expect(el.textContent).toContain('required');
+});
+
+it('should not accept a negative goal (-1000)',() => {
+  component.projectControls.goal.setValue('-1000');
+  fixture.detectChanges();
+  expect(component.projectControls.goal.valid).toBe(false);
+});
+
+it('should show an error message when a negative goal is supplied (-1000)',() => {
+  component.projectControls.goal.setValue('-1000');
+  fixture.detectChanges();
+  button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+  button.click();
+  fixture.detectChanges();
+  de = fixture.debugElement.query(By.css('mat-form-field.project-goal mat-error'));
+  el = de.nativeElement;
+  expect(el.textContent).toContain('required');
+});
+
+
+it('should accept a valid (10000)',() => {
+  component.projectControls.goal.setValue('10000');
+  fixture.detectChanges();
+  expect(component.projectControls.goal.valid).toBe(true);
+});
+
+it('should not show an error message when a valid goal is supplied (10000)',() => {
+  component.projectControls.goal.setValue('10000');
+  fixture.detectChanges();
+  button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+  button.click();
+  fixture.detectChanges();
+  de = fixture.debugElement.query(By.css('mat-form-field.project-goal mat-error'));
+  expect(de).not.toBeTruthy();
+});
 
 
 
