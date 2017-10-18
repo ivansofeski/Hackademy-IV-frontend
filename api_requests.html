@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>API Requests</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        @media only screen and (max-width : 1366px) {
+            .body, body * {
+                min-width: 320px;
+            }
+        }
+        body {
+            margin: 0;
+            min-width: 320px;
+        }
+
+        body,
+        body * {
+            font-family: "Calibri", 'Trebuchet MS', sans-serif, Helvetica, sans-serif;
+            box-sizing: border-box;
+        }
+
+        blockquote {
+            margin: 0 20px;
+        }
+
+        header { 
+            position: fixed;
+            display: block;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 99999;
+        }
+
+        main {
+            margin-top: 140px;
+        }
+
+        .flex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .trans-15ms {
+            -webkit-transition: .15s all ease-in-out;
+            -moz-transition: .15s all ease-in-out;
+            -ms-transition: .15s all ease-in-out;
+            -o-transition: .15s all ease-in-out;
+            transition: .15s all ease-in-out;
+        }
+
+        .header-label {
+            position: relative;
+            width: 100%;
+            min-height: 100px;
+            background-color: #4cb19e;
+            border-bottom: 1px solid #4cb19e;
+            margin-bottom: 40px;
+            color: white;
+            font-size: 40px;
+            text-transform: capitalize;
+        }
+
+        .header-label::before,
+        .header-label::after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 70%;
+            height: 5px;
+            background-color: #6bc1b1;
+            top: 100%;
+
+            -webkit-transition: .25s all ease-in-out;
+            -moz-transition: .25s all ease-in-out;
+            -ms-transition: .25s all ease-in-out;
+            -o-transition: .25s all ease-in-out;
+            transition: .25s all ease-in-out;
+        }
+
+        .header-label::before {
+            left: 0;
+
+            -webkit-transform: skewX(75deg);
+            -moz-transform: skewX(75deg);
+            -ms-transform: skewX(75deg);
+            -o-transform: skewX(75deg);
+            transform: skewX(75deg);
+        }
+
+        .header-label::after {
+            right: 0;
+
+            -webkit-transform: skewX(-75deg);
+            -moz-transform: skewX(-75deg);
+            -ms-transform: skewX(-75deg);
+            -o-transform: skewX(-75deg);
+            transform: skewX(-75deg);
+        }
+
+        .api-section {
+            position: relative;
+            display: block;
+            width: 60%;
+            margin: 0 auto 30px auto;
+            border-radius: 3px;
+            background-color: rgba(254, 251, 202, 1);
+            overflow: hidden;
+
+            -webkit-box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .42), 0 4px 25px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);
+            -moz-box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .42), 0 4px 25px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);
+            box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .42), 0 4px 25px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);
+        }
+
+        .api-title {
+            position: relative;
+            width: 100%;
+            padding: 20px;
+            color: #2323d9;
+            font-size: 24px;
+            text-align: center;
+            font-weight: 100;
+            cursor: pointer;
+        }
+
+        .api-title::after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #9191ef;
+        }
+
+        .api-body {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .api-body::after {
+            content: "";
+            position: relative;
+            display: block;
+            width: 0;
+            height: 0;
+            clear: both;
+        }
+
+        .api-column {
+            position: relative;
+            display: block;
+            width: 33%;
+            float: left;
+        }
+
+        .api-column:first-of-type {
+            margin-left: 0.5%;
+        }
+
+        .api-column-header {
+            padding: 15px;
+            font-size: 18px;
+            text-transform: uppercase;
+            color: white;
+        }
+
+        .api-column.input>.api-column-header {
+            background-color: rgb(230, 52, 88);
+        }
+
+        .api-column.output>.api-column-header {
+            background-color: rgb(67, 206, 54);
+        }
+
+        .api-column.description>.api-column-header {
+            background-color: rgb(250, 172, 56);
+        }
+
+        .api-column-body {
+            padding: 10px;
+        }
+
+        .api-title.expanded + .api-body {
+            height: auto;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class='flex header-label'></div>
+    </header>
+    <main>
+    </main>
+    <footer></footer>
+
+    <script>
+        /* <section class='api-section'>
+            <div class='flex api-column-header'></div>
+            <div class='api-body'>
+                <div class='api-column'></div>
+                <div class='api-column'></div>
+                <div class='api-column'></div>
+            </div>
+        </section> */
+        function ApiRequest(title, body) {
+            this.tag = 'section';
+            this.attributes = { class: 'api-section' };
+            this.children = [
+                {
+                    tag: 'div',
+                    attributes: { class: 'flex api-title', title: 'Click to toggle expand/collapse' },
+                    properties: { innerHTML: title }
+                }, {
+                    tag: 'div',
+                    attributes: { class: 'trans-15ms api-body' },
+                    children: [
+                        {
+                            tag: 'div',
+                            attributes: { class: 'api-column input' },
+                            children: [
+                                {
+                                    tag: 'div',
+                                    attributes: { class: 'flex api-column-header' },
+                                    properties: { innerHTML: "input" }
+                                }, {
+                                    tag: 'div',
+                                    attributes: { class: 'api-column-body' },
+                                    properties: { innerHTML: body.input }
+                                }
+                            ]
+                        }, {
+                            tag: 'div',
+                            attributes: { class: 'api-column output' },
+                            children: [
+                                {
+                                    tag: 'div',
+                                    attributes: { class: 'flex api-column-header' },
+                                    properties: { innerHTML: "output" }
+                                }, {
+                                    tag: 'div',
+                                    attributes: { class: 'api-column-body' },
+                                    properties: { innerHTML: body.output }
+                                }
+                            ]
+                        }, {
+                            tag: 'div',
+                            attributes: { class: 'api-column description' },
+                            children: [
+                                {
+                                    tag: 'div',
+                                    attributes: { class: 'flex api-column-header' },
+                                    properties: { innerHTML: "description" }
+                                }, {
+                                    tag: 'div',
+                                    attributes: { class: 'api-column-body' },
+                                    properties: { innerHTML: body.description }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ];
+        }
+
+        function init() {
+            let strings = {
+                headerLabel: 'NANO <br/>api requests',
+                apiInput: 'expected INPUT:',
+                apiOutput: 'expected OUTPUT:',
+                apiDescription: 'description'
+            };
+
+            let insertContent = function (elm) {
+                if (elm === undefined || typeof elm !== 'object') {
+                    return;
+                }
+
+                if (elm.hasOwnProperty('tag') && typeof elm.tag === 'string' && elm.tag.trim() !== '') {
+                    let item = document.createElement(elm.tag);
+
+                    if (elm.hasOwnProperty('attributes') && Object.keys(elm.attributes).length > 0) {
+                        for (let key in elm.attributes) {
+                            if (elm.attributes.hasOwnProperty(key)) {
+                                item.setAttribute(key, elm.attributes[key]);
+                            }
+                        }
+                    }
+
+                    if (elm.hasOwnProperty('children') && elm.children.length > 0) {
+                        for (let child of elm.children) {
+                            child = insertContent(child);
+
+                            if (child !== undefined) {
+                                item.appendChild(child);
+                            }
+                        }
+                    }
+
+                    if (elm.hasOwnProperty('properties') && Object.keys(elm.properties).length > 0) {
+                        for (let prop in elm.properties) {
+                            if (elm.properties.hasOwnProperty(prop)) {
+                                item[prop] = elm.properties[prop];
+                            }
+                        }
+                    }
+
+                    return item;
+                }
+
+                return null;
+            };
+
+            let api = [
+                {
+                    title: 'getOrganizations()',
+                    input: `Nothing to INPUT.`,
+                    output: `[<blockquote>{<br/><blockquote>"id": "number",<br/>"orgId": "string",<br/>"name": "string",<br/>"address": "string",<br/>"contact": {<br/><blockquote>"person": "string",<br/>"phone": "string",<br/>"email": "string"</blockquote>},
+                    <br/>"password": "string",
+                    <br/>"billing": "string",
+                    <br/>"description": "string"
+                    <br/></blockquote>}</blockquote>]`,
+                    description: `This function will do a HTTP Request of GET from the provided API path.
+                    <br/>User end expects an array of all organizations registered in the DB.
+                    <br/>Paramaters sent: 0.`
+                }, {
+                    title: 'getOrganization(options: Object)',
+                    input: `It sends <options> as object of key+pair. Minimum one property must be provided. E.g.:
+                            <br/> <b>{ id: 3 }</b> or multiple <b>{ name: "some name", orgId: "some Org Registered Id" }</b>`,
+                    output: `{<br/><blockquote>"id": "number",<br/>"orgId": "string",<br/>"name": "string",<br/>"address": "string",<br/>"contact": {<br/><blockquote>"person": "string",<br/>"phone": "string",<br/>"email": "string"</blockquote>},
+                    <br/>"password": "string",
+                    <br/>"billing": "string",
+                    <br/>"description": "string"
+                    <br/></blockquote>}`,
+                    description: `This function will do a HTTP Request of GET from the provided API path.
+                    <br/>User end expects an object with the properties as seen in OUTPUT that correlates to provided parameters.
+                    <br/>Paramaters sent: 1+`
+                }, {
+                    title: 'getProjects()',
+                    input: `Nothing to INPUT.`,
+                    output: `[
+                        <br/><blockquote>{
+                            <blockquote>
+                                "projectId":        "string",
+                                <br/>"projectName":      "string",
+                                <br/>"projectManager":   "string",
+                                <br/>"fromDate":         "string",
+                                <br/>"toDate":           "string",
+                                <br/>"address":          "string",
+                                <br/>"location": "{
+                                    <blockquote>
+                                        "lat": "number",
+                                        <br/>"lng": "number"
+                                    </blockquote>
+                                }",
+                                <br/>"neededFunding":    "number",
+                                <br/>"raisedFunding":    "number",
+                                <br/>"description":      "string",
+                                <br/>"mainImage":        "string",
+                                <br/>"images":           "string[]",
+                                <br/>"organizationName": "string",
+                                <br/>"organizationId":   "number",
+                                <br/>"open":             "string"
+                            </blockquote>}
+                        </blockquote>]`,
+                    description: `This function will do a HTTP Request of GET from the provided API path.
+                    <br/>User end expects an array of all organizations registered in the DB.
+                    <br/>Paramaters sent: 0.`
+                }, {
+                    title: 'getProject(options: Object)',
+                    input: `It sends <options> as object of key+pair. Minimum one property must be provided. E.g.:
+                            <br/> <b>{ id: 3 }</b> or multiple <b>{ name: "some name", orgId: "some Org Registered Id" }</b>`,
+                    output: `{
+                        <blockquote>
+                            "projectId":        "string",
+                            <br/>"projectName":      "string",
+                            <br/>"projectManager":   "string",
+                            <br/>"fromDate":         "string",
+                            <br/>"toDate":           "string",
+                            <br/>"address":          "string",
+                            <br/>"location": "{
+                                <blockquote>"lat": "number",
+                                <br/>"lng": "number"
+                            </blockquote>}",
+                            <br/>"neededFunding":    "number",
+                            <br/>"raisedFunding":    "number",
+                            <br/>"description":      "string",
+                            <br/>"mainImage":        "string",
+                            <br/>"images":           "string[]",
+                            <br/>"organizationName": "string",
+                            <br/>"organizationId":   "number",
+                            <br/>"open":             "string"
+                        </blockquote>}`,
+                    description: `This function will do a HTTP Request of GET from the provided API path.
+                    <br/>User end expects an object with the properties as seen in OUTPUT that correlates to provided parameters.
+                    <br/>Paramaters sent: 1+`
+                }
+            ];
+
+            let headerLabel = document.querySelectorAll('header > .header-label')[0];
+            let mainPanel = document.querySelectorAll('main')[0];
+
+            if (strings !== undefined) {
+                if (headerLabel !== undefined) {
+                    headerLabel.innerHTML = strings.headerLabel;
+                }
+
+                if (mainPanel !== undefined) {
+                    for (let request of api) {
+                        let content = insertContent(new ApiRequest(request.title, { input: request.input, output: request.output, description: request.description }));
+
+                        if (content !== undefined) {
+                            mainPanel.appendChild(content);
+                        }
+                    }
+                }
+            }
+        };
+
+        function events() {
+            let apiTitles = document.querySelectorAll('.api-title');
+
+            if (apiTitles !== undefined && apiTitles.length > 0) {
+                for (let title of apiTitles) {
+                    title.addEventListener('mouseup', (e) => {
+                        if (e.currentTarget.classList.contains('api-title')) {
+                            e.currentTarget.classList.toggle('expanded');
+                        }
+                    });
+                }
+            }
+        }
+
+        if (init !== undefined) {
+            init();
+            events();
+        }
+    </script>
+</body>
+
+</html>

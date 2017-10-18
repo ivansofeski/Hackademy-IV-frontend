@@ -60,3 +60,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
   - removed http import from admin module
   - removed material imports from all spec files as they are imported from the shared module
   - Fixed imports and declaration in the navbar spec file
+
+  # API Documentation Link
+  [API Quests (HTML)](https://github.com/IvanCybercom/Hackademy-IV-frontend/blob/development/api_requests.html)
