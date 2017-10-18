@@ -122,4 +122,38 @@ describe('ProjectFormComponent', () => {
   });
 
 
+  it('should not accept an empty project manager',() => {
+    component.projectControls.manager.setValue(' ');
+    fixture.detectChanges();
+    expect(component.projectControls.manager.valid).toBe(false);
+  });
+
+  it('should show an error message when an empty project manager is supplied',() => {
+    component.projectControls.manager.setValue(' ');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-manager mat-error'));
+    el = de.nativeElement;
+    expect(el.textContent).toContain('required');
+  });
+
+  it('should accept a normal project manager ( Super Hero )',() => {
+    component.projectControls.manager.setValue(' Super Hero ');
+    fixture.detectChanges();
+    expect(component.projectControls.manager.valid).toBe(true);
+  });
+
+  it('should now show an error message when a correct project name is supplied ( Super Hero )',() => {
+    component.projectControls.manager.setValue(' Super Hero ');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-manager mat-error'));
+    expect(de).not.toBeTruthy();
+  });
+
+
 });
