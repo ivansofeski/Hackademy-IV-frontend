@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { ProjectService } from '../projects/project.service';
 import { } from 'googlemaps';
-import { MapsAPILoader, GoogleMapsAPIWrapper } from '@agm/core';
+import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import { GoogleMap } from '@agm/core/services/google-maps-types';
 //import { google } from '@agm/core/services/google-maps-types';
 declare var google: any;
 
@@ -13,18 +12,15 @@ declare var google: any;
   templateUrl: './geolocation.component.html',
   styleUrls: ['./geolocation.component.scss']
 })
-export class GeolocationComponent implements OnInit, AfterViewInit {
+export class GeolocationComponent implements OnInit {
   ipInfo:any;
   lat:number;
-  initialLat:number;
   lng:number;
-  initialLng:number;
   zoom:number;
   radius:number;
   projects=[]
   position;
   geocoder;
-  map;
   inputAddressElm;
   
   @ViewChild("search")
@@ -48,12 +44,10 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
   constructor(private _projectService: ProjectService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private _http: HttpClient,
-    private _mapsWrapper:GoogleMapsAPIWrapper) { 
+    private _http: HttpClient) { 
   }
 
   ngOnInit() {    
-    
     this.showPosition();
     this.inputAddressElm= this.searchElementRef.nativeElement;
     let searchButtElm = document.getElementById("searchButton");
@@ -81,16 +75,6 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
       });     
     });
   }
-
-  // ngAfterViewInit() {
-  //   this._mapsWrapper.getNativeMap().then(m => {
-  //     console.log('native map',m);
-  //     this.map=m;
-  //     var centerControl = this.CenterControl(this.map);
-  //   }, err=>{
-  //     console.log('error',err);
-  //   })
-  // }
 
   showPosition(){
     this.getIP().subscribe(res =>{
@@ -186,44 +170,4 @@ getIP(): Observable<any[]> {
   return this._http.get('//ip-api.com/json') // ...using post request
   .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
 }
-
-CenterControl(map) {
-  
-  var controlDiv:any = document.createElement('div');
-  
-    var firstChild = document.createElement('button');
-    firstChild.style.backgroundColor = '#fff';
-    firstChild.style.border = 'none';
-    firstChild.style.outline = 'none';
-    firstChild.style.width = '28px';
-    firstChild.style.height = '28px';
-    firstChild.style.borderRadius = '2px';
-    firstChild.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
-    firstChild.style.cursor = 'pointer';
-    firstChild.style.marginRight = '10px';
-    firstChild.style.padding = '0px';
-    firstChild.title = 'Your Location';
-    controlDiv.appendChild(firstChild);
-
-    var secondChild = document.createElement('div');
-    secondChild.style.margin = '5px';
-    secondChild.style.width = '18px';
-    secondChild.style.height = '18px';
-    secondChild.style.backgroundImage = 'url(https://maps.gstatic.com/tactile/mylocation/mylocation-sprite-1x.png)';
-    secondChild.style.backgroundSize = '180px 18px';
-    secondChild.style.backgroundPosition = '0px 0px';
-    secondChild.style.backgroundRepeat = 'no-repeat';
-    secondChild.id = 'you_location_img';
-    firstChild.appendChild(secondChild);
-
-    // Setup the click event listeners: simply set the map to Chicago.
-    firstChild.addEventListener('click', ()=> {
-      map.setCenter([this.initialLat, this.initialLng]);
-    });
-    controlDiv.index = 1;
-    this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv);
-
-  }
-
-
 }
