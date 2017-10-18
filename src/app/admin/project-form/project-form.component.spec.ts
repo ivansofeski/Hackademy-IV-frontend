@@ -188,6 +188,38 @@ describe('ProjectFormComponent', () => {
     expect(de).not.toBeTruthy();
   });
 
+  it('should not accept an empty project start date',() => {
+    component.projectControls.fromDate.setValue('');
+    fixture.detectChanges();
+    expect(component.projectControls.fromDate.valid).toBe(false);
+  });
+
+  it('should show an error message when an empty start date is supplied',() => {
+    component.projectControls.fromDate.setValue('');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-fromdate mat-error'));
+    el = de.nativeElement;
+    expect(el.textContent).toContain('required');
+  });
+
+  it('should accept a normal project address (now)',() => {
+    component.projectControls.fromDate.setValue(new Date());
+    fixture.detectChanges();
+    expect(component.projectControls.fromDate.valid).toBe(true);
+  });
+
+  it('should not show an error message when a valid project address is supplied (now)',() => {
+    component.projectControls.fromDate.setValue(new Date());
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-fromdate mat-error'));
+    expect(de).not.toBeTruthy();
+  });
 
 
 });

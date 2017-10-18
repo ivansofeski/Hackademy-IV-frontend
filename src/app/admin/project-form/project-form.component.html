@@ -41,7 +41,7 @@
   <table class='project-full-width' cellspacing='0'>
     <tr>
       <td>
-        <mat-form-field>
+        <mat-form-field class="project-fromdate">
           <input name='FROM_DATE' matInput [matDatepicker]='myDatepicker' placeholder='From (date)' [formControl]='projectControls.fromDate'>
           <mat-error *ngIf='projectControls.fromDate.hasError("required")'>
             The starting Date is
