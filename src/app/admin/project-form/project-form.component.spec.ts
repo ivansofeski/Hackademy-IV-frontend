@@ -61,7 +61,7 @@ describe('ProjectFormComponent', () => {
     expect(component.projectControls.name.valid).toBe(true);
   });
 
-  it('should now show an error message when a correct project name is supplied ( My Project )',() => {
+  it('should not show an error message when a correct project name is supplied ( My Project )',() => {
     component.projectControls.name.setValue(' My Project ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
@@ -94,7 +94,7 @@ describe('ProjectFormComponent', () => {
     expect(component.projectControls.projectId.valid).toBe(false);
   });
 
-  it('should now show an error message when a well formed project ID is supplied (12345643324)',() => {
+  it('should not show an error message when a well formed project ID is supplied (12345643324)',() => {
     component.projectControls.projectId.setValue('12345643324');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
@@ -111,7 +111,7 @@ describe('ProjectFormComponent', () => {
     expect(component.projectControls.projectId.valid).toBe(true);
   });
 
-  it('should now show an error message when a well formed project ID is supplied (123456-4332)',() => {
+  it('should not show an error message when a well formed project ID is supplied (123456-4332)',() => {
     component.projectControls.projectId.setValue('123456-4332');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
@@ -145,7 +145,7 @@ describe('ProjectFormComponent', () => {
     expect(component.projectControls.manager.valid).toBe(true);
   });
 
-  it('should now show an error message when a correct project name is supplied ( Super Hero )',() => {
+  it('should not show an error message when a correct project manager is supplied ( Super Hero )',() => {
     component.projectControls.manager.setValue(' Super Hero ');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
@@ -154,6 +154,40 @@ describe('ProjectFormComponent', () => {
     de = fixture.debugElement.query(By.css('mat-form-field.project-manager mat-error'));
     expect(de).not.toBeTruthy();
   });
+
+  it('should not accept an empty project address',() => {
+    component.projectControls.address.setValue(' ');
+    fixture.detectChanges();
+    expect(component.projectControls.address.valid).toBe(false);
+  });
+
+  it('should show an error message when an empty project address is supplied',() => {
+    component.projectControls.address.setValue(' ');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-address mat-error'));
+    el = de.nativeElement;
+    expect(el.textContent).toContain('required');
+  });
+
+  it('should accept a normal project address (somewhere 12, Malmö)',() => {
+    component.projectControls.address.setValue('somewhere 12, Malmö');
+    fixture.detectChanges();
+    expect(component.projectControls.address.valid).toBe(true);
+  });
+
+  it('should not show an error message when a valid project address is supplied (somewhere 12, Malmö)',() => {
+    component.projectControls.address.setValue('somewhere 12, Malmö');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-address mat-error'));
+    expect(de).not.toBeTruthy();
+  });
+
 
 
 });
