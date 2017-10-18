@@ -7,7 +7,7 @@ import { Activity } from '../activity.interface';
 @Component({
   selector: 'app-project-page',
   templateUrl: './project-page.component.html',
-  styleUrls: ['./project-page.component.scss']
+  styleUrls: ['./project-page.component.scss', './_project-page.component-theme.scss']
 })
 export class ProjectPageComponent implements OnInit {
  
