@@ -68,7 +68,58 @@ describe('ProjectFormComponent', () => {
     button.click();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.project-name mat-error'));
-    expect(de).not.toBeTruthy('required');
+    expect(de).not.toBeTruthy();
   });
+
+  it('should not accept an empty project ID',() => {
+    component.projectControls.projectId.setValue(' ');
+    fixture.detectChanges();
+    expect(component.projectControls.projectId.valid).toBe(false);
+  });
+
+  it('should show an error message when an empty project ID is supplied',() => {
+    component.projectControls.projectId.setValue(' ');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-id mat-error'));
+    el = de.nativeElement;
+    expect(el.textContent).toContain('required');
+  });
+
+  it('should not accept a malformed project ID (12345643324)',() => {
+    component.projectControls.projectId.setValue('12345643324');
+    fixture.detectChanges();
+    expect(component.projectControls.projectId.valid).toBe(false);
+  });
+
+  it('should now show an error message when a well formed project ID is supplied (12345643324)',() => {
+    component.projectControls.projectId.setValue('12345643324');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-id mat-error'));
+    el = de.nativeElement;
+    expect(el.textContent).toContain('XXXXXX-XXXX');
+  });
+
+  it('should accept a well formed project ID (123456-4332)',() => {
+    component.projectControls.projectId.setValue('123456-4332');
+    fixture.detectChanges();
+    expect(component.projectControls.projectId.valid).toBe(true);
+  });
+
+  it('should now show an error message when a well formed project ID is supplied (123456-4332)',() => {
+    component.projectControls.projectId.setValue('123456-4332');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-id mat-error'));
+    expect(de).not.toBeTruthy();
+  });
+
 
 });

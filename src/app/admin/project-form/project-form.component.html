@@ -15,7 +15,7 @@
   </mat-form-field>
 
   <!-- FIELD: PROJECT NUMBER ID -->
-  <mat-form-field class='project-full-width'>
+  <mat-form-field class='project-full-width project-id'>
     <input matInput #projectId name='PROJECT_ID' placeholder='{{attributes.PROJECT_ID.placeholder}}' [formControl]='projectControls.projectId'>
     <mat-error *ngIf='projectControls.projectId.hasError("required")'>Project number is<strong>required</strong></mat-error>
     <mat-error *ngIf='projectControls.projectId.hasError("pattern")'>Project number must be written in this format<strong>XXXXXX-XXXX</strong></mat-error>
