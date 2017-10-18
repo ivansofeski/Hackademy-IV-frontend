@@ -70,7 +70,7 @@
 
   <!-- FIELD: PROJECT GOAL AMOUNT -->
   <mat-form-field class='project-full-width project-goal'>
-    <input matInput name='GOAL' placeholder='{{attributes.GOAL.placeholder}}' [formControl]='projectControls.goal'>
+    <input matInput name='GOAL' type="number" placeholder='{{attributes.GOAL.placeholder}}' [formControl]='projectControls.goal'>
     <mat-error *ngIf='projectControls.goal.hasError("required")'>
       The goal is
       <strong>required</strong>
