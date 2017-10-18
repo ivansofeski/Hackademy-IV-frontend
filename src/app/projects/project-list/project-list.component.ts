@@ -7,7 +7,7 @@ import {Project} from '../project.interface';
 @Component({
   // selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.scss']
+  styleUrls: ['./project-list.component.scss','./_project-list.component-theme.scss']
 })
 export class ProjectListComponent implements OnInit {
   errors: any[] = [];
