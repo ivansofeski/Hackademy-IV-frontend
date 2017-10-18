@@ -3,7 +3,7 @@ import {Component, OnInit, Input} from '@angular/core';
 @Component({
   selector: 'app-donate-button',
   templateUrl: './donate-button.component.html',
-  styleUrls: ['./donate-button.component.scss'],
+  styleUrls: ['./donate-button.component.scss','./_donate-button.component-theme.scss'],
 })
 
 export class DonateButtonComponent implements OnInit {
