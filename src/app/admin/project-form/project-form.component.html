@@ -22,7 +22,7 @@
   </mat-form-field>
 
   <!-- FIELD: PROJECT MANAGER -->
-  <mat-form-field class='project-full-width'>
+  <mat-form-field class='project-full-width project-manager'>
     <input matInput #manager name='MANAGER' placeholder='{{attributes.MANAGER.placeholder}}' [formControl]='projectControls.manager'>
     <mat-error *ngIf='projectControls.manager.hasError("required")'>Project manager is<strong>required</strong></mat-error>
     <mat-error *ngIf='projectControls.manager.hasError("pattern")'>Must be<strong>valid</strong> name!</mat-error>
