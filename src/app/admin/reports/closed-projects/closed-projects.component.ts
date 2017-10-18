@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NewProject } from '../../interface/project';
+import { Project } from '../../interface/project';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -20,36 +20,91 @@ import 'rxjs/add/operator/map';
 export class ClosedProjectsComponent implements OnInit {
   color = 'primary';
   mode = 'determinate';
-  
+  years: string[] = [];
+  yearNow = new Date().getFullYear();
+  selectedMonth: any;
+  chosenMonth: any = "";
+  chosenYear: any = "";
   errors: any[] = [];
   dataSource: ProjectDataSource | null;
-  displayedColumns = ['projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate', 'closedDate'];
+  displayedColumns = ['id', 'projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate'];
+  months = [
+    { value: '01', viewValue: 'January' },
+    { value: '02', viewValue: 'February' },
+    { value: '03', viewValue: 'March' },
+    { value: '04', viewValue: 'April' },
+    { value: '05', viewValue: 'May' },
+    { value: '06', viewValue: 'June' },
+    { value: '07', viewValue: 'July' },
+    { value: '08', viewValue: 'August' },
+    { value: '09', viewValue: 'September' },
+    { value: '10', viewValue: 'October' },
+    { value: '11', viewValue: 'November' },
+    { value: '12', viewValue: 'December' },
 
+  ];
   @ViewChild(MatSort) sort: MatSort;
 
   // Constructor here
   constructor(private _dataService: DataService, private _router: Router) {
   }
 
-  ngOnInit() {
-    this.dataSource = new ProjectDataSource(this._dataService, this.sort);
+  initDataSource: Function = (filter?: string): void => {
+    this.dataSource = new ProjectDataSource(this._dataService, this.sort, filter);
   }
 
+  ngOnInit() {
+    this.yearsGenerator();
+    this.initDataSource();
+  }
+  yearsGenerator(): void {
+    let year = new Date;
+    var yearNow = year.getFullYear();
+    let years: any[] = [];
+
+    for (let i = yearNow; i >= 2000; i--) {
+      this.years.push(i.toString());
+    }
+  }
+  filterClosedProjects: Function = (date: Object): void => {
+    if (date === undefined || typeof date !== 'object') {
+      return;
+    }
+
+    if (Object.keys(date).length > 0) {
+      for (const key in date) {
+        if (date.hasOwnProperty(key)) {
+          this[key] = date[key];
+        }
+      }
+    }
+
+    const fullPeriod = `${this.chosenYear}/${this.chosenMonth}`;
+
+    this.initDataSource(fullPeriod);
+
+    console.log(fullPeriod);
+  }
   ngOnDestroy(): void { }
+  handleRowClick(row) {
+    // alert('your click on the row with the Project  name ' + row.projectName);
+    this._router.navigateByUrl('/admin/projects/view/' + row.id);
+  }
 }
 
 export class ProjectDataSource extends DataSource<any> {
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   errors: any[] = [];
-
-  constructor(private dataService: DataService, private _sorter: MatSort) {
+  nowDate = new Date;
+  pla = this.nowDate.toDateString;
+  constructor(private dataService: DataService, private _sorter: MatSort, private filter?: string) {
     super();
   }
 
 
-  subject: BehaviorSubject<NewProject[]> = new BehaviorSubject<NewProject[]>([]);
+  subject: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
 
-  connect(): Observable<NewProject[]> {
+  connect(): Observable<Project[]> {
 
     const displayDataChanges = [
       this.subject,
@@ -57,24 +112,34 @@ export class ProjectDataSource extends DataSource<any> {
     ];
 
     if (!this.subject.isStopped) {
-      this.dataService.getNewProjects().subscribe(
+      this.dataService.getProjects().subscribe(
         projects => {
-          projects = projects.filter((v, k) => {
-            return v.status === 'false';
+          projects = projects.filter((k, v) => {
+            let dateNow = new Date(k.toDate);
+            return this.filter?
+            dateNow <= this.nowDate && k.toDate.toString().trim().slice(0, -2).indexOf(this.filter) > -1 :
+            dateNow <= this.nowDate;
           });
 
-          this.dataService.getNewOrganizations().subscribe(
+          this.dataService.getOrganizations().subscribe(
             orgs => {
               for (const proj of projects) {
                 proj['organization'] = orgs.filter((v, k) => {
-                  return v.id === proj.orgId;
+                  return v.id === proj.organizationId;
                 })[0];
 
-                delete proj.orgId;
+                delete proj.organizationId;
                 delete proj.organizationName;
               }
 
-              this.subject.next(projects);
+              let _reorderedProj = [];
+
+              for (let proj of projects) {
+                proj.id = projects.indexOf(proj) + 1;
+                _reorderedProj.push(proj)
+              }
+
+              this.subject.next(_reorderedProj);
             },
             error => this.errors.push(error)
           )
@@ -93,7 +158,7 @@ export class ProjectDataSource extends DataSource<any> {
     console.log('disconnected!');
   }
 
-  getSortedData(): NewProject[] {
+  getSortedData(): Project[] {
     const data = this.subject.value.slice();
 
     if (!this._sorter.active || this._sorter.direction === '') {
@@ -104,15 +169,15 @@ export class ProjectDataSource extends DataSource<any> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
 
-      ['projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate', 'closedDate']
       switch (this._sorter.active) {
-        case 'title': [propertyA, propertyB] = [a.title, b.title]; break;
+        case 'id': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
+        case 'title': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
         case 'orgName': [propertyA, propertyB] = [a['organization'].name, b['organization'].name]; break;
-        case 'bankAccount': [propertyA, propertyB] = [a['organization'].bankAccount, b['organization'].bankAccount]; break;
-        case 'fundsRaised': [propertyA, propertyB] = [a.fundsRaised, b.fundsRaised]; break;
-        case 'dueDate': [propertyA, propertyB] = [a.dueDate, b.dueDate]; break;
-        case 'closedDate': [propertyA, propertyB] = [<string>a.closedDate, <string>b.closedDate]; break;
-      }
+        case 'bankAccount': [propertyA, propertyB] = [a['organization'].billing, b['organization'].billing]; break;
+        case 'fundsRaised': [propertyA, propertyB] = [a.raisedFunding, b.raisedFunding]; break;
+        case 'dueDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
+/*         case 'closedDate': [propertyA, propertyB] = [<string>a.closedDate, <string>b.closedDate]; break;
+ */      }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;

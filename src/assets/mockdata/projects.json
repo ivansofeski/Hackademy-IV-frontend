@@ -20,8 +20,8 @@
         ],
         "projectManager": "Mats Nilsson",
         "projectId": "001",
-        "organizationName": "Save the children",
-        "organizationId": 1,
+        "organizationName": "Red Cross",
+        "organizationId": 2,
         "open": "true"
     },
     {
@@ -46,7 +46,7 @@
         "projectManager": "Johan Ericsson",
         "projectId": "002",
         "organizationName": "Unicef",
-        "organizationId": 2,
+        "organizationId": 1,
         "open": "true"
     },
     {
@@ -70,8 +70,8 @@
         ],
         "projectManager": "Mats Nilsson",
         "projectId": "003",
-        "organizationName": "Save the children",
-        "organizationId": 1,
+        "organizationName": "Remotion",
+        "organizationId": 3,
         "open": "true"
     },
     {
@@ -95,8 +95,8 @@
         ],
         "projectManager": "Johan Ericsson",
         "projectId": "004",
-        "organizationName": "Unicef",
-        "organizationId": 2,
+        "organizationName": "Exodoc",
+        "organizationId": 4,
         "open": "true"
     },
     {
@@ -112,23 +112,23 @@
         "neededFunding": 1000,
         "raisedFunding": 700,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "mainImage": "./assets/photos/project005/main/001.jpg",
         "images": [
-            "./assets/photos/project004/main/001.jpg",
-            "./assets/photos/project004/main/002.jpg",
-            "./assets/photos/project004/main/003.jpg"
+            "./assets/photos/project005/main/001.jpg",
+            "./assets/photos/project005/main/002.jpg",
+            "./assets/photos/project005/main/003.jpg"
         ],
         "projectManager": "Mia Larsson",
-        "projectId": "004",
-        "organizationName": "Unicef",
-        "organizationId": 2,
+        "projectId": "005",
+        "organizationName": "Talent without Borders",
+        "organizationId": 5,
         "open": "false"
     },
     {
         "id": 6,
         "projectName": "More green, More Life",
         "fromDate": "2017/09/15",
-        "toDate": "2017/11/15",
+        "toDate": "2017/10/15",
         "location": {
             "lat": 55.606210,
             "lng": 13.006070
@@ -137,16 +137,116 @@
         "neededFunding": 1000,
         "raisedFunding": 1000,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
-        "mainImage": "./assets/photos/project004/main/001.jpg",
+        "mainImage": "./assets/photos/project006/main/001.jpg",
         "images": [
-            "./assets/photos/project004/main/001.jpg",
-            "./assets/photos/project004/main/002.jpg",
-            "./assets/photos/project004/main/003.jpg"
+            "./assets/photos/project006/main/001.jpg",
+            "./assets/photos/project006/main/002.jpg",
+            "./assets/photos/project006/main/003.jpg"
         ],
         "projectManager": "Johan Ericsson",
-        "projectId": "004",
+        "projectId": "006",
+        "organizationName": "Imnseta",
+        "organizationId": 6,
+        "open": "false"
+    },
+    {
+        "id": 7,
+        "projectName": "Rusty Cage",
+        "fromDate": "2017/02/21",
+        "toDate": "2017/06/01",
+        "location": {
+            "lat": 55.606210,
+            "lng": 13.006070
+        },
+        "address": "Östergatan 4",
+        "neededFunding": 1500,
+        "raisedFunding": 1500,
+        "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
+        "mainImage": "./assets/photos/project007/main/001.jpg",
+        "images": [
+            "./assets/photos/project007/main/001.jpg",
+            "./assets/photos/project007/main/002.jpg",
+            "./assets/photos/project007/main/003.jpg"
+        ],
+        "projectManager": "Johnny Cash",
+        "projectId": "007",
+        "organizationName": "Do it!",
+        "organizationId": 7,
+        "open": "false"
+    },
+    {
+        "id": 8,
+        "projectName": "In the garden",
+        "fromDate": "2017/09/15",
+        "toDate": "2018/01/15",
+        "location": {
+            "lat": 55.606210,
+            "lng": 13.006070
+        },
+        "address": "Östergatan 4",
+        "neededFunding": 9000,
+        "raisedFunding": 3000,
+        "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
+        "mainImage": "./assets/photos/project008/main/001.jpg",
+        "images": [
+            "./assets/photos/project008/main/001.jpg",
+            "./assets/photos/project008/main/002.jpg",
+            "./assets/photos/project008/main/003.jpg"
+        ],
+        "projectManager": "Elvis",
+        "projectId": "008",
+        "organizationName": "Get rythem",
+        "organizationId": 8,
+        "open": "true"
+    },
+    {
+        "id": 9,
+        "projectName": "The One Rose",
+        "fromDate": "2016/09/03",
+        "toDate": "2018/10/09",
+        "location": {
+            "lat": 55.606210,
+            "lng": 13.006070
+        },
+        "address": "Östergatan 4",
+        "neededFunding": 7350,
+        "raisedFunding": 2250,
+        "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
+        "mainImage": "./assets/photos/project009/main/001.jpg",
+        "images": [
+            "./assets/photos/project009/main/001.jpg",
+            "./assets/photos/project009/main/002.jpg",
+            "./assets/photos/project009/main/003.jpg"
+        ],
+        "projectManager": "Frank Sinatra",
+        "projectId": "009",
+        "organizationName": "Get rythem",
+        "organizationId": 8,
+        "open": "true"
+    },
+    {
+        "id": 10,
+        "projectName": "Whie vail",
+        "fromDate": "2017/05/22",
+        "toDate": "2017/10/04",
+        "location": {
+            "lat": 55.606210,
+            "lng": 13.006070
+        },
+        "address": "Östergatan 4",
+        "neededFunding": 2000,
+        "raisedFunding": 2000,
+        "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
+        "mainImage": "./assets/photos/project010/main/001.jpg",
+        "images": [
+            "./assets/photos/project010/main/001.jpg",
+            "./assets/photos/project010/main/002.jpg",
+            "./assets/photos/project010/main/003.jpg"
+        ],
+        "projectManager": "Sara Andersson",
+        "projectId": "010",
         "organizationName": "Unicef",
-        "organizationId": 2,
+        "organizationId": 1,
         "open": "false"
     }
 ]
