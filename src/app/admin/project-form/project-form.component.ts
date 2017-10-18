@@ -172,7 +172,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
       Validators.required,
       (c: AbstractControl) => c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null,
       (c: AbstractControl): ValidationErrors | null => {
-        return this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate': true} : null;
+        return this.projectControls.toDate.value && this.projectControls.fromDate.value && this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate': true} : null;
       }
     ]);
   }
