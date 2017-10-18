@@ -55,5 +55,20 @@ describe('ProjectFormComponent', () => {
     expect(el.textContent).toContain('required');
   });
 
+  it('should accept a normal project name ( My Project )',() => {
+    component.projectControls.name.setValue(' My Project ');
+    fixture.detectChanges();
+    expect(component.projectControls.name.valid).toBe(true);
+  });
+
+  it('should now show an error message when a correct project name is supplied ( My Project )',() => {
+    component.projectControls.name.setValue(' My Project ');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-name mat-error'));
+    expect(de).not.toBeTruthy('required');
+  });
 
 });
