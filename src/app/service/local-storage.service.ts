@@ -63,4 +63,13 @@ export class LocalStorageService {
       }
     }
   }
+
+  checkUser(): boolean {
+    this.user = localStorage.getItem(this.localStorageKey);
+    if (this.user !== null || this.user !== undefined) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
