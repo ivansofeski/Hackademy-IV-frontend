@@ -205,21 +205,69 @@ describe('ProjectFormComponent', () => {
     expect(el.textContent).toContain('required');
   });
 
-  it('should accept a normal project address (now)',() => {
+  it('should accept a normal project start date (now)',() => {
     component.projectControls.fromDate.setValue(new Date());
     fixture.detectChanges();
     expect(component.projectControls.fromDate.valid).toBe(true);
   });
+  /*
 
-  it('should not show an error message when a valid project address is supplied (now)',() => {
+  it('should not show an error message when a valid project start date is supplied (now)',() => {
     component.projectControls.fromDate.setValue(new Date());
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
     button.click();
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('mat-form-field.project-fromdate mat-error'));
+    de = fixture.debugElement.query(By.css('mat-form-field.project-todate mat-error'));
     expect(de).not.toBeTruthy();
   });
+*/
+
+  it('should not accept an empty project end date',() => {
+    component.projectControls.toDate.setValue('');
+    fixture.detectChanges();
+    expect(component.projectControls.toDate.valid).toBe(false);
+  });
+
+  it('should show an error message when an empty end date is supplied',() => {
+    component.projectControls.toDate.setValue('');
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-todate mat-error'));
+    el = de.nativeElement;
+    expect(el.textContent).toContain('required');
+  });
+
+  it('should accept a normal project end date after the start date ()',() => {
+    let now:Date = new Date();
+    let month:number = 30 * 24 * 60 * 60 * 1000 ;
+    let nextMonth:Date = new Date( month + now.valueOf());
+    component.projectControls.fromDate.setValue(now);
+    component.projectControls.toDate.setValue(nextMonth);    
+    fixture.detectChanges();
+    expect(component.projectControls.toDate.valid).toBe(true);
+  });
+
+/*
+  it('should not show an error message when a valid end date is supplied ()',() => {
+    let now:Date = new Date();
+    let month:number = 30 * 24 * 60 * 60 * 1000 ;
+    let nextMonth:Date = new Date( month + now.valueOf());
+    component.projectControls.fromDate.setValue(now);
+    component.projectControls.toDate.setValue(nextMonth);    
+    fixture.detectChanges();
+    button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('mat-form-field.project-todate mat-error'));
+    expect(de).not.toBeTruthy();
+  });
+
+*/
+
+
 
 
 });
