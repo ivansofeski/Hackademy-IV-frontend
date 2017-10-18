@@ -28,7 +28,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     projectId:    new FormControl('', [NanoValidators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
     manager:      new FormControl('', [NanoValidators.required]),
     orgId:        new FormControl('', [NanoValidators.required]),
-    fromDate:     new FormControl(null, [NanoValidators.required]),
+    fromDate:     new FormControl(new Date(), [Validators.required]),
     toDate:       new FormControl(null, []),
     goal:         new FormControl('', [NanoValidators.required]),
     address:      new FormControl('', [NanoValidators.required]),
@@ -169,7 +169,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
 
   constructor(private _fetcher: DataService, private fb: FormBuilder) {
     this.projectControls.toDate.setValidators([
-      NanoValidators.required,
+      Validators.required,
       (c: AbstractControl) => c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null,
       (c: AbstractControl): ValidationErrors | null => {
         return this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate': true} : null;
