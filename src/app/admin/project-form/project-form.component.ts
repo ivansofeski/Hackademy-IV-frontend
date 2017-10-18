@@ -14,8 +14,8 @@ import { NanoValidators } from '../services/nano-validators';
 
 export class ProjectFormComponent implements OnInit, DoCheck {
   @ViewChild('projectForm') projectForm: ElementRef;
-  errorsTwo: QueryList<String>;
-  links = {
+  errorsTwo: QueryList<String>;  //@bani: Is this use anywhere?
+  links = {  //@bani: Is this use anywhere?
     list: '/admin/projects/',
     new: '/admin/projects/new/'
   };
@@ -37,7 +37,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     national:     new FormControl('0', [NanoValidators.required])
   };
 
-  setAttributes(options: any): void {
+  setAttributes(options: any): void { //@bani: Is this use anywhere?
     console.log(options);
   }
 
