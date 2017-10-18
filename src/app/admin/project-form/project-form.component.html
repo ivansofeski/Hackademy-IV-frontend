@@ -15,21 +15,21 @@
   </mat-form-field>
 
   <!-- FIELD: PROJECT NUMBER ID -->
-  <mat-form-field class='project-full-width'>
+  <mat-form-field class='project-full-width project-id'>
     <input matInput #projectId name='PROJECT_ID' placeholder='{{attributes.PROJECT_ID.placeholder}}' [formControl]='projectControls.projectId'>
     <mat-error *ngIf='projectControls.projectId.hasError("required")'>Project number is<strong>required</strong></mat-error>
     <mat-error *ngIf='projectControls.projectId.hasError("pattern")'>Project number must be written in this format<strong>XXXXXX-XXXX</strong></mat-error>
   </mat-form-field>
 
   <!-- FIELD: PROJECT MANAGER -->
-  <mat-form-field class='project-full-width'>
+  <mat-form-field class='project-full-width project-manager'>
     <input matInput #manager name='MANAGER' placeholder='{{attributes.MANAGER.placeholder}}' [formControl]='projectControls.manager'>
     <mat-error *ngIf='projectControls.manager.hasError("required")'>Project manager is<strong>required</strong></mat-error>
     <mat-error *ngIf='projectControls.manager.hasError("pattern")'>Must be<strong>valid</strong> name!</mat-error>
   </mat-form-field>
 
   <!-- FIELD: PROJECT ADDRESS -->
-  <mat-form-field class='project-full-width'>
+  <mat-form-field class='project-full-width project-address'>
     <input matInput #address name='ADDRESS' placeholder='{{attributes.ADDRESS.placeholder}}' [formControl]='projectControls.address'>
     <mat-error *ngIf='projectControls.address.hasError("required")'>
       Address is
@@ -41,7 +41,7 @@
   <table class='project-full-width' cellspacing='0'>
     <tr>
       <td>
-        <mat-form-field>
+        <mat-form-field class="project-fromdate">
           <input name='FROM_DATE' matInput [matDatepicker]='myDatepicker' placeholder='From (date)' [formControl]='projectControls.fromDate'>
           <mat-error *ngIf='projectControls.fromDate.hasError("required")'>
             The starting Date is
@@ -52,7 +52,7 @@
         </mat-form-field>
       </td>
       <td>
-        <mat-form-field>
+        <mat-form-field class="project-todate">
           <input name='TO_DATE' matInput [matDatepicker]='myDatepicker2' placeholder='To (date)' [formControl]='projectControls.toDate'>
           <mat-error *ngIf='projectControls.toDate.hasError("required")'>
             The ending Date is
@@ -69,8 +69,8 @@
   </table>
 
   <!-- FIELD: PROJECT GOAL AMOUNT -->
-  <mat-form-field class='project-full-width'>
-    <input matInput name='GOAL' placeholder='{{attributes.GOAL.placeholder}}' [formControl]='projectControls.goal'>
+  <mat-form-field class='project-full-width project-goal'>
+    <input matInput name='GOAL' type="number" placeholder='{{attributes.GOAL.placeholder}}' [formControl]='projectControls.goal'>
     <mat-error *ngIf='projectControls.goal.hasError("required")'>
       The goal is
       <strong>required</strong>
