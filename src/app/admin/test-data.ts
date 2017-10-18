@@ -1,3 +1,30 @@
+/*
+ * Use this object when testing components that depend on data from injected services.
+ * 
+ * Available properties
+ *   orgList: the organizations list
+ *   projectList: the project list
+ *   activitiesList: the activities list
+ *   donorList: the list of donors.
+ * 
+ * Example usage:
+ * 
+ * In the following code, in the beforeEach() function of the unit test file, we are getting
+ * the service from the injector, and spying on the appropriate property, then returning the 
+ * value from the test data instead of getting the data from the server. 
+ * 
+  
+  beforeEach(() => {
+    fixture = TestBed.createComponent(OrganizationPageComponent);
+    component = fixture.componentInstance;
+    let dataService = fixture.debugElement.injector.get(DataService);
+    let orgSpy = spyOn(dataService,'getOrganizations').and.returnValue(Observable.of(testData.orgList));
+  });
+ 
+ * As we know the test data, we now know how the component should behave, and we can test that.
+ * 
+ */
+
 export const testData = {
     orgList: [
         {
