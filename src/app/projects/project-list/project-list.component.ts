@@ -54,27 +54,14 @@ export class ProjectListComponent implements OnInit {
       'heart-red': this.isRed,
       'heart-gray': this.isGray,
     };
-
-    if (this.currentUser !== null || this.currentUser !== undefined) {
-      if (this.currentUser.savedProject == null || this.currentUser.savedProject === undefined) {
-        classes['heart-red'] = false;
-        classes['heart-gray'] = true;
-        return classes;
-
-      } else {
-        if (this.currentUser.savedProject.indexOf(project_id) > -1) {
-          classes['heart-red'] = true;
-          classes['heart-gray'] = false;
-          return classes;
-
-        } else {
-          classes['heart-red'] = false;
-          classes['heart-gray'] = true;
-          return classes;
-
-        }
-      }
+    if (this.currentUser.savedProject.indexOf(project_id) > -1) {
+      classes['heart-red'] = true;
+      classes['heart-gray'] = false;
+    } else {
+      classes['heart-red'] = false;
+      classes['heart-gray'] = true;
     }
+    return classes;
   }
 
   /**
