@@ -4,7 +4,6 @@ import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-//import { google } from '@agm/core/services/google-maps-types';
 declare var google: any;
 
 @Component({
