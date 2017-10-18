@@ -29,7 +29,7 @@
   </mat-form-field>
 
   <!-- FIELD: PROJECT ADDRESS -->
-  <mat-form-field class='project-full-width'>
+  <mat-form-field class='project-full-width project-address'>
     <input matInput #address name='ADDRESS' placeholder='{{attributes.ADDRESS.placeholder}}' [formControl]='projectControls.address'>
     <mat-error *ngIf='projectControls.address.hasError("required")'>
       Address is
