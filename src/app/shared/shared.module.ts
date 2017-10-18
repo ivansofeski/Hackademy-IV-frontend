@@ -55,11 +55,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCHC4hLZ_ogiMaGy9kVZl4u0gjocEyw3EA',
-<<<<<<< HEAD
       libraries: ['places']
-=======
-      libraries: ["places"]
->>>>>>> dragable, clickable and searchbar are added now
     })
   ],
   exports: [
