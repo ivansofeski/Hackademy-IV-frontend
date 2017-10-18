@@ -52,7 +52,7 @@
         </mat-form-field>
       </td>
       <td>
-        <mat-form-field>
+        <mat-form-field class="project-todate">
           <input name='TO_DATE' matInput [matDatepicker]='myDatepicker2' placeholder='To (date)' [formControl]='projectControls.toDate'>
           <mat-error *ngIf='projectControls.toDate.hasError("required")'>
             The ending Date is
@@ -69,7 +69,7 @@
   </table>
 
   <!-- FIELD: PROJECT GOAL AMOUNT -->
-  <mat-form-field class='project-full-width'>
+  <mat-form-field class='project-full-width project-goal'>
     <input matInput name='GOAL' placeholder='{{attributes.GOAL.placeholder}}' [formControl]='projectControls.goal'>
     <mat-error *ngIf='projectControls.goal.hasError("required")'>
       The goal is
