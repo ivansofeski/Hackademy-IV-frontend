@@ -94,7 +94,7 @@ describe('ProjectFormComponent', () => {
     expect(component.projectControls.projectId.valid).toBe(false);
   });
 
-  it('should not show an error message when a well formed project ID is supplied (12345643324)',() => {
+  it('should show an error message when a well formed project ID is supplied (12345643324)',() => {
     component.projectControls.projectId.setValue('12345643324');
     fixture.detectChanges();
     button = fixture.debugElement.query(By.css('button.mat-primary')).nativeElement;
