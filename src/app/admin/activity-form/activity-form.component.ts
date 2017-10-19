@@ -6,6 +6,7 @@ import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@a
 import { Activity } from '../interface/activity';
 import { INPUT_ATTRIBUTES, NUMBERS, REGEX_UNITS } from './activity-form.constants';
 import { DataService } from '../services/data.service';
+import { NanoValidators } from '../services/nano-validators';
 
 @Component({
   selector: 'app-activity-form',
@@ -34,11 +35,11 @@ export class ActivityFormComponent implements OnInit {
   errors: any[] = [];
   activityControls = {
 
-    descImage: new FormControl('', []),
-    name: new FormControl('', [Validators.required]),
-    projectId: new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
-    activityDate: new FormControl('', [Validators.required]),
-    desc: new FormControl('', [Validators.required]),
+    descImage:   new FormControl('', []),
+    name:        new FormControl('', [NanoValidators.required]),
+    projectId:     new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
+    activityDate: new FormControl('', [NanoValidators.required]),
+    desc:         new FormControl('', [NanoValidators.required]),
   };
 
   setAttributes(options: any): void {
