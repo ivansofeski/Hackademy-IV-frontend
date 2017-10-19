@@ -1,4 +1,4 @@
-import { EventsService } from './../services/events.service';
+import { ActivitiesService } from './../services/activities.service';
 import { constructDependencies } from '@angular/core/src/di/reflective_provider';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
@@ -124,8 +124,8 @@ export class ActivityFormComponent implements OnInit {
     // this.projectControls.orgId.updateValueAndValidity();
   }
 
-  getEventsProject: Function = (): void => {
-    this._eventsService.project.subscribe(
+  getactivitiesProject: Function = (): void => {
+    this._activitiesService.project.subscribe(
       project => {
         if (project !== undefined && Object.keys(project).length > 0) {
           this.loadedProject = project;
@@ -146,12 +146,12 @@ export class ActivityFormComponent implements OnInit {
     );
   }
 
-  constructor(private _router: ActivatedRoute, private _dataService: DataService, private _eventsService: EventsService) { }
+  constructor(private _router: ActivatedRoute, private _dataService: DataService, private _activitiesService: ActivitiesService) { }
 
   ngOnInit() {
-    this.functions = new ActivityFormFunctions(this.activityForm, this._eventsService);
+    this.functions = new ActivityFormFunctions(this.activityForm, this._activitiesService);
     this.inputs = this.functions.setInputAttributes;
-    this.getEventsProject();
+    this.getactivitiesProject();
     if (this.inputs !== undefined) {
       this.inputs();
     }
@@ -184,8 +184,8 @@ export class ActivityFormFunctions {
     }
   }
 
-  /* getEventsProject: Function = (proj: Object): void => {
-    this._eventsService.project.subscribe(
+  /* getactivitiesProject: Function = (proj: Object): void => {
+    this._activitiesService.project.subscribe(
       project => {
          proj = project;
          console.log(project);
@@ -193,5 +193,5 @@ export class ActivityFormFunctions {
     );
   } */
 
-  constructor(private _form: ElementRef, private _eventsService: EventsService) { }
+  constructor(private _form: ElementRef, private _activitiesService: ActivitiesService) { }
 }
