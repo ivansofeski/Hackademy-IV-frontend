@@ -9,6 +9,7 @@ import { AdminModule } from './admin/admin.module';
 import { ProjectsModule } from './projects/projects.module';
 import {DonorModule} from './donor/donor.module';
 import {LocalStorageService} from './service/local-storage.service';
+import { GeolocationService } from './service/geolocation.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {LocalStorageService} from './service/local-storage.service';
     DonorModule,
     BrowserAnimationsModule
   ],
-  providers: [LocalStorageService],
+  providers: [LocalStorageService,
+    GeolocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

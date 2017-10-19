@@ -4,6 +4,7 @@ import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import { GeolocationService } from '../service/geolocation.service';
 declare var google: any;
 
 @Component({
@@ -43,7 +44,8 @@ export class GeolocationComponent implements OnInit {
   constructor(private _projectService: ProjectService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private _http: HttpClient) { 
+    // private _http: HttpClient,
+    private _geolocationService: GeolocationService) { 
   }
 
   ngOnInit() {    
@@ -76,38 +78,42 @@ export class GeolocationComponent implements OnInit {
   }
 
   showPosition(){
-    this.getIP().subscribe(res =>{
-      this.ipInfo= res;
-      console.log(this.ipInfo);
-    });
+    // this.getIP().subscribe(res =>{
+    //   this.ipInfo= res;
+    //   console.log(this.ipInfo);
+    // });
     this.radius=4000;
     this.zoom = 12;
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position=>{
-        this.position=position;
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        console.log("Latitude: " + this.lat +
-        " -- Longitude: " + this.lng);
-      }, 
-      error => {
-        if (error.PERMISSION_DENIED){
-          console.log("Geolocation is denied by the user.");
-        } else if (error.POSITION_UNAVAILABLE){
-          console.log("Geolocation is not availabe.");
-        }
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(position=>{
+    //     this.position=position;
+    //     this.lat = position.coords.latitude;
+    //     this.lng = position.coords.longitude;
+    //     console.log("Latitude: " + this.lat +
+    //     " -- Longitude: " + this.lng);
+    //   }, 
+    //   error => {
+    //     if (error.PERMISSION_DENIED){
+    //       console.log("Geolocation is denied by the user.");
+    //     } else if (error.POSITION_UNAVAILABLE){
+    //       console.log("Geolocation is not availabe.");
+    //     }
         
-        console.log("IP address is used to locate the user.");
-        this.lat = this.ipInfo.lat;
-        this.lng = this.ipInfo.lon;
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-      console.log("IP address is used to locate the user.");
-      this.lat = this.ipInfo.lat;
-      this.lng = this.ipInfo.lon;
+    //     console.log("IP address is used to locate the user.");
+    //     this.lat = this.ipInfo.lat;
+    //     this.lng = this.ipInfo.lon;
+    //   });
+    // } else {
+    //   console.log("Geolocation is not supported by this browser.");
+    //   console.log("IP address is used to locate the user.");
+    //   this.lat = this.ipInfo.lat;
+    //   this.lng = this.ipInfo.lon;
 
-    }
+    // }
+    this._geolocationService.getGeolocation().subscribe(location => {
+      this.lat = location.lat;
+      this.lng = location.lng;
+    });
     this._projectService.getProjects().subscribe(
       res => {
         console.log(res);
@@ -165,8 +171,8 @@ getLatLan(address: string) {
     })
 }
 
-getIP(): Observable<any[]> {
-  return this._http.get('//ip-api.com/json') // ...using post request
-  .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
-}
+// getIP(): Observable<any[]> {
+//   return this._http.get('//ip-api.com/json') // ...using post request
+//   .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+// }
 }

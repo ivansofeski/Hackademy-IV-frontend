@@ -14,6 +14,7 @@ export class ProjectListComponent implements OnInit {
   projectList: any[] = [];
   project: Project;
   currentUser: any;
+  userLocation: any;
 
   isRed = false;
   isGray = true;
@@ -27,7 +28,6 @@ export class ProjectListComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.currentUser = this._localStorageService.getCurrentUser();
 
     this._projectService.getProjects().subscribe(
@@ -42,6 +42,7 @@ export class ProjectListComponent implements OnInit {
     );
   }
 
+  
 
   /**
    * this function will return a class that is responsible for activating and deactivating the color red in the
@@ -107,4 +108,5 @@ export class ProjectListComponent implements OnInit {
       this._localStorageService.updateCurrnetUser(this.currentUser);
     }
   }
+
 }
