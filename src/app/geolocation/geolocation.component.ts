@@ -9,7 +9,8 @@ declare var google: any;
 @Component({
   //selector: 'app-geolocation',
   templateUrl: './geolocation.component.html',
-  styleUrls: ['./geolocation.component.scss']
+  styleUrls: ['./geolocation.component.scss',
+    './_geolocation.component-theme.scss']
 })
 export class GeolocationComponent implements OnInit {
   ipInfo:any;
@@ -21,32 +22,32 @@ export class GeolocationComponent implements OnInit {
   position;
   geocoder;
   inputAddressElm;
-  
+
   @ViewChild("search")
   public searchElementRef: ElementRef;
 
   @ViewChild("searchButton")
   public searchButtonElementRef: ElementRef;
 
-  iconUrl={url:"../assets/icons/pin.png",
+  iconUrl={url:"../assets/icons/person-location.png",
             scaledSize: {
-              height: 50,
-              width: 50
+              height: 45,
+              width: 35
             }
           }
-  iconUrlProject={url:"../assets/icons/blueMarker.png",
+  iconUrlProject={url:"../assets/icons/project-icon.png",
           scaledSize: {
-            height: 35,
-            width: 25
+            height: 45,
+            width: 45
           }
         }
   constructor(private _projectService: ProjectService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private _http: HttpClient) { 
+    private _http: HttpClient) {
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.showPosition();
     this.inputAddressElm= this.searchElementRef.nativeElement;
     let searchButtElm = document.getElementById("searchButton");
@@ -54,7 +55,7 @@ export class GeolocationComponent implements OnInit {
       let autocomplete = new google.maps.places.Autocomplete(this.inputAddressElm, {
         types: ["address"]
       });
-      
+
       // this.searchButtonElementRef.nativeElement.addListener("click", this.search());
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
@@ -71,7 +72,7 @@ export class GeolocationComponent implements OnInit {
           this.lng = place.geometry.location.lng();
           this.zoom = 12;
         });
-      });     
+      });
     });
   }
 
@@ -89,14 +90,14 @@ export class GeolocationComponent implements OnInit {
         this.lng = position.coords.longitude;
         console.log("Latitude: " + this.lat +
         " -- Longitude: " + this.lng);
-      }, 
+      },
       error => {
         if (error.PERMISSION_DENIED){
           console.log("Geolocation is denied by the user.");
         } else if (error.POSITION_UNAVAILABLE){
           console.log("Geolocation is not availabe.");
         }
-        
+
         console.log("IP address is used to locate the user.");
         this.lat = this.ipInfo.lat;
         this.lng = this.ipInfo.lon;
