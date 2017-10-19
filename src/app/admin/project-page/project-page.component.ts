@@ -1,8 +1,9 @@
-import { EventsService } from './../services/events.service';
+import { ActivitiesService } from './../services/activities.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { Project } from '../interface/project';
+import { Activity } from '../interface/activity';
 
 @Component({
   selector: 'app-project-page',
@@ -14,6 +15,7 @@ export class ProjectPageComponent implements OnInit {
   _projectId: number = 0;
   _project: any;
   errors: any[] = [];
+  projectActivities: Activity[];
 
   get project(){
     return this._project;
@@ -31,6 +33,7 @@ export class ProjectPageComponent implements OnInit {
       );
     }else this._project.organization = null;
   }
+
   get projectId():number{
     return this._projectId;
   }
@@ -49,15 +52,24 @@ export class ProjectPageComponent implements OnInit {
     }
   }
   constructor(public route: ActivatedRoute, public router: Router,private dataService: DataService,
-     private _eventsService: EventsService) { }
+     private _activitiesService: ActivitiesService) { }
 
   ngOnInit() {
     this.projectId = +this.route.snapshot.paramMap.get('id');
+    let project_activity = this._activitiesService.getProjectActivities(this.projectId);
+    project_activity.subscribe(
+      res => {
+         console.log(res)
+        this.projectActivities = res;
+      },
+      error => this.errors.push(error)
+    );
+
   }
 
   EventButton() {
     // alert('your click on the row with the Project  name ' + row.projectName);
-    this._eventsService.storeProject(this.project);
+    this._activitiesService.storeProject(this.project);
     this.router.navigateByUrl('/admin/projects/view/' + this.projectId + '/new');
   }
 }
