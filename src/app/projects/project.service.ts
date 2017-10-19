@@ -17,7 +17,6 @@ export class ProjectService {
 
   getProjects(): Observable<Project[]> {
     return this._http.get<Project[]>(this._projectUrl)
-      .do(data => console.log('info about projects is being retrieved---' + data.length))
       .catch(this.handlerError);
   }
 

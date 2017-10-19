@@ -32,7 +32,6 @@ export class ProjectListComponent implements OnInit {
 
     this._projectService.getProjects().subscribe(
       res => {
-        console.log(res);
         this.projectList = res.filter((v, k) => {
             return v.open === 'true';
           },
