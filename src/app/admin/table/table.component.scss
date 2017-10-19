@@ -1,0 +1,74 @@
+$menuColor: '#4cb19e ';
+$lighterMenuColor: 'rgba(160, 220, 209, 0.53)';
+
+
+.admin-table {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid silver;
+
+  overflow: hidden;
+}
+
+.admin-table,
+.admin-table * {
+  box-sizing: border-box;
+}
+
+.table-header-row,
+.table-data-row {
+  padding: 0;
+}
+
+.table-data-row:not(:last-of-type) {
+  border-bottom: 0.5px solid rgb(211, 211, 211);
+}
+
+.table-data-row:last-of-type {
+  border: none;
+}
+
+.table-header-row {
+  background-color: #{$menuColor};
+}
+
+.table-data-cell,
+.table-header-cell {
+  position: relative;
+  display: block;
+  padding: 10px 5px;
+  color: rgb(53, 53, 53);
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;  
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.table-header-cell {
+  color: white;
+  font-size: 18px;
+  text-transform: capitalize;
+}
+
+.table-data-cell:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 50%;
+  right: 0;
+  width: 1px;
+  height: 25px;
+  background-color: silver;
+
+  transform: translateY(-50%);
+}
+
+.table-data-row:hover {
+  background-color: #{$lighterMenuColor};
+}
+
+.counter {
+  max-width: 50px;
+}

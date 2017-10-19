@@ -1,7 +1,7 @@
 [
     {
-        "id": 1,
         "orgId": "J67P24-cUKb",
+        "orgLogo": "/assets/logos/unicef/logo_001.jpg",
         "name": "Unicef",
         "address": "Främsteby Karlsborg 3, 28236, Malmö",
         "contact": {
@@ -9,13 +9,12 @@
             "email": "support@orten.io",
             "person": "Ivan"
         },
-        "password": "@#aaOB23WEpp!",
-        "billing": "5569-9339-5553-5681",
+        "bankAccount": "5569-9339-5553-5681",
         "description": "Hello compassionate hyena one up infectiously scowled octopus one far walrus goodness as gosh when inclusively lenient husky this bluebird underneath this where more jeepers under thoughtful."
     },
     {
-        "id": 2,
         "orgId": "biSarl-6a3t",
+        "orgLogo": "/assets/logos/red_cross/logo_001.jpg",
         "name": "Red Cross",
         "address": "Norrfjäll 58, 26215, Goteborg",
         "contact": {
@@ -23,13 +22,12 @@
             "email": "support@jayway.com",
             "person": "Olaf"
         },
-        "password": "qwerty@#45",
-        "billing": "4572-6569-8361-8819",
+        "bankAccount": "4572-6569-8361-8819",
         "description": "Far more some goodness alas hello jeepers hello amongst jeepers seagull anathematically well drove more one bound through while much in however overshot strived orca in burned showed however by."
     },
     {
-        "id": 3,
         "orgId": "lScbkv-Ilz6",
+        "orgLogo": "/assets/logos/remotion/logo_001.jpg",
         "name": "Remotion",
         "address": "Stockton Street, Broadlands",
         "contact": {
@@ -37,13 +35,12 @@
             "email": "mcbridewise@remotion.com",
             "person": "Ballard Petty"
         },
-        "password": "59d6277005660094ca1d8150",
-        "billing": "5569-9339-5553-5681",
+        "bankAccount": "5569-9339-5553-5681",
         "description": "proident exercitation aute enim aliqua cupidatat culpa eu ex et"
     },
     {
-        "id": 4,
         "orgId": "hW732U-HIyG",
+        "orgLogo": "/assets/logos/exodoc/logo_001.png",
         "name": "Exodoc",
         "address": "Albemarle Road, Edneyville",
         "contact": {
@@ -51,13 +48,12 @@
             "email": "ballardpetty@exodoc.com",
             "person": "Alford Reed"
         },
-        "password": "59d6277096e63b3d91f79c5e",
-        "billing": "4572-6569-8361-8819",
+        "bankAccount": "4572-6569-8361-8819",
         "description": "consequat ut ea nisi cupidatat excepteur aute excepteur ex id"
     },
     {
-        "id": 5,
         "orgId": "wyzNls-bkTb",
+        "orgLogo": "/assets/logos/talent_without_borders/logo_001.jpeg",
         "name": "Talent without Borders",
         "address": "Törneby 41, Landskrona",
         "contact": {
@@ -65,50 +61,46 @@
             "email": "ClaudiaCarlsson@rhyta.com",
             "person": "Claudia Carlsson"
         },
-        "password": "59d6277096e63b3d91f79c5e",
-        "billing": "4485-8777-8550-8000",
+        "bankAccount": "4485-8777-8550-8000",
         "description": "consequat ut ea nisi cupidatat excepteur aute excepteur ex id"
     },
     {
-        "id": 6,
         "orgId": "FJn5Ka-x4zj",
-        "name": "Imnseta",
+        "orgLogo": "/assets/logos/inseta/logo_001.jpg",
+        "name": "Inseta",
         "address": "Verdandi Gränd 33, Ömeå",
         "contact": {
             "phone": "0952-2589184",
             "email": "AvaAbrahamsson@dayrep.com",
             "person": "Ava Abrahamsson"
         },
-        "password": "59d6277096e63b3d91f79c5e",
-        "billing": "4453-2514-0591-1130",
+        "bankAccount": "4453-2514-0591-1130",
         "description": "consequat ut ea nisi cupidatat excepteur aute excepteur ex id"
     },
     {
-        "id": 7,
         "orgId": "iWVGUT-cyQv",
-        "name": "Do it!",
+        "orgLogo": "/assets/logos/do_it/logo_001.jpg",
+        "name": "Do It",
         "address": "Ellenö 76, Helsinborg",
         "contact": {
             "phone": "0418-4982514",
             "email": "ElinLundin@armyspy.com",
             "person": "Elin Lundin"
         },
-        "password": "59d6277096e63b3d91f79c5e",
-        "billing": "4402-0071-4599-0684",
+        "bankAccount": "4402-0071-4599-0684",
         "description": "consequat ut ea nisi cupidatat excepteur aute excepteur ex id"
     },
     {
-        "id": 8,
         "orgId": "ZXP8qn-XSPJ",
-        "name": "Get rythem",
+        "orgLogo": "/assets/logos/wwf/logo_001.gif",
+        "name": "WWF",
         "address": "Klinta 43, Käglinge",
         "contact": {
             "phone": "0923-3638559",
             "email": "bZahraaBergstrom@jourrapide.com",
             "person": "Zahraa Bergström"
         },
-        "password": "59d6277096e63b3d91f79c5e",
-        "billing": "4916-0053-9151-3102",
+        "bankAccount": "4916-0053-9151-3102",
         "description": "consequat ut ea nisi cupidatat excepteur aute excepteur ex id"
     }
 ]

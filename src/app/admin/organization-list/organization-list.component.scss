@@ -1,85 +1,42 @@
-$menuColor: '#4cb19e ';
-$lighterMenuColor: '#6bc1b1 ';
-
-/* Structure specific for the organization table*/
-.container{
-  background: #eee;
-  padding-top: 15vh;
-}
-
-mat-card {
-  margin: auto ;
-  
-  width: 700px;
-  height: auto;
-}
-
-
-
-.organization-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 150px;
-  max-width: 700px;
+.container {
+  position: relative;
+  display: block;
   width: 100%;
-  margin: auto;
-  padding-bottom: 10px;
+  padding: 100px 40px;
+  overflow: hidden;
+
+  box-sizing: border-box;
 }
 
-.organization-table {
-  flex: 1 1 auto;
-  overflow: auto;
-  max-height: 500px;
+:host ::ng-deep app-admin-table .table-data-cell[class*="orgLogo"] {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  max-width: 70px;
+  height: 50px;
+  max-height: 50px;
+  overflow: hidden;
 }
 
-.organization-header-row,
-.organization-row {
-  display: flex;
-  border-bottom: 1px solid #ccc;
-  align-items: center;
-  height: 32px;
-  padding: 0 8px;
+:host ::ng-deep app-admin-table .table-header-cell[class*="orgLogo"] {
+  max-width: 70px;
 }
 
-.organization-header-row {
-  background-color: #{$menuColor};
-}
-
-.organization-header-cell {
-  font-size: 14px;
+:host ::ng-deep app-admin-table .table-data-cell[class*="name"] {
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.904);
 }
 
-.organization-cell {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.87);
+:host ::ng-deep app-admin-table .table-data-cell[class*="orgLogo"] > img {
+  position: relative;
+  display: block;
+  height: 100%;
+  margin: 0 auto;
 }
 
-mat-row:hover {
-  background-color: #aad1e4;
+:host ::ng-deep app-admin-table .table-data-cell[class*="orgId"] {
+  text-transform: uppercase;
 }
 
-.mat-cell:nth-child(1),
-.mat-header-cell:nth-child(1),
-{
-  flex: 0 0 5%;
-}
-
-.mat-cell:nth-child(2),
-.mat-header-cell:nth-child(2),
-{
-  flex: 0 0 20%;
-}
-
-.mat-cell:nth-child(3),
-.mat-header-cell:nth-child(3),
-{
-  flex: 0 0 40%;
-}
-
-.mat-cell:nth-child(4),
-.mat-header-cell:nth-child(4),
-{
-  flex: 0 0 15%;
+:host ::ng-deep app-admin-table .table-data-cell[class*="email"] {
+  text-transform: lowercase;
 }

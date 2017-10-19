@@ -1,3 +1,12 @@
-<p>
-  table works!
-</p>
+<div [class.loaded]='tableData ? true : false'>
+  <mat-table #table [dataSource]="dataSource" class="admin-table" matSort>
+
+    <ng-container *ngFor='let col of columns.all; let i = index;' [matColumnDef]='col?.label'>
+      <mat-header-cell *matHeaderCellDef [ngClass]='{"table-header-cell": true, "counter": i===0}' [innerHtml]='col?.value' mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let row" [ngClass]='{"table-data-cell": true, "counter": i===0}' [innerHtml]='insertValues(col?.label, row)' [title]='col?.value'></mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns.visible" class="table-header-row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns.visible;" class="table-data-row"></mat-row>
+  </mat-table>
+</div>
