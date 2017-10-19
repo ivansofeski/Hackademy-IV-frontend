@@ -18,13 +18,12 @@
             <div class="org-address">{{organization.address}}</div>
           </div>
         </mat-list-item>
-        <mat-list-item class="org-billing">
+        <mat-list-item class="org-bankAccount">
           <div mat-line>
-            <div class="label">Billing: </div>
-            <div class="org-billing">{{organization.billing}}</div>
+            <div class="label">Bank Account: </div>
+            <div class="org-bank-account">{{organization.bankAccount}}</div>
           </div>
         </mat-list-item>
-
         <mat-list-item class="org-person">
           <div mat-line>
             <div class="label">Contact Name: </div>
@@ -45,17 +44,11 @@
         </mat-list-item>
       </mat-card-content>
     </mat-list>
-
-
     <div class="project-list">
-
-
       <div mat-line>
         <h4>Projects of {{organization.name}}</h4>
-
         <ul class="project-list">
           <li *ngFor="let project of organization.projects">
-
             <a [routerLink]="['/admin/projects/view/', project.id]">{{project.projectName}}</a>
           </li>
         </ul>

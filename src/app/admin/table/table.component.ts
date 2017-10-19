@@ -16,10 +16,25 @@ import { DataService } from '../services/data.service';
 import { Organization } from '../interface/organization';
 
 @Component({
+  selector: 'app-admin-link',
+  template: '<a routerLink="{{link}}"></a>'
+})
+
+class AdminLinksComponent {
+  link = '/admin';
+
+  constructor(private _link: string) {
+    // this.link = _link;
+  }
+}
+
+@Component({
   selector: 'app-admin-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  entryComponents: [AdminLinksComponent]
 })
+
 
 export class TableComponent implements OnInit {
   @Input() tableData;
@@ -28,6 +43,8 @@ export class TableComponent implements OnInit {
   errors: any[] = [];
 
   private _dataSource: AdminTableDataSource;
+
+  AdminLinksComponent = AdminLinksComponent;
 
   get dataSource(): AdminTableDataSource {
     return new AdminTableDataSource(this.tableData, this.columns.visible, this.sort);
@@ -55,6 +72,8 @@ export class TableComponent implements OnInit {
     let _value = '';
 
     switch (label) {
+      case 'name':
+        return null;
       case 'person':
       case 'phone':
       case 'email':
@@ -72,6 +91,13 @@ export class TableComponent implements OnInit {
     }
 
     return _value;
+  }
+
+  setLink(item: Object): string {
+    let _link = '';
+    const id = this.dataSource.subject.value.indexOf(item) + 1;
+    _link = `/admin/organizations/view/${id}`;
+    return _link;
   }
 
   ngOnInit() {

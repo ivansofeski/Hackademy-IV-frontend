@@ -23,7 +23,7 @@ export class OrganizationPageComponent implements OnInit {
     if(value > 0){
       this.dataService.getOrganizations().subscribe(
         res => {
-          this.organization = res.filter((v, k) => v.id == value)[0];
+          this.organization = res.filter((v, k) =>  res.indexOf(v) + 1 === value)[0];
         },
         error => {
           console.log(error);
