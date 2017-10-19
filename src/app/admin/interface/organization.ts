@@ -5,14 +5,14 @@ interface Contact {
 }
 
 export interface Organization {
-    id: number; // Subject to change (Remove) - This is a property only get/set from the database!
-    orgId: string;
-    name: string;
-    address: string;
-    contact: Contact;
-    password: string;
-    billing: string;
-    description: string;
+    id?:                number;
+    orgNo:              string;
+    orgLogo?:           string;
+    name:               string;
+    address:            string;
+    contact:            Contact;
+    bankAccount:        string;
+    description:        string;
 }
 
 // TESTING PURPOSE ONLY! USE AT YOUR OWN RISK!
