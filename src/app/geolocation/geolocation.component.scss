@@ -33,6 +33,7 @@
     left: 0;
     right: 0;
     background: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 
     mat-form-field {
       width: 100%;
@@ -42,6 +43,9 @@
         label {
           padding-left: 10px;
         }
+      }
+      ::ng-deep .mat-form-field-underline {
+        display: none;
       }
       input {
         width: 100vw;
@@ -54,13 +58,14 @@
         white-space: nowrap;
       }
     }
-    button {
+    ::ng-deep button {
       position: absolute;
       right: 0;
       z-index: 22;
       top: 0;
       height: 7.5vh;
       padding: 2px;
+      background: #eee;
       .material-icons.search {
         color: silver;
       }
@@ -99,6 +104,8 @@
     margin: auto;
     left: 20px;
     width: 75%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
     button {
       padding: 0.5em;
       width: 100%;
