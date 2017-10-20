@@ -422,4 +422,17 @@ confirm_location() {
     const path = 'projects/' + project.id;
     this.router.navigate([path]);
   }
+getIP(): Observable<any[]> {
+  return this._http.get('//ip-api.com/json') // ...using post request
+  .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+}
+  current_location(){
+  this.hide_default = true;
+}
+default_location() {
+this.hide_default = false;
+}
+confirm_location() {
+    this.center_changed = false;
+}
 }
