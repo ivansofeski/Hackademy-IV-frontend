@@ -205,10 +205,10 @@
         "fromDate": "2016/09/03",
         "toDate": "2018/10/09",
         "location": {
-            "lat": 55.605623,
-            "lng": 13.020935
+            "lat": 59.3315346,
+            "lng": 18.05924034
         },
-        "address": "Östergatan 4",
+        "address": "Klarabergsgatan 4",
         "neededFunding": 7350,
         "raisedFunding": 2250,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",
@@ -230,10 +230,10 @@
         "fromDate": "2017/05/22",
         "toDate": "2017/10/04",
         "location": {
-            "lat": 55.606329,
-            "lng": 13.010293
+            "lat": 59.31425476,
+            "lng": 18.08171082
         },
-        "address": "Östergatan 4",
+        "address": "Nytorgsgatan 4",
         "neededFunding": 2000,
         "raisedFunding": 2000,
         "description": "Litora sed purus lorem vel quam sagittis euismod lacinia mattis nec, habitasse nunc lorem vivamus torquent suspendisse ac aenean leo consectetur taciti, donec sociosqu dictumst mollis vivamus nam aliquet nibh vestibulum magna mauris duis nulla fermentum enim convallis, ipsum urna curabitur netus et etiam, suspendisse ligula volutpat fames aenean.",

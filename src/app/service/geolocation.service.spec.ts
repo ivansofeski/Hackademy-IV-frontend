@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { GeolocationService } from './geolocation.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('GeolocationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [GeolocationService]
+      providers: [GeolocationService],
+      imports: [HttpClientModule]
     });
   });
 
