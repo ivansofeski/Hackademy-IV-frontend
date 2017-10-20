@@ -56,7 +56,7 @@ export class GeolocationService {
       }
     });
   }
-  getIPLocation(): Observable<any> {
+  getIPLocation() {
     return this._http.get('//ip-api.com/json') // ...using post request
     .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
   }

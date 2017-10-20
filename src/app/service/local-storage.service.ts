@@ -3,7 +3,7 @@
  */
 
 import {Injectable} from '@angular/core';
-import { GeolocationService } from './geolocation.service';
+// import { GeolocationService } from './geolocation.service';
 
 @Injectable()
 export class LocalStorageService {
@@ -15,7 +15,7 @@ export class LocalStorageService {
   errors: any[] = [];
 
 
-  constructor(private _geolocationService: GeolocationService) {
+  constructor() {
   }
 
   /**
@@ -28,19 +28,12 @@ export class LocalStorageService {
 
       this.currentUser['id'] = Math.floor(Math.random() * 100000) + 1;
       this.currentUser['userImage'] = './assets/photos/userImage1.jpeg';
-      this.setLocation(this.currentUser);
+      // this.setLocation(this.currentUser);
       this.currentUser['userLocation'] = {'lat': this.lat, 'lng': this.lng};
       this.user = JSON.stringify(this.currentUser);
       localStorage.setItem(this.localStorageKey, this.user);
 
     }
-  }
-  setLocation(user) {
-    const location = this._geolocationService.getIPLocation().subscribe(userlocation => {
-      console.log(userlocation);
-      this.lat = userlocation.lat;
-      this.lng = userlocation.lon;
-    });
   }
 
   /**

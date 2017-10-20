@@ -80,8 +80,8 @@
         "fromDate": "2017/09/15",
         "toDate": "2017/11/15",
         "location": {
-            "lat": 55.606210,
-            "lng": 13.006070
+            "lat": 55.608192,
+            "lng": 13.000897
         },
         "address": "Östergatan 4",
         "neededFunding": 1000,
@@ -105,8 +105,8 @@
         "fromDate": "2017/09/15",
         "toDate": "2017/10/01",
         "location": {
-            "lat": 55.606210,
-            "lng": 13.006070
+            "lat": 55.607261,
+            "lng": 13.020842
         },
         "address": "Östergatan 4",
         "neededFunding": 1000,
@@ -130,8 +130,8 @@
         "fromDate": "2017/09/15",
         "toDate": "2017/10/15",
         "location": {
-            "lat": 55.606210,
-            "lng": 13.006070
+            "lat": 55.606923,
+            "lng": 13.023454
         },
         "address": "Östergatan 4",
         "neededFunding": 1000,
@@ -155,8 +155,8 @@
         "fromDate": "2017/02/21",
         "toDate": "2017/06/01",
         "location": {
-            "lat": 55.606210,
-            "lng": 13.006070
+            "lat": 55.606087,
+            "lng": 13.057342
         },
         "address": "Östergatan 4",
         "neededFunding": 1500,
@@ -180,8 +180,8 @@
         "fromDate": "2017/09/15",
         "toDate": "2018/01/15",
         "location": {
-            "lat": 55.606210,
-            "lng": 13.006070
+            "lat": 55.604111,
+            "lng": 13.039814
         },
         "address": "Östergatan 4",
         "neededFunding": 9000,
@@ -205,8 +205,8 @@
         "fromDate": "2016/09/03",
         "toDate": "2018/10/09",
         "location": {
-            "lat": 55.606210,
-            "lng": 13.006070
+            "lat": 55.605623,
+            "lng": 13.020935
         },
         "address": "Östergatan 4",
         "neededFunding": 7350,
@@ -230,8 +230,8 @@
         "fromDate": "2017/05/22",
         "toDate": "2017/10/04",
         "location": {
-            "lat": 55.606210,
-            "lng": 13.006070
+            "lat": 55.606329,
+            "lng": 13.010293
         },
         "address": "Östergatan 4",
         "neededFunding": 2000,
