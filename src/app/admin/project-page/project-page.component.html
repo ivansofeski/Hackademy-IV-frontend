@@ -61,6 +61,7 @@
             <agm-marker [latitude]="project.location.lat" [longitude]="project.location.lng"></agm-marker>
           </agm-map>
         </div>
+        <button mat-raised-button color="primary" [routerLink]="['/admin/projects/view/',_projectId,'activities','new']">Add Activity</button>
       </mat-card-content>
     </mat-list>
 

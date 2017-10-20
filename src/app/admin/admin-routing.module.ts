@@ -9,6 +9,7 @@ import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ClosedProjectsComponent } from './reports/closed-projects/closed-projects.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ActivityFormComponent } from './activity-form/activity-form.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/new', component: ProjectFormComponent },
       { path: 'projects/view/:id', component: ProjectPageComponent },
+      { path: 'projects/view/:id/activities/new', component: ActivityFormComponent },
       { path: 'reports/closed-projects', component: ClosedProjectsComponent }
     ]
   },
