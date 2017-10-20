@@ -279,6 +279,8 @@ export class GeolocationComponent implements OnInit {
       ]
     }
   ];
+  hide_default = true;
+  center_changed = false;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -380,6 +382,7 @@ export class GeolocationComponent implements OnInit {
     console.log(this.lng);
     this.lng=event.coords.lng;
     console.log(this.lng);
+    this.center_changed = true;
   }
 
   mapClicked(event) {
@@ -426,5 +429,14 @@ getLatLan(address: string) {
 getIP(): Observable<any[]> {
   return this._http.get('//ip-api.com/json') // ...using post request
   .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+}
+  current_location(){
+  this.hide_default = true;
+}
+default_location() {
+this.hide_default = false;
+}
+confirm_location() {
+    this.center_changed = false;
 }
 }
