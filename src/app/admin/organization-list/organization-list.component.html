@@ -1,33 +1,66 @@
-<br>
-<br>
-<div>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th rowspan='2'>ID</th>
-                    <th rowspan='2'>OrgID</th>
-                    <th rowspan='2'>Name</th>
-                    <th rowspan='2'>Address</th>
-                    <th colspan='3'>Contact</th> 
-                </tr>
-                <tr>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Person</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let organization of orgList">
-                    <td>{{organization.id}}</td>
-                    <td>{{organization.orgId}}</td>
-                    <td><a href="/admin/organizations/view/{{organization.id}}">{{organization.name}}</a></td>
-                    <td>{{organization.address}}</td>
-                    <td>{{organization.contact.phone}}</td>
-                    <td>{{organization.contact.email}}</td>
-                    <td>{{organization.contact.person}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Organization List</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <!-- Material Mat-table to display the list of organization-->
+      <div class="organization-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource" class="organization-table" matSort>
+
+          <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Id Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef class="organization-header-cell" mat-sort-header> ID </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="organization-cell">
+              {{row.id}}
+            </mat-cell>
+          </ng-container>
+
+          <!-- row Id Column -->
+          <ng-container matColumnDef="orgId">
+            <mat-header-cell *matHeaderCellDef class="organization-header-cell" mat-sort-header> Organization Number </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="customWidth"> {{row.orgId}} </mat-cell>
+          </ng-container>
+
+          <!-- row Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef class="organization-header-cell" mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="organization-cell"><a [routerLink]="['/admin/organizations/view/', row.id]">{{row.name}} </a> </mat-cell>
+          </ng-container>
+
+          <!-- Adress Column -->
+          <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef class="organization-header-cell" mat-sort-header> Address </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="organization-cell"> {{row.address}} </mat-cell>
+          </ng-container>
+
+          <!-- Contact Name Column -->
+          <ng-container matColumnDef="person">
+            <mat-header-cell *matHeaderCellDef class="organization-header-cell"> Contact </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="organization-cell"> {{row.contact.person}} </mat-cell>
+          </ng-container>
+
+          <!-- Contact Email Column -->
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef class="organization-header-cell"> Contact Email </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="organization-cell"> {{row.contact.email}} </mat-cell>
+          </ng-container>
+
+          <!-- Contact Phone Column -->
+          <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef class="organization-header-cell"> Contact Phone </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="organization-cell"> {{row.contact.phone}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns" class="organization-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" class="organization-row" title='Double click to go to this organization detailed page.' (dblclick)="handleRowClick(row)"></mat-row>
+        </mat-table>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

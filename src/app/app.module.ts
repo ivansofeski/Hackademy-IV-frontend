@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ProjectsModule } from './projects/projects.module';
+import {DonorModule} from './donor/donor.module';
+import {LocalStorageService} from './service/local-storage.service';
+import { GeolocationService } from './service/geolocation.service';
 
 @NgModule({
   declarations: [
@@ -17,10 +20,12 @@ import { ProjectsModule } from './projects/projects.module';
     AppRoutingModule,
     SharedModule,
     ProjectsModule,
-    AdminModule,  
+    AdminModule,
+    DonorModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [LocalStorageService,
+    GeolocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

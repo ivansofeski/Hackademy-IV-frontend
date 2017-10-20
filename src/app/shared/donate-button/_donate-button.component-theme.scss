@@ -1,0 +1,25 @@
+@import "../../../nano-theme.scss";
+
+
+@mixin app-donate-button-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+ 
+    .fab-item {
+        background: mat-color($primary);
+        &:hover {
+          background:mat-color($primary,darker)
+        }
+    }
+
+    .fab-toggle {
+      background: mat-color($primary);
+    }
+  
+}
+
+@include app-donate-button-theme($nano-app-theme);  

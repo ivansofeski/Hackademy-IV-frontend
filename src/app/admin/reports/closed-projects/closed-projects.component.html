@@ -1,0 +1,65 @@
+<div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class='card-title'>Closed Projects</mat-card-title>
+      </mat-card-header>
+      <mat-form-field class='dateFilters' >
+        <mat-select class='filter-year' placeholder="year" (change)='filterClosedProjects({chosenYear: $event.value})' selected='yearNow'>
+          <mat-option *ngFor='let year of years' [value]='year' [textContent]='year'></mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class='dateFilters'>
+        <mat-select class='filter-month' placeholder="month" (change)='filterClosedProjects({chosenMonth: $event.value})'>
+          <mat-option *ngFor='let month of months' [value]='month.value' [textContent]='month.viewValue'></mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-card-content>
+        <!-- Material Mat-table to display the list of organization-->
+        <div class="organization-container mat-elevation-z8">
+          <mat-table #table [dataSource]="dataSource" class="organization-table" matSort>
+            <!-- ID -->
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell counter" mat-sort-header> # </mat-header-cell>
+              <mat-cell *matCellDef="let row;" class="project-cell counter"> {{row.id}} </mat-cell>
+            </ng-container>
+
+            <!-- PROJECT NAME -->
+            <ng-container matColumnDef="projectName">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Project Name </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.projectName}} </mat-cell>
+            </ng-container>
+  
+            <!-- ORGANIZATION NAME -->
+            <ng-container matColumnDef="orgName">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Organization Name </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.organization?.name}} </mat-cell>
+            </ng-container>
+  
+            <!-- ORG. BANK ACCOUNT -->
+            <ng-container matColumnDef="bankAccount">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Bank Account </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.organization?.billing}} </mat-cell>
+            </ng-container>
+  
+            <!-- COLLECTED AMOUNT -->
+            <ng-container matColumnDef="fundsRaised">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Collected Amount </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.raisedFunding}} / {{row.neededFunding}} </mat-cell>
+            </ng-container>
+
+            <!-- DUE DATE -->
+            <ng-container matColumnDef="dueDate">
+              <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Due Date </mat-header-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.toDate}} </mat-cell>
+            </ng-container>
+  
+          
+  
+            <mat-header-row *matHeaderRowDef="displayedColumns" class="organization-header-row"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="organization-row" title='Double click to go to this project detailed page.' (dblclick)="handleRowClick(row)"></mat-row>
+          </mat-table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

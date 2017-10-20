@@ -1,44 +1,50 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OrganizationFormComponent } from './organization-form/organization-form.component';
+import { MatTableModule, MatSortModule } from '@angular/material';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
-import { MdInputModule, MdListModule } from '@angular/material';
-
-import { AdminRoutingModule } from './admin-routing.module';
-import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
-import { OrganizationListComponent } from './organization-list/organization-list.component';
-import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
-import { OrganizationPageComponent } from './organization-page/organization-page.component';
+import { AdminRoutingModule } from './admin-routing.module';
 
 // Services
 import { DataService } from './services/data.service';
+import { ActivitiesService } from './services/activities.service';
+
+// Components
+import { AdminComponent } from './admin.component';
+import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { OrganizationPageComponent } from './organization-page/organization-page.component';
+import { OrganizationFormComponent } from './organization-form/organization-form.component';
+import { OrganizationListComponent } from './organization-list/organization-list.component';
+import { ProjectPageComponent } from './project-page/project-page.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
+import { ProjectListComponent } from './project-list/project-list.component';
+import { ReportsModule } from './reports/reports.module';
+import { ActivityFormComponent } from './activity-form/activity-form.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    HttpModule,
     AdminRoutingModule,
     SharedModule,
-    MdInputModule,
-    MdListModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    ReactiveFormsModule
+    MatTableModule,
+    MatSortModule,
+    ReportsModule
   ],
   exports: [
-    MdInputModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    ReactiveFormsModule
   ],
-  declarations: [AdminComponent, OrganizationListComponent, AdminToolbarComponent, OrganizationFormComponent, OrganizationPageComponent],
-  providers: [DataService]
+  declarations: [
+    AdminComponent,
+    OrganizationListComponent,
+    ProjectListComponent,
+    AdminToolbarComponent,
+    OrganizationFormComponent,
+    OrganizationPageComponent,
+    ProjectPageComponent,
+    ProjectFormComponent,
+    SidebarComponent,
+    DashboardComponent,
+    ActivityFormComponent,
+  ],
+  providers: [DataService, ActivitiesService]
 })
 
 export class AdminModule { }

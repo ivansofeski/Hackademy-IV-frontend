@@ -1,0 +1,49 @@
+<div class="container" *ngIf="donor">
+  <mat-card class="">
+
+    <div class="image-container">
+      <img class="profile-image" [src]="donor.userImage">
+    </div>
+
+    <mat-card-header class="card-header">
+      <div class="user-info">
+        <span class="user-name">{{donor.userName}}</span>
+        <br>
+        <span class="user-slogan">{{donor.userSlogan}}</span>
+      </div>
+
+      <div class="user-wallet">
+        <span class="donated-amount">Total: {{donor.wallet.total}}</span>
+        <span class="amount-left">Donated: {{donor.wallet.donated}}</span>
+      </div>
+    </mat-card-header>
+
+    <hr>
+
+  </mat-card>
+
+  <div class="saved-projects">
+    <div class="menu-container">
+      <ul class="toolbar-menu">
+        <li><a href="" class="project-link liked-projects active">Saved project</a></li>
+        <li><a href="" class="project-link funded-projects">funded project</a></li>
+      </ul>
+    </div>
+  </div>
+
+<div class="projects-list-container">
+  <div class="project-container" *ngFor="let p of projectList">
+    <div class="project-image-container">
+      <div class="project-image">
+        <div class="project-image">
+          <img [src]="p.mainImage" alt="">
+        </div>
+        <div class="overlay"></div>
+        <div class="project-name">
+          {{p.projectName}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

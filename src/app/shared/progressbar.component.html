@@ -1,2 +1,5 @@
-  <span>Collected: {{raisedFunding}} <br> Goal: {{neededFunding}}</span>
-  <md-progress-bar mode="determinate" [value]='raisedFunding/neededFunding*100'></md-progress-bar>
+<div class="progress-bar-container">
+  <span>Collected: {{raisedFunding}}</span>
+  <mat-progress-bar mode="determinate" [value]='raisedFunding/neededFunding*100'></mat-progress-bar>
+  <span class="goal">Goal: {{neededFunding}}</span>
+</div>

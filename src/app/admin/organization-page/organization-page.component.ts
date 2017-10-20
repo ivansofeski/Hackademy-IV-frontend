@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { IOrganization } from '../interface/organization';
+import { Organization } from '../interface/organization';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -10,19 +10,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class OrganizationPageComponent implements OnInit {
 
-  organizationId: number = 0;
-  organization: any;
+  _organizationId: number = 0;
+  _organization: any;
   errors: any[] = [];
 
-  constructor(public route: ActivatedRoute, public router: Router,private dataService: DataService) { }
+  get organizationId():number{
+    return this._organizationId;
+  }
 
-  ngOnInit() {
-    this.organizationId = +this.route.snapshot.paramMap.get('id');
-    if(this.organizationId > 0){
-      this.dataService.get.organizations().subscribe(
+  set organizationId(value:number){
+    this._organizationId = value;
+    if(value > 0){
+      this.dataService.getOrganizations().subscribe(
         res => {
-          this.organization = res.filter((v, k) => v.id == this.organizationId)[0];
-          console.log(this.organization);
+          this.organization = res.filter((v, k) => v.id == value)[0];
         },
         error => {
           console.log(error);
@@ -30,6 +31,25 @@ export class OrganizationPageComponent implements OnInit {
         }
       );
     }
+  }
+
+  get organization(){
+    return this._organization;
+  }
+
+  set organization(value: Organization){
+    this._organization = value;
+    this.dataService.getProjects().subscribe(
+      res => this._organization.projects = res.filter((v,k) => v.organizationId == value.id),
+      error => this.errors.push(error)
+    );
+  }
+
+
+  constructor(public route: ActivatedRoute, public router: Router,private dataService: DataService) { }
+
+  ngOnInit() {
+    this.organizationId = +this.route.snapshot.paramMap.get('id');
   }
 
 }

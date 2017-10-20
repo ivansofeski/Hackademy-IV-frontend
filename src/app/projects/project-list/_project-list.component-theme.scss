@@ -1,0 +1,31 @@
+@import "../../../nano-theme.scss";
+
+
+@mixin project-list-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .organization-name {
+    color: mat-color($primary);
+  }
+
+  .read-more {
+    color: mat-color($foreground, create-account-admin);
+  }
+
+  .project-description {
+    color: mat-color($foreground, create-account-admin);
+  } 
+    .project-title {
+        color: mat-color($foreground, base);
+      }
+  
+      .main-image-container {
+        background: mat-color($background, background);
+      }
+}
+
+@include project-list-theme($nano-app-theme);

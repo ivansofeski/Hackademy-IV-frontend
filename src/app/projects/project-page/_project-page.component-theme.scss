@@ -1,0 +1,48 @@
+@import "../../../nano-theme.scss";
+
+
+@mixin project-page-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .activity-description {
+
+      color: mat-color($foreground,create-account-admin);
+    }
+
+  .project-description {
+     color: mat-color($foreground,create-account-admin);
+    }
+
+
+  .ctn.inner-ctn.ui :card :swipe-box {
+            background: mat-color($background, background);
+          }
+
+
+  .project-title {
+    color: mat-color($foreground,base);
+  }
+
+  .organization-name {
+    color: mat-color($primary);
+  }
+
+
+  mat-expansion-panel-header{
+    background: mat-color($primary);
+  }
+
+  .activity-description {
+
+      color: mat-color($foreground, create-account-admin);
+
+    }
+
+
+}
+
+@include project-page-theme($nano-app-theme);

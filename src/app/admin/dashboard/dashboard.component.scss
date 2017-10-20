@@ -1,0 +1,16 @@
+.dashboard-header {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 6px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid silver;
+    font-size: 30px;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: default;
+    overflow: hidden;
+    box-sizing: border-box;
+    user-select: none;
+}

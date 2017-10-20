@@ -1,0 +1,59 @@
+<div class="container">
+
+  <div class="button-container">
+    <button mat-button class="map-location-button" (click)="current_location()">Current Location</button>
+    <div class="vertical-line"></div>
+    <button mat-button class="map-location-button" (click)="default_location()">Default Location</button>
+  </div>
+
+  <form>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Search" type="text" class="form-control" #search>
+
+    </mat-form-field>
+    <button mat-button type="submit" id="searchButton" (click)="onClick()">
+      <mat-icon class="md-24 material-icons search" aria-label="search icon">search</mat-icon>
+    </button>
+  </form>
+
+
+  <div class="message-container" [hidden]="hide_default">
+    drag or click to change default location
+  </div>
+
+  <div class="map-container">
+
+    <agm-map *ngIf="lat && lng"
+             [latitude]="lat"
+             [longitude]="lng"
+             [zoom]="zoom"
+             [styles]="style"
+             (mapClick)="mapClicked($event)">
+
+      <agm-marker [latitude]="lat"
+                  [longitude]="lng"
+                  [iconUrl]="iconUrl"
+                  [markerDraggable]="true"
+                  (dragEnd)="dragEnd($event)"></agm-marker>
+      <agm-circle [latitude]="lat"
+                  [longitude]="lng"
+                  [radius]="radius"
+                  fillOpacity="0.05"></agm-circle>
+
+      <agm-marker *ngFor="let m of projects"
+                  [latitude]="m.location.lat"
+                  [longitude]="m.location.lng"
+                  (markerClick)='goToProjectPage(m)'
+                  [iconUrl]="iconUrlProject">
+      </agm-marker>
+    </agm-map>
+
+  </div>
+
+  <div class="confirm-container"
+       *ngIf="center_changed"
+       [hidden]="hide_default"
+       (click)="confirm_location()">
+    <button mat-button class="confirm-button">Confirm</button>
+  </div>
+</div>

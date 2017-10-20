@@ -1,0 +1,99 @@
+$menuColor: '#4cb19e ';
+$lighterMenuColor: '#6bc1b1 ';
+
+/* Structure specific for the project table*/
+
+.container{
+    background: #eee;
+    padding-top: 15vh;
+  }
+  
+  mat-card {
+    margin: auto ;
+    
+    width: 700px;
+    height: auto;
+  }
+  
+.project-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+  padding-bottom: 10px;
+}
+
+.project-table {
+  flex: 1 1 auto;
+  overflow: auto;
+  max-height: 800px;
+}
+
+.project-header-row,
+.project-row {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+  height: 32px;
+  padding: 0 8px;
+}
+
+.project-row {
+  height: 60px;
+}
+
+.project-header-row {
+  background-color: #{$menuColor};
+}
+
+.project-header-cell {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.904);
+}
+
+.project-cell {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+mat-row:hover {
+  background-color: #aad1e4;
+}
+
+.mat-cell:nth-child(1),
+.mat-header-cell:nth-child(1),
+{
+  flex: 0 0 15%;
+}
+
+.mat-cell:nth-child(3),
+.mat-header-cell:nth-child(3),
+{
+  flex: 0 0 15%;
+}
+
+.mat-cell:nth-child(4),
+.mat-header-cell:nth-child(4),
+{
+  flex: 0 0 15%;
+}
+.mat-cell:nth-child(2),
+.mat-header-cell:nth-child(2),
+{
+  flex: 0 0 20%;
+}
+
+.image-wrapper {
+  position: relative;
+  display: block;
+  width: 75px;
+  overflow: hidden;
+  img {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+}

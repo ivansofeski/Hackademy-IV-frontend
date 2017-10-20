@@ -1,0 +1,80 @@
+<div class="container">
+  <mat-card class="activity-card">
+    <mat-card-header>
+      <div class='activity-header' [textContent]='loadedProject?.projectName'></div>
+    </mat-card-header>
+    <mat-card-content>
+      <form class='activity-form' #activityForm>
+
+        <!-- FIELD: PROJECT DESCRIPTIVE IMAGE -->
+        <div class='image-container' (mouseup)='$event.button === 0 ? descImage.click() : return;'>
+          <!-- <i class='material-icons'>file_upload</i> -->
+          <input #descImage name='DESC_IMAGE' placeholder='{{attributes.DESC_IMAGE.placeholder}}' [formControl]='activityControls.descImage'
+            (change)='setImagePath($event.currentTarget)'>
+          <img #activityImage class='image-holder' src='' alt='' title='Click to upload an image'>
+        </div>
+
+
+        <!-- FIELD: activity NAME -->
+        <mat-form-field class='activity-full-width'>
+          <input matInput #name name='NAME' placeholder='{{attributes.NAME.placeholder}}' [formControl]='activityControls.name'>
+          <mat-error *ngIf='activityControls.name.hasError("required")'>Name is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+
+        <!-- FIELDS: activity date -->
+        <table class='activity-full-width' cellspacing='0'>
+          <tr>
+            <td>
+              <mat-form-field>
+                <input name='START_DATE' matInput [matDatepicker]='myDatepicker' placeholder='From (date)' [formControl]='activityControls.activityDate'>
+                <mat-error *ngIf='activityControls.activityDate.hasError("required")'>
+                  The starting Date is
+                  <strong>required</strong>
+                </mat-error>
+                <mat-datepicker-toggle matSuffix [for]='myDatepicker'></mat-datepicker-toggle>
+                <mat-datepicker #myDatepicker></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+
+        <!--FIELD: activity DESCRIPTION-->
+        <mat-form-field class='activity-full-width'>
+          <textarea matInput #desc
+                    matTextareaAutosize
+                    matAutosizeMinRows="3"
+                    matAutosizeMaxRows = "5"
+                    class='myInput' name='DESC'
+                    placeholder='{{attributes.DESC.placeholder}}'
+                    [formControl]='activityControls.desc'
+                    type='text'>
+          </textarea>
+          <mat-error *ngIf='activityControls.desc.hasError("required")'>
+            The description of the activity is
+            <strong>required</strong>
+          </mat-error>
+          <mat-hint align='end'>{{desc.value.length}} /400</mat-hint>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <!--Button to save the form or Canceled-->
+      <div class='buttons-wrapper'>
+        <button mat-raised-button color='warn' (mouseup)='hardReset($event, activityForm)'>Cancel</button>
+        <button mat-raised-button color='primary'>Validate</button>
+        <!-- <button mat-raised-button color='primary' [routerLink]='[activityListLink]' (mouseup)='saveactivity()'>Submit -->
+      </div>
+    </mat-card-actions>
+  </mat-card>
+
+
+</div>
+
+
+
+<!-- Form for the submission of a new actitivity-->

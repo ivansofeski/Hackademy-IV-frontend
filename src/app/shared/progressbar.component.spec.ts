@@ -1,16 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProgressbarComponent } from './progressbar.component';
-import { MdProgressBarModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material';
+import { By } from "@angular/platform-browser";
+import { DebugElement } from "@angular/core";
 
 describe('ProgressbarComponent', () => {
   let component: ProgressbarComponent;
   let fixture: ComponentFixture<ProgressbarComponent>;
-
+  let de:      DebugElement;
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProgressbarComponent ],
-      imports:[MdProgressBarModule]
+      imports:[MatProgressBarModule]
     })
     .compileComponents();
   }));
@@ -24,4 +27,10 @@ describe('ProgressbarComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+  it('should display a material progress bar', () => {
+    component.neededFunding=100;
+    component.raisedFunding= 50;
+    de = fixture.debugElement.query(By.css('mat-progress-bar'));
+    expect(de).toBeTruthy();
+  })
 });
