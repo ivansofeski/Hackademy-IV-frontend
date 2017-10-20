@@ -43,6 +43,7 @@
       <agm-marker *ngFor="let m of projects"
                   [latitude]="m.location.lat"
                   [longitude]="m.location.lng"
+                  (markerClick)='goToProjectPage(m)'
                   [iconUrl]="iconUrlProject">
       </agm-marker>
     </agm-map>
