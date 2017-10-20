@@ -1,9 +1,9 @@
 <div class="container">
 
   <div class="button-container">
-    <button mat-button class="map-location-button">Current Location</button>
+    <button mat-button class="map-location-button" (click)="current_location()">Current Location</button>
     <div class="vertical-line"></div>
-    <button mat-button class="map-location-button">Default Location</button>
+    <button mat-button class="map-location-button" (click)="default_location()">Default Location</button>
   </div>
 
   <form>
@@ -17,7 +17,7 @@
   </form>
 
 
-  <div class="message-container">
+  <div class="message-container" [hidden]="hide_default">
     drag or click to change default location
   </div>
 
@@ -49,7 +49,10 @@
 
   </div>
 
-  <div class="confirm-container">
+  <div class="confirm-container"
+       *ngIf="center_changed"
+       [hidden]="hide_default"
+       (click)="confirm_location()">
     <button mat-button class="confirm-button">Confirm</button>
   </div>
 </div>
