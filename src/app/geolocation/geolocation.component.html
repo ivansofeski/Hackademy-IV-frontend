@@ -2,18 +2,24 @@
 
   <div class="button-container">
     <button mat-button class="map-location-button">Current Location</button>
+    <div class="vertical-line"></div>
     <button mat-button class="map-location-button">Default Location</button>
   </div>
 
   <form>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="search for location" type="text" class="form-control" #search>
+      <input matInput placeholder="Search" type="text" class="form-control" #search>
 
     </mat-form-field>
+    <button mat-button type="submit" id="searchButton" (click)="onClick()">
+      <mat-icon class="md-24 material-icons search" aria-label="search icon">search</mat-icon>
+    </button>
   </form>
-  <a mat-button id="searchButton" (click)="onClick()">
-    <mat-icon class="md-24 material-icons search" aria-label="search icon">search</mat-icon>
-  </a>
+
+
+  <div class="message-container">
+    drag or click to change default location
+  </div>
 
   <div class="map-container">
 
@@ -21,6 +27,7 @@
              [latitude]="lat"
              [longitude]="lng"
              [zoom]="zoom"
+             [styles]="style"
              (mapClick)="mapClicked($event)">
 
       <agm-marker [latitude]="lat"
@@ -40,5 +47,9 @@
       </agm-marker>
     </agm-map>
 
+  </div>
+
+  <div class="confirm-container">
+    <button mat-button class="confirm-button">Confirm</button>
   </div>
 </div>
