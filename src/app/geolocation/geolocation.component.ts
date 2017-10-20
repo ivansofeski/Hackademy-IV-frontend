@@ -284,7 +284,6 @@ export class GeolocationComponent implements OnInit {
     }
   ];
 
-
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
@@ -370,6 +369,7 @@ export class GeolocationComponent implements OnInit {
   mapClicked(event) {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
+    this.center_changed = true;
   }
 
   onClick() {
@@ -409,19 +409,6 @@ export class GeolocationComponent implements OnInit {
     });
   }
 
-getIP(): Observable<any[]> {
-  return this._http.get('//ip-api.com/json') // ...using post request
-  .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
-}
-  current_location(){
-  this.hide_default = true;
-}
-default_location() {
-this.hide_default = false;
-}
-confirm_location() {
-    this.center_changed = false;
-}
   goToProjectPage(project: Project) {
     const path = 'projects/' + project.id;
     this.router.navigate([path]);
