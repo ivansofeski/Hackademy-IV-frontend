@@ -284,7 +284,6 @@ export class GeolocationComponent implements OnInit {
     }
   ];
 
-
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
