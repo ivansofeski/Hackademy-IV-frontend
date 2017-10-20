@@ -14,7 +14,7 @@
         <agm-map *ngIf="lat && lng" [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
             <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" [markerDraggable]="true" (dragEnd)="dragEnd($event)"></agm-marker>
             <agm-circle [latitude]="lat" [longitude]="lng" [radius]="radius" fillOpacity="0.1"></agm-circle>
-            <agm-marker *ngFor="let m of projects" [latitude]="m.location.lat" [longitude]="m.location.lng" [iconUrl]="iconUrlProject">
+            <agm-marker *ngFor="let m of projects" [latitude]="m.location.lat" [longitude]="m.location.lng" [iconUrl]="iconUrlProject" (markerClick)='goToProjectPage(m)'>
             </agm-marker>
         </agm-map>
 

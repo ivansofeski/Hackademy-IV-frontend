@@ -3,12 +3,15 @@
  */
 
 import {Injectable} from '@angular/core';
+// import { GeolocationService } from './geolocation.service';
 
 @Injectable()
 export class LocalStorageService {
   localStorageKey = 'currentUser';
   user: string;
   currentUser = {};
+  lat;
+  lng;
   errors: any[] = [];
 
 
@@ -25,8 +28,11 @@ export class LocalStorageService {
 
       this.currentUser['id'] = Math.floor(Math.random() * 100000) + 1;
       this.currentUser['userImage'] = './assets/photos/userImage1.jpeg';
+      // this.setLocation(this.currentUser);
+      this.currentUser['userLocation'] = {'lat': this.lat, 'lng': this.lng};
       this.user = JSON.stringify(this.currentUser);
       localStorage.setItem(this.localStorageKey, this.user);
+
     }
   }
 

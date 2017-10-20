@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {ProjectService} from '../project.service';
 import {LocalStorageService} from '../../service/local-storage.service';
 import {Project} from '../project.interface';
+import { GeolocationService } from '../../service/geolocation.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class ProjectListComponent implements OnInit {
   projectList: any[] = [];
   project: Project;
   currentUser: any;
-
+  userLocation: any;
+  localStorageKey = 'currentUser';
   isRed = false;
   isGray = true;
 
@@ -23,25 +25,31 @@ export class ProjectListComponent implements OnInit {
   donateOption3 = 50;
 
   constructor(private _projectService: ProjectService,
-              private _localStorageService: LocalStorageService) {
+              private _localStorageService: LocalStorageService,
+              private _geolocationService: GeolocationService) {
   }
 
   ngOnInit() {
-
     this.currentUser = this._localStorageService.getCurrentUser();
-
-    this._projectService.getProjects().subscribe(
-      res => {
-        console.log(res);
-        this.projectList = res.filter((v, k) => {
+    this._geolocationService.getIPLocation().subscribe(location => {
+      this.currentUser.userLocation.lat = location.lat;
+      this.currentUser.userLocation.lng = location.lon;
+      const user = JSON.stringify(this.currentUser);
+      localStorage.setItem(this.localStorageKey, user);
+      this._projectService.getProjects().subscribe(
+        res => {
+          console.log(res);
+          this.projectList = res.filter((v, k) => {
             return v.open === 'true';
           },
-          error => this.errors.push(error)
-        );
-      }
-    );
+            error => this.errors.push(error)
+          );
+        }
+      );
+    });
   }
 
+  
 
   /**
    * this function will return a class that is responsible for activating and deactivating the color red in the
@@ -107,4 +115,5 @@ export class ProjectListComponent implements OnInit {
       this._localStorageService.updateCurrnetUser(this.currentUser);
     }
   }
+
 }

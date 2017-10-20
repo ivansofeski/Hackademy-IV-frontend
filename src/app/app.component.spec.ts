@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import {SharedModule} from './shared/shared.module';
 import {LocalStorageService} from "./service/local-storage.service";
+import { GeolocationService } from './service/geolocation.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -16,7 +17,7 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        LocalStorageService
+        LocalStorageService, GeolocationService
       ]
     }).compileComponents();
   }));
