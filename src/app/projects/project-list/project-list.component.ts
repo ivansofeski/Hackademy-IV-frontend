@@ -3,7 +3,10 @@ import {ProjectService} from '../project.service';
 import {LocalStorageService} from '../../service/local-storage.service';
 import {Project} from '../project.interface';
 import { GeolocationService } from '../../service/geolocation.service';
-
+import { Observable } from 'rxjs/Observable';
+import {} from 'googlemaps';
+import {MapsAPILoader} from '@agm/core';
+declare var google: any;
 
 @Component({
   // selector: 'app-project-list',
@@ -23,10 +26,14 @@ export class ProjectListComponent implements OnInit {
   donateOption1 = 10;
   donateOption2 = 25;
   donateOption3 = 50;
-
+  geocoder;
   constructor(private _projectService: ProjectService,
               private _localStorageService: LocalStorageService,
-              private _geolocationService: GeolocationService) {
+              private _geolocationService: GeolocationService,
+              private mapsAPILoader: MapsAPILoader) {
+    this.mapsAPILoader.load().then(() => {
+        this.geocoder = new google.maps.Geocoder();
+    });
   }
 
   ngOnInit() {
@@ -37,10 +44,14 @@ export class ProjectListComponent implements OnInit {
       // const user = JSON.stringify(this.currentUser);
       // localStorage.setItem(this.localStorageKey, user);
       this._projectService.getProjects().subscribe(
-        res => {
-          console.log(res);
-          this.projectList = res.filter((v, k) => {
-            return v.open === 'true';
+        projects => { console.log(projects);
+          this.projectList = projects.filter((project, k) => {
+            this.getAddressLocation(project.address)
+            .subscribe(projectLocation => {
+              project['lat'] = projectLocation.lat();
+              project['lng'] = projectLocation.lng();
+              return project.open === 'true';
+            });
           },
             error => this.errors.push(error)
           );
@@ -114,6 +125,22 @@ export class ProjectListComponent implements OnInit {
       this.currentUser.savedProject.splice(index, 1);
       this._localStorageService.updateCurrnetUser(this.currentUser);
     }
+  }
+
+  getAddressLocation(address) {
+    // const geocoder = new google.maps.Geocoder();
+    return Observable.create(observer => {
+      this.geocoder.geocode({'address': address}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          observer.next(results[0].geometry.location);
+          observer.complete();
+        } else {
+          console.log('Error - ', results, ' & Status - ', status);
+          observer.next({});
+          observer.complete();
+        }
+      });
+    });
   }
 
 }
