@@ -30,7 +30,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     orgId:        new FormControl('', [NanoValidators.required]),
     fromDate:     new FormControl(new Date(), [Validators.required]),
     toDate:       new FormControl(null, []),
-    goal:         new FormControl('', [NanoValidators.required]),
+    goal:         new FormControl('', [NanoValidators.required, Validators.min(1)]),
     address:      new FormControl('', [NanoValidators.required]),
     shortDesc:    new FormControl('', [NanoValidators.required]),
     desc:         new FormControl('', [NanoValidators.required]),
