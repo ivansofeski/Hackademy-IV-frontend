@@ -75,6 +75,11 @@
       The goal is
       <strong>required</strong>
     </mat-error>
+    <mat-error *ngIf='projectControls.goal.hasError("min")'>
+      The project goal must be
+      <strong>greater than or equal to 1</strong>
+    </mat-error>
+
   </mat-form-field>
 
   <!-- Field for the city,postcode and country of the project
