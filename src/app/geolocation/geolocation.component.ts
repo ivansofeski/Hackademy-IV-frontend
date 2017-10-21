@@ -22,10 +22,13 @@ export class GeolocationComponent implements OnInit {
   zoom: number;
   radius: number;
   projects = [];
-  position;
+  currentlat: number;
+  currentlng: number;
   inputAddressElm;
   hide_default = true;
   center_changed = false;
+  user;
+  currentLocationTab = true;
   style = [
     {
       'featureType': 'all',
@@ -314,6 +317,7 @@ export class GeolocationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = this._localStorageService.getCurrentUser();
     this.showPosition();
     this.inputAddressElm = this.searchElementRef.nativeElement;
     const searchButtElm = document.getElementById('searchButton');
@@ -337,6 +341,9 @@ export class GeolocationComponent implements OnInit {
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
           this.zoom = 12;
+          if (this.currentLocationTab === false) {
+            this.center_changed = true;
+          }
         });
       });
     });
@@ -348,6 +355,8 @@ export class GeolocationComponent implements OnInit {
     this._geolocationService.getGeolocation().subscribe(location => {
       this.lat = location.lat;
       this.lng = location.lng;
+      this.currentlat = this.lat;
+      this.currentlng = this.lng;
     });
     this._projectService.getProjects().subscribe(
       res => {
@@ -357,12 +366,8 @@ export class GeolocationComponent implements OnInit {
   }
 
   dragEnd(event) {
-    console.log(this.lat);
     this.lat = event.coords.lat;
-    console.log(this.lat);
-    console.log(this.lng);
     this.lng = event.coords.lng;
-    console.log(this.lng);
     this.center_changed = true;
   }
 
@@ -374,17 +379,15 @@ export class GeolocationComponent implements OnInit {
 
   onClick() {
     console.log('an address has been searched');
-    console.log(this.inputAddressElm.value);
     this.getLatLan(this.inputAddressElm.value).subscribe(
       result => {
         // needs to run inside zone to update the map
         this.ngZone.run(() => {
-          console.log(this.lat);
           this.lat = result.lat();
-          console.log(this.lat);
-          console.log(this.lng);
           this.lng = result.lng();
-          console.log(this.lng);
+          if (this.currentLocationTab === false) {
+            this.center_changed = true;
+          }
         });
       },
       error => console.log(error),
@@ -415,18 +418,29 @@ export class GeolocationComponent implements OnInit {
   }
 
   current_location() {
+    this.currentLocationTab = true;
     this.hide_default = true;
+    this.center_changed = false;
+    this.lat = this.currentlat;
+    this.lng = this.currentlng;
   }
 
   default_location() {
+    this.currentLocationTab = false;
     this.hide_default = false;
+    if (this.user.userLocation['lat'] !== undefined || this.user.userLocation['lat'] != null) {
+      this.lat = this.user.userLocation.lat;
+      this.lng = this.user.userLocation.lng;
+      this.center_changed = false;
+    } else {
+      this.center_changed = true;
+    }
   }
 
   confirm_location() {
     this.center_changed = false;
-    const user = this._localStorageService.getCurrentUser();
-    user.userLocation.lat = this.lat;
-    user.userLocation.lng = this.lng;
-    this._localStorageService.updateCurrnetUser(user);
+    this.user.userLocation.lat = this.lat;
+    this.user.userLocation.lng = this.lng;
+    this._localStorageService.updateCurrnetUser(this.user);
   }
 }

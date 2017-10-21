@@ -32,10 +32,10 @@ export class ProjectListComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this._localStorageService.getCurrentUser();
     this._geolocationService.getIPLocation().subscribe(location => {
-      this.currentUser.userLocation.lat = location.lat;
-      this.currentUser.userLocation.lng = location.lon;
-      const user = JSON.stringify(this.currentUser);
-      localStorage.setItem(this.localStorageKey, user);
+      // this.currentUser.userLocation.lat = location.lat;
+      // this.currentUser.userLocation.lng = location.lon;
+      // const user = JSON.stringify(this.currentUser);
+      // localStorage.setItem(this.localStorageKey, user);
       this._projectService.getProjects().subscribe(
         res => {
           console.log(res);
