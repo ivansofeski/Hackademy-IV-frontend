@@ -297,7 +297,7 @@ it('should show an error message when an invalid goal is supplied (123 3)',() =>
   fixture.detectChanges();
   de = fixture.debugElement.query(By.css('mat-form-field.project-goal mat-error'));
   el = de.nativeElement;
-  expect(el.textContent).toContain('required');
+  expect(el.textContent).toContain('greater than');
 });
 
 it('should not accept zero goal (0)',() => {
