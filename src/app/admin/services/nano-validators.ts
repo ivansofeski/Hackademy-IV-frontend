@@ -5,4 +5,8 @@ export class NanoValidators{
         if(c.value == null || c.value=='' || ( c.value && c.value.trim && c.value.trim().length == 0) )
         return {'required': 'Required'};
     }
+    static NaN(c: AbstractControl):ValidationErrors|null{
+      if(isNaN(c.value))
+      return {'NaN': 'Required'};
+    }
 }
