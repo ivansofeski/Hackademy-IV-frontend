@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DataSource } from '@angular/cdk/table';
 import { MatSort } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../../shared/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../../interface/project';
 import 'rxjs/add/observable/of';
