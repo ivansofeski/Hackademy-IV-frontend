@@ -1,18 +1,21 @@
-import { ActivitiesService } from './../services/activities.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../services/data.service';
-import { Project } from '../interface/project';
-import { Activity } from '../interface/activity';
+
+// Interfaces
+import { Activity } from '../../interfaces/activity';
+import { Project } from '../../interfaces/project';
+
+// Services
+import { DataService } from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-project-page',
   templateUrl: './project-page.component.html',
   styleUrls: ['./project-page.component.scss']
 })
-export class ProjectPageComponent implements OnInit {
 
-  _projectId: number = 0;
+export class ProjectPageComponent implements OnInit {
+  _projectId = 0;
   _project: any;
   errors: any[] = [];
   projectActivities: Activity[];
@@ -23,27 +26,29 @@ export class ProjectPageComponent implements OnInit {
 
   set project(value: Project){
     this._project = value;
-    if(value.organizationId > 0 ){ //this code must move to the data service.
-      this.dataService.getOrganizations().subscribe(
+    if (value.organizationId > 0 ) {
+      this._dataService.getOrganizations().subscribe(
         res => {
-          this._project.organization = res.filter((v,k) => v.id === value.organizationId)[0];
+          this._project.organization = res.filter((v, k) => v.id === value.organizationId)[0];
           console.log('Fetched Organization', this._project.organization);
         },
         error => this.errors.push(error)
       );
-    }else this._project.organization = null;
+    } else {
+      this._project.organization = null;
+    }
   }
 
-  get projectId():number{
+  get projectId(): number {
     return this._projectId;
   }
 
-  set projectId(value:number){
+  set projectId(value: number) {
     this._projectId = value;
-    if(value > 0){
-      this.dataService.getProjects().subscribe(
+    if (value > 0) {
+      this._dataService.getProjects().subscribe(
         res => {
-          this.project = res.filter((v, k) => v.id == value)[0];
+          this.project = res.filter((v, k) => v.id === value)[0];
         },
         error => {
           this.errors.push(error);
@@ -51,25 +56,23 @@ export class ProjectPageComponent implements OnInit {
       );
     }
   }
-  constructor(public route: ActivatedRoute, public router: Router,private dataService: DataService,
-     private _activitiesService: ActivitiesService) { }
+
+  constructor(public route: ActivatedRoute, public router: Router, private _dataService: DataService) { }
 
   ngOnInit() {
     this.projectId = +this.route.snapshot.paramMap.get('id');
-    let project_activity = this._activitiesService.getProjectActivities(this.projectId);
-    project_activity.subscribe(
-      res => {
-         console.log(res)
-        this.projectActivities = res;
+    this._dataService.getActivities().subscribe(
+      activities => {
+        if (activities && activities.length > 0) {
+          this.projectActivities = activities.filter((v, k) => v.projectId === this.projectId);
+        }
       },
       error => this.errors.push(error)
     );
-
   }
 
-  EventButton() {
-    // alert('your click on the row with the Project  name ' + row.projectName);
-    this._activitiesService.storeProject(this.project);
+  eventButton() {
+    this._dataService.storeProject(this.project);
     this.router.navigateByUrl('/admin/projects/view/' + this.projectId + '/new');
   }
 }
