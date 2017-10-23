@@ -8,6 +8,10 @@ export interface Project {
     address: string;
     lat: number;
     lng: number;
+    location: {
+        lat: number;
+        lng: number;
+    };
     neededFunding: number;
     raisedFunding: number;
     description: string;
