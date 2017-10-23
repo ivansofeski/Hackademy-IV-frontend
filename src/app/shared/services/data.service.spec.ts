@@ -1,11 +1,19 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { DataService } from './data.service';
+import { HttpModule, XHRBackend } from '@angular/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+
 
 describe('DataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DataService]
+      imports: [HttpModule],
+      providers: [
+        HttpClient,
+        HttpHandler,
+        DataService
+      ]
     });
   });
 
