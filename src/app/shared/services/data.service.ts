@@ -6,8 +6,12 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/Observable/throw';
 
 // Interfaces
+<<<<<<< HEAD
 import { Organization } from '../../interfaces/organization';
 import { Project } from '../../interfaces/project';
+=======
+import { Organization, Project } from '../../interfaces';
+>>>>>>> Added all Admin Data Service code/functions
 
 @Injectable()
 export class DataService {
@@ -22,7 +26,13 @@ export class DataService {
   private _paths = {
     root: '../../../assets/mockdata/',
     organizations: 'organizations.json',
+<<<<<<< HEAD
     projects: 'projects.json'
+=======
+    newOrganizations: 'newOrganizations.json',
+    projects: 'projects.json',
+    newProjects: 'newProjects.json'
+>>>>>>> Added all Admin Data Service code/functions
   };
 
   /**
