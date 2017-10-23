@@ -1,12 +1,15 @@
 import {Component, OnInit, ViewChild, ElementRef, NgZone} from '@angular/core';
-import {ProjectService} from '../projects/project.service';
 import {} from 'googlemaps';
 import {MapsAPILoader} from '@agm/core';
 import {Observable} from 'rxjs/Observable';
-import {GeolocationService} from '../service/geolocation.service';
 import {Project} from '../projects/project.interface';
 import {Router} from '@angular/router';
+
+// Services
+import {GeolocationService} from '../service/geolocation.service';
 import {LocalStorageService} from '../service/local-storage.service';
+import { DataService } from '../shared/services/data.service';
+
 
 declare var google: any;
 
@@ -305,7 +308,7 @@ export class GeolocationComponent implements OnInit {
   };
   iconUrlProject;
 
-  constructor(private _projectService: ProjectService,
+  constructor(private _dataService: DataService,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
               private _geolocationService: GeolocationService,
@@ -367,7 +370,7 @@ export class GeolocationComponent implements OnInit {
   }
 
   loadProjects(): any {
-    this._projectService.getProjects()
+    this._dataService.getProjects()
       .subscribe(projectsList => {
         console.log(projectsList);
         projectsList.map(project => {
