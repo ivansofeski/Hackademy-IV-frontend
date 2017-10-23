@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { DataSource } from '@angular/cdk/table';
 import { MatPaginator, MatSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
