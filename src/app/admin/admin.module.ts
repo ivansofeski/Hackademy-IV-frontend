@@ -3,9 +3,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 
-// Services
-import { ActivitiesService } from './services/activities.service';
-
 // Components
 import { AdminComponent } from './admin.component';
 import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
@@ -43,7 +40,7 @@ import { ActivityFormComponent } from './activity-form/activity-form.component';
     DashboardComponent,
     ActivityFormComponent,
   ],
-  providers: [ActivitiesService]
+  providers: []
 })
 
 export class AdminModule { }

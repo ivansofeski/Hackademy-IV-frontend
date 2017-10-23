@@ -1,7 +1,7 @@
-import { Activity } from './../../projects/activity.interface';
+
 import { testData } from './../test-data';
 import { Observable } from 'rxjs/Observable';
-import { ActivitiesService } from './../services/activities.service';
+
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActivityFormComponent } from './activity-form.component';
@@ -26,7 +26,7 @@ describe('ActivityFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ActivityFormComponent ],
       imports: [ SharedModule ],
-      providers: [ ActivitiesService ]
+      providers: [  ]
     })
     .compileComponents();
   }));
@@ -35,8 +35,6 @@ describe('ActivityFormComponent', () => {
     fixture = TestBed.createComponent(ActivityFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    let activitiesService = fixture.debugElement.injector.get(ActivitiesService);
-    let spy = spyOn(activitiesService, 'getProjectActivities').and.returnValue(Observable.of(testData));
   });
 /*
   it('should create', () => {

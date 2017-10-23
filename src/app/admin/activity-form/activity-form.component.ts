@@ -2,12 +2,12 @@ import { constructDependencies } from '@angular/core/src/di/reflective_provider'
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
-import { Activity } from '../interface/activity';
 import { INPUT_ATTRIBUTES, NUMBERS, REGEX_UNITS } from './activity-form.constants';
 import { NanoValidators } from '../services/nano-validators';
 
 // Services
 import { DataService } from '../../shared/services/data.service';
+import { Activity } from '../../interfaces/activity';
 
 @Component({
   selector: 'app-activity-form',
