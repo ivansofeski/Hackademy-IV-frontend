@@ -30,12 +30,14 @@
              [styles]="style"
              (mapClick)="mapClicked($event)">
 
-      <agm-marker [latitude]="lat"
+      <agm-marker *ngIf = "user"
+                  [latitude]="lat"
                   [longitude]="lng"
                   [iconUrl]="iconUrl"
                   [markerDraggable]="true"
                   (dragEnd)="dragEnd($event)"></agm-marker>
-      <agm-circle [latitude]="lat"
+      <agm-circle *ngIf = "user"
+                  [latitude]="lat"
                   [longitude]="lng"
                   [radius]="radius"
                   fillOpacity="0.05"></agm-circle>

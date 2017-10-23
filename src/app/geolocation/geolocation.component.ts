@@ -28,6 +28,7 @@ export class GeolocationComponent implements OnInit {
   hide_default = true;
   center_changed = false;
   user;
+  showUser = true;
   currentLocationTab = true;
   geocoder;
 
@@ -313,9 +314,11 @@ export class GeolocationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this._localStorageService.getCurrentUser();
-    this.inputAddressElm = this.searchElementRef.nativeElement;
-    const searchButtElm = document.getElementById('searchButton');
+    if (this.showUser === true) {
+      this.user = this._localStorageService.getCurrentUser();
+      this.inputAddressElm = this.searchElementRef.nativeElement;
+      const searchButtElm = document.getElementById('searchButton');
+    }
     this.mapsAPILoader.load().then(() => {
       this.iconUrlProject = {
         url: '../assets/icons/project-icon.png',
