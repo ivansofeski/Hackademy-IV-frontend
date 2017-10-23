@@ -2,35 +2,34 @@
 <form class='project-form' #projectForm>
   <!-- FIELD: PROJECT DESCRIPTIVE IMAGE -->
   <div class='image-container' (mouseup)='$event.button === 0 ? descImage.click() : return;'>
-    <!-- <i class='material-icons'>file_upload</i> -->
-    <input #descImage name='DESC_IMAGE' placeholder='{{attributes.DESC_IMAGE.placeholder}}' [formControl]='projectControls.descImage'
-      (change)='setImagePath($event.currentTarget)'>
+    <input #descImage name='DESC_IMAGE' type="file" accept="imege/*" class="input-image" placeholder="Select an image from your device" 
+      [formControl]='projectControls.descImage' (change)='setImagePath($event.currentTarget)'>
     <img #projectImage class='image-holder' src='' alt='' title='Click to upload an image'>
   </div>
 
   <!-- FIELD: PROJECT NAME -->
   <mat-form-field class='project-full-width project-name'>
-    <input matInput #name name='NAME' placeholder='{{attributes.NAME.placeholder}}' [formControl]='projectControls.name'>
-    <mat-error *ngIf='projectControls.name.hasError("required")'>Name is<strong>required</strong></mat-error>
+    <input matInput #name name='NAME' class="mat-input-element input-name" type="text" placeholder='Project title' title="Type in the project title" [formControl]='projectControls.name'>
+    <mat-error *ngIf='projectControls.name.hasError("required")'>Name is<strong> required </strong></mat-error>
   </mat-form-field>
 
   <!-- FIELD: PROJECT NUMBER ID -->
   <mat-form-field class='project-full-width project-id'>
-    <input matInput #projectId name='PROJECT_ID' placeholder='{{attributes.PROJECT_ID.placeholder}}' [formControl]='projectControls.projectId'>
+    <input matInput #projectId name='PROJECT_ID' class="mat-input-element input-proj-id" type="text" placeholder='Project id' title="Type in the corresponding project id" [formControl]='projectControls.projectId'>
     <mat-error *ngIf='projectControls.projectId.hasError("required")'>Project number is<strong>required</strong></mat-error>
     <mat-error *ngIf='projectControls.projectId.hasError("pattern")'>Project number must be written in this format<strong>XXXXXX-XXXX</strong></mat-error>
   </mat-form-field>
 
   <!-- FIELD: PROJECT MANAGER -->
   <mat-form-field class='project-full-width project-manager'>
-    <input matInput #manager name='MANAGER' placeholder='{{attributes.MANAGER.placeholder}}' [formControl]='projectControls.manager'>
+    <input matInput #manager name='MANAGER' class="mat-input-element input-proj-manager" type="text" placeholder='Project manager' title="Type in the corresponding project manager" [formControl]='projectControls.manager'>
     <mat-error *ngIf='projectControls.manager.hasError("required")'>Project manager is<strong>required</strong></mat-error>
     <mat-error *ngIf='projectControls.manager.hasError("pattern")'>Must be<strong>valid</strong> name!</mat-error>
   </mat-form-field>
 
   <!-- FIELD: PROJECT ADDRESS -->
   <mat-form-field class='project-full-width project-address'>
-    <input matInput #address name='ADDRESS' placeholder='{{attributes.ADDRESS.placeholder}}' [formControl]='projectControls.address'>
+    <input matInput #address name='ADDRESS' placeholder='Street address' class="mat-input-element input-address" type="text" max-length="200" title="Type in the project location street address." [formControl]='projectControls.address'>
     <mat-error *ngIf='projectControls.address.hasError("required")'>
       Address is
       <strong>required</strong>
@@ -42,7 +41,7 @@
     <tr>
       <td>
         <mat-form-field class="project-fromdate">
-          <input name='FROM_DATE' matInput [matDatepicker]='myDatepicker' placeholder='From (date)' [formControl]='projectControls.fromDate'>
+          <input name='FROM_DATE' matInput class="mat-input-element input-date" [matDatepicker]='myDatepicker' placeholder='From (date)' [formControl]='projectControls.fromDate'>
           <mat-error *ngIf='projectControls.fromDate.hasError("required")'>
             The starting Date is
             <strong>required</strong>
@@ -53,7 +52,7 @@
       </td>
       <td>
         <mat-form-field class="project-todate">
-          <input name='TO_DATE' matInput [matDatepicker]='myDatepicker2' placeholder='To (date)' [formControl]='projectControls.toDate'>
+          <input name='TO_DATE' matInput matInput class="mat-input-element input-date" [matDatepicker]='myDatepicker2' placeholder='To (date)' [formControl]='projectControls.toDate'>
           <mat-error *ngIf='projectControls.toDate.hasError("required")'>
             The ending Date is
             <strong>required</strong>
@@ -70,39 +69,21 @@
 
   <!-- FIELD: PROJECT GOAL AMOUNT -->
   <mat-form-field class='project-full-width project-goal'>
-    <input matInput name='GOAL' type="number" placeholder='{{attributes.GOAL.placeholder}}' [formControl]='projectControls.goal'>
+    <input matInput name='GOAL' type="number" placeholder='Goal amount' class="mat-input-element input-goal" title="Type in the desire goal amount. Accepts: Numbers only!" [formControl]='projectControls.goal'>
     <mat-error *ngIf='projectControls.goal.hasError("required")'>
       The goal is
       <strong>required</strong>
     </mat-error>
-  </mat-form-field>
+    <mat-error *ngIf='projectControls.goal.hasError("min") || projectControls.goal.hasError("NaN")'>
+      The project goal must be 
+    <strong>greater than or equal to 1</strong>
+    </mat-error>
 
-  <!-- Field for the city,postcode and country of the project
-    <table class='project-full-width' cellspacing='0'>
-      <tr>
-        <td>
-          <mat-form-field class='project-full-width'>
-            <input matInput #postalCode maxlength='5' placeholder=' Postal Code ' value='' type='number' [formControl]='projectControls.zipCode'>
-            <mat-error *ngIf='projectControls.zipCode.hasError('required')'>
-              the ppstCode is <strong>required</strong>
-            </mat-error>
-            <mat-hint align='end'>{{postalCode.value.length}} / 5</mat-hint>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class='project-full-width'  required>
-            <input matInput #orgCity placeholder=' City '  [formControl]='projectControls.city'>
-            <mat-error *ngIf='projectControls.city.hasError('required')'>
-              The city where the project is locate is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
-    </table> -->
+  </mat-form-field>
 
   <!--FIELD: PROJECT DESCRIPTION-->
   <mat-form-field class='project-full-width'>
-    <textarea matInput #desc name='DESC' placeholder='{{attributes.DESC.placeholder}}' [formControl]='projectControls.desc'></textarea>
+    <textarea matInput #desc name='DESC' class="mat-input-element input-desc" placeholder='Description' title="Type in a detailed description." [formControl]='projectControls.desc'></textarea>
     <mat-error *ngIf='projectControls.desc.hasError("required")'>
       The description of the project is
       <strong>required</strong>
@@ -112,34 +93,26 @@
 
   <!--FIELD: PROJECT TYPE-->
   <mat-form-field class='project-full-width'>
-    <input matInput #national name='NATIONAL_PROJECT' [formControl]='projectControls.national'>
+    <input matInput #national name='NATIONAL_PROJECT' class="input-national-project hidden" [formControl]='projectControls.national'>
     <label class='nat-project-label'>National Project</label>
     <mat-radio-group class="nat-project-radio" (change)='setHiddenInputs("national", $event.value)' #nationalRadios>
       <mat-radio-button value="1">Yes</mat-radio-button>
       <mat-radio-button [checked]='true' value="0">No</mat-radio-button>
     </mat-radio-group>
-    <mat-error *ngIf='projectControls.national.hasError("required")'>Set the type of the
+    <mat-error *ngIf='projectControls.national.hasError("required")'>Set the type of the 
       <strong>project</strong>
     </mat-error>
   </mat-form-field>
 
   <!-- FIELD: ORGANIZATION -->
   <mat-form-field class='project-full-width'>
-    <input matInput name='ORG_ID' class='input-org-id' [formControl]='projectControls.orgId' #orgId>
+    <input matInput name='ORG_ID' class='mat-input-element input-org-id hidden' type="text" [formControl]='projectControls.orgId' #orgId>
     <mat-select class='custom-mat-select' placeholder="Organization Name" title='Click to select an organization' (change)='setHiddenInputs("orgId", $event.value)'
       #orgIdPicker>
       <mat-option *ngFor="let org of organizations" [value]="org.id" [textContent]='org.name'></mat-option>
     </mat-select>
     <mat-error *ngIf='projectControls.orgId.errors'>The organization name is<strong>required</strong></mat-error>
   </mat-form-field>
-
-  <!-- <div class='project-data-row'>
-    <label class='nat-project-label'>National Project</label>
-    <mat-radio-group class="nat-project-radio">
-      <mat-radio-button value="yes">Yes</mat-radio-button>
-      <mat-radio-button [checked]='true' value="no">No</mat-radio-button>
-    </mat-radio-group>
-  </div> -->
 
   <!--Button to save the form or Canceled-->
   <div class='buttons-wrapper'>
