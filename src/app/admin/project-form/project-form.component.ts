@@ -1,9 +1,8 @@
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
-import { Project } from '../interface/project';
-import { Organization } from '../interface/organization';
 import { DataService } from '../../shared/services/data.service';
 import { NanoValidators } from '../services/nano-validators';
+import { Organization } from '../../interfaces/organization';
 
 @Component({
   selector: 'app-project-form',

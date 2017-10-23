@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
 // Interfaces
-import { Project } from '../interface/project';
+
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 

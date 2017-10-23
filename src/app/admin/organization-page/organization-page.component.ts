@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../shared/services/data.service';
-import { Organization } from '../interface/organization';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Organization } from '../../interfaces/organization';
 
 @Component({
   selector: 'app-organization-page',
