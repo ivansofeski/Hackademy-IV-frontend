@@ -31,6 +31,7 @@ import { GeolocationComponent } from '../geolocation/geolocation.component';
 
 // Services
 import { DataService } from './services/data.service';
+import { GeolocationService } from '../service/geolocation.service';
 
 @NgModule({
   imports: [
@@ -98,6 +99,6 @@ import { DataService } from './services/data.service';
     DonateButtonComponent,
     GeolocationComponent
   ],
-  providers: [DataService]
+  providers: [DataService, GeolocationService]
 })
 export class SharedModule { }

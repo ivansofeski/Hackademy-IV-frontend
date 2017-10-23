@@ -13,7 +13,7 @@ describe('GeolocationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeolocationComponent ],
+      declarations: [ ],
       imports:[RouterTestingModule, 
         HttpClientModule,
         SharedModule,
