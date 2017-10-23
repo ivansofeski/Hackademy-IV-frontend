@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrganizationFormComponent } from './organization-form.component';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { SharedModule } from '../../shared/shared.module';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
