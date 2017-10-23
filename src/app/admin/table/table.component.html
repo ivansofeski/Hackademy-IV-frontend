@@ -3,15 +3,12 @@
 
     <ng-container *ngFor='let col of columns.all; let i = index;' [matColumnDef]='col?.label'>
       <mat-header-cell *matHeaderCellDef [ngClass]='{"table-header-cell": true, "counter": i===0}' [innerHtml]='col?.value' mat-sort-header></mat-header-cell>
-      <mat-cell *matCellDef="let row" [ngClass]='{"table-data-cell": true, "counter": i===0}' [innerHtml]='insertValues(col?.label, row)'
+      <mat-cell *matCellDef="let row" [ngClass]='{"table-data-cell": true, "counter": i===0}'
         [title]='col?.value'>
-        <!-- <a *ngIf='col?.label === "name"' routerLink='{{setLink(row)}}'>{{row[col?.label]}}</a> -->
-        <ng-container *ngIf='col?.label === "name"'>
-          <ng-container *ngComponentOutlet='AdminLinksComponent'></ng-container>
-        </ng-container>
+        <div *ngIf='col?.label.toLowerCase().indexOf("name") <= -1' [innerHtml]='insertValues(col?.label, row)'></div>
+        <a class='admin-link' *ngIf='col?.label.toLowerCase().indexOf("name") > -1' [routerLink]='getLink(row)' [textContent]='row[col?.label]' title='Click to open the detailed page as a link'></a>
       </mat-cell>
     </ng-container>
-
     <mat-header-row *matHeaderRowDef="columns.visible" class="table-header-row"></mat-header-row>
     <mat-row *matRowDef="let row; columns: columns.visible;" class="table-data-row"></mat-row>
   </mat-table>

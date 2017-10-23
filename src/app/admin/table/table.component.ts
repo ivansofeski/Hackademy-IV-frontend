@@ -1,5 +1,18 @@
-import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  OnChanges,
+  AfterContentInit,
+  ViewChild,
+  Input,
+  ViewContainerRef,
+  ReflectiveInjector,
+  ComponentFactoryResolver,
+  Injector,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { MatPaginator, MatSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -16,35 +29,19 @@ import { DataService } from '../services/data.service';
 import { Organization } from '../interface/organization';
 
 @Component({
-  selector: 'app-admin-link',
-  template: '<a routerLink="{{link}}"></a>'
-})
-
-class AdminLinksComponent {
-  link = '/admin';
-
-  constructor(private _link: string) {
-    // this.link = _link;
-  }
-}
-
-@Component({
   selector: 'app-admin-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
-  entryComponents: [AdminLinksComponent]
+  styleUrls: ['./table.component.scss']
 })
-
 
 export class TableComponent implements OnInit {
   @Input() tableData;
   @Input() columns;
   @ViewChild(MatSort) sort: MatSort;
+  currentComponent = null;
   errors: any[] = [];
 
   private _dataSource: AdminTableDataSource;
-
-  AdminLinksComponent = AdminLinksComponent;
 
   get dataSource(): AdminTableDataSource {
     return new AdminTableDataSource(this.tableData, this.columns.visible, this.sort);
@@ -72,8 +69,6 @@ export class TableComponent implements OnInit {
     let _value = '';
 
     switch (label) {
-      case 'name':
-        return null;
       case 'person':
       case 'phone':
       case 'email':
@@ -83,6 +78,7 @@ export class TableComponent implements OnInit {
         _value = (this.dataSource.subject.value.indexOf(row) + 1).toString();
         break;
       case 'orgLogo':
+      case 'mainImage':
         _value = `<img class="org-logo" src="${row[label]}"/>`;
         break;
       default:
@@ -93,11 +89,19 @@ export class TableComponent implements OnInit {
     return _value;
   }
 
-  setLink(item: Object): string {
-    let _link = '';
-    const id = this.dataSource.subject.value.indexOf(item) + 1;
-    _link = `/admin/organizations/view/${id}`;
-    return _link;
+  getLink: Function = (row: any): string => {
+    if (!row || typeof row !== 'object' || Object.keys(row).length <= 0) {
+      return;
+    }
+
+    const _link = [
+      this.route.parent.snapshot.url.toString(),
+      this.route.snapshot.url.toString(),
+      'view',
+      row.id ? row.id : (Array.from(this.tableData).indexOf(row) + 1).toString()
+    ];
+
+    return '/' + _link.join('/');
   }
 
   ngOnInit() {
@@ -106,7 +110,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 }
 
 export class AdminTableDataSource extends DataSource<any> {

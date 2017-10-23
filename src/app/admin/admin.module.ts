@@ -41,7 +41,7 @@ import { TableComponent } from './table/table.component';
     ProjectFormComponent,
     SidebarComponent,
     DashboardComponent,
-    TableComponent,
+    TableComponent
   ],
   providers: [DataService]
 })

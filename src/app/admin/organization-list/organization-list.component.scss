@@ -7,36 +7,3 @@
 
   box-sizing: border-box;
 }
-
-:host ::ng-deep app-admin-table .table-data-cell[class*="orgLogo"] {
-  position: relative;
-  display: block;
-  margin: 0 auto;
-  max-width: 70px;
-  height: 50px;
-  max-height: 50px;
-  overflow: hidden;
-}
-
-:host ::ng-deep app-admin-table .table-header-cell[class*="orgLogo"] {
-  max-width: 70px;
-}
-
-:host ::ng-deep app-admin-table .table-data-cell[class*="name"] {
-  font-weight: bold;
-}
-
-:host ::ng-deep app-admin-table .table-data-cell[class*="orgLogo"] > img {
-  position: relative;
-  display: block;
-  height: 100%;
-  margin: 0 auto;
-}
-
-:host ::ng-deep app-admin-table .table-data-cell[class*="orgId"] {
-  text-transform: uppercase;
-}
-
-:host ::ng-deep app-admin-table .table-data-cell[class*="email"] {
-  text-transform: lowercase;
-}

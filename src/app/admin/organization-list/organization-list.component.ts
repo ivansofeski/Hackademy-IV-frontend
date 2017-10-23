@@ -9,6 +9,8 @@ import { Organization } from '../interface/organization';
 
 // Services
 import { DataService } from '../services/data.service';
+
+// Components
 import { TableComponent } from '../table/table.component';
 
 @Component({
@@ -35,6 +37,7 @@ export class OrganizationListComponent implements OnInit {
   };
   tableData: Organization[] = [];
   errors: any[] = [];
+  componentData = null;
 
   initDataLoad: Function = (): void => {
     if (this._dataService) {
@@ -55,5 +58,5 @@ export class OrganizationListComponent implements OnInit {
     }
   }
 
-  constructor(private _router: Router, private _dataService: DataService) { }
+  constructor(private _dataService: DataService) { }
 }

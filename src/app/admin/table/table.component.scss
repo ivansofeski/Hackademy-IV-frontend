@@ -1,7 +1,6 @@
 $menuColor: '#4cb19e ';
 $lighterMenuColor: 'rgba(160, 220, 209, 0.53)';
 
-
 .admin-table {
   position: relative;
   display: block;
@@ -15,6 +14,7 @@ $lighterMenuColor: 'rgba(160, 220, 209, 0.53)';
 .admin-table,
 .admin-table * {
   box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .table-header-row,
@@ -40,7 +40,6 @@ $lighterMenuColor: 'rgba(160, 220, 209, 0.53)';
   display: block;
   padding: 10px 5px;
   color: rgb(53, 53, 53);
-  font-family: Helvetica, Arial, sans-serif;
   text-align: center;  
   overflow: hidden;
   word-break: break-word;
@@ -61,7 +60,11 @@ $lighterMenuColor: 'rgba(160, 220, 209, 0.53)';
   width: 1px;
   height: 25px;
   background-color: silver;
-
+  
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
@@ -71,4 +74,66 @@ $lighterMenuColor: 'rgba(160, 220, 209, 0.53)';
 
 .counter {
   max-width: 50px;
+}
+
+.table-data-cell[class*="Logo"],
+.table-data-cell[class*="Image"] {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  max-width: 90px;
+  height: 50px;
+  max-height: 50px;
+  overflow: hidden;
+
+  div {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    ::ng-deep img {
+      position: relative;
+      display: block;
+      height: 100%;
+      margin: 0 auto;
+    }
+  }
+}
+
+.table-data-cell[class*="name"],
+.table-data-cell[class*="Name"] {
+  font-weight: bold;
+  text-transform: capitalize;
+
+  a {
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: initial;
+  }
+
+  a:hover {
+    color: darkblue;
+    text-decoration: underline;
+  }
+}
+
+.table-header-cell[class*="Logo"],
+.table-header-cell[class*="Image"] {
+  max-width: 90px;
+}
+
+.table-data-cell[class*="name"] {
+  font-weight: bold;
+}
+
+.table-data-cell[class*="Id"] {
+  text-transform: uppercase;
+}
+
+.table-data-cell[class*="email"] {
+  text-transform: lowercase;
 }
