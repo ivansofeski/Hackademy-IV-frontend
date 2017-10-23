@@ -6,8 +6,10 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/Observable/throw';
 
 // Interfaces
-import { Organization, NewOrganization } from '../interface/organization';
-import { Project, NewProject } from '../interface/project';
+
+import { Project } from '../../interfaces/project';
+import { Organization } from '../../interfaces/organization';
+
 
 @Injectable()
 export class DataService {
@@ -22,9 +24,7 @@ export class DataService {
   private _paths = {
     root: '../../../assets/mockdata/',
     organizations: 'organizations.json',
-    newOrganizations: 'newOrganizations.json',
     projects: 'projects.json',
-    newProjects: 'newProjects.json'
   };
 
   /**
@@ -140,29 +140,6 @@ export class DataService {
     }
 
     return this._get(this._paths.root + this._paths.projects, options);
-  }
-
-  /* ////////////////////////////////////////////////////////////////////////
-  *  /////////////////////////                      /////////////////////////
-  *  ///////////////////////// TESTING PURPOSE ONLY /////////////////////////
-  *  /////////////////////////                      /////////////////////////
-  *  ////////////////////////////////////////////////////////////////////////
-  */
-
-  /**
-   * @experimental
-   * Functions to try something new for Closed Projects with different set of interfaces.
-   */
-  getNewProjects(): Observable<NewProject[]> {
-    return this._get(this._paths.root + this._paths.newProjects);
-  }
-
-  /**
-   * @experimental
-   * Functions to try something new for Closed Projects with different set of interfaces.
-   */
-  getNewOrganizations(): Observable<NewOrganization[]> {
-    return this._get(this._paths.root + this._paths.newOrganizations);
   }
 
   /**
