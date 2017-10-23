@@ -6,7 +6,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/Observable/throw';
 
 // Interfaces
-import { Organization, Project } from '../../interfaces';
+import { Organization } from '../../interfaces/organization';
+import { Project } from '../../interfaces/project';
 
 @Injectable()
 export class DataService {
