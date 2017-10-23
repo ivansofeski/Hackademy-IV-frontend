@@ -29,6 +29,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { GeolocationComponent } from '../geolocation/geolocation.component';
 
+// Services
+import { DataService } from './services/data.service';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -56,7 +59,7 @@ import { GeolocationComponent } from '../geolocation/geolocation.component';
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCHC4hLZ_ogiMaGy9kVZl4u0gjocEyw3EA',
-      libraries: ["places"]
+      libraries: ['places']
     })
   ],
   exports: [
@@ -94,6 +97,7 @@ import { GeolocationComponent } from '../geolocation/geolocation.component';
     ProgressbarComponent,
     DonateButtonComponent,
     GeolocationComponent
-  ]
+  ],
+  providers: [DataService]
 })
 export class SharedModule { }
