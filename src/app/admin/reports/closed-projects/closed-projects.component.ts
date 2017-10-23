@@ -5,11 +5,11 @@ import { MatSort } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../../shared/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project } from '../../interface/project';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import { Project } from '../../../interfaces/project';
 
 @Component({
   selector: 'app-closed-projects',
