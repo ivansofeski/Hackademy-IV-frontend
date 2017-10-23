@@ -4,7 +4,6 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 
 // Services
-import { DataService } from './services/data.service';
 import { ActivitiesService } from './services/activities.service';
 
 // Components
@@ -44,7 +43,7 @@ import { ActivityFormComponent } from './activity-form/activity-form.component';
     DashboardComponent,
     ActivityFormComponent,
   ],
-  providers: [DataService, ActivitiesService]
+  providers: [ActivitiesService]
 })
 
 export class AdminModule { }
