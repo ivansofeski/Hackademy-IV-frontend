@@ -3,7 +3,7 @@ import {ProjectService} from '../project.service';
 import {LocalStorageService} from '../../service/local-storage.service';
 import {Project} from '../project.interface';
 import { GeolocationService } from '../../service/geolocation.service';
-
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   // selector: 'app-project-list',
@@ -23,7 +23,7 @@ export class ProjectListComponent implements OnInit {
   donateOption1 = 10;
   donateOption2 = 25;
   donateOption3 = 50;
-
+  geocoder;
   constructor(private _projectService: ProjectService,
               private _localStorageService: LocalStorageService,
               private _geolocationService: GeolocationService) {
@@ -32,20 +32,19 @@ export class ProjectListComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this._localStorageService.getCurrentUser();
     this._geolocationService.getIPLocation().subscribe(location => {
-      this.currentUser.userLocation.lat = location.lat;
-      this.currentUser.userLocation.lng = location.lon;
-      const user = JSON.stringify(this.currentUser);
-      localStorage.setItem(this.localStorageKey, user);
+      // this.currentUser.userLocation.lat = location.lat;
+      // this.currentUser.userLocation.lng = location.lon;
+      // const user = JSON.stringify(this.currentUser);
+      // localStorage.setItem(this.localStorageKey, user);
       this._projectService.getProjects().subscribe(
-        res => {
-          console.log(res);
-          this.projectList = res.filter((v, k) => {
-            return v.open === 'true';
-          },
+        projects => {
+          console.log(projects);
+          this.projectList = projects.filter((project, k) => {
+            return project.open === 'true';
+            },
             error => this.errors.push(error)
           );
-        }
-      );
+        });
     });
   }
 
