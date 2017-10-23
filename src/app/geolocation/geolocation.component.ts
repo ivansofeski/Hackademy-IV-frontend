@@ -29,6 +29,8 @@ export class GeolocationComponent implements OnInit {
   center_changed = false;
   user;
   currentLocationTab = true;
+  geocoder;
+
   style = [
     {
       'featureType': 'all',
@@ -300,13 +302,7 @@ export class GeolocationComponent implements OnInit {
       width: 35
     }
   };
-  iconUrlProject = {
-    url: '../assets/icons/project-icon.png',
-    scaledSize: {
-      height: 45,
-      width: 45
-    }
-  };
+  iconUrlProject;
 
   constructor(private _projectService: ProjectService,
               private mapsAPILoader: MapsAPILoader,
@@ -318,10 +314,17 @@ export class GeolocationComponent implements OnInit {
 
   ngOnInit() {
     this.user = this._localStorageService.getCurrentUser();
-    this.showPosition();
     this.inputAddressElm = this.searchElementRef.nativeElement;
     const searchButtElm = document.getElementById('searchButton');
     this.mapsAPILoader.load().then(() => {
+      this.iconUrlProject = {
+        url: '../assets/icons/project-icon.png',
+        size: new google.maps.Size(45, 45),
+        anchor: new google.maps.Point(22.5, 22.5)
+      };
+      this.geocoder = new google.maps.Geocoder();
+      this.showUserPosition();
+      this.loadProjects();
       const autocomplete = new google.maps.places.Autocomplete(this.inputAddressElm, {
         types: ['address']
       });
@@ -349,7 +352,7 @@ export class GeolocationComponent implements OnInit {
     });
   }
 
-  showPosition() {
+  showUserPosition() {
     this.radius = 4000;
     this.zoom = 12;
     this._geolocationService.getGeolocation().subscribe(location => {
@@ -358,23 +361,38 @@ export class GeolocationComponent implements OnInit {
       this.currentlat = this.lat;
       this.currentlng = this.lng;
     });
-    this._projectService.getProjects().subscribe(
-      res => {
-        console.log(res);
-        this.projects = res;
-      });
   }
+
+  loadProjects(): any {
+    this._projectService.getProjects()
+      .subscribe(projectsList => {
+        console.log(projectsList);
+        projectsList.map(project => {
+          this.getAddressLocation(project.address)
+          .subscribe(projectLocation => {
+            project['lat'] = projectLocation.lat();
+            project['lng'] = projectLocation.lng();
+            this.projects.push(project);
+            console.log(project);
+          });
+        });
+      });
+    }
 
   dragEnd(event) {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
-    this.center_changed = true;
+    if (this.currentLocationTab === false) {
+      this.center_changed = true;
+    }
   }
 
   mapClicked(event) {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
-    this.center_changed = true;
+    if (this.currentLocationTab === false) {
+      this.center_changed = true;
+    }
   }
 
   onClick() {
@@ -397,9 +415,8 @@ export class GeolocationComponent implements OnInit {
 
   getLatLan(address: string) {
     console.log('Getting Address - ', address);
-    const geocoder = new google.maps.Geocoder();
     return Observable.create(observer => {
-      geocoder.geocode({'address': address}, function (results, status) {
+      this.geocoder.geocode({'address': address}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           observer.next(results[0].geometry.location);
           observer.complete();
@@ -443,4 +460,21 @@ export class GeolocationComponent implements OnInit {
     this.user.userLocation.lng = this.lng;
     this._localStorageService.updateCurrnetUser(this.user);
   }
+
+  getAddressLocation(address) {
+    // const geocoder = new google.maps.Geocoder();
+    return Observable.create(observer => {
+      this.geocoder.geocode({'address': address}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          observer.next(results[0].geometry.location);
+          observer.complete();
+        } else {
+          console.log('Error - ', results, ' & Status - ', status);
+          observer.next({});
+          observer.complete();
+        }
+      });
+    });
+  }
+
 }
