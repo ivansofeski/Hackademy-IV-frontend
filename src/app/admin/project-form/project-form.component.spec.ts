@@ -7,7 +7,7 @@ import { ProjectFormComponent } from './project-form.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { testData } from '../test-data';
 

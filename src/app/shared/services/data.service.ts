@@ -3,11 +3,13 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/Observable/throw';
+import 'rxjs/add/observable/throw';
 
 // Interfaces
-import { Organization, NewOrganization } from '../interface/organization';
-import { Project, NewProject } from '../interface/project';
+import { Organization } from '../../interfaces/organization';
+import { Project } from '../../interfaces/project';
+import { Activity } from '../../interfaces/activity';
+import { Subject, BehaviorSubject } from 'rxjs/Rx';
 
 @Injectable()
 export class DataService {
@@ -22,10 +24,27 @@ export class DataService {
   private _paths = {
     root: '../../../assets/mockdata/',
     organizations: 'organizations.json',
-    newOrganizations: 'newOrganizations.json',
     projects: 'projects.json',
-    newProjects: 'newProjects.json'
+    activities: 'activities.json'
   };
+
+  /**
+   * @property Used to pass stored data from one parent component to a router outlet inside it.
+   */
+  private _project: Subject<Object> = new BehaviorSubject<Object>({});
+  /**
+   * @property Subscribable property in order to provide previously stored relevant private property from a parent component.
+   */
+  project: Observable<Object> = this._project.asObservable();
+
+  /**
+   * @property Function to set the private property `_project`. User must supply `data` as an object of unspecified properties
+   * to set a private property so that it can be accessible by another router outlet by subcribing to it later.
+   */
+  storeProject: Function = (data: Object) => {
+    this._project.next(data);
+  }
+
 
   /**
    * @argument path as a string e.g. (API) `'/someurlsegment/api/'` or (file) `'/somepath/somefile.json'`
@@ -142,31 +161,27 @@ export class DataService {
     return this._get(this._paths.root + this._paths.projects, options);
   }
 
-  /* ////////////////////////////////////////////////////////////////////////
-  *  /////////////////////////                      /////////////////////////
-  *  ///////////////////////// TESTING PURPOSE ONLY /////////////////////////
-  *  /////////////////////////                      /////////////////////////
-  *  ////////////////////////////////////////////////////////////////////////
-  */
-
   /**
-   * @experimental
-   * Functions to try something new for Closed Projects with different set of interfaces.
+   * @description
+   * GET all activity records.
+   *
+   * Returns an Observable Array of `Activity`(interface).
+   *
+   * @returns an Observable Array of `Activity`(interface).
    */
-  getNewProjects(): Observable<NewProject[]> {
-    return this._get(this._paths.root + this._paths.newProjects);
-  }
-
-  /**
-   * @experimental
-   * Functions to try something new for Closed Projects with different set of interfaces.
-   */
-  getNewOrganizations(): Observable<NewOrganization[]> {
-    return this._get(this._paths.root + this._paths.newOrganizations);
+  getActivities(): Observable<Activity[]> {
+    return this._get(this._paths.root + this._paths.activities);
   }
 
   /**
    * @param http An instance of HttpClient to enable functions in this service to use HTTP requests like GET, POST, PUT etc.
    */
   constructor(private http: HttpClient) { }
+
+  /* ////////////////////////////////////////////////////////////////////////
+  *  /////////////////////////                      /////////////////////////
+  *  ///////////////////////// TESTING PURPOSE ONLY /////////////////////////
+  *  /////////////////////////                      /////////////////////////
+  *  ////////////////////////////////////////////////////////////////////////
+  */
 }

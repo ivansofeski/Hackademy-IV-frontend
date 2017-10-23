@@ -1,18 +1,20 @@
-import { ActivitiesService } from './../services/activities.service';
 import { constructDependencies } from '@angular/core/src/di/reflective_provider';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
-import { Activity } from '../interface/activity';
 import { INPUT_ATTRIBUTES, NUMBERS, REGEX_UNITS } from './activity-form.constants';
-import { DataService } from '../services/data.service';
 import { NanoValidators } from '../services/nano-validators';
+
+// Services
+import { DataService } from '../../shared/services/data.service';
+import { Activity } from '../../interfaces/activity';
 
 @Component({
   selector: 'app-activity-form',
   templateUrl: './activity-form.component.html',
   styleUrls: ['./activity-form.component.scss']
 })
+
 export class ActivityFormComponent implements OnInit {
   @ViewChild('activityForm') activityForm: ElementRef;
   functions: ActivityFormFunctions;
@@ -126,7 +128,7 @@ export class ActivityFormComponent implements OnInit {
   }
 
   getactivitiesProject: Function = (): void => {
-    this._activitiesService.project.subscribe(
+    this._dataService.project.subscribe(
       project => {
         if (project !== undefined && Object.keys(project).length > 0) {
           this.loadedProject = project;
@@ -147,10 +149,10 @@ export class ActivityFormComponent implements OnInit {
     );
   }
 
-  constructor(private _router: ActivatedRoute, private _dataService: DataService, private _activitiesService: ActivitiesService) { }
+  constructor(private _router: ActivatedRoute, private _dataService: DataService) { }
 
   ngOnInit() {
-    this.functions = new ActivityFormFunctions(this.activityForm, this._activitiesService);
+    this.functions = new ActivityFormFunctions(this.activityForm);
     this.inputs = this.functions.setInputAttributes;
     this.getactivitiesProject();
     if (this.inputs !== undefined) {
@@ -185,14 +187,5 @@ export class ActivityFormFunctions {
     }
   }
 
-  /* getactivitiesProject: Function = (proj: Object): void => {
-    this._activitiesService.project.subscribe(
-      project => {
-         proj = project;
-         console.log(project);
-      }
-    );
-  } */
-
-  constructor(private _form: ElementRef, private _activitiesService: ActivitiesService) { }
+  constructor(private _form: ElementRef) { }
 }

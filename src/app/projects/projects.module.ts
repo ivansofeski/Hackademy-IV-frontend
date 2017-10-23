@@ -28,9 +28,9 @@ export class MyHammerConfig extends HammerGestureConfig  {
   ],
   providers: [
     ProjectService,
-    { 
-      provide: HAMMER_GESTURE_CONFIG, 
-       useClass: MyHammerConfig 
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+       useClass: MyHammerConfig
     }
   ],
   declarations: [ProjectsComponent, ProjectListComponent,  ProjectPageComponent]

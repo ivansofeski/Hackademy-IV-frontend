@@ -1,9 +1,11 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {ProjectService} from '../project.service';
-import {LocalStorageService} from '../../service/local-storage.service';
 import {Project} from '../project.interface';
-import { GeolocationService } from '../../service/geolocation.service';
 import { Observable } from 'rxjs/Observable';
+
+// Services
+import {LocalStorageService} from '../../service/local-storage.service';
+import { GeolocationService } from '../../service/geolocation.service';
+import { DataService } from '../../shared/services/data.service';
 
 @Component({
   // selector: 'app-project-list',
@@ -24,7 +26,7 @@ export class ProjectListComponent implements OnInit {
   donateOption2 = 25;
   donateOption3 = 50;
   geocoder;
-  constructor(private _projectService: ProjectService,
+  constructor(private _projectService: DataService,
               private _localStorageService: LocalStorageService,
               private _geolocationService: GeolocationService) {
   }

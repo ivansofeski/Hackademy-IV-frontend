@@ -3,13 +3,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DataSource } from '@angular/cdk/table';
 import { MatSort } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from '../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project } from '../interface/project';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+
+// Services
+import { DataService } from '../../shared/services/data.service';
+import { Project } from '../../interfaces/project';
 
 @Component({
   selector: 'app-project-list',

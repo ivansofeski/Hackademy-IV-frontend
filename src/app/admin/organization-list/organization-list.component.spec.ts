@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { OrganizationListComponent } from './organization-list.component';
 import { DebugElement } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { testData } from '../test-data';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';

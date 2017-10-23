@@ -28,6 +28,9 @@ export class LocalStorageService {
 
       this.currentUser['id'] = Math.floor(Math.random() * 100000) + 1;
       this.currentUser['userImage'] = './assets/photos/userImage1.jpeg';
+      this.currentUser['userName'] = 'Nano user';
+      this.currentUser['userSlogan'] = 'Go nano!';
+      this.currentUser['wallet'] = {'total': 0, 'donated': 0};
       // this.setLocation(this.currentUser);
       this.currentUser['userLocation'] = {'lat': this.lat, 'lng': this.lng};
       this.user = JSON.stringify(this.currentUser);

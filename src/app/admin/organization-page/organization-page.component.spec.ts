@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrganizationPageComponent } from './organization-page.component';
 import { SharedModule } from '../../shared/shared.module';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { testData } from '../test-data';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Rx';
