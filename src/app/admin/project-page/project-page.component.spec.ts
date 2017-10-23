@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectPageComponent } from './project-page.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from '../../shared/shared.module';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { AgmCoreModule } from '@agm/core';
 import { DebugElement } from '@angular/core';
 import { testData } from '../test-data';
