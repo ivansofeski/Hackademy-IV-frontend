@@ -21,9 +21,7 @@ export class DataService {
   private _paths = {
     root: '../../../assets/mockdata/',
     organizations: 'organizations.json',
-    newOrganizations: 'newOrganizations.json',
-    projects: 'projects.json',
-    newProjects: 'newProjects.json'
+    projects: 'projects.json'
   };
 
   /**
