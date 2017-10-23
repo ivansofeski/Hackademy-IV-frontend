@@ -6,8 +6,8 @@ export interface Project {
     fromDate: string;
     toDate: string;
     address: string;
-    lat: number;
-    lng: number;
+    lat?: number;
+    lng?: number;
     location: {
         lat: number;
         lng: number;
