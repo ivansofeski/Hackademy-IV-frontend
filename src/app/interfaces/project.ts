@@ -12,6 +12,7 @@ export interface Project {
     imageOrvideo?:string;
     projectManager: string;    
     recurringProject?: boolean;
+    nationalProject: boolean;
     recurringProjectPublishingDate?: Date|null;
     organizationId: number;
 
