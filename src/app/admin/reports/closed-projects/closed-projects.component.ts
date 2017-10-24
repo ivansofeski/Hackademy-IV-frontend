@@ -1,7 +1,8 @@
+// Modules
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import '../../shared/rxjs.operators';
+import '../../../shared/rxjs.operators';
 
 // Services
 import { DataService } from '../../../shared/services/data.service';
@@ -60,6 +61,34 @@ export class ClosedProjectsComponent implements OnInit {
    */
   public errors: any[] = [];
 
+  yearsGenerator: Function = (): void => {
+    const year = new Date;
+    const yearNow = year.getFullYear();
+    const years: any[] = [];
+
+    for (let i = yearNow; i >= 2000; i--) {
+      this.years.push(i.toString());
+    }
+  }
+
+  filterClosedProjects: Function = (date: Object): void => {
+    if (date === undefined || typeof date !== 'object') {
+      return;
+    }
+
+    if (Object.keys(date).length > 0) {
+      for (const key in date) {
+        if (date.hasOwnProperty(key)) {
+          this[key] = date[key];
+        }
+      }
+    }
+
+    const fullPeriod = `${this.chosenYear}/${this.chosenMonth}`;
+
+    this.initDataLoad(fullPeriod);
+  }
+
   /**
    * @property Function to initialize starting code for the component itself.
    * It consists of many steps like subscribing to a method in the service instantiated by the contructor
@@ -89,11 +118,20 @@ export class ClosedProjectsComponent implements OnInit {
                     v['bankAccount'] = org && org.billing ? org.billing : '';
                   });
 
-                  this.tableData = filterDate && filterDate.length > 0 ? projects.filter((v, i) => {
-                    const _filteredDate = new Date(filterDate);
-                    const _projectToDate = new Date(v.toDate);
-                    return
-                  }) : projects;
+                  if (filterDate && filterDate.length > 0) {
+                    projects = projects.filter((v, i) => {
+                      const _filteredDate = new Date(filterDate);
+                      const _projectToDate = new Date(v.toDate);
+
+                      const _dateNow = new Date();
+                      const _validate = _filteredDate <= _dateNow && _filteredDate <= _projectToDate &&
+                        v.toDate.toString().trim().slice(0, -2).indexOf(filterDate) > -1;
+
+                      return _validate;
+                    });
+                  }
+
+                  this.tableData = projects;
                 }
               }
             );
@@ -105,6 +143,10 @@ export class ClosedProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.yearsGenerator) {
+      this.yearsGenerator();
+    }
+
     if (this.initDataLoad) {
       this.initDataLoad();
     }
