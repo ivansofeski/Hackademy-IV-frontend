@@ -16,14 +16,14 @@ export interface Project {
     organizationId: number;
     open: string; 
 
-    mainImage: string;
-    images: string[];
-address: string;
-    location: {
+    mainImage: string;  // using imageOrVideo
+    images: string[]; // this must be added by backend.
+    address: string;  // Does not exist on backend, is this needed by frontend?
+    location: {       // To be removed.
         lat: number;
         lng: number;
     };
-    neededFunding: number;
-    organizationName: string;
+    neededFunding: number;  //using amountToBeRaised
+    organizationName: string;  //to be removed
     
 }
