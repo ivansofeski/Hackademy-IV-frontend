@@ -1,14 +1,15 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MatPaginator, MatSort } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import '../rxjs.operators';
 
-// Services
-
-// Interfaces
+let lastSorted = {
+  column: '',
+  order: ''
+};
 
 @Component({
   selector: 'app-admin-table',
@@ -20,7 +21,6 @@ export class TableComponent implements OnInit {
   @Input() tableData;
   @Input() columns;
   @ViewChild(MatSort) sort: MatSort;
-  errors: any[] = [];
 
   private _dataSource: AdminTableDataSource;
 
@@ -70,20 +70,66 @@ export class TableComponent implements OnInit {
     return _value;
   }
 
-  getLink: Function = (row: any): string => {
-    if (!row || typeof row !== 'object' || Object.keys(row).length <= 0) {
+  checkColumn: Function = (column: string): boolean => {
+    if (!column || typeof column !== 'string' || column.length <= 0) {
       return;
     }
 
-    const _link = [
-      this.route.parent.snapshot.url.toString(),
-      this.route.snapshot.url.toString(),
-      'view',
-      row.id ? row.id : (Array.from(this.tableData).indexOf(row) + 1).toString()
-    ];
+    let _validate = false;
+    column = column.trim().toLowerCase();
 
-    return '/' + _link.join('/');
+    switch (true) {
+      case column === 'name':
+      case column === 'organizationname':
+      case column === 'projectname':
+        _validate = true;
+        break;
+      default:
+        _validate = false;
+        break;
+    }
+
+    return _validate;
   }
+
+  getLink: Function = (column: string, row: any): string => {
+    if (!column || typeof column !== 'string' || column.length <= 0 || !row || typeof row !== 'object' || Object.keys(row).length <= 0) {
+      return;
+    }
+
+    const root = this.route.parent.snapshot.url.toString();
+    let selector = '';
+    let id;
+
+    switch (true) {
+      case column === 'name':
+        selector = 'organizations/view';
+        id = row.id;
+        break;
+      case column === 'organizationName':
+        selector = 'organizations/view';
+        id = row.organizationId;
+        break;
+      case column === 'projectName':
+        selector = 'projects/view';
+        id = row.id ? row.id : (Array.from(this.tableData).indexOf(row) + 1).toString();
+        break;
+      default:
+        break;
+    }
+
+    const _link = '/' + [ root, selector, id ].join('/');
+
+    return _link;
+  }
+
+  /* instanceOfOrganization: Function = (object: any): object is Organization => {
+    return 'orgId' in object;
+  }
+
+  instanceOfProject: Function = (object: any): object is Project => {
+    return 'projectId' in object;
+  } */
 
   ngOnInit() {
     if (this.validateProperties && this.validateProperties()) {
@@ -97,14 +143,33 @@ export class TableComponent implements OnInit {
 export class AdminTableDataSource extends DataSource<any> {
   subject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
-  sort: Function = (sorters: string[]): any[] => {
-    const data = this.subject.value.slice();
+  showSortingArrow: Function = (): void => {
+    if (!this._sorter || !this._sorter.active) {
+      return;
+    }
+
+    const header = document.querySelectorAll('.mat-column-' + this._sorter.active)[0];
+    const lastSortedHeader = document.querySelectorAll('[sorted="true"]')[0];
+
+    if (header && header) {
+      header.setAttribute('sorted', 'true');
+      header.setAttribute('dir', this._sorter.direction);
+    }
+
+    if (lastSortedHeader && lastSortedHeader !== header) {
+      lastSortedHeader.setAttribute('sorted', 'false');
+      lastSortedHeader.removeAttribute('dir');
+    }
+  }
+
+  initSorting: Function = (sorters: string[]): any[] => {
+    let data = this.subject.value.slice();
 
     if (!this._sorter.active || this._sorter.direction === '') {
       return data;
     }
 
-    return data.sort((a, b) => {
+    data = data.sort((a, b) => {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
 
@@ -117,9 +182,12 @@ export class AdminTableDataSource extends DataSource<any> {
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+      const _sort = (valueA < valueB ? -1 : 1) * (this._sorter.direction === 'asc' ? 1 : -1);
 
-      return (valueA < valueB ? -1 : 1) * (this._sorter.direction === 'asc' ? 1 : -1);
+      return _sort;
     });
+
+    return data;
   }
 
   connect(): Observable<any[]> {
@@ -129,8 +197,10 @@ export class AdminTableDataSource extends DataSource<any> {
     ];
 
     if (!this.subject.isStopped) {
+      this.showSortingArrow();
+
       return Observable.merge(...displayDataChanges).map(() => {
-        return this.sort(this._sortableColumns);
+        return this.initSorting(this._sortableColumns);
       });
     }
   }

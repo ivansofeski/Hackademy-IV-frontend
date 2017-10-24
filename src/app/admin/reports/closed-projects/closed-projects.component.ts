@@ -124,14 +124,16 @@ export class ClosedProjectsComponent implements OnInit {
                       const _projectToDate = new Date(v.toDate);
 
                       const _dateNow = new Date();
-                      const _validate = _filteredDate <= _dateNow && _filteredDate <= _projectToDate &&
-                        v.toDate.toString().trim().slice(0, -2).indexOf(filterDate) > -1;
+                      const _validate = (_filteredDate <= _dateNow && _filteredDate <= _projectToDate) &&
+                      (v.toDate.toString().trim().slice(0, -2).indexOf(filterDate) > -1);
 
                       return _validate;
                     });
                   }
 
-                  this.tableData = projects;
+                  this.tableData = projects.filter((v, i) => {
+                    return v.open === 'false';
+                  });
                 }
               }
             );
