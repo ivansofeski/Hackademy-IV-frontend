@@ -28,6 +28,13 @@ export class DataService {
     activities: 'activities.json'
   };
 
+  private _backendPaths = {
+    root: 'http://18.221.31.52:8080/nano-1.0/api/',
+    organizations: 'org/getall',
+    projects: 'getlistofprojects',
+    activities: 'getlistofactivities'
+  };
+
   /**
    * @property Used to pass stored data from one parent component to a router outlet inside it.
    */
@@ -176,7 +183,9 @@ export class DataService {
   /**
    * @param http An instance of HttpClient to enable functions in this service to use HTTP requests like GET, POST, PUT etc.
    */
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this._paths = this._backendPaths;
+   }
 
   /* ////////////////////////////////////////////////////////////////////////
   *  /////////////////////////                      /////////////////////////
