@@ -215,3 +215,10 @@ $lighterMenuColor: 'rgba(160, 220, 209, 0.53)';
   -o-transform: rotateZ(90deg) rotateY(180deg);
   transform: rotateZ(90deg) rotateY(180deg);
 }
+
+::ng-deep .dash {
+  margin: 0 5px;
+  color: silver;
+  opacity: .75;
+  font-weight: 100;
+}
