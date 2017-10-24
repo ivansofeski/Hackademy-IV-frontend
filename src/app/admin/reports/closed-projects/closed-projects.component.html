@@ -1,22 +1,21 @@
 <div class="container">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title class='card-title'>Closed Projects</mat-card-title>
-      </mat-card-header>
-      <mat-form-field class='dateFilters' >
-        <mat-select class='filter-year' placeholder="year" (change)='filterClosedProjects({chosenYear: $event.value})' selected='yearNow'>
-          <mat-option *ngFor='let year of years' [value]='year' [textContent]='year'></mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class='dateFilters'>
-        <mat-select class='filter-month' placeholder="month" (change)='filterClosedProjects({chosenMonth: $event.value})'>
-          <mat-option *ngFor='let month of months' [value]='month.value' [textContent]='month.viewValue'></mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-card>
-    <br/>
-    <div class="table-container">
-      <app-admin-table [tableData]='tableData' [columns]='columns'></app-admin-table>
-    </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class='card-title'>Closed Projects</mat-card-title>
+    </mat-card-header>
+    <mat-form-field class='dateFilters'>
+      <mat-select class='filter-year' placeholder="year" (change)='filterClosedProjects({chosenYear: $event.value})' selected='yearNow'>
+        <mat-option *ngFor='let year of years' [value]='year' [textContent]='year'></mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class='dateFilters'>
+      <mat-select class='filter-month' placeholder="month" (change)='filterClosedProjects({chosenMonth: $event.value})'>
+        <mat-option *ngFor='let month of months' [value]='month.value' [textContent]='month.viewValue'></mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
+  <br/>
+  <div class="table-container">
+    <app-admin-table [tableData]='tableData' [columns]='columns'></app-admin-table>
   </div>
-  
+</div>
