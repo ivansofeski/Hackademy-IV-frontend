@@ -1,115 +1,81 @@
-import { Router } from '@angular/router';
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { DataService } from '../../shared/services/data.service';
-import { DataSource } from '@angular/cdk/table';
-import { MatPaginator, MatSort } from '@angular/material';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
-import { Organization } from '../../interfaces/organization';
+import '../../shared/rxjs.operators';
 
-/**
- *
- *
- * @export
- * @class OrganizationListComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
- */
+// Interfaces
+import { Organization } from '../../interfaces/organization';
+// Services
+import { DataService } from '../../shared/services/data.service';
+
+// Components
+import { TableComponent } from '../../shared/table/table.component';
+
 @Component({
   selector: 'app-organization-list',
   templateUrl: './organization-list.component.html',
   styleUrls: ['./organization-list.component.scss']
 })
-/** */
-export class OrganizationListComponent implements OnInit, OnDestroy {
-  dataSource: OrganizationDataSource | null;
-  displayedColumns = [ 'number', 'name', 'address', 'person'];
 
-  @ViewChild(MatSort) sort: MatSort;
+export class OrganizationListComponent implements OnInit {
+  /**
+   * @readonly An Object type property. Basically, it provides column labels and their
+   * respective shown values (strings) on runtime. It's a required property in order to let Table Child Component be created.
+   * @prop `columns.all`
+   * an Array of all possible columns of the table data we are supposed to fetch and load.
+   * @prop `columns.visible`
+   * an Array of selected columns to be shown in the Table Child Component.
+   */
+  readonly columns = {
+    all: [
+      { label: 'order',         value: '#' },
+      { label: 'orgId',         value: 'org. number' },
+      { label: 'name',          value: 'name' },
+      { label: 'address',       value: 'address' },
+      { label: 'billing',       value: 'bank account' },
+      { label: 'person',        value: 'contact person' },
+      { label: 'phone',         value: 'contact phone' },
+      { label: 'email',         value: 'contact email' },
+      { label: 'description',   value: 'about' }
+    ],
+    visible: ['order', 'name', 'orgId', 'billing', 'address', 'person', 'email']
+  };
 
-  // Constructor here
-  constructor(private _dataService: DataService, private _router: Router ) {
+  /**
+   * @property The table data for the component itself. It's strong-typed to `Organization` interface and is predefined
+   * as an empty array of `Organization`. Later on, it's value changes when we subscribe to an Observable method from
+   * the service associated with this component.
+   *
+   * The property name is reflected as an `Input()` on the Table Child Compoment so it's recommended not to change it.
+   */
+  public tableData: Organization[] = [];
+  /**
+   * @property An empty Array of `any` type. It stands to collect garbabe possible/unpredictable errors in the component.
+   */
+  public errors: any[] = [];
+
+  /**
+   * @property Function to initialize starting code for the component itself.
+   * It consists of many steps like subscribing to a method in the service instantiated by the contructor
+   * and then process it's result further.
+   */
+  initDataLoad: Function = (): void => {
+    if (this._dataService) {
+      this._dataService.getOrganizations().subscribe(
+        organizations => {
+          if (organizations && organizations.length > 0) {
+            this.tableData = organizations;
+          }
+        },
+        error => this.errors.push(error)
+      );
+    }
   }
 
   ngOnInit() {
-    this.dataSource = new OrganizationDataSource(this._dataService, this.sort);
-    console.log('this.datasource', this.dataSource);
-  }
-
-  ngOnDestroy(): void { }
-
-  handleRowClick(row) {
-    // alert('your click on the row with the organization  name ' + row.name);
-    this._router.navigateByUrl('/admin/organizations/view/' + row.id);
-  }
-
-
-}
-
-export class OrganizationDataSource extends DataSource<any> {
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  errors: any[] = [];
-  orgList: Organization[];
-
-  constructor(private _serviceFetch: DataService, private _sorter: MatSort) {
-    super();
-  }
-
-
-  subject: BehaviorSubject<Organization[]> = new BehaviorSubject<Organization[]>([]);
-
-  connect(): Observable<Organization[]> {
-
-    const displayDataChanges = [
-      this.subject,
-      this._sorter.sortChange
-    ];
-
-    if (!this.subject.isStopped) {
-      this._serviceFetch.getOrganizations()
-        .subscribe(res => {
-          this.subject.next(res);
-        });
-      return Observable.merge(...displayDataChanges).map(() => {
-        return this.getSortedData();
-      });
+    if (this.initDataLoad) {
+      this.initDataLoad();
     }
   }
 
-  disconnect() {
-    this.subject.complete();
-    this.subject.observers = [];
-    console.log('disconnected!');
-  }
-
-  getSortedData(): Organization[] {
-    const data = this.subject.value.slice();
-
-    if (!this._sorter.active || this._sorter.direction === '') {
-      return data;
-    }
-
-    return data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
-
-      switch (this._sorter.active) {
-        case 'id': [propertyA, propertyB] = [a.organizationId, b.organizationId]; break;
-        case 'number': [propertyA, propertyB] = [a.organizationNumber, b.organizationNumber]; break;
-        case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
-        case 'address': [propertyA, propertyB] = [a.address, b.address]; break;
-        case 'person': [propertyA, propertyB] = [a.contactPersonName, b.contactPersonName]; break;
-        case 'email': [propertyA, propertyB] = [a.contactPersonEmail, b.contactPersonEmail]; break;
-      }
-
-      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-
-      return (valueA < valueB ? -1 : 1) * (this._sorter.direction === 'asc' ? 1 : -1);
-    });
-  }
+  constructor(private _dataService: DataService) { }
 }
