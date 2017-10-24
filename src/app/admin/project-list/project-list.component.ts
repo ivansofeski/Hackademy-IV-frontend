@@ -12,9 +12,9 @@ import { DataService } from '../../shared/services/data.service';
 import { TableComponent } from '../../shared/table/table.component';
 
 @Component({
-  selector: 'app-organization-list',
-  templateUrl: './organization-list.component.html',
-  styleUrls: ['./organization-list.component.scss']
+  selector: 'app-project-list',
+  templateUrl: './project-list.component.html',
+  styleUrls: ['./project-list.component.scss']
 })
 <<<<<<< HEAD
 export class ProjectListComponent implements OnInit {
@@ -107,7 +107,7 @@ export class ProjectDataSource extends DataSource<any> {
     });
 =======
 
-export class OrganizationListComponent implements OnInit {
+export class ProjectListComponent implements OnInit {
   /**
    * @readonly An Object type property. Basically, it provides column labels and their
    * respective shown values (strings) on runtime. It's a required property in order to let Table Child Component be created.
@@ -139,8 +139,8 @@ export class OrganizationListComponent implements OnInit {
   };
 
   /**
-   * @property The table data for the component itself. It's strong-typed to `Organization` interface and is predefined
-   * as an empty array of `Organization`. Later on, it's value changes when we subscribe to an Observable method from
+   * @property The table data for the component itself. It's strong-typed to `Project` interface and is predefined
+   * as an empty array of `Project`. Later on, it's value changes when we subscribe to an Observable method from
    * the service associated with this component.
    *
    * The property name is reflected as an `Input()` on the Table Child Compoment so it's recommended not to change it.
