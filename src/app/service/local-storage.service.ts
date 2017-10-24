@@ -31,6 +31,8 @@ export class LocalStorageService {
       this.currentUser['userName'] = 'Nano user';
       this.currentUser['userSlogan'] = 'Go nano!';
       this.currentUser['wallet'] = {'total': 0, 'donated': 0};
+      this.currentUser['savedProject'] = [];
+      this.currentUser['donatedProject'] = [];
       // this.setLocation(this.currentUser);
       this.currentUser['userLocation'] = {'lat': this.lat, 'lng': this.lng};
       this.user = JSON.stringify(this.currentUser);
