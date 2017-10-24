@@ -1,11 +1,11 @@
 <div [class.loaded]='tableData ? true : false'>
   <mat-table #table [dataSource]="dataSource" class="admin-table" matSort>
     <ng-container *ngFor='let col of columns.all; let i = index;' [matColumnDef]='col?.label'>
-      <mat-header-cell *matHeaderCellDef [ngClass]='{"table-header-cell": true, "counter": i===0}' [innerHtml]='col?.value' mat-sort-header></mat-header-cell>
+      <mat-header-cell *matHeaderCellDef [ngClass]='{"table-header-cell": true, "counter": i===0}' [innerHtml]='col?.value' [attr.sorted]='false' title='Click to sort' mat-sort-header></mat-header-cell>
       <mat-cell *matCellDef="let row" [ngClass]='{"table-data-cell": true, "counter": i===0}'
         [title]='col?.value'>
         <div *ngIf='col?.label.toLowerCase().indexOf("name") <= -1' [innerHtml]='insertValues(col?.label, row)'></div>
-        <a class='admin-link' *ngIf='col?.label.toLowerCase().indexOf("name") > -1' [routerLink]='getLink(row)' [textContent]='row[col?.label]' title='Click to open the detailed page as a link'></a>
+        <a class='admin-link' *ngIf='checkColumn(col?.label)' [routerLink]='getLink(col?.label, row)' [textContent]='row[col?.label]' title='Click to open the detailed page as a link'></a>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="columns.visible" class="table-header-row"></mat-header-row>
