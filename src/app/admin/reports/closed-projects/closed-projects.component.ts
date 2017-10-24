@@ -1,7 +1,8 @@
+// Modules
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import '../../shared/rxjs.operators';
+import '../../../shared/rxjs.operators';
 
 // Services
 import { DataService } from '../../../shared/services/data.service';
@@ -15,17 +16,12 @@ import { Project } from '../../../interfaces/project';
   styleUrls: ['./closed-projects.component.scss']
 })
 
-export class SomethingComponent implements OnInit {
-  color = 'primary';
-  mode = 'determinate';
+export class ClosedProjectsComponent implements OnInit {
   years: string[] = [];
   yearNow = new Date().getFullYear();
   selectedMonth: any;
   chosenMonth: any = '';
   chosenYear: any = '';
-  errors: any[] = [];
-  dataSource: ProjectDataSource | null;
-  displayedColumns = ['id', 'projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate'];
   months = [
     { value: '01', viewValue: 'January' },
     { value: '02', viewValue: 'February' },
@@ -41,147 +37,7 @@ export class SomethingComponent implements OnInit {
     { value: '12', viewValue: 'December' },
 
   ];
-  @ViewChild(MatSort) sort: MatSort;
 
-  // Constructor here
-  constructor(private _dataService: DataService, private _router: Router) {
-  }
-
-  initDataSource: Function = (filter?: string): void => {
-    this.dataSource = new ProjectDataSource(this._dataService, this.sort, filter);
-  }
-
-  ngOnInit() {
-    this.yearsGenerator();
-    this.initDataSource();
-  }
-  yearsGenerator(): void {
-    let year = new Date;
-    var yearNow = year.getFullYear();
-    let years: any[] = [];
-
-    for (let i = yearNow; i >= 2000; i--) {
-      this.years.push(i.toString());
-    }
-  }
-  filterClosedProjects: Function = (date: Object): void => {
-    if (date === undefined || typeof date !== 'object') {
-      return;
-    }
-
-    if (Object.keys(date).length > 0) {
-      for (const key in date) {
-        if (date.hasOwnProperty(key)) {
-          this[key] = date[key];
-        }
-      }
-    }
-
-    const fullPeriod = `${this.chosenYear}/${this.chosenMonth}`;
-
-    this.initDataSource(fullPeriod);
-
-    console.log(fullPeriod);
-  }
-
-  handleRowClick(row) {
-    this._router.navigateByUrl('/admin/projects/view/' + row.id);
-  }
-}
-
-export class ProjectDataSource extends DataSource<any> {
-  errors: any[] = [];
-  nowDate = new Date();
-  pla = this.nowDate.toDateString;
-  constructor(private dataService: DataService, private _sorter: MatSort, private filter?: string) {
-    super();
-  }
-
-  subject: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
-
-  connect(): Observable<Project[]> {
-
-    const displayDataChanges = [
-      this.subject,
-      this._sorter.sortChange
-    ];
-
-    if (!this.subject.isStopped) {
-      this.dataService.getProjects().subscribe(
-        projects => {
-          projects = projects.filter((k, v) => {
-            let dateNow = new Date(k.toDate);
-            return this.filter ? dateNow <= this.nowDate && k.toDate.toString().trim().slice(0, -2).indexOf(this.filter) > -1 :
-            dateNow <= this.nowDate;
-          });
-
-          this.dataService.getOrganizations().subscribe(
-            orgs => {
-              for (const proj of projects) {
-                proj['organization'] = orgs.filter((v, k) => {
-                  return v.id === proj.organizationId;
-                })[0];
-
-                delete proj.organizationId;
-                delete proj.organizationName;
-              }
-
-              let _reorderedProj = [];
-
-              for (let proj of projects) {
-                proj.id = projects.indexOf(proj) + 1;
-                _reorderedProj.push(proj)
-              }
-
-              this.subject.next(_reorderedProj);
-            },
-            error => this.errors.push(error)
-          )
-        },
-        error => this.errors.push(error)
-      );
-      return Observable.merge(...displayDataChanges).map(() => {
-        return this.getSortedData();
-      });
-    }
-  }
-
-  disconnect() {
-    this.subject.complete();
-    this.subject.observers = [];
-    console.log('disconnected!');
-  }
-
-  getSortedData(): Project[] {
-    const data = this.subject.value.slice();
-
-    if (!this._sorter.active || this._sorter.direction === '') {
-      return data;
-    }
-
-    return data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
-
-      switch (this._sorter.active) {
-        case 'id': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
-        case 'title': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
-        case 'orgName': [propertyA, propertyB] = [a['organization'].name, b['organization'].name]; break;
-        case 'bankAccount': [propertyA, propertyB] = [a['organization'].billing, b['organization'].billing]; break;
-        case 'fundsRaised': [propertyA, propertyB] = [a.raisedFunding, b.raisedFunding]; break;
-        case 'dueDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
-/*         case 'closedDate': [propertyA, propertyB] = [<string>a.closedDate, <string>b.closedDate]; break;
- */      }
-
-      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-
-      return (valueA < valueB ? -1 : 1) * (this._sorter.direction === 'asc' ? 1 : -1);
-    });
-  }
-}
-
-export class ClosedProjectsComponent implements OnInit {
   /**
    * @readonly An Object type property. Basically, it provides column labels and their
    * respective shown values (strings) on runtime. It's a required property in order to let Table Child Component be created.
@@ -226,6 +82,34 @@ export class ClosedProjectsComponent implements OnInit {
    */
   public errors: any[] = [];
 
+  yearsGenerator: Function = (): void => {
+    const year = new Date;
+    const yearNow = year.getFullYear();
+    const years: any[] = [];
+
+    for (let i = yearNow; i >= 2000; i--) {
+      this.years.push(i.toString());
+    }
+  }
+
+  filterClosedProjects: Function = (date: Object): void => {
+    if (date === undefined || typeof date !== 'object') {
+      return;
+    }
+
+    if (Object.keys(date).length > 0) {
+      for (const key in date) {
+        if (date.hasOwnProperty(key)) {
+          this[key] = date[key];
+        }
+      }
+    }
+
+    const fullPeriod = `${this.chosenYear}/${this.chosenMonth}`;
+
+    this.initDataLoad(fullPeriod);
+  }
+
   /**
    * @property Function to initialize starting code for the component itself.
    * It consists of many steps like subscribing to a method in the service instantiated by the contructor
@@ -255,11 +139,20 @@ export class ClosedProjectsComponent implements OnInit {
                     v['bankAccount'] = org && org.billing ? org.billing : '';
                   });
 
-                  this.tableData = filterDate && filterDate.length > 0 ? projects.filter((v, i) => {
-                    const _filteredDate = new Date(filterDate);
-                    const _projectToDate = new Date(v.toDate);
-                    return 
-                  }) : projects;
+                  if (filterDate && filterDate.length > 0) {
+                      projects = projects.filter((v, i) => {
+                      const _filteredDate = new Date(filterDate);
+                      const _projectToDate = new Date(v.toDate);
+
+                      const _dateNow = new Date();
+                      const _validate = _filteredDate <= _dateNow && _filteredDate <= _projectToDate &&
+                      v.toDate.toString().trim().slice(0, -2).indexOf(filterDate) > -1;
+
+                      return _validate;
+                    });
+                  }
+
+                  this.tableData = projects;
                 }
               }
             );
@@ -271,6 +164,10 @@ export class ClosedProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.yearsGenerator) {
+      this.yearsGenerator();
+    }
+
     if (this.initDataLoad) {
       this.initDataLoad();
     }
