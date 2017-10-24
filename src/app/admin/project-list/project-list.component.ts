@@ -12,9 +12,9 @@ import { DataService } from '../../shared/services/data.service';
 import { TableComponent } from '../../shared/table/table.component';
 
 @Component({
-  selector: 'app-organization-list',
-  templateUrl: './organization-list.component.html',
-  styleUrls: ['./organization-list.component.scss']
+  selector: 'app-project-list',
+  templateUrl: './project-list.component.html',
+  styleUrls: ['./project-list.component.scss']
 })
 
 export class ProjectListComponent implements OnInit {
