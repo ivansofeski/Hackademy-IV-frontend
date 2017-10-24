@@ -30,13 +30,22 @@ export class ProjectPageComponent implements OnInit {
       this._dataService.getOrganizations().subscribe(
         res => {
           this._project.organization = res.filter((v, k) => v.id === value.organizationId)[0];
-          console.log('Fetched Organization', this._project.organization);
         },
         error => this.errors.push(error)
       );
     } else {
       this._project.organization = null;
     }
+
+    this._dataService.getActivities().subscribe(
+      activities => {
+        if (activities && activities.length > 0) {
+          this.projectActivities = activities.filter((v, k) => v.projectId === value.projectId);
+        }
+      },
+      error => this.errors.push(error)
+    );
+
   }
 
   get projectId(): number {
@@ -61,14 +70,6 @@ export class ProjectPageComponent implements OnInit {
 
   ngOnInit() {
     this.projectId = +this.route.snapshot.paramMap.get('id');
-    this._dataService.getActivities().subscribe(
-      activities => {
-        if (activities && activities.length > 0) {
-          this.projectActivities = activities.filter((v, k) => v.projectId === this.projectId);
-        }
-      },
-      error => this.errors.push(error)
-    );
   }
 
   eventButton() {
