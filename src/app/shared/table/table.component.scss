@@ -1,0 +1,224 @@
+$menuColor: '#4cb19e ';
+$lighterMenuColor: 'rgba(160, 220, 209, 0.53)';
+
+.admin-table {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 800px;
+  border-radius: 4px;
+  border: 1px solid silver;
+
+  overflow: hidden;
+}
+
+.admin-table,
+.admin-table * {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.table-header-row,
+.table-data-row {
+  padding: 0;
+}
+
+.table-data-row:not(:last-of-type) {
+  border-bottom: 0.5px solid rgb(211, 211, 211);
+}
+
+.table-data-row:last-of-type {
+  border: none;
+}
+
+.table-header-row {
+  background-color: #{$menuColor};
+}
+
+.table-data-cell,
+.table-header-cell {
+  position: relative;
+  display: block;
+  padding: 10px 5px;
+  color: rgb(53, 53, 53);
+  text-align: center;  
+  word-break: break-word;
+}
+
+.table-header-cell {
+  color: whitesmoke;
+  font-size: 18px;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.table-header-cell::after {
+  content: '';
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 4px;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  background-color: #1e554a;
+  box-sizing: border-box;
+}
+
+.table-header-cell:hover {
+  color: white;
+  /* text-shadow: 0 0 2px whitesmoke; */
+}
+
+.table-header-cell:hover::after {
+  display: block;
+}
+
+.table-data-cell {
+  overflow: hidden;
+}
+
+.table-data-cell:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 50%;
+  right: 0;
+  width: 1px;
+  height: 25px;
+  background-color: silver;
+  
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.table-data-row:hover {
+  background-color: #{$lighterMenuColor};
+}
+
+.counter {
+  max-width: 50px;
+}
+
+.table-data-cell[class*="Logo"],
+.table-data-cell[class*="Image"] {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  max-width: 90px;
+  height: 50px;
+  max-height: 50px;
+  overflow: hidden;
+
+  div {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    ::ng-deep img {
+      position: relative;
+      display: block;
+      height: 100%;
+      margin: 0 auto;
+    }
+  }
+}
+
+.table-data-cell[class*="name"],
+.table-data-cell[class*="Name"] {
+  font-weight: bold;
+  text-transform: capitalize;
+
+  a {
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: initial;
+  }
+
+  a:hover {
+    color: darkblue;
+    text-decoration: underline;
+  }
+}
+
+.table-header-cell[class*="Logo"],
+.table-header-cell[class*="Image"] {
+  max-width: 90px;
+}
+
+.table-data-cell[class*="name"] {
+  font-weight: bold;
+}
+
+.table-data-cell[class*="Id"] {
+  text-transform: uppercase;
+}
+
+.table-data-cell[class*="email"] {
+  text-transform: lowercase;
+}
+
+.table-header-cell::before {
+  content: '>';
+  position: relative;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  text-align: center;
+  float: right;
+  width: 20px;
+  height: 20px;
+  color: rgb(235, 235, 235);
+  font-size: 75%;
+  opacity: 0;
+  
+  -webkit-transition: .25s all ease-in-out;
+  -moz-transition: .25s all ease-in-out;
+  -ms-transition: .25s all ease-in-out;
+  -o-transition: .25s all ease-in-out;
+  transition: .25s all ease-in-out;
+
+  -webkit-transform: rotateZ(90deg);
+  -moz-transform: rotateZ(90deg);
+  -ms-transform: rotateZ(90deg);
+  -o-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+
+.table-header-cell[sorted='true'][dir='desc']::before {
+  display: flex;
+  opacity: 1;
+}
+
+.table-header-cell[sorted='true'][dir='asc']::before {
+  display: flex;
+  opacity: 1;
+
+  -webkit-transform: rotateZ(90deg) rotateY(180deg);
+  -moz-transform: rotateZ(90deg) rotateY(180deg);
+  -ms-transform: rotateZ(90deg) rotateY(180deg);
+  -o-transform: rotateZ(90deg) rotateY(180deg);
+  transform: rotateZ(90deg) rotateY(180deg);
+}
+
+::ng-deep .dash {
+  margin: 0 5px;
+  color: silver;
+  opacity: .75;
+  font-weight: 100;
+}

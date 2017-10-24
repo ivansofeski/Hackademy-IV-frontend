@@ -1,85 +1,9 @@
-$menuColor: '#4cb19e ';
-$lighterMenuColor: '#6bc1b1 ';
-
-/* Structure specific for the organization table*/
-.container{
-  background: #eee;
-  padding-top: 15vh;
-}
-
-mat-card {
-  margin: auto ;
-  
-  width: 700px;
-  height: auto;
-}
-
-
-
-.organization-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 150px;
-  max-width: 700px;
+.container {
+  position: relative;
+  display: block;
   width: 100%;
-  margin: auto;
-  padding-bottom: 10px;
-}
-
-.organization-table {
-  flex: 1 1 auto;
+  padding: 100px 40px;
   overflow: auto;
-  max-height: 500px;
-}
 
-.organization-header-row,
-.organization-row {
-  display: flex;
-  border-bottom: 1px solid #ccc;
-  align-items: center;
-  height: 32px;
-  padding: 0 8px;
-}
-
-.organization-header-row {
-  background-color: #{$menuColor};
-}
-
-.organization-header-cell {
-  font-size: 14px;
-  font-weight: bold;
-  color: rgba(0, 0, 0, 0.904);
-}
-
-.organization-cell {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.87);
-}
-
-mat-row:hover {
-  background-color: #aad1e4;
-}
-
-.mat-cell:nth-child(1),
-.mat-header-cell:nth-child(1),
-{
-  flex: 0 0 5%;
-}
-
-.mat-cell:nth-child(2),
-.mat-header-cell:nth-child(2),
-{
-  flex: 0 0 20%;
-}
-
-.mat-cell:nth-child(3),
-.mat-header-cell:nth-child(3),
-{
-  flex: 0 0 40%;
-}
-
-.mat-cell:nth-child(4),
-.mat-header-cell:nth-child(4),
-{
-  flex: 0 0 15%;
+  box-sizing: border-box;
 }
