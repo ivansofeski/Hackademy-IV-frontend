@@ -1,12 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProjectListComponent } from './project-list.component';
-import { SharedModule } from '../../shared/shared.module';
-
-import { testData } from '../test-data';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { Observable } from 'rxjs/Rx';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+
+// Components
+import { ProjectListComponent } from './project-list.component';
+import { testData } from '../test-data';
+
+// Services
 import { DataService } from '../../shared/services/data.service';
 
 describe('ProjectListComponent', () => {
