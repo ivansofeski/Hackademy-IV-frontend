@@ -25,13 +25,18 @@ export class DataService {
     root: '../../../assets/mockdata/',
     organizations: 'organizations.json',
     projects: 'projects.json',
-    activities: 'activities.json'
+    activities: 'activities.json',
+    projectByProjectId: 'getprojectbyprojectid/',
+    projectById: 'getprojectbyid/',
+
   };
 
   private _backendPaths = {
     root: 'http://18.221.31.52:8080/nano-1.0/api/',
     organizations: 'org/getall',
     projects: 'getlistofprojects',
+    projectByProjectId: 'getprojectbyprojectid/',
+    projectById: 'getprojectbyid/',
     activities: 'getlistofactivities'
   };
 
@@ -166,6 +171,14 @@ export class DataService {
     }
 
     return this._get(this._paths.root + this._paths.projects, options);
+  }
+
+  getProjectById(id:number){
+    return this._get(this._paths.root + this._paths.projectById + id);
+  }
+  
+  getProjectByProjectId(projectId: string){
+    return this._get(this._paths.root + this._paths.projectByProjectId + projectId);
   }
 
   /**
