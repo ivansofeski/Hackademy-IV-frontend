@@ -1,5 +1,5 @@
 export interface Project {
-    id: number;
+    id?: number;
     projectId: string;
     projectName: string;
     fromDate: Date | number;
