@@ -13,11 +13,10 @@
           <mat-option *ngFor='let month of months' [value]='month.value' [textContent]='month.viewValue'></mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-card-content>
-        <div class="container">
-          <app-admin-table [tableData]='tableData' [columns]='columns'></app-admin-table>
-        </div>
-      </mat-card-content>
     </mat-card>
+    <br/>
+    <div class="table-container">
+      <app-admin-table [tableData]='tableData' [columns]='columns'></app-admin-table>
+    </div>
   </div>
   
