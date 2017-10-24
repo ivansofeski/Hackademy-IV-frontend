@@ -14,8 +14,8 @@ export interface Project {
     recurringProject?: boolean;
     recurringProjectPublishingDate?: Date|null;
     organizationId: number;
-    open: string; 
 
+    open: string; 
     mainImage: string;  // using imageOrVideo
     images: string[]; // this must be added by backend.
     address: string;  // Does not exist on backend, is this needed by frontend?
