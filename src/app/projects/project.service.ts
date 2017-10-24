@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/Observable/throw';
+import 'rxjs/add/observable/throw';
 import {Observable} from 'rxjs/Observable';
 import {Project} from './project.interface';
 import {Activity} from './activity.interface';
