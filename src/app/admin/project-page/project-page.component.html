@@ -9,13 +9,13 @@
         <mat-list-item class="project-fromDate">
           <div mat-line>
             <div class="label">From Date: </div>
-            <div class="project-fromDate">{{project.fromDate}}</div>
+            <div class="project-fromDate">{{project.fromDate | date}}</div>
           </div>
         </mat-list-item>
         <mat-list-item class="project-toDate">
           <div mat-line>
             <div class="label">To Date: </div>
-            <div class="project-toDate">{{project.toDate}}</div>
+            <div class="project-toDate">{{project.toDate | date}}</div>
           </div>
         </mat-list-item>
         <mat-list-item class="project-address">
@@ -27,7 +27,7 @@
         <mat-list-item class="project-neededFunding">
           <div mat-line>
             <div class="label">Needed Funding: </div>
-            <div class="project-neededFunding">{{project.neededFunding}}</div>
+            <div class="project-neededFunding">{{project.amountToBeRaised}}</div>
           </div>
         </mat-list-item>
         <mat-list-item class="project-raisedFunding">
@@ -61,8 +61,8 @@
           <strong>Location:</strong>
         </h4>
         <div class="project-location">
-          <agm-map [latitude]="project.location.lat" [longitude]="project.location.lng" [zoom]="12" style="height:300px">
-            <agm-marker [latitude]="project.location.lat" [longitude]="project.location.lng"></agm-marker>
+          <agm-map [latitude]="project.latitude" [longitude]="project.longitude" [zoom]="12" style="height:300px">
+            <agm-marker [latitude]="project.latitude" [longitude]="project.longitude"></agm-marker>
           </agm-map>
         </div>
       </mat-card-content>

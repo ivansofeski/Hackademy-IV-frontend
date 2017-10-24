@@ -46,9 +46,9 @@ export class ProjectPageComponent implements OnInit {
   set projectId(value: number) {
     this._projectId = value;
     if (value > 0) {
-      this._dataService.getProjects().subscribe(
+      this._dataService.getProjectById(value).subscribe(
         res => {
-          this.project = res.filter((v, k) => v.id === value)[0];
+          this.project = res;
         },
         error => {
           this.errors.push(error);
