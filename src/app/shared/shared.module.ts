@@ -92,7 +92,8 @@ import { TableComponent } from './table/table.component';
     ReactiveFormsModule,
     AgmCoreModule,
     DonateButtonComponent,
-    GeolocationComponent
+    GeolocationComponent,
+    TableComponent
   ],
   declarations: [
     NavbarComponent,
