@@ -32,6 +32,7 @@ import { GeolocationComponent } from '../geolocation/geolocation.component';
 // Services
 import { DataService } from './services/data.service';
 import { GeolocationService } from '../service/geolocation.service';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   imports: [
@@ -97,7 +98,8 @@ import { GeolocationService } from '../service/geolocation.service';
     NavbarComponent,
     ProgressbarComponent,
     DonateButtonComponent,
-    GeolocationComponent
+    GeolocationComponent,
+    TableComponent
   ],
   providers: [DataService, GeolocationService]
 })
