@@ -39,20 +39,22 @@ export class ProjectPageComponent implements OnInit {
       const project = this.projectService.getProjects();
       project.subscribe(
         res => {
-          console.log(res);
           this.project = res.find(retrunedProject => retrunedProject.id === this._projectId);
-          },
-        error => this.errors.push(error)
-      );
-      project_activity.subscribe(
-        res => {
-           console.log(res);
-          this.projectActivities = res.filter((k, v) => k.projectId === this._projectId);
-          for (const projectImage of this.project.images){
-            this.projectImages.push({visible: false, image: projectImage});
-            console.log(this.projectImages);
-          }
-          this.projectImages[0].visible = true;
+          project_activity.subscribe(
+            res => {
+               console.log(res);
+              this.projectActivities = res.filter((k, v) => k.projectId == this.project.projectId); 
+              // The above line was odified by Al to match the new interfaced. 
+              // This whole block was moved here to set the project activities after getting the project. 
+              for (const projectImage of this.project.images){
+                this.projectImages.push({visible: false, image: projectImage});
+                console.log(this.projectImages);
+              }
+              this.projectImages[0].visible = true;
+            },
+            error => this.errors.push(error)
+          );
+    
         },
         error => this.errors.push(error)
       );

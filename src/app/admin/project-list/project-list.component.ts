@@ -96,8 +96,8 @@ export class ProjectDataSource extends DataSource<any> {
 
       switch (this._sorter.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'fromDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
-        case 'toDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
+//        case 'fromDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
+//        case 'toDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
         case 'projectName': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
       }
 
