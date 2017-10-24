@@ -33,8 +33,9 @@ $sidebarClosedVal: '0';
         overflow: hidden;
     }
 
-    .wrapper::before {
-        content: "";
+    .wrapper::before,
+    .wrapper > .overlay {
+        /* content: ""; */
         position: fixed;
         display: none;
         top: 0;
@@ -59,7 +60,8 @@ $sidebarClosedVal: '0';
         width: #{$sidebarExpandedVal};
     }
 
-    .wrapper.expanded::before {
+    .wrapper.expanded::before,
+    .wrapper.expanded > .overlay {
         display: block;
     }
 
