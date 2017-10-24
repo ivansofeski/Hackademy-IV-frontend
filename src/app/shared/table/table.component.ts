@@ -62,6 +62,9 @@ export class TableComponent implements OnInit {
       case 'mainImage':
         _value = `<img class="org-logo" src="${row[label]}"/>`;
         break;
+      case 'raisedFunding':
+        _value = `${row[label]}<span class='dash'>/</span>${row.neededFunding}`;
+        break;
       default:
         _value = row[label];
         break;
