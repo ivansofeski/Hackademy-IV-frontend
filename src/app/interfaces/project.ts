@@ -2,8 +2,8 @@ export interface Project {
     id: number;
     projectId: string;
     projectName: string;
-    fromDate: string;
-    toDate: string;
+    fromDate: Date | number;
+    toDate: Date | number;
     longitude?: number;
     latitude?: number;
     amountToBeRaised?: number;
@@ -13,12 +13,12 @@ export interface Project {
     projectManager: string;    
     recurringProject?: boolean;
     recurringProjectPublishingDate?: Date|null;
-    mainImage: string;
-    images: string[];
     organizationId: number;
     open: string; 
 
-    address: string;
+    mainImage: string;
+    images: string[];
+address: string;
     location: {
         lat: number;
         lng: number;
