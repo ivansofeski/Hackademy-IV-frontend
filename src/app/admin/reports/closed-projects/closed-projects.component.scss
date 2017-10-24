@@ -1,11 +1,11 @@
 $menuColor: '#4cb19e ';
 $lighterMenuColor: '#6bc1b1 ';
 
-/* Structure specific for the organization table*/
 .container{
   background: #eee;
   padding: 15vh 0;
 }
+
 ::ng-deep .mat-card-header-text {
   width: 100%;
 }
@@ -27,83 +27,12 @@ mat-card {
   text-transform: uppercase;
 }
 
-
-
-.organization-container {
+.table-container {
   position: relative;
   display: block;
   width: 100%;
-  padding: 20px 40px;
-  min-height: 400px;
+  padding: 100px 40px;
   overflow: hidden;
 
   box-sizing: border-box;
-}
-
-.organization-table {
-  /* flex: 1 1 auto; */
-  position: relative;
-  display: block;
-  width: 100%;
-}
-
-.organization-header-row,
-.organization-row {
-  display: flex;
-  border-bottom: 1px solid #ccc;
-  align-items: center;
-  height: 32px;
-  padding: 0 8px;
-}
-
-.organization-header-row {
-  background-color: #{$menuColor};
-}
-
-.project-header-cell {
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-  color: rgba(0, 0, 0, 0.904);
-}
-
-::ng-deep .mat-sort-header-button {
-  margin: 0 auto;
-}
-
-.project-cell {
-  text-align: center;
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.87);
-}
-
-mat-row:hover {
-  background-color: #aad1e4;
-}
-
-/* .mat-cell:nth-child(1),
-.mat-header-cell:nth-child(1),
-{
-  flex: 0 0 5%;
-}
-
-.mat-cell:nth-child(2),
-.mat-header-cell:nth-child(2),
-{
-  flex: 0 0 20%;
-}
-
-.mat-cell:nth-child(3),
-.mat-header-cell:nth-child(3),
-{
-  flex: 0 0 40%;
-}
-
-.mat-cell:nth-child(4),
-.mat-header-cell:nth-child(4),
-{
-  flex: 0 0 15%;
-} */
-.counter {
-  max-width: 50px;
 }
