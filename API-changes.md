@@ -1,8 +1,8 @@
 # API Changes On the backend
 
 ## Projects:
-- Rename projectId to projectNumber or projectCode to avoid confusion.
-- every project has a list of images, please add allow saving and returning them.
+- Rename projectId to projectNumber to avoid confusion.
+- every project has a list of images, please  allow saving and returning them.
 - the project has a address field, which is a string
 
 
