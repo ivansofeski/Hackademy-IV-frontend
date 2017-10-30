@@ -6,6 +6,7 @@ interface Contact {
 
 export interface Organization {
     organizationID?: string;
+    organizationNumber?: string;
     organizationName?: string;
     organizationAddress?: string;
     contactPersonName?: string;
