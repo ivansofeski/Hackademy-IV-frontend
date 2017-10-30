@@ -24,10 +24,13 @@ export class DataService {
   private _paths = {
     root: 'http://18.221.31.52:8080/nano-1.0/api/',
     organizations: 'org/getall',
+
     projects: 'getlistofprojects',
     projectByProjectId: 'getprojectbyprojectid/',
     projectById: 'getprojectbyid/',
-    activities: 'getlistofactivities'
+    saveproject: 'saveproject',
+
+    activities: 'getlistofactivities',
 
   };
 
@@ -102,6 +105,20 @@ export class DataService {
     return _inserted;
   }
 
+
+  private _post(path: string, data:any){
+    return this.http.post(path, data)    
+    .do((data: Response) => {
+      return data !== undefined ? data : [];
+    })
+    .catch((error: Response) => {
+      return Observable.throw(error || 'Server error');
+    });
+;
+  }
+
+
+
   /**
    * @description
    * GET all Projects records.
@@ -173,7 +190,7 @@ export class DataService {
   }
 
   postProject(data:any){
-
+    return this._post(this._paths.root + this._paths.saveproject,data);
   }
 
 
