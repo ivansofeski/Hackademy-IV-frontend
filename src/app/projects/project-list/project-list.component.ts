@@ -41,11 +41,12 @@ export class ProjectListComponent implements OnInit {
       this._projectService.getProjects().subscribe(
         projects => {
           console.log(projects);
-          this.projectList = projects.filter((project, k) => {
-            return project.open === 'true';
-            },
-            error => this.errors.push(error)
-          );
+          this.projectList = projects;
+          // this.projectList = projects.filter((project, k) => {
+          //   return project.open === 'true';
+          //   },
+          //   error => this.errors.push(error)
+          // );
         });
     });
   }
