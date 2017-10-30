@@ -7,7 +7,7 @@
 
 
 ## activities:
-- add the project ID, not the projectNumber(see projects above), to the activity fields.
+- add the project ID, not the projectNumber(see projects above), to the activity fields. this field is a foreign key linking to the project ID in the project table.
 - We need to get all the activities of a project by the id of the project, not by the projectId.
 
 
