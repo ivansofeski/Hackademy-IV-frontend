@@ -10,6 +10,7 @@ import { Organization } from '../../interfaces/organization';
 import { Project } from '../../interfaces/project';
 import { Activity } from '../../interfaces/activity';
 import { Subject, BehaviorSubject } from 'rxjs/Rx';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DataService {
@@ -107,7 +108,8 @@ export class DataService {
 
 
   private _post(path: string, data:any){
-    return this.http.post(path, data)    
+    let headers:HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(path, data, {'headers': headers} )    
     .do((data: Response) => {
       return data !== undefined ? data : [];
     })
