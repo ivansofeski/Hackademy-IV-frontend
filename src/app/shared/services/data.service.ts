@@ -22,22 +22,13 @@ export class DataService {
    * properties of the `_paths`.
    */
   private _paths = {
-    root: '../../../assets/mockdata/',
-    organizations: 'organizations.json',
-    projects: 'projects.json',
-    activities: 'activities.json',
-    projectByProjectId: 'getprojectbyprojectid/',
-    projectById: 'getprojectbyid/',
-
-  };
-
-  private _backendPaths = {
     root: 'http://18.221.31.52:8080/nano-1.0/api/',
     organizations: 'org/getall',
     projects: 'getlistofprojects',
     projectByProjectId: 'getprojectbyprojectid/',
     projectById: 'getprojectbyid/',
     activities: 'getlistofactivities'
+
   };
 
   /**
@@ -181,6 +172,16 @@ export class DataService {
     return this._get(this._paths.root + this._paths.projectByProjectId + projectId);
   }
 
+  postProject(data:any){
+
+  }
+
+
+
+
+
+
+
   /**
    * @description
    * GET all activity records.
@@ -197,8 +198,8 @@ export class DataService {
    * @param http An instance of HttpClient to enable functions in this service to use HTTP requests like GET, POST, PUT etc.
    */
   constructor(private http: HttpClient) {
-    this._paths = this._backendPaths;
-   }
+
+  }
 
   /* ////////////////////////////////////////////////////////////////////////
   *  /////////////////////////                      /////////////////////////
