@@ -11,6 +11,7 @@ export interface Project {
     raisedFunding: number;
     description: string;
     mainImage:string;
+    images: string[]; // this must be added by backend.    
     projectManager: string;    
     recurringProject?: boolean;
     nationalProject: boolean;
@@ -18,7 +19,6 @@ export interface Project {
     organizationId: number;
 
     open: string; //to be removed
-    images: string[]; // this must be added by backend.
     location: {       // To be removed.
         lat: number;
         lng: number;
