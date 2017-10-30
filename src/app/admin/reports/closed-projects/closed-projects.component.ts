@@ -129,7 +129,6 @@ export class ProjectDataSource extends DataSource<any> {
                 })[0];
 
                 delete proj.organizationId;
-                delete proj.organizationName;
               }
 
               let _reorderedProj = [];
