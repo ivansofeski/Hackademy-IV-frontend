@@ -1,7 +1,8 @@
 export interface Project {
     id?: number;
-    projectId: string;
+    projectNumber?: string;
     projectName: string;
+    address: string;
     fromDate: Date | number;
     toDate: Date | number;
     longitude?: number;
@@ -9,7 +10,7 @@ export interface Project {
     amountToBeRaised?: number;
     raisedFunding: number;
     description: string;
-    imageOrvideo?:string;
+    mainImage:string;
     projectManager: string;    
     recurringProject?: boolean;
     nationalProject: boolean;
@@ -17,9 +18,7 @@ export interface Project {
     organizationId: number;
 
     open: string; //to be removed
-    mainImage: string;  // using imageOrVideo
     images: string[]; // this must be added by backend.
-    address: string;  // Does not exist on backend, is this needed by frontend?
     location: {       // To be removed.
         lat: number;
         lng: number;
