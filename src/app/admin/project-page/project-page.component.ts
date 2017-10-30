@@ -36,7 +36,7 @@ export class ProjectPageComponent implements OnInit {
     } else {
       this._project.organization = null;
     }
-
+/*
     this._dataService.getActivities().subscribe(
       activities => {
         if (activities && activities.length > 0) {
@@ -45,7 +45,7 @@ export class ProjectPageComponent implements OnInit {
       },
       error => this.errors.push(error)
     );
-
+*/
   }
 
   get projectId(): number {
