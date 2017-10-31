@@ -10,7 +10,7 @@ import { DataService } from '../../shared/services/data.service';
 @Component({
   // selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.scss','./_project-list.component-theme.scss']
+  styleUrls: ['./project-list.component.scss', './_project-list.component-theme.scss']
 })
 export class ProjectListComponent implements OnInit {
   errors: any[] = [];
@@ -51,7 +51,7 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
-  
+
 
   /**
    * this function will return a class that is responsible for activating and deactivating the color red in the

@@ -7,7 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 
 // Services
 import { LocalStorageService } from '../service/local-storage.service';
-import { ProjectService } from '../projects/project.service';
 
 describe('GeolocationComponent', () => {
   let component: GeolocationComponent;
@@ -21,7 +20,7 @@ describe('GeolocationComponent', () => {
         HttpClientModule,
         SharedModule
       ],
-      providers: [ ProjectService, LocalStorageService ]
+      providers: [ LocalStorageService ]
     })
     .compileComponents();
   }));

@@ -23,8 +23,8 @@ export class ClosedProjectsComponent implements OnInit {
   years: string[] = [];
   yearNow = new Date().getFullYear();
   selectedMonth: any;
-  chosenMonth: any = "";
-  chosenYear: any = "";
+  chosenMonth: any = '';
+  chosenYear: any = '';
   errors: any[] = [];
   dataSource: ProjectDataSource | null;
   displayedColumns = ['id', 'projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate'];
@@ -58,9 +58,9 @@ export class ClosedProjectsComponent implements OnInit {
     this.initDataSource();
   }
   yearsGenerator(): void {
-    let year = new Date;
-    var yearNow = year.getFullYear();
-    let years: any[] = [];
+    const year = new Date;
+    const yearNow = year.getFullYear();
+    const years: any[] = [];
 
     for (let i = yearNow; i >= 2000; i--) {
       this.years.push(i.toString());
@@ -115,8 +115,8 @@ export class ProjectDataSource extends DataSource<any> {
       this.dataService.getProjects().subscribe(
         projects => {
           projects = projects.filter((k, v) => {
-            let dateNow = k.toDate;
-            return this.filter?
+            const dateNow = k.toDate;
+            return this.filter ?
             dateNow <= this.nowDate && k.toDate.toString().trim().slice(0, -2).indexOf(this.filter) > -1 :
             dateNow <= this.nowDate;
           });
@@ -131,17 +131,17 @@ export class ProjectDataSource extends DataSource<any> {
                 delete proj.organizationId;
               }
 
-              let _reorderedProj = [];
+              const _reorderedProj = [];
 
-              for (let proj of projects) {
+              for (const proj of projects) {
                 proj.id = projects.indexOf(proj) + 1;
-                _reorderedProj.push(proj)
+                _reorderedProj.push(proj);
               }
 
               this.subject.next(_reorderedProj);
             },
             error => this.errors.push(error)
-          )
+          );
         },
         error => this.errors.push(error)
       );
