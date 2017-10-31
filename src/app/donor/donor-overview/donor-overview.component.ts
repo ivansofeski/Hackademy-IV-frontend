@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 // import {DonorOverviewService} from './donor-overview.service';
 
-//Interfaces
+// Interfaces
 import { Donor } from '../../interfaces/donor';
 
-//Services
+// Services
 import {LocalStorageService} from '../../service/local-storage.service';
 import { DataService } from '../../shared/services/data.service';
 

@@ -43,9 +43,9 @@ export class ProjectPageComponent implements OnInit {
           project_activity.subscribe(
             res => {
                console.log(res);
-              this.projectActivities = res.filter((k, v) => k.projectId == this.project.projectId); 
-              // The above line was odified by Al to match the new interfaced. 
-              // This whole block was moved here to set the project activities after getting the project. 
+              this.projectActivities = res.filter((k, v) => k.projectId === this.project.projectId);
+              // The above line was odified by Al to match the new interfaced.
+              // This whole block was moved here to set the project activities after getting the project.
               for (const projectImage of this.project.images){
                 this.projectImages.push({visible: false, image: projectImage});
                 console.log(this.projectImages);
@@ -54,7 +54,7 @@ export class ProjectPageComponent implements OnInit {
             },
             error => this.errors.push(error)
           );
-    
+
         },
         error => this.errors.push(error)
       );

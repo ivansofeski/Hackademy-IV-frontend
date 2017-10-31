@@ -10,9 +10,9 @@ export interface Project {
     amountToBeRaised: number;
     raisedFunding: number;
     description: string;
-    mainImage:string;
-    images: string[]; 
-    projectManager: string;    
+    mainImage: string;
+    images: string[];
+    projectManager: string;
     recurringProject: boolean;
     nationalProject: boolean;
     recurringProjectPublishingDate?: Date|null;

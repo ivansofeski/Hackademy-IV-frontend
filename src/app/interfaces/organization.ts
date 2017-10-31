@@ -14,8 +14,8 @@ export interface Organization {
     accountNumber?: string;
     billingInformation: string;
     description: string;
-    
-    id: number; 
+
+    id: number;
     orgId: string;
     name: string;
     address: string;

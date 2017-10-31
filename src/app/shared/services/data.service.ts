@@ -9,6 +9,13 @@ import { Project } from '../../interfaces/project';
 import { Activity } from '../../interfaces/activity';
 import { Subject, BehaviorSubject } from 'rxjs/Rx';
 
+/**
+ * The data service of the App, resides in the shared module, and responsible for reading and saving JSON data
+ * to the backend.
+ *
+ * @export
+ * @class DataService
+ */
 @Injectable()
 export class DataService {
   /**
@@ -57,7 +64,7 @@ export class DataService {
    * @description
    * Function that retrieves data from an API (or a string path) with HttpClient GET method.
    * It provides both parameterized and non-parameterized call methods depending on what use provide.
-   * @return an `Observable` of any depending on where or what API was provided in the request.
+   * @returns an `Observable` of any depending on where or what API was provided in the request.
    */
   private _get(path: string, options?: Object): Observable<any> {
     if (path === undefined) {
@@ -88,6 +95,7 @@ export class DataService {
   /**
    * @argument path as string e.g. (API) '/someurlsegment/api/' or (file) '/somepath/somefile.json'
    * 'options' as JS Object as optional e.g. { id: 1 } or multiple properties { name: 'someName', 'date': '2018/01/01' }
+   *
    * @description
    * Function that sends data to an API (or a string path) with HttpClient POST/PUT method(s).
    * It provides both parameterized and non-parameterized call methods depending on what use provide.
@@ -95,7 +103,7 @@ export class DataService {
    * @experimental
    * Under construction!
    *
-   * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+   * @returns an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
    */
   private _set(path: string, data: any): boolean {
     const _inserted = false;
@@ -104,9 +112,21 @@ export class DataService {
   }
 
 
-  private _post(path: string, data:any){
-    let headers:HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post(path, data, {'headers': headers} )    
+  /**
+   * @description
+   * Post a json object to the backend
+   *
+   * @private
+   * @param {string} path the path that we are posting to
+   * @param {*} data a json object in text format
+   * @returns an observable for the http response.
+   *
+   * @memberOf DataService
+   */
+
+  private _post(path: string, data: any) {
+    const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(path, data, {'headers': headers} )
     .do((data: Response) => {
       return data !== undefined ? data : [];
     })
@@ -123,7 +143,7 @@ export class DataService {
    *
    * Returns an Observable Array of `Organization`(interface).
    *
-   * @return an Observable Array of `Organization`(interface).
+   * @returns an Observable Array of `Organization`(interface).
    */
   getOrganizations(): Observable<Organization[]> {
     return this._get(this._paths.root + this._paths.organizations);
@@ -135,8 +155,6 @@ export class DataService {
    * @description
    * GET only 1 Organization record data with parameterized query.
    * `options` is an Object argument which should have at least 1 property + value.
-   *
-   * Returns an Observable of `Organization`(interface).
    *
    * @returns an Observable of `Organization`(interface).
    */
@@ -179,16 +197,40 @@ export class DataService {
     return this._get(this._paths.root + this._paths.projects, options);
   }
 
-  getProjectById(id:number){
+  /**
+   * get a specific project by its ID
+   *
+   * @param {number} id the ID of the project, this is different from the project number.
+   * @returns
+   *
+   * @memberOf DataService
+   */
+  getProjectById(id: number) {
     return this._get(this._paths.root + this._paths.projectById + id);
   }
-  
-  getProjectByProjectId(projectId: string){
+
+  /**
+   * Get a project by the project number
+   *
+   * @param {string} projectId the project number
+   * @returns
+   *
+   * @memberOf DataService
+   */
+  getProjectByProjectId(projectId: string) {
     return this._get(this._paths.root + this._paths.projectByProjectId + projectId);
   }
 
-  postProject(data:any){
-    return this._post(this._paths.root + this._paths.saveproject,data);
+  /**
+   * Post a project to the backend
+   *
+   * @param {*} data
+   * @returns
+   *
+   * @memberOf DataService
+   */
+  postProject(data: any) {
+    return this._post(this._paths.root + this._paths.saveproject, data);
   }
 
 

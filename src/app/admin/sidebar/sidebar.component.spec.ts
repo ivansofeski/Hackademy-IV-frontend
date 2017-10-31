@@ -54,9 +54,9 @@ describe('SidebarComponent', () => {
     expect(de).toBeTruthy();
   });
 
-it('all links should be clickable', () => {
-  fixture.detectChanges();
-  des = fixture.debugElement.queryAll(By.css('li.item > a[href]'));
-  expect(des.length).toBeGreaterThanOrEqual(4)
-});
+  it('all links should be clickable', () => {
+    fixture.detectChanges();
+    des = fixture.debugElement.queryAll(By.css('li.item > a[href]'));
+    expect(des.length).toBeGreaterThanOrEqual(4);
+  });
 });
