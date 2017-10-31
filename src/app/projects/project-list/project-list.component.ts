@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Project} from '../project.interface';
+import {Project} from '../../interfaces/project';
 import { Observable } from 'rxjs/Observable';
 
 // Services

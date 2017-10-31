@@ -1,5 +1,4 @@
 
-import { ProjectService } from './project.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -27,7 +26,6 @@ export class MyHammerConfig extends HammerGestureConfig  {
     ProjectsRoutingModule
   ],
   providers: [
-    ProjectService,
     {
       provide: HAMMER_GESTURE_CONFIG,
        useClass: MyHammerConfig

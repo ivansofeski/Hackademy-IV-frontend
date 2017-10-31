@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone, AfterViewInit, Direct
 import {} from 'googlemaps';
 import { MapsAPILoader, GoogleMapsAPIWrapper } from '@agm/core';
 import {Observable} from 'rxjs/Observable';
-import {Project} from '../projects/project.interface';
+import {Project} from '../interfaces/project';
 import {Router} from '@angular/router';
 
 // Services

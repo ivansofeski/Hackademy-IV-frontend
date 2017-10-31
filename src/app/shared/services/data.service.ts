@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -10,7 +10,6 @@ import { Organization } from '../../interfaces/organization';
 import { Project } from '../../interfaces/project';
 import { Activity } from '../../interfaces/activity';
 import { Subject, BehaviorSubject } from 'rxjs/Rx';
-import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DataService {
@@ -116,7 +115,6 @@ export class DataService {
     .catch((error: Response) => {
       return Observable.throw(error || 'Server error');
     });
-;
   }
 
 
