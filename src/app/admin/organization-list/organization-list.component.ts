@@ -27,7 +27,7 @@ import { Organization } from '../../interfaces/organization';
 /** */
 export class OrganizationListComponent implements OnInit, OnDestroy {
   dataSource: OrganizationDataSource | null;
-  displayedColumns = ['id', 'name', 'address', 'person', 'phone'];
+  displayedColumns = [ 'number', 'name', 'address', 'person'];
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -98,10 +98,12 @@ export class OrganizationDataSource extends DataSource<any> {
       let propertyB: number | string = '';
 
       switch (this._sorter.active) {
-        case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'orgId': [propertyA, propertyB] = [a.orgId, b.orgId]; break;
+        case 'id': [propertyA, propertyB] = [a.organizationId, b.organizationId]; break;
+        case 'number': [propertyA, propertyB] = [a.organizationNumber, b.organizationNumber]; break;
         case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
         case 'address': [propertyA, propertyB] = [a.address, b.address]; break;
+        case 'person': [propertyA, propertyB] = [a.contactPersonName, b.contactPersonName]; break;
+        case 'email': [propertyA, propertyB] = [a.contactPersonEmail, b.contactPersonEmail]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
