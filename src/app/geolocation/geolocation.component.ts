@@ -335,7 +335,7 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
       // google.maps.addListener('zoom_changed', () => {
       //   this.zoom = 1;
       // });
-      this.geocoder = new google.maps.Geocoder();
+      // this.geocoder = new google.maps.Geocoder();
       this.showUserPosition();
       this.loadProjects();
       const autocomplete = new google.maps.places.Autocomplete(this.inputAddressElm, {
@@ -386,20 +386,23 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
     this._dataService.getProjects()
       .subscribe( projectsList => {
         console.log(projectsList);
-        projectsList.map(project => {
-          if (project.latitude === null || project.longitude === null) {
-            this.getAddressLocation(project.address)
-            .subscribe(projectLocation => {
-              project['latitude'] = projectLocation.lat();
-              project['longitude'] = projectLocation.lng();
-              this.projects.push(project);
-              console.log(project);
-            });
-          } else {
-            this.projects.push(project);
-            console.log(project);
-          }
+          projectsList.forEach(project => {
+            if (project.latitude === null || project.longitude === null) {
+              this._geolocationService.getAddressLocation(project.address)
+                .subscribe(projectLocation => {
+                  project.latitude = projectLocation.lat();
+                  project.longitude = projectLocation.lng();
+                });
+            }
+            // if (project.id === 13) {
+            //   this._geolocationService.getAddressLocation(project.address)
+            //   .subscribe(projectLocation => {
+            //     console.log(project.id);
+            //     console.log('latitude: ' + projectLocation.lat() + ',' + 'longitude: ' + projectLocation.lng() + ',' );
+            //   });
+            // }
         });
+        this.projects = projectsList;
       });
     }
 
@@ -421,7 +424,7 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
 
   onClick() {
     console.log('an address has been searched');
-    this.getLatLan(this.inputAddressElm.value).subscribe(
+    this._geolocationService.getAddressLocation(this.inputAddressElm.value).subscribe(
       result => {
         // needs to run inside zone to update the map
         this.ngZone.run(() => {
@@ -435,22 +438,6 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
       error => console.log(error),
       () => console.log('Geocoding completed!')
     );
-  }
-
-  getLatLan(address: string) {
-    console.log('Getting Address - ', address);
-    return Observable.create(observer => {
-      this.geocoder.geocode({'address': address}, function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-          observer.next(results[0].geometry.location);
-          observer.complete();
-        } else {
-          console.log('Error - ', results, ' & Status - ', status);
-          observer.next({});
-          observer.complete();
-        }
-      });
-    });
   }
 
   goToProjectPage(project: Project) {
@@ -487,22 +474,6 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
     this.user.userLocation.lat = this.lat;
     this.user.userLocation.lng = this.lng;
     this._localStorageService.updateCurrnetUser(this.user);
-  }
-
-  getAddressLocation(address) {
-    // const geocoder = new google.maps.Geocoder();
-    return Observable.create(observer => {
-      this.geocoder.geocode({'address': address}, function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-          observer.next(results[0].geometry.location);
-          observer.complete();
-        } else {
-          console.log('Error - ', results, ' & Status - ', status);
-          observer.next({});
-          observer.complete();
-        }
-      });
-    });
   }
 }
 

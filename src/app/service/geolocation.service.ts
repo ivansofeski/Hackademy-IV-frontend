@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 
+declare var google: any;
 @Injectable()
 
 export class GeolocationService {
@@ -58,5 +59,21 @@ export class GeolocationService {
   getIPLocation() {
     return this._http.get('//ip-api.com/json') // ...using post request
     .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
+  }
+
+  getAddressLocation(address) {
+    const geocoder = new google.maps.Geocoder();
+    return Observable.create(observer => {
+      geocoder.geocode({'address': address}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          observer.next(results[0].geometry.location);
+          observer.complete();
+        } else {
+          console.log('Error - ', results, ' & Status - ', status);
+          observer.next({});
+          observer.complete();
+        }
+      });
+    });
   }
 }
