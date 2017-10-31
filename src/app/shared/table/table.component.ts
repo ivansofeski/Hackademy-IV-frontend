@@ -45,6 +45,7 @@ export class TableComponent implements OnInit {
     let _validate = false;
 
     switch (true) {
+      case column === 'name':
       case column === 'activityTitle':
       case column === 'organizationName':
       case column === 'projectName':
@@ -64,20 +65,21 @@ export class TableComponent implements OnInit {
 
     const root = this.route.parent.snapshot.url.toString();
     let selector = '';
-    let id;
+    let id = Array.from(this.tableData).indexOf(row) + 1;
 
     switch (true) {
       case column === 'activityTitle':
         selector = 'activities/view';
-        id = row.activityId ? row.activityId : row.id;
+        id = row.activityId ? row.activityId : id;
         break;
+      case column === 'name':
       case column === 'organizationName':
         selector = 'organizations/view';
-        id = row.organizationId ? row.organizationId : row.id;
+        id = row.organizationId ? row.organizationId : id;
         break;
       case column === 'projectName':
         selector = 'projects/view';
-        id = row.id ? row.id : (Array.from(this.tableData).indexOf(row) + 1).toString();
+        id = row.id ? row.id : id;
         break;
       default:
         break;
