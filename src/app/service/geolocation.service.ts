@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import { MapsAPILoader } from '@agm/core';
 
 declare var google: any;
 @Injectable()
 
 export class GeolocationService {
+  geocoder: any;
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient,
+  private mapsAPILoader: MapsAPILoader) {
+    this.mapsAPILoader.load().then(() => {
+      this.geocoder = new google.maps.Geocoder();
+    });
+  }
   lat: number;
   lng: number;
   location= {'lat': this.lat,
@@ -62,9 +69,9 @@ export class GeolocationService {
   }
 
   getAddressLocation(address) {
-    const geocoder = new google.maps.Geocoder();
+    // const geocoder = new google.maps.Geocoder();
     return Observable.create(observer => {
-      geocoder.geocode({'address': address}, function (results, status) {
+      this.geocoder.geocode({'address': address}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           observer.next(results[0].geometry.location);
           observer.complete();
