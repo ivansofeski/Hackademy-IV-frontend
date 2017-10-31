@@ -29,6 +29,7 @@ export class DataService {
   private _paths = {
     root: 'http://18.221.31.52:8080/nano.se/api/',
     organizations: 'organisations/',
+    organisationsbyId: 'organisations/',
 
     projects: 'projects/',
     projectById: 'projects/',
@@ -174,6 +175,10 @@ export class DataService {
     }
 
     return this._get(this._paths.root + this._paths.organizations, options);
+  }
+
+  getOrganizationById(organizationId: number){
+    return this._get(this._paths.root + this._paths.organisationsbyId + organizationId);
   }
 
   /**

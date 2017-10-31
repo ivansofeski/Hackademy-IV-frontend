@@ -29,7 +29,7 @@ export class ProjectPageComponent implements OnInit {
     if (value.organizationId > 0 ) {
       this._dataService.getOrganizations().subscribe(
         res => {
-          this._project.organization = res.filter((v, k) => v.id === value.organizationId)[0];
+          this._project.organization = res.filter((v, k) => v.organizationId === value.organizationId)[0];
         },
         error => this.errors.push(error)
       );
