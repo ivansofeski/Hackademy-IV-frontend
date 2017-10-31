@@ -134,7 +134,6 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   onSubmit() {
     let lat: number;
     let long: number;
-    console.log('location:' + this._geoLocationService.getAddressLocation(this.projectControls.address.value));
     this.projForm = {
       mainImage:           this.projectControls.descImage.value,
       projectName:         this.projectControls.name.value,
@@ -150,7 +149,11 @@ export class ProjectFormComponent implements OnInit, DoCheck {
       nationalProject:     this.projectControls.national.value,
       images:         [''],
   };
-
+  this._geoLocationService.getAddressLocation(this.projectControls.address.value)
+  .subscribe(coords => {
+    console.log(coords.lat());
+    console.log(coords.lng());
+  });
     console.log('projectForm: ' + JSON.stringify(this.projForm));
 
   }
