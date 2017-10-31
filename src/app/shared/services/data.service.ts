@@ -177,9 +177,32 @@ export class DataService {
     return this._get(this._paths.root + this._paths.organizations, options);
   }
 
-  getOrganizationById(organizationId: number){
+  /**
+   * get a single organization by ID
+   *
+   * @param {number} organizationId the organization ID
+   * @returns an observable
+   *
+   * @memberOf DataService
+   */
+  getOrganizationById(organizationId: number) {
     return this._get(this._paths.root + this._paths.organisationsbyId + organizationId);
   }
+
+  /**
+   * create a new organization
+   *
+   * @param {*} data the organization data as json
+   * @returns an observable.
+   *
+   * @memberOf DataService
+   */
+  postOrganization(data: any) {
+    return this._post(this._paths.root + this._paths.organizations, data);
+  }
+
+
+
 
   /**
    * @description
