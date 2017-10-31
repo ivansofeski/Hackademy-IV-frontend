@@ -28,7 +28,7 @@ export class DataService {
    */
   private _paths = {
     root: 'http://18.221.31.52:8080/nano.se/api/',
-    organizations: 'org/getall/',
+    organizations: 'organisations/',
 
     projects: 'projects/',
     projectById: 'projects/',
