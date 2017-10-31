@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild, ElementRef, NgZone} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, AfterViewInit, Directive } from '@angular/core';
 import {} from 'googlemaps';
-import {MapsAPILoader} from '@agm/core';
+import { MapsAPILoader, GoogleMapsAPIWrapper } from '@agm/core';
 import {Observable} from 'rxjs/Observable';
 import {Project} from '../projects/project.interface';
 import {Router} from '@angular/router';
@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 import {GeolocationService} from '../service/geolocation.service';
 import {LocalStorageService} from '../service/local-storage.service';
 import { DataService } from '../shared/services/data.service';
+import { GoogleMap } from '@agm/core/services/google-maps-types';
 
 
 declare var google: any;
@@ -19,7 +20,8 @@ declare var google: any;
   styleUrls: ['./geolocation.component.scss',
     './_geolocation.component-theme.scss']
 })
-export class GeolocationComponent implements OnInit {
+export class GeolocationComponent implements OnInit, AfterViewInit {
+  map: GoogleMap;
   lat: number;
   lng: number;
   zoom: number;
@@ -310,6 +312,7 @@ export class GeolocationComponent implements OnInit {
 
   constructor(private _dataService: DataService,
               private mapsAPILoader: MapsAPILoader,
+              private _mapsWrapper: GoogleMapsAPIWrapper,
               private ngZone: NgZone,
               private _geolocationService: GeolocationService,
               public router: Router,
@@ -328,6 +331,10 @@ export class GeolocationComponent implements OnInit {
         size: new google.maps.Size(45, 45),
         anchor: new google.maps.Point(22.5, 22.5)
       };
+
+      // google.maps.addListener('zoom_changed', () => {
+      //   this.zoom = 1;
+      // });
       this.geocoder = new google.maps.Geocoder();
       this.showUserPosition();
       this.loadProjects();
@@ -358,6 +365,12 @@ export class GeolocationComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this._mapsWrapper.getNativeMap().then(returnedMap => {
+      this.map = returnedMap;
+    });
+  }
+
   showUserPosition() {
     this.radius = 4000;
     this.zoom = 12;
@@ -371,16 +384,21 @@ export class GeolocationComponent implements OnInit {
 
   loadProjects(): any {
     this._dataService.getProjects()
-      .subscribe(projectsList => {
+      .subscribe( projectsList => {
         console.log(projectsList);
         projectsList.map(project => {
-          this.getAddressLocation(project.address)
-          .subscribe(projectLocation => {
-            project['lat'] = projectLocation.lat();
-            project['lng'] = projectLocation.lng();
+          if (project.latitude === null || project.longitude === null) {
+            this.getAddressLocation(project.address)
+            .subscribe(projectLocation => {
+              project['latitude'] = projectLocation.lat();
+              project['longitude'] = projectLocation.lng();
+              this.projects.push(project);
+              console.log(project);
+            });
+          } else {
             this.projects.push(project);
             console.log(project);
-          });
+          }
         });
       });
     }
@@ -446,6 +464,10 @@ export class GeolocationComponent implements OnInit {
     this.center_changed = false;
     this.lat = this.currentlat;
     this.lng = this.currentlng;
+    const changedZoom = this.map.getZoom();
+    this.map.setZoom(12);
+    const changedCenter = this.map.getCenter();
+    this.map.setCenter(google.maps.LatLng(this.lat, this.lng));
   }
 
   default_location() {
@@ -482,5 +504,24 @@ export class GeolocationComponent implements OnInit {
       });
     });
   }
+}
 
+@Directive({
+  // tslint:disable-next-line:directive-selector
+  selector: 'my-custom-extension'
+})
+// tslint:disable-next-line:directive-class-suffix
+export class MyCustomExtension implements AfterViewInit {
+  constructor(private _wrapper: GoogleMapsAPIWrapper) {
+    console.log('constructor');
+  }
+
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit');
+    this._wrapper.getNativeMap().then((m) => {
+      console.log('native map', m);
+    }, err => {
+      console.log('error', err);
+    });
+  }
 }
