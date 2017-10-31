@@ -111,7 +111,7 @@ export class ClosedProjectsComponent implements OnInit {
                 if (organizations && organizations.length > 0) {
                   projects.forEach((proj, index, obj) => {
                     const _org = organizations.filter((org, j) => {
-                      return org.id && proj.organizationId && org.id === proj.organizationId;
+                      return org.organizationId && proj.organizationId && org.organizationId === proj.organizationId;
                     })[0];
 
                     proj['organizationName']  = _org.name           ? _org.name : '';
