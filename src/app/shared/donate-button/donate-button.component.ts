@@ -21,14 +21,13 @@ export class DonateButtonComponent implements OnInit {
     }
 
     elm.parentElement.classList.toggle('expanded');
-    // console.log(elm.parentElement.classList);
   }
 
   toggleThings(e) {
     let _target = e.srcElement || e.currentTarget;
 
     if (_target['localName'] !== 'fab') {
-      let donateButton = e.currentTarget.querySelectorAll('.fab-menu.expanded')[0];
+      const donateButton = e.currentTarget.querySelectorAll('.fab-menu.expanded')[0];
 
       if (donateButton !== undefined) {
         donateButton.classList.remove('expanded');
@@ -45,10 +44,9 @@ export class DonateButtonComponent implements OnInit {
   }
 
   donate(amount: number) {
-    console.log('Something changed');
-    // this.project.find(o => o.id === ID);
-    if (this.project.raisedFunding + amount < this.project.neededFunding) {
-      this.project.raisedFunding = this.project.raisedFunding + amount;
+    if (this.project.raisedFunding + amount < this.project.amountToBeRaised) {
+      this.project.raisedFunding +=  amount;
+      // the project should be saved here
     }
   }
 }
