@@ -1,9 +1,11 @@
+import { GeolocationService } from '../../service/geolocation.service';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
 import { DataService } from '../../shared/services/data.service';
 import { NanoValidators } from '../services/nano-validators';
 import { Organization } from '../../interfaces/organization';
 
+declare var google: any;
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
@@ -14,6 +16,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   @ViewChild('projectForm') projectForm: ElementRef;
   organizations: Organization[] = [];
   errors: any[] = [];
+  projForm: {};
   projectControls = {
     descImage:    new FormControl('', []),
     name:         new FormControl('', [NanoValidators.required]),
@@ -73,7 +76,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     }
   }
 
-  constructor(private _fetcher: DataService, private fb: FormBuilder) {
+  constructor(private _fetcher: DataService, private fb: FormBuilder, private _geoLocationService: GeolocationService) {
     this.projectControls.toDate.setValidators([
       Validators.required,
       (c: AbstractControl) => c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null,
@@ -85,30 +88,71 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    if (this.organizations !== undefined) {
-      this._fetcher.getOrganizations().subscribe(
-        res => {
-          if (res !== undefined && res.length > 0) {
-            this.organizations = res;
+    // if (this.organizations !== undefined) {
+    //   this._fetcher.getOrganizations().subscribe(
+    //     res => {
+    //       if (res !== undefined && res.length > 0) {
+    //         this.organizations = res;
 
-            this.organizations.sort((a, b) => {
-              const _a = a.name.toLowerCase();
-              const _b = b.name.toLowerCase();
+    //         this.organizations.sort((a, b) => {
+    //           const _a = a.name.toLowerCase();
+    //           const _b = b.name.toLowerCase();
 
-              switch (true) {
-                case _a < _b:
-                  return -1;
-                case _a > _b:
-                  return 1;
-                default:
-                  return 0;
-              }
-            });
-          }
-        },
-        error => this.errors.push(error)
-      );
-    }
+    //           switch (true) {
+    //             case _a < _b:
+    //               return -1;
+    //             case _a > _b:
+    //               return 1;
+    //             default:
+    //               return 0;
+    //           }
+    //         });
+    //       }
+    //     },
+    //     error => this.errors.push(error)
+    //   );
+    // }
+
+    this.projForm = {
+      mainImage:           '',
+      projectName:         '',
+      projectNumber:       '0',
+      projectManager:      '',
+      organizationId:      0,
+      fromDate:            0,
+      toDate:              0,
+      amountToBeRaised:    0,
+      raisedFunding:        0,
+      address:              '',
+      description:         '',
+      nationalProject:     false,
+      images:         [''],
+      latitude:         0,
+      longitude:       0,
+  };
+  }
+  onSubmit() {
+    let lat: number;
+    let long: number;
+    console.log('location:' + this._geoLocationService.getAddressLocation(this.projectControls.address.value));
+    this.projForm = {
+      mainImage:           this.projectControls.descImage.value,
+      projectName:         this.projectControls.name.value,
+      projectNumber:       this.projectControls.projectId.value,
+      projectManager:      this.projectControls.manager.value,
+      organizationId:      this.projectControls.orgId.value,
+      fromDate:            this.projectControls.fromDate.value,
+      toDate:              this.projectControls.toDate.value,
+      amountToBeRaised:    this.projectControls.goal.value,
+      raisedFunding:        0,
+      address:              this.projectControls.address.value,
+      description:         this.projectControls.desc.value,
+      nationalProject:     this.projectControls.national.value,
+      images:         [''],
+  };
+
+    console.log('projectForm: ' + JSON.stringify(this.projForm));
+
   }
 
   ngDoCheck(): void {}
