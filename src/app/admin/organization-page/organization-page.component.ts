@@ -21,9 +21,9 @@ export class OrganizationPageComponent implements OnInit {
   set organizationId(value: number){
     this._organizationId = value;
     if (value > 0) {
-      this.dataService.getOrganizations().subscribe(
+      this.dataService.getOrganizationById(value).subscribe(
         res => {
-          this.organization = res.filter((v, k) => v.id === value)[0];
+          this.organization = res;
         },
         error => {
           console.log(error);
@@ -40,7 +40,7 @@ export class OrganizationPageComponent implements OnInit {
   set organization(value: Organization){
     this._organization = value;
     this.dataService.getProjects().subscribe(
-      res => this._organization.projects = res.filter((v, k) => v.organizationId === value.id),
+      res => this._organization.projects = res.filter((v, k) => v.organizationId === value.organizationId),
       error => this.errors.push(error)
     );
   }

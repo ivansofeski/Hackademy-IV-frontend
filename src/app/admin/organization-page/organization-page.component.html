@@ -9,7 +9,7 @@
         <mat-list-item class="org-id">
           <div mat-line>
             <div class="label">Organization ID: </div>
-            <div class="org-id">{{organization.orgId}}</div>
+            <div class="org-id">{{organization.organizationNumber}}</div>
           </div>
         </mat-list-item>
         <mat-list-item class="org-address">
@@ -21,26 +21,20 @@
         <mat-list-item class="org-billing">
           <div mat-line>
             <div class="label">Billing: </div>
-            <div class="org-billing">{{organization.billing}}</div>
+            <div class="org-billing">{{organization.billingInformation}}</div>
           </div>
         </mat-list-item>
 
         <mat-list-item class="org-person">
           <div mat-line>
             <div class="label">Contact Name: </div>
-            <div class="org-person">{{organization.contact.person}}</div>
+            <div class="org-person">{{organization.contactPersonName}}</div>
           </div>
         </mat-list-item>
         <mat-list-item class="org-email">
           <div mat-line>
             <div class="label">Contact Email: </div>
-            <div class="org-email">{{organization.contact.email}}</div>
-          </div>
-        </mat-list-item>
-        <mat-list-item class="org-phone">
-          <div mat-line>
-            <div class="label">Contact Phone: </div>
-            <div class="org-phone">{{organization.contact.phone}}</div>
+            <div class="org-email">{{organization.contactPersonEmail}}</div>
           </div>
         </mat-list-item>
       </mat-card-content>
