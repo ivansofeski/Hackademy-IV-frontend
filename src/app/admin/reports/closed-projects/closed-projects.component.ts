@@ -27,25 +27,27 @@ export class ClosedProjectsComponent implements OnInit {
    */
   readonly columns = {
     all: [
-      { label: 'order', value: '#' },
-      { label: 'projectName', value: 'title' },
-      { label: 'projectId', value: 'proj. ID' },
-      { label: 'projectManager', value: 'manager' },
-      { label: 'fromDate', value: 'start (date)' },
-      { label: 'toDate', value: 'closed (date)' },
-      { label: 'address', value: 'address' },
-      { label: 'location', value: 'geolocation' },
-      { label: 'neededFunding', value: 'funding goal' },
-      { label: 'raisedFunding', value: 'collected amount' },
-      { label: 'description', value: 'description' },
-      { label: 'mainImage', value: 'logo' },
-      { label: 'images', value: 'gallery' },
-      { label: 'organizationName', value: 'org. name' },
-      { label: 'organizationId', value: 'org. ID' },
-      { label: 'open', value: 'active' },
-      { label: 'bankAccount', value: 'bank account' }
+      { label: 'id',                              value: '#' },
+      { label: 'projectNumber',                   value: 'project no.' },
+      { label: 'projectName',                     value: 'project' },
+      { label: 'address',                         value: 'address' },
+      { label: 'fromDate',                        value: 'start (date)' },
+      { label: 'toDate',                          value: 'closed (date)' },
+      { label: 'longitude',                       value: 'longitude' },
+      { label: 'latitude',                        value: 'latitude' },
+      { label: 'amountToBeRaised',                value: 'needed amount' },
+      { label: 'raisedFunding',                   value: 'collected amount' },
+      { label: 'description',                     value: 'description' },
+      { label: 'mainImage',                       value: 'logo' },
+      { label: 'images',                          value: 'gallery' },
+      { label: 'projectManager',                  value: 'manager' },
+      { label: 'nationalProject',                 value: 'national' },
+      { label: 'recurringProject',                value: 'recurring' },
+      { label: 'recurringProjectPublishingDate',  value: 'published on' },
+      { label: 'organizationName',                value: 'organization' },
+      { label: 'bankAccount',                     value: 'bank account' }
     ],
-    visible: ['order', 'projectName', 'organizationName', 'bankAccount', 'raisedFunding', 'toDate']
+    visible: ['id', 'address', 'projectName', 'organizationName', 'bankAccount', 'raisedFunding', 'toDate']
   };
 
   /**
@@ -61,13 +63,15 @@ export class ClosedProjectsComponent implements OnInit {
    */
   public errors: any[] = [];
 
+  years: number[] = [];
+  chosenYear: number;
+  chosenMonth: number;
+
   yearsGenerator: Function = (): void => {
-    const year = new Date;
-    const yearNow = year.getFullYear();
-    const years: any[] = [];
+    const yearNow = new Date().getFullYear();
 
     for (let i = yearNow; i >= 2000; i--) {
-      this.years.push(i.toString());
+      this.years.push(i);
     }
   }
 
@@ -105,39 +109,34 @@ export class ClosedProjectsComponent implements OnInit {
             this._dataService.getOrganizations().subscribe(
               organizations => {
                 if (organizations && organizations.length > 0) {
-                  projects.forEach((v, i) => {
-                    const org = organizations.filter((y, j) => {
-                      const name = y.name;
-
-                      if (y.id === v.organizationId) {
-                        return name;
-                      }
+                  projects.forEach((proj, index, obj) => {
+                    const _org = organizations.filter((org, j) => {
+                      return org.id && proj.organizationId && org.id === proj.organizationId;
                     })[0];
 
-                    v.organizationName = org && org.name ? org.name : '';
-                    v['bankAccount'] = org && org.billing ? org.billing : '';
-                  });
+                    proj['organizationName']  = _org.name           ? _org.name : '';
+                    proj['bankAccount']       = _org.accountNumber  ? _org.accountNumber : '';
 
-                  if (filterDate && filterDate.length > 0) {
-                    projects = projects.filter((v, i) => {
-                      const _filteredDate = new Date(filterDate);
-                      const _projectToDate = new Date(v.toDate);
+                    if (filterDate && filterDate.length > 0) {
+                      const _dateNow: Date    = new Date(),
+                        _filteredDate: Date   = new Date(filterDate),
+                        _projectToDate: Date  = new Date(proj.toDate.toString()),
+                        _validate: boolean    = (_filteredDate <= _dateNow && _filteredDate <= _projectToDate) &&
+                          (proj.toDate.toString().trim().slice(0, -2).indexOf(filterDate) > -1);
 
-                      const _dateNow = new Date();
-                      const _validate = (_filteredDate <= _dateNow && _filteredDate <= _projectToDate) &&
-                      (v.toDate.toString().trim().slice(0, -2).indexOf(filterDate) > -1);
+                      if (!_validate) {
+                        obj.splice(index, 1);
+                      }
+                    }
 
-                      return _validate;
-                    });
-                  }
-
-                  this.tableData = projects.filter((v, i) => {
-                    return v.open === 'false';
+                    delete proj.organizationId;
                   });
                 }
               }
             );
           }
+
+          this.tableData = projects;
         },
         error => this.errors.push(error)
       );
