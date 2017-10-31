@@ -27,6 +27,7 @@ export class ActivityFormComponent implements OnInit {
   };
   attributes = INPUT_ATTRIBUTES;
   errors: any[] = [];
+  eventsForm: {};
   activityControls = {
 
     descImage:   new FormControl('', []),
@@ -144,6 +145,14 @@ export class ActivityFormComponent implements OnInit {
   constructor(private _router: ActivatedRoute, private _dataService: DataService) { }
 
   ngOnInit() {
+    this.eventsForm = {
+      projectId:            '',
+      activityTitle:        '',
+      activityDescriptopn:  '',
+      activityDate:         '',
+      activityImage:        '',
+    }
+
     this.functions = new ActivityFormFunctions(this.activityForm);
     this.inputs = this.functions.setInputAttributes;
     this.getactivitiesProject();
@@ -151,7 +160,17 @@ export class ActivityFormComponent implements OnInit {
       this.inputs();
     }
   }
-
+  
+  onSubmit() {
+    this.eventsForm = {
+      projectId:            this.activityControls.projectId.value,
+      activityTitle:        this.activityControls.name.value,
+      activityDescriptopn:  this.activityControls.desc.value,
+      activityDate:         this.activityControls.activityDate.value,
+      activityImage:        this.activityControls.descImage.value,
+    }
+    console.log('events data:' + JSON.stringify(this.eventsForm));
+  }
 }
 
 export class ActivityFormFunctions {
