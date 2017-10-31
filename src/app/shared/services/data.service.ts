@@ -27,15 +27,15 @@ export class DataService {
    * properties of the `_paths`.
    */
   private _paths = {
-    root: 'http://18.221.31.52:8080/nano-1.0/api/',
-    organizations: 'org/getall',
+    root: 'http://18.221.31.52:8080/nano.se/api/',
+    organizations: 'organisations/',
 
-    projects: 'getlistofprojects',
-    projectByProjectId: 'getprojectbyprojectid/',
-    projectById: 'getprojectbyid/',
-    saveproject: 'saveproject',
+    projects: 'projects/',
+    projectById: 'projects/',
+    projectByProjectId: 'projects/number/',
+    saveproject: 'projects/',
 
-    activities: 'getlistofactivities',
+    activities: 'getlistofactivities/',
 
   };
 
@@ -135,6 +135,16 @@ export class DataService {
     });
   }
 
+  private _put(path: string, data: any) {
+    const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put(path, data, {'headers': headers} )
+    .do((data: Response) => {
+      return data !== undefined ? data : [];
+    })
+    .catch((error: Response) => {
+      return Observable.throw(error || 'Server error');
+    });
+  }
 
 
   /**
@@ -233,7 +243,18 @@ export class DataService {
     return this._post(this._paths.root + this._paths.saveproject, data);
   }
 
-
+  /**
+   * Save a new project to the database
+   *
+   * @param {number} id The ID of the new project
+   * @param {*} data JSON object with the project data
+   * @returns an objervable
+   * 
+   * @memberOf DataService
+   */
+  putProject(id: number, data: any) {
+    return this._put(this._paths.root + this._paths.saveproject + id, data);
+  }
 
 
 
