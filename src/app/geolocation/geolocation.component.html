@@ -43,8 +43,8 @@
                   fillOpacity="0.05"></agm-circle>
 
       <agm-marker *ngFor="let m of projects"
-                  [latitude]="m.lat"
-                  [longitude]="m.lng"
+                  [latitude]="m.latitude"
+                  [longitude]="m.longitude"
                   (markerClick)='goToProjectPage(m)'
                   [iconUrl]="iconUrlProject">
       </agm-marker>
