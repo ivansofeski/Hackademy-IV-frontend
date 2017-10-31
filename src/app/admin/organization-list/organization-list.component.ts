@@ -26,19 +26,28 @@ export class OrganizationListComponent implements OnInit {
    * @prop `columns.visible`
    * an Array of selected columns to be shown in the Table Child Component.
    */
+  /* organizationID?: string;
+    organizationNumber?: string;
+    organizationName?: string;
+    organizationAddress?: string;
+    contactPersonName?: string;
+    contactPersonEmail?: string;
+    accountNumber?: string;
+    billingInformation: string;
+    description: string; */
   readonly columns = {
     all: [
-      { label: 'order',         value: '#' },
-      { label: 'orgId',         value: 'org. number' },
-      { label: 'name',          value: 'name' },
-      { label: 'address',       value: 'address' },
-      { label: 'billing',       value: 'bank account' },
-      { label: 'person',        value: 'contact person' },
-      { label: 'phone',         value: 'contact phone' },
-      { label: 'email',         value: 'contact email' },
-      { label: 'description',   value: 'about' }
+      { label: 'organizationID',      value: '#' },
+      { label: 'organizationNumber',  value: 'org. number' },
+      { label: 'organizationName',    value: 'org. name' },
+      { label: 'organizationAddress', value: 'org. address' },
+      { label: 'contactPersonName',   value: 'contact person' },
+      { label: 'contactPersonEmail',  value: 'contact email' },
+      { label: 'accountNumber',       value: 'bank account' },
+      { label: 'billingInformation',  value: 'billing address' },
+      { label: 'description',         value: 'about' }
     ],
-    visible: ['order', 'name', 'orgId', 'billing', 'address', 'person', 'email']
+    visible: ['organizationID', 'organizationNumber', 'organizationName', 'organizationAddress', 'contactPersonName', 'contactPersonEmail']
   };
 
   /**

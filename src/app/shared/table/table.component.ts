@@ -6,11 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import '../rxjs.operators';
 
-let lastSorted = {
-  column: '',
-  order: ''
-};
-
 @Component({
   selector: 'app-admin-table',
   templateUrl: './table.component.html',
@@ -42,53 +37,20 @@ export class TableComponent implements OnInit {
     }
   }
 
-  insertValues: Function = (label: string, row: any): string => {
-    if (label === undefined || typeof label !== 'string' || label.trim().length <= 0 || row === undefined) {
-      return;
-    }
-
-    let _value = '';
-
-    switch (label) {
-      case 'person':
-      case 'phone':
-      case 'email':
-        _value = row.contact[label];
-        break;
-      case 'order':
-        _value = (this.dataSource.subject.value.indexOf(row) + 1).toString();
-        break;
-      case 'orgLogo':
-      case 'mainImage':
-        _value = `<img class="org-logo" src="${row[label]}"/>`;
-        break;
-      case 'raisedFunding':
-        _value = `${row[label]}<span class='dash'>/</span>${row.neededFunding}`;
-        break;
-      default:
-        _value = row[label];
-        break;
-    }
-
-    return _value;
-  }
-
   checkColumn: Function = (column: string): boolean => {
-    if (!column || typeof column !== 'string' || column.length <= 0) {
+    if (!column || typeof column !== 'string' || column.trim().length <= 0) {
       return;
     }
 
     let _validate = false;
-    column = column.trim().toLowerCase();
 
     switch (true) {
-      case column === 'name':
-      case column === 'organizationname':
-      case column === 'projectname':
+      case column === 'activityTitle':
+      case column === 'organizationName':
+      case column === 'projectName':
         _validate = true;
         break;
       default:
-        _validate = false;
         break;
     }
 
@@ -105,13 +67,13 @@ export class TableComponent implements OnInit {
     let id;
 
     switch (true) {
-      case column === 'name':
-        selector = 'organizations/view';
-        id = row.id;
+      case column === 'activityTitle':
+        selector = 'activities/view';
+        id = row.activityId ? row.activityId : row.id;
         break;
       case column === 'organizationName':
         selector = 'organizations/view';
-        id = row.organizationId;
+        id = row.organizationId ? row.organizationId : row.id;
         break;
       case column === 'projectName':
         selector = 'projects/view';
@@ -126,13 +88,35 @@ export class TableComponent implements OnInit {
     return _link;
   }
 
-  /* instanceOfOrganization: Function = (object: any): object is Organization => {
-    return 'orgId' in object;
-  }
+  insertValues: Function = (label: string, row: any): string => {
+    if (label === undefined || typeof label !== 'string' || label.trim().length <= 0 || row === undefined) {
+      return;
+    }
 
-  instanceOfProject: Function = (object: any): object is Project => {
-    return 'projectId' in object;
-  } */
+    let _value = '';
+
+    switch (label) {
+      case 'id':
+        _value = row[label] ? row[label] : this.dataSource.subject.value.indexOf(row) + 1;
+        break;
+      case 'orgLogo':
+      case 'mainImage':
+        _value = `<img class="org-logo" src="${row[label]}"/>`;
+        break;
+      case 'raisedFunding':
+        _value = `${row[label]}<span class='dash'>/</span>${row.amountToBeRaised}`;
+        break;
+      case 'fromDate':
+      case 'toDate':
+        _value = new Date(row[label]).toDateString();
+        break;
+      default:
+        _value = row[label];
+        break;
+    }
+
+    return _value;
+  }
 
   ngOnInit() {
     if (this.validateProperties && this.validateProperties()) {
@@ -173,8 +157,8 @@ export class AdminTableDataSource extends DataSource<any> {
     }
 
     data = data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
+      let propertyA: number | string | Date = '';
+      let propertyB: number | string | Date = '';
 
       for (const colName of sorters) {
         if (this._sorter.active === colName) {
