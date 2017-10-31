@@ -253,7 +253,7 @@ export class DataService {
    * @memberOf DataService
    */
   putProject(id: number, data: any) {
-    return this._post(this._paths.root + this._paths.saveproject + id, data);
+    return this._put(this._paths.root + this._paths.saveproject + id, data);
   }
 
 
