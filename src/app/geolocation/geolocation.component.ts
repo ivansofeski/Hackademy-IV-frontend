@@ -20,7 +20,8 @@ declare var google: any;
   styleUrls: ['./geolocation.component.scss',
     './_geolocation.component-theme.scss']
 })
-export class GeolocationComponent implements OnInit, AfterViewInit {
+export class GeolocationComponent implements OnInit {
+  @ViewChild('agmMap') mapElement: any;
   map: GoogleMap;
   lat: number;
   lng: number;
@@ -365,11 +366,11 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-    this._mapsWrapper.getNativeMap().then(returnedMap => {
-      this.map = returnedMap;
-    });
-  }
+  // ngAfterViewInit() {
+  //   this._mapsWrapper.getNativeMap().then(returnedMap => {
+  //     this.map = returnedMap;
+  //   });
+  // }
 
   showUserPosition() {
     this.radius = 4000;
@@ -451,18 +452,18 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
     this.center_changed = false;
     this.lat = this.currentlat;
     this.lng = this.currentlng;
-    const changedZoom = this.map.getZoom();
-    this.map.setZoom(12);
-    const changedCenter = this.map.getCenter();
-    this.map.setCenter(google.maps.LatLng(this.lat, this.lng));
+    this.mapElement._mapsWrapper.setZoom(12);
+    this.mapElement._mapsWrapper.setCenter({lat: this.lat, lng: this.lng});
   }
 
   default_location() {
     this.currentLocationTab = false;
     this.hide_default = false;
-    if (this.user.userLocation['lat'] !== undefined || this.user.userLocation['lat'] != null) {
+    if (this.user.userLocation['lat'] !== undefined || this.user.userLocation['lat'] !== null) {
       this.lat = this.user.userLocation.lat;
       this.lng = this.user.userLocation.lng;
+      this.mapElement._mapsWrapper.setZoom(12);
+      this.mapElement._mapsWrapper.setCenter({lat: this.lat, lng: this.lng});
       this.center_changed = false;
     } else {
       this.center_changed = true;

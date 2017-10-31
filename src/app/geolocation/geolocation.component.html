@@ -28,7 +28,8 @@
              [longitude]="lng"
              [zoom]="zoom"
              [styles]="style"
-             (mapClick)="mapClicked($event)">
+             (mapClick)="mapClicked($event)"
+             #agmMap>
 
       <agm-marker *ngIf = "user"
                   [latitude]="lat"
