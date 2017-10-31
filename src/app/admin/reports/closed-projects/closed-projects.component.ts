@@ -125,7 +125,7 @@ export class ProjectDataSource extends DataSource<any> {
             orgs => {
               for (const proj of projects) {
                 proj['organization'] = orgs.filter((v, k) => {
-                  return v.id === proj.organizationId;
+                  return v.organizationId === proj.organizationId;
                 })[0];
 
                 delete proj.organizationId;
