@@ -216,6 +216,27 @@ $lighterMenuColor: 'rgba(160, 220, 209, 0.53)';
   transform: rotateZ(90deg) rotateY(180deg);
 }
 
+.no-record {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    width: 100%;
+    min-height: 100px;
+    background-color: white;
+    border: 1px solid silver;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    overflow: hidden;
+    color: grey;
+    padding: 3px;
+    box-sizing: border-box;
+    user-select: none;
+    cursor: default;
+}
+
 ::ng-deep .dash {
   margin: 0 5px;
   color: silver;

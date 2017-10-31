@@ -17,6 +17,20 @@ import { Project } from '../../../interfaces/project';
 })
 
 export class ClosedProjectsComponent implements OnInit {
+  readonly months = [
+    { value: '01', viewValue: 'January' },
+    { value: '02', viewValue: 'February' },
+    { value: '03', viewValue: 'March' },
+    { value: '04', viewValue: 'April' },
+    { value: '05', viewValue: 'May' },
+    { value: '06', viewValue: 'June' },
+    { value: '07', viewValue: 'July' },
+    { value: '08', viewValue: 'August' },
+    { value: '09', viewValue: 'September' },
+    { value: '10', viewValue: 'October' },
+    { value: '11', viewValue: 'November' },
+    { value: '12', viewValue: 'December' },
+  ];
   /**
    * @readonly An Object type property. Basically, it provides column labels and their
    * respective shown values (strings) on runtime. It's a required property in order to let Table Child Component be created.
@@ -47,7 +61,7 @@ export class ClosedProjectsComponent implements OnInit {
       { label: 'organizationName',                value: 'organization' },
       { label: 'bankAccount',                     value: 'bank account' }
     ],
-    visible: ['id', 'address', 'projectName', 'organizationName', 'bankAccount', 'raisedFunding', 'toDate']
+    visible: ['id', 'projectName', 'organizationName', 'bankAccount', 'raisedFunding', 'toDate']
   };
 
   /**
@@ -90,7 +104,7 @@ export class ClosedProjectsComponent implements OnInit {
 
     const fullPeriod = `${this.chosenYear}/${this.chosenMonth}`;
 
-    this.initDataLoad(fullPeriod);
+    this.initDataLoad(new Date(fullPeriod));
   }
 
   /**
@@ -101,7 +115,7 @@ export class ClosedProjectsComponent implements OnInit {
    * `filter` Optional argument. Whenever user sets a period of time from both Date Pickers it will trigger a filtering on the table data
    * source. This `filter` is type of string when initiated.
    */
-  initDataLoad: Function = (filterDate?: string): void => {
+  initDataLoad: Function = (filterDate?: Date | string): void => {
     if (this._dataService) {
       this._dataService.getProjects().subscribe(
         projects => {
@@ -110,6 +124,11 @@ export class ClosedProjectsComponent implements OnInit {
               organizations => {
                 if (organizations && organizations.length > 0) {
                   projects.forEach((proj, index, obj) => {
+                    const _dateNow: Date = new Date();
+                    const _projectToDate: Date = new Date(+proj.toDate);
+                    const _closedByDate = _projectToDate <= _dateNow;
+                    const _closedByFunding = proj.amountToBeRaised && proj.raisedFunding &&
+                      proj.raisedFunding === proj.amountToBeRaised ? true : false;
                     const _org = organizations.filter((org, j) => {
                       return org.organizationId && proj.organizationId && org.organizationId === proj.organizationId;
                     })[0];
@@ -117,16 +136,19 @@ export class ClosedProjectsComponent implements OnInit {
                     proj['organizationName']  = _org.name           ? _org.name : '';
                     proj['bankAccount']       = _org.accountNumber  ? _org.accountNumber : '';
 
-                    if (filterDate && filterDate.length > 0) {
-                      const _dateNow: Date    = new Date(),
-                        _filteredDate: Date   = new Date(filterDate),
-                        _projectToDate: Date  = new Date(proj.toDate.toString()),
-                        _validate: boolean    = (_filteredDate <= _dateNow && _filteredDate <= _projectToDate) &&
-                          (proj.toDate.toString().trim().slice(0, -2).indexOf(filterDate) > -1);
+                    let _validate = false;
 
-                      if (!_validate) {
-                        obj.splice(index, 1);
-                      }
+                    if (_closedByDate || _closedByFunding) {
+                      _validate = true;
+                    }
+
+                    if (filterDate) {
+                      _validate = (filterDate <= _dateNow && filterDate <= _projectToDate) &&
+                        (proj.toDate.toString().trim().slice(0, -2).indexOf(filterDate.toString()) > -1);
+                    }
+
+                    if (_validate) {
+                      this.tableData.push(proj);
                     }
 
                     delete proj.organizationId;
@@ -135,8 +157,6 @@ export class ClosedProjectsComponent implements OnInit {
               }
             );
           }
-
-          this.tableData = projects;
         },
         error => this.errors.push(error)
       );
