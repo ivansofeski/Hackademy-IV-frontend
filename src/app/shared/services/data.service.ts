@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import '../rxjs.operators';
 
@@ -20,10 +20,16 @@ export class DataService {
    * properties of the `_paths`.
    */
   private _paths = {
-    root: '../../../assets/mockdata/',
-    organizations: 'organizations.json',
-    projects: 'projects.json',
-    activities: 'activities.json'
+    root: 'http://18.221.31.52:8080/nano-1.0/api/',
+    organizations: 'org/getall',
+
+    projects: 'getlistofprojects',
+    projectByProjectId: 'getprojectbyprojectid/',
+    projectById: 'getprojectbyid/',
+    saveproject: 'saveproject',
+
+    activities: 'getlistofactivities',
+
   };
 
   /**
@@ -97,6 +103,20 @@ export class DataService {
     return _inserted;
   }
 
+
+  private _post(path: string, data:any){
+    let headers:HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(path, data, {'headers': headers} )    
+    .do((data: Response) => {
+      return data !== undefined ? data : [];
+    })
+    .catch((error: Response) => {
+      return Observable.throw(error || 'Server error');
+    });
+  }
+
+
+
   /**
    * @description
    * GET all Projects records.
@@ -159,6 +179,24 @@ export class DataService {
     return this._get(this._paths.root + this._paths.projects, options);
   }
 
+  getProjectById(id:number){
+    return this._get(this._paths.root + this._paths.projectById + id);
+  }
+  
+  getProjectByProjectId(projectId: string){
+    return this._get(this._paths.root + this._paths.projectByProjectId + projectId);
+  }
+
+  postProject(data:any){
+    return this._post(this._paths.root + this._paths.saveproject,data);
+  }
+
+
+
+
+
+
+
   /**
    * @description
    * GET all activity records.
@@ -174,7 +212,9 @@ export class DataService {
   /**
    * @param http An instance of HttpClient to enable functions in this service to use HTTP requests like GET, POST, PUT etc.
    */
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
 
   /* ////////////////////////////////////////////////////////////////////////
   *  /////////////////////////                      /////////////////////////

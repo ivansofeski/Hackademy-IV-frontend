@@ -1,23 +1,20 @@
 export interface Project {
     id: number;
-    projectId: string;
+    projectNumber: string;
     projectName: string;
-    projectManager: string;
-    fromDate: string;
-    toDate: string;
     address: string;
-    lat?: number;
-    lng?: number;
-    location: {
-        lat: number;
-        lng: number;
-    };
-    neededFunding: number;
+    fromDate: Date | number;
+    toDate: Date | number;
+    longitude: number;
+    latitude: number;
+    amountToBeRaised: number;
     raisedFunding: number;
     description: string;
-    mainImage: string;
-    images: string[];
-    organizationName: string;
+    mainImage:string;
+    images: string[]; 
+    projectManager: string;    
+    recurringProject: boolean;
+    nationalProject: boolean;
+    recurringProjectPublishingDate?: Date|null;
     organizationId: number;
-    open: string; 
 }

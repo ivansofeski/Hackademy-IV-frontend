@@ -1,14 +1,15 @@
-import {Component, OnInit, ViewChild, ElementRef, NgZone} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, AfterViewInit, Directive } from '@angular/core';
 import {} from 'googlemaps';
-import {MapsAPILoader} from '@agm/core';
+import { MapsAPILoader, GoogleMapsAPIWrapper } from '@agm/core';
 import {Observable} from 'rxjs/Observable';
-import {Project} from '../projects/project.interface';
+import {Project} from '../interfaces/project';
 import {Router} from '@angular/router';
 
 // Services
 import {GeolocationService} from '../service/geolocation.service';
 import {LocalStorageService} from '../service/local-storage.service';
 import { DataService } from '../shared/services/data.service';
+import { GoogleMap } from '@agm/core/services/google-maps-types';
 
 
 declare var google: any;
@@ -19,7 +20,8 @@ declare var google: any;
   styleUrls: ['./geolocation.component.scss',
     './_geolocation.component-theme.scss']
 })
-export class GeolocationComponent implements OnInit {
+export class GeolocationComponent implements OnInit, AfterViewInit {
+  map: GoogleMap;
   lat: number;
   lng: number;
   zoom: number;
@@ -310,6 +312,7 @@ export class GeolocationComponent implements OnInit {
 
   constructor(private _dataService: DataService,
               private mapsAPILoader: MapsAPILoader,
+              private _mapsWrapper: GoogleMapsAPIWrapper,
               private ngZone: NgZone,
               private _geolocationService: GeolocationService,
               public router: Router,
@@ -328,7 +331,11 @@ export class GeolocationComponent implements OnInit {
         size: new google.maps.Size(45, 45),
         anchor: new google.maps.Point(22.5, 22.5)
       };
-      this.geocoder = new google.maps.Geocoder();
+
+      // google.maps.addListener('zoom_changed', () => {
+      //   this.zoom = 1;
+      // });
+      // this.geocoder = new google.maps.Geocoder();
       this.showUserPosition();
       this.loadProjects();
       const autocomplete = new google.maps.places.Autocomplete(this.inputAddressElm, {
@@ -358,6 +365,12 @@ export class GeolocationComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this._mapsWrapper.getNativeMap().then(returnedMap => {
+      this.map = returnedMap;
+    });
+  }
+
   showUserPosition() {
     this.radius = 4000;
     this.zoom = 12;
@@ -371,17 +384,25 @@ export class GeolocationComponent implements OnInit {
 
   loadProjects(): any {
     this._dataService.getProjects()
-      .subscribe(projectsList => {
+      .subscribe( projectsList => {
         console.log(projectsList);
-        projectsList.map(project => {
-          this.getAddressLocation(project.address)
-          .subscribe(projectLocation => {
-            project['lat'] = projectLocation.lat();
-            project['lng'] = projectLocation.lng();
-            this.projects.push(project);
-            console.log(project);
-          });
+          projectsList.forEach(project => {
+            if (project.latitude === null || project.longitude === null) {
+              this._geolocationService.getAddressLocation(project.address)
+                .subscribe(projectLocation => {
+                  project.latitude = projectLocation.lat();
+                  project.longitude = projectLocation.lng();
+                });
+            }
+            // if (project.id === 13) {
+            //   this._geolocationService.getAddressLocation(project.address)
+            //   .subscribe(projectLocation => {
+            //     console.log(project.id);
+            //     console.log('latitude: ' + projectLocation.lat() + ',' + 'longitude: ' + projectLocation.lng() + ',' );
+            //   });
+            // }
         });
+        this.projects = projectsList;
       });
     }
 
@@ -403,7 +424,7 @@ export class GeolocationComponent implements OnInit {
 
   onClick() {
     console.log('an address has been searched');
-    this.getLatLan(this.inputAddressElm.value).subscribe(
+    this._geolocationService.getAddressLocation(this.inputAddressElm.value).subscribe(
       result => {
         // needs to run inside zone to update the map
         this.ngZone.run(() => {
@@ -419,22 +440,6 @@ export class GeolocationComponent implements OnInit {
     );
   }
 
-  getLatLan(address: string) {
-    console.log('Getting Address - ', address);
-    return Observable.create(observer => {
-      this.geocoder.geocode({'address': address}, function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-          observer.next(results[0].geometry.location);
-          observer.complete();
-        } else {
-          console.log('Error - ', results, ' & Status - ', status);
-          observer.next({});
-          observer.complete();
-        }
-      });
-    });
-  }
-
   goToProjectPage(project: Project) {
     const path = 'projects/' + project.id;
     this.router.navigate([path]);
@@ -446,6 +451,10 @@ export class GeolocationComponent implements OnInit {
     this.center_changed = false;
     this.lat = this.currentlat;
     this.lng = this.currentlng;
+    const changedZoom = this.map.getZoom();
+    this.map.setZoom(12);
+    const changedCenter = this.map.getCenter();
+    this.map.setCenter(google.maps.LatLng(this.lat, this.lng));
   }
 
   default_location() {
@@ -466,21 +475,24 @@ export class GeolocationComponent implements OnInit {
     this.user.userLocation.lng = this.lng;
     this._localStorageService.updateCurrnetUser(this.user);
   }
+}
 
-  getAddressLocation(address) {
-    // const geocoder = new google.maps.Geocoder();
-    return Observable.create(observer => {
-      this.geocoder.geocode({'address': address}, function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-          observer.next(results[0].geometry.location);
-          observer.complete();
-        } else {
-          console.log('Error - ', results, ' & Status - ', status);
-          observer.next({});
-          observer.complete();
-        }
-      });
-    });
+@Directive({
+  // tslint:disable-next-line:directive-selector
+  selector: 'my-custom-extension'
+})
+// tslint:disable-next-line:directive-class-suffix
+export class MyCustomExtension implements AfterViewInit {
+  constructor(private _wrapper: GoogleMapsAPIWrapper) {
+    console.log('constructor');
   }
 
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit');
+    this._wrapper.getNativeMap().then((m) => {
+      console.log('native map', m);
+    }, err => {
+      console.log('error', err);
+    });
+  }
 }

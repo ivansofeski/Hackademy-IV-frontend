@@ -115,7 +115,7 @@ export class ProjectDataSource extends DataSource<any> {
       this.dataService.getProjects().subscribe(
         projects => {
           projects = projects.filter((k, v) => {
-            let dateNow = new Date(k.toDate);
+            let dateNow = k.toDate;
             return this.filter?
             dateNow <= this.nowDate && k.toDate.toString().trim().slice(0, -2).indexOf(this.filter) > -1 :
             dateNow <= this.nowDate;
@@ -129,7 +129,6 @@ export class ProjectDataSource extends DataSource<any> {
                 })[0];
 
                 delete proj.organizationId;
-                delete proj.organizationName;
               }
 
               let _reorderedProj = [];
@@ -175,7 +174,7 @@ export class ProjectDataSource extends DataSource<any> {
         case 'orgName': [propertyA, propertyB] = [a['organization'].name, b['organization'].name]; break;
         case 'bankAccount': [propertyA, propertyB] = [a['organization'].billing, b['organization'].billing]; break;
         case 'fundsRaised': [propertyA, propertyB] = [a.raisedFunding, b.raisedFunding]; break;
-        case 'dueDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
+//        case 'dueDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
 /*         case 'closedDate': [propertyA, propertyB] = [<string>a.closedDate, <string>b.closedDate]; break;
  */      }
 

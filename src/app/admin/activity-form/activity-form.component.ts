@@ -21,14 +21,6 @@ export class ActivityFormComponent implements OnInit {
   inputs: Function;
   errorsTwo: QueryList<String>;
   loadedProject: Object;
-  newActivity: Activity = {
-    projectId: 0,
-    activityId: 1,
-    activityTitle: '',
-    activityDescription: '',
-    activityDate: '',
-    activityImage: '',
-  };
   links = {
     list: '/admin/projects/',
     new: '/admin/projects/new/'

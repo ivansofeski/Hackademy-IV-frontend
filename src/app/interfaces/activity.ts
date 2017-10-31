@@ -1,8 +1,8 @@
 export interface Activity {
-    projectId: number;
-    activityId: number;
+    activityId?: number;
+    projectId: string;
     activityTitle: string;
     activityDescription: string;
-    activityDate: string;
+    activityDate: Date | number;
     activityImage: string;
 }

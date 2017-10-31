@@ -16,7 +16,7 @@
           <!-- row Id Column -->
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> ID </mat-header-cell>
-            <mat-cell *matCellDef="let row" class="customWidth"> {{row.id}} </mat-cell>
+            <mat-cell *matCellDef="let row" class="customWidth"> {{row.projectNumber}} </mat-cell>
           </ng-container>
 
           <!-- Picture Column -->
@@ -38,19 +38,19 @@
           <!-- row from date Column -->
           <ng-container matColumnDef="fromDate">
             <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Start </mat-header-cell>
-            <mat-cell *matCellDef="let row" class="project-cell"> {{row.fromDate}} </mat-cell>
+            <mat-cell *matCellDef="let row" class="project-cell"> {{row.fromDate | date }} </mat-cell>
           </ng-container>
 
           <!-- to DAteColumn -->
           <ng-container matColumnDef="toDate">
             <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Due </mat-header-cell>
-            <mat-cell *matCellDef="let row" class="project-cell"> {{row.toDate}} </mat-cell>
+            <mat-cell *matCellDef="let row" class="project-cell"> {{row.toDate | date }} </mat-cell>
           </ng-container>
 
           <!-- Contact Name Column -->
           <ng-container matColumnDef="goal">
             <mat-header-cell *matHeaderCellDef class="project-header-cell"> Goal </mat-header-cell>
-            <mat-cell *matCellDef="let row" class="project-cell"> {{row.neededFunding}} kr </mat-cell>
+            <mat-cell *matCellDef="let row" class="project-cell"> {{row.amountToBeRaised}} kr </mat-cell>
           </ng-container>
 
           <!-- Contact Email Column -->
