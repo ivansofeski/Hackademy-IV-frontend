@@ -16,8 +16,11 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   @ViewChild('projectForm') projectForm: ElementRef;
   organizations: Organization[] = [];
   errors: any[] = [];
+<<<<<<< HEAD
   lat: number;
   lng: number;
+=======
+>>>>>>> 22f0f48d316b9d2945067d17ebcc94ee2654c56a
   projForm: {};
   projectControls = {
     descImage:    new FormControl('', []),
