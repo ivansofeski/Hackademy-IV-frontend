@@ -136,29 +136,29 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   onSubmit() {
     this._geoLocationService.getAddressLocation(this.projectControls.address.value)
     .subscribe(coords => {
-      this.lat = coords.lat();
-      this.lng = coords.lng();
+      if (this.projForm && Object.keys(this.projForm).length > 0) {
+        this.projForm = {
+          mainImage:           this.projectControls.descImage.value,
+          projectName:         this.projectControls.name.value,
+          projectNumber:       this.projectControls.projectId.value,
+          projectManager:      this.projectControls.manager.value,
+          organizationId:      this.projectControls.orgId.value,
+          fromDate:            this.projectControls.fromDate.value,
+          toDate:              this.projectControls.toDate.value,
+          amountToBeRaised:    this.projectControls.goal.value,
+          raisedFunding:        0,
+          address:              this.projectControls.address.value,
+          description:         this.projectControls.desc.value,
+          nationalProject:     this.projectControls.national.value,
+          images:         [],
+          latitude : coords.lat(),
+          longitude: coords.lng()
+        };
+      }
+
+      console.log('projectForm: ' + JSON.stringify(this.projForm));
     });
-    this.projForm = {
-      mainImage:           this.projectControls.descImage.value,
-      projectName:         this.projectControls.name.value,
-      projectNumber:       this.projectControls.projectId.value,
-      projectManager:      this.projectControls.manager.value,
-      organizationId:      this.projectControls.orgId.value,
-      fromDate:            this.projectControls.fromDate.value,
-      toDate:              this.projectControls.toDate.value,
-      amountToBeRaised:    this.projectControls.goal.value,
-      raisedFunding:        0,
-      address:              this.projectControls.address.value,
-      description:         this.projectControls.desc.value,
-      nationalProject:     this.projectControls.national.value,
-      images:         [''],
-      latitude : this.lat,
-      longitude: this.lng
-  };
-
-    console.log('projectForm: ' + JSON.stringify(this.projForm));
-
+console.log('outside' + this.projForm);
   }
 
   ngDoCheck(): void {}

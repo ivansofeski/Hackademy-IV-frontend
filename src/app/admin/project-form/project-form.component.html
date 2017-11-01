@@ -107,9 +107,9 @@
   <!-- FIELD: ORGANIZATION -->
   <mat-form-field class='project-full-width'>
     <input matInput name='ORG_ID' class='mat-input-element input-org-id hidden' type="text" [formControl]='projectControls.orgId' #orgId>
-    <mat-select class='custom-mat-select' placeholder="Organization Name" title='Click to select an organization' (change)='setHiddenInputs("orgId", $event)'
+    <mat-select class='custom-mat-select' placeholder="Organization Name" title='Click to select an organization' (change)='setHiddenInputs("orgId", $event.value)'
       #orgIdPicker>
-      <mat-option *ngFor="let org of organizations" [value]="org.id" [textContent]='org.name'></mat-option>
+      <mat-option *ngFor="let org of organizations" [value]="org.organizationId" [textContent]='org.name'></mat-option>
     </mat-select>
     <mat-error *ngIf='projectControls.orgId.errors'>The organization name is<strong>required</strong></mat-error>
   </mat-form-field>
