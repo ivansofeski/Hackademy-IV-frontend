@@ -125,20 +125,17 @@ export class DataService {
    * @memberOf DataService
    */
 
-  private _post(path: string, data: any) {
+  private _post(path: string, body: string) {
     const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post(path, data, {'headers': headers} )
-    .do((data: Response) => {
-      return data !== undefined ? data : [];
-    })
+    return this.http.post(path, body, {'headers': headers} )
     .catch((error: Response) => {
       return Observable.throw(error || 'Server error');
     });
   }
 
-  private _put(path: string, data: any) {
+  private _put(path: string, body: any) {
     const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.put(path, data, {'headers': headers} )
+    return this.http.put(path, body, {'headers': headers} )
     .do((data: Response) => {
       return data !== undefined ? data : [];
     })
@@ -197,7 +194,7 @@ export class DataService {
    *
    * @memberOf DataService
    */
-  postOrganization(data: any) {
+  postOrganization(data: string) {
     return this._post(this._paths.root + this._paths.organizations, data);
   }
 
