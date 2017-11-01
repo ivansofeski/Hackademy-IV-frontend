@@ -216,6 +216,23 @@ export class DataService {
     return this._get(this._paths.root + this._paths.projects);
   }
 
+  isClosedProject(project: Project): Boolean {
+    return project.toDate <= new Date() || project.amountToBeRaised <= project.raisedFunding;
+  }
+  getClosedProjects(): Observable<Project[]> {
+    return this.getProjects().map(
+      res =>  res.filter((v, k) => this.isClosedProject(v))
+    );
+  }
+
+  getOpenProjects(): Observable<Project[]> {
+    return this.getProjects().map(
+      res => {
+        return res.filter((v, k) => !this.isClosedProject(v));
+      }
+    );
+  }
+
   /**
    * @argument options Accepts minimum 1 key+value pair from the Project interface.
    *
