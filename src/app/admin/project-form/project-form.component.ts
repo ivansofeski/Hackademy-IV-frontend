@@ -1,3 +1,4 @@
+import { Project } from '../../interfaces/project';
 import { GeolocationService } from '../../service/geolocation.service';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
@@ -18,7 +19,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   errors: any[] = [];
   lat: number;
   lng: number;
-  projForm: {};
+  projForm: Project;
   projectControls = {
     descImage:    new FormControl('', []),
     name:         new FormControl('', [NanoValidators.required]),
@@ -129,6 +130,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
       images:         [''],
       latitude:         0,
       longitude:       0,
+      recurringProject: false,
   };
   }
 
@@ -150,6 +152,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
           description:         this.projectControls.desc.value,
           nationalProject:     this.projectControls.national.value,
           images:              null,
+          recurringProject: false,
           latitude :           coords.lat(),
           longitude:           coords.lng()
         };
