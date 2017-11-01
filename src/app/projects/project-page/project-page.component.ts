@@ -34,23 +34,28 @@ export class ProjectPageComponent implements OnInit {
     ngOnInit() {
 
       this._projectId = +this.route.snapshot.paramMap.get('id');
-      console.log(this._projectId);
       const project_activity = this.projectService.getActivities();
-      const project = this.projectService.getProjects();
+      // By Al: Use the anew interface.
+      const project = this.projectService.getProjectById(this._projectId); 
+
       project.subscribe(
         res => {
-          this.project = res.find(retrunedProject => retrunedProject.id === this._projectId);
+          this.project = res;
+          // By Al: the slider will work with only the main image until backend sends us an image array.
+          this.projectImages.push({visible: false, image: this.project.mainImage});
+          if(this.project.images){
+            for (const projectImage of this.project.images){
+              this.projectImages.push({visible: false, image: projectImage});
+              console.log(this.projectImages);
+            }
+          }
+          this.projectImages[0].visible = true;
+
           project_activity.subscribe(
             res => {
                console.log(res);
               this.projectActivities = res.filter((k, v) => k.projectId === this.project.projectId);
               // The above line was odified by Al to match the new interfaced.
-              // This whole block was moved here to set the project activities after getting the project.
-              for (const projectImage of this.project.images){
-                this.projectImages.push({visible: false, image: projectImage});
-                console.log(this.projectImages);
-              }
-              this.projectImages[0].visible = true;
             },
             error => this.errors.push(error)
           );
