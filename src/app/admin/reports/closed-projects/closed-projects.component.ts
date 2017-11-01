@@ -112,15 +112,8 @@ export class ProjectDataSource extends DataSource<any> {
     ];
 
     if (!this.subject.isStopped) {
-      this.dataService.getProjects().subscribe(
+      this.dataService.getClosedProjects().subscribe(
         projects => {
-          projects = projects.filter((k, v) => {
-            const dateNow = k.toDate;
-            return this.filter ?
-            dateNow <= this.nowDate && k.toDate.toString().trim().slice(0, -2).indexOf(this.filter) > -1 :
-            dateNow <= this.nowDate;
-          });
-
           this.dataService.getOrganizations().subscribe(
             orgs => {
               for (const proj of projects) {
