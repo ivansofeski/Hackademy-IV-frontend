@@ -32,20 +32,21 @@ export class OrganizationFormComponent implements OnInit {
 
   ngOnInit() {
   }
-
   onSubmit() {
     this.newOrganization = {
-      organizationId:  0,
-      organizationNumber:  this.formControls.orgNumber.value,
-      name:        this.formControls.name.value,
-      address:      this.formControls.address.value,
-      contactPersonName:  this.formControls.contactName.value,
-      contactPersonEmail:  this.formControls.contactEmail.value,
-      accountNumber:  this.formControls.bankAccount.value,
-      billingInformation:   '',
-      description:  this.formControls.description.value
+      organizationNumber:   this.formControls.orgNumber.value,
+      name:                 this.formControls.name.value,
+      address:              this.formControls.address.value,
+      contactPersonName:    this.formControls.contactName.value,
+      contactPersonEmail:   this.formControls.contactEmail.value,
+      accountNumber:        this.formControls.bankAccount.value,
+      billingInformation:   this.formControls.billings.value,
+      description:          this.formControls.description.value
     };
-  console.log('organizationsDataInput:' + JSON.stringify(this.newOrganization));
-  // this._dataservice.postOrganization(this.newOrganization);
+
+    console.log('organizationsDataInput:' + JSON.stringify(this.newOrganization));
+    this._dataservice.postOrganization(JSON.stringify(this.newOrganization)).subscribe(
+      response => console.log(response)
+   );
   }
 }
