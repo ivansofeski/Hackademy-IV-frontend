@@ -1,1 +1,50 @@
 <div class='dashboard-header' [textContent]='strings.dashboard[lng]'></div>
+<main>
+    <ng-container *ngIf='sections'>
+        <section *ngFor='let section of sections | keys' class="trans-15s category {{section}}" [attr.for]='section'>
+            <!-- {{section}} : {{sections[section].length}} -->
+            <label class='flex row-label'>{{_getSectionLabel(section)}}
+                <span class='breaker'></span>
+                <span class='latest'>Latest {{latest}}</span>
+            </label>
+            <div class='row' *ngFor='let row of sections[section]' [ngSwitch]='section'>
+                <div class='row-wrapper' *ngSwitchCase='"organizations"'>
+                    <span>name: </span>
+                    <span>{{row?.name}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"organizations"'>
+                    <span>number: </span>
+                    <span>{{row?.organizationNumber}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"organizations"'>
+                    <span>contact person: </span>
+                    <span>{{row?.contactPersonName}}</span>
+                </div>
+                <div class='row-wrapper'*ngSwitchCase='"projects"'>
+                    <span>name: </span>
+                    <span>{{row?.projectName}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"projects"'>
+                    <span>number: </span>
+                    <span>{{row?.projectNumber}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"projects"'>
+                    <span>funding goal: </span>
+                    <span>{{row?.amountToBeRaised}}</span>
+                </div>
+                <div class='row-wrapper'*ngSwitchCase='"closedProjects"'>
+                    <span>name: </span>
+                    <span>{{row?.projectName}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"closedProjects"'>
+                    <span>funding raised: </span>
+                    <span>{{row?.raisedFunding}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"closedProjects"'>
+                    <span>closed date: </span>
+                    <span>{{_getPropertDateFormat(row?.toDate)}}</span>
+                </div>
+            </div>
+        </section>
+    </ng-container>
+</main>
