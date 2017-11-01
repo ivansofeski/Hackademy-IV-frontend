@@ -57,8 +57,12 @@ export class GeolocationService {
     });
   }
   getIPLocation() {
+    const defaultLocation = JSON.parse('{"as":"AS29518 Bredband2 AB","city":"Malmo","country":"Sweden","countryCode":"SE","isp":"Bredband2 AB","lat":55.6059,"lon":13.0007,"org":"Bredband2 AB","query":"31.209.25.130","region":"M","regionName":"Skåne","status":"success","timezone":"Europe/Stockholm","zip":"211 20"}');
+    return Observable.of(defaultLocation);
+/*
     return this._http.get('//ip-api.com/json') // ...using post request
     .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
+*/
   }
 
   getAddressLocation(address) {
