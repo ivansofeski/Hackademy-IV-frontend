@@ -78,7 +78,7 @@
 
   <!--Field to save the billings information of the organisation-->
   <mat-form-field class="organization-billings">
-    <textarea matInput #orgDesc maxlength="200" placeholder=" billings Information " type="text" [formControl]="formControls.description"></textarea>
+    <textarea matInput #orgDesc maxlength="200" placeholder=" billings Information " type="text" [formControl]="formControls.billings"></textarea>
     <mat-error *ngIf="formControls.billings.hasError('required')">
       The billings information of the organization is
       <strong>required</strong>
