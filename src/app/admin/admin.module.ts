@@ -17,6 +17,9 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { ReportsModule } from './reports/reports.module';
 import { ActivityFormComponent } from './activity-form/activity-form.component';
 
+// Pipes
+import { KeysPipe } from './dashboard/keys.pipe';
+
 @NgModule({
   imports: [
     AdminRoutingModule,
@@ -39,6 +42,7 @@ import { ActivityFormComponent } from './activity-form/activity-form.component';
     SidebarComponent,
     DashboardComponent,
     ActivityFormComponent,
+    KeysPipe,
   ],
   providers: []
 })
