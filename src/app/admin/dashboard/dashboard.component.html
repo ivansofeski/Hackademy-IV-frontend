@@ -45,6 +45,7 @@
                     <span>{{_getPropertDateFormat(row?.toDate)}}</span>
                 </div>
             </div>
+            <div class='row no-data' *ngIf='sections[section].length <= 0'>No data!</div>
         </section>
     </ng-container>
 </main>

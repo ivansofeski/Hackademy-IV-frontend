@@ -115,6 +115,10 @@ export class DashboardComponent implements OnInit {
     return date;
   }
 
+  private checkContent(section: any) {
+    console.log(section);
+  }
+
   readonly initData: Function = (): void => {
     if (this._getLatestOrganizations && this._getLatestProjects) {
       this._getLatestOrganizations();

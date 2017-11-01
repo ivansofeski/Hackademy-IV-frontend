@@ -157,7 +157,7 @@ main {
             border: none;
         }
 
-        .row::before {
+        .row::before:not([class='no-data']) {
             content: "";
             position: absolute;
             display: block;
@@ -173,6 +173,17 @@ main {
             _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
 
             z-index: 5;
+        }
+
+        .row.no-data {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            line-height: 1;
+            padding: 15px 5px;
+            text-align: center;
+            color: silver;
         }
     }
 
