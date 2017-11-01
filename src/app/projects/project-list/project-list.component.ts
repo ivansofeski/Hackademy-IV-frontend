@@ -38,16 +38,16 @@ export class ProjectListComponent implements OnInit {
       // this.currentUser.userLocation.lng = location.lon;
       // const user = JSON.stringify(this.currentUser);
       // localStorage.setItem(this.localStorageKey, user);
-      this._projectService.getProjects().subscribe(
-        projects => {
-          console.log(projects);
-          this.projectList = projects;
-          // this.projectList = projects.filter((project, k) => {
-          //   return project.open === 'true';
-          //   },
-          //   error => this.errors.push(error)
-          // );
-        });
+      this._projectService.getOrganizations().subscribe(orgs => {
+        this._projectService.getOpenProjects().subscribe(
+          projects => {
+            console.log(projects);
+            projects.forEach(project => {
+              project['organizationName'] = orgs.find(org => org.organizationId === project.organizationId).name;
+            });
+            this.projectList = projects;
+          });
+      });
     });
   }
 
