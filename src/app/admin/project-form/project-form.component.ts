@@ -38,9 +38,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     if (elm === undefined || elm.value === '') {
       return;
     }
-
     const _imgSelector = elm.parentElement.querySelectorAll('img')[0];
-
     if (_imgSelector !== undefined) {
       const fReader = new FileReader();
 
