@@ -1,122 +1,96 @@
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { DataSource } from '@angular/cdk/table';
-import { MatSort } from '@angular/material';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
+import '../../shared/rxjs.operators';
+
+// Interfaces
+import { Project } from '../../interfaces/project';
 
 // Services
 import { DataService } from '../../shared/services/data.service';
-import { Project } from '../../interfaces/project';
+
+// Components
+import { TableComponent } from '../../shared/table/table.component';
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss']
 })
+
 export class ProjectListComponent implements OnInit {
-  color = 'primary';
-  mode = 'determinate';
-  proList: any[];
-  projectId: number = 0;
-  project: any;
-  errors: any[] = [];
-  dataSource: ProjectDataSource | null;
-  displayedColumns = ['picture', 'projectName', 'fromDate', 'toDate', 'goal', 'funded'];
+  /**
+   * @readonly An Object type property. Basically, it provides column labels and their
+   * respective shown values (strings) on runtime. It's a required property in order to let Table Child Component be created.
+   * @prop `columns.all`
+   * an Array of all possible columns of the table data we are supposed to fetch and load.
+   * @prop `columns.visible`
+   * an Array of selected columns to be shown in the Table Child Component.
+   */
+  readonly columns = {
+    all: [
+      { label: 'id',                              value: '#' },
+      { label: 'projectNumber',                   value: 'project no.' },
+      { label: 'projectName',                     value: 'project' },
+      { label: 'address',                         value: 'address' },
+      { label: 'fromDate',                        value: 'start (date)' },
+      { label: 'toDate',                          value: 'closed (date)' },
+      { label: 'longitude',                       value: 'longitude' },
+      { label: 'latitude',                        value: 'latitude' },
+      { label: 'amountToBeRaised',                value: 'goal (amount)' },
+      { label: 'raisedFunding',                   value: 'collected amount' },
+      { label: 'description',                     value: 'description' },
+      { label: 'mainImage',                       value: 'logo' },
+      { label: 'images',                          value: 'gallery' },
+      { label: 'projectManager',                  value: 'manager' },
+      { label: 'nationalProject',                 value: 'national' },
+      { label: 'recurringProject',                value: 'recurring' },
+      { label: 'recurringProjectPublishingDate',  value: 'published on' },
+      { label: 'organizationId',                  value: 'organization id' }
+    ],
+    visible: ['id', 'projectNumber', 'projectName', 'address', 'amountToBeRaised', 'projectManager', 'toDate']
+  };
 
-  @ViewChild(MatSort) sort: MatSort;
+  /**
+   * @property The table data for the component itself. It's strong-typed to `Project` interface and is predefined
+   * as an empty array of `Project`. Later on, it's value changes when we subscribe to an Observable method from
+   * the service associated with this component.
+   *
+   * The property name is reflected as an `Input()` on the Table Child Compoment so it's recommended not to change it.
+   */
+  public tableData: Project[] = [];
+  /**
+   * @property An empty Array of `any` type. It stands to collect garbabe possible/unpredictable errors in the component.
+   */
+  public errors: any[] = [];
 
-  // Constructor here
-  constructor(private _dataService: DataService, private _router: Router ) {
+  /**
+   * @property Function to initialize starting code for the component itself.
+   * It consists of many steps like subscribing to a method in the service instantiated by the contructor
+   * and then process it's result further.
+   */
+  initDataLoad: Function = (): void => {
+    if (this._dataService) {
+      this._dataService.getProjects().subscribe(
+        projects => {
+          if (projects && projects.length > 0) {
+            projects.forEach((proj, i, object) => {
+              proj.fromDate = +proj.fromDate + (i * 86400000);
+              proj.toDate = +proj.toDate + (i * 86400000);
+            });
+
+            this.tableData = projects;
+          }
+        },
+        error => this.errors.push(error)
+      );
+    }
   }
 
   ngOnInit() {
-    this.dataSource = new ProjectDataSource(this._dataService, this.sort);
-  }
-
-  ngOnDestroy(): void { }
-
-  handleRowClick(row) {
-    // alert('your click on the row with the Project  name ' + row.projectName);
-    this._router.navigateByUrl('/admin/projects/view/' + row.id);
-  }
-
-
-}
-
-export class ProjectDataSource extends DataSource<any> {
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  errors: any[] = [];
-  orgList: Project[];
-
-  constructor(private _serviceFetch: DataService, private _sorter: MatSort) {
-    super();
-  }
-
-
-  subject: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
-
-  connect(): Observable<Project[]> {
-
-    const displayDataChanges = [
-      this.subject,
-      this._sorter.sortChange
-    ];
-
-    if (!this.subject.isStopped) {
-      this._serviceFetch.getProjects()
-        .subscribe(res => {
-          this.subject.next(res);
-        });
-      return Observable.merge(...displayDataChanges).map(() => {
-        return this.getSortedData();
-      });
+    if (this.initDataLoad) {
+      this.initDataLoad();
     }
   }
 
-  disconnect() {
-    this.subject.complete();
-    this.subject.observers = [];
-  }
-
-  getSortedData(): Project[] {
-    const data = this.subject.value.slice();
-
-    if (!this._sorter.active || this._sorter.direction === '') {
-      return data;
-    }
-
-    return data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
-
-      switch (this._sorter.active) {
-        case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-//        case 'fromDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
-//        case 'toDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
-        case 'projectName': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
-      }
-
-      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-
-      return (valueA < valueB ? -1 : 1) * (this._sorter.direction === 'asc' ? 1 : -1);
-    });
-  }
-  // constructor( public router: Router, private dataService: DataService) { }
-
-  // ngOnInit() {
-  //   this.dataService.getProjects().subscribe(
-  //     res => {
-  //       //console.log(res);
-  //       this.proList = res;
-  //     },
-  //     error => this.errors.push(error)
-  //   );
-  // }
+  constructor(private _dataService: DataService) { }
 }
-
