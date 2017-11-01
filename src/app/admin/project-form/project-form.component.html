@@ -104,20 +104,19 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- FIELD: ORGANIZATION 
+  <!-- FIELD: ORGANIZATION -->
   <mat-form-field class='project-full-width'>
     <input matInput name='ORG_ID' class='mat-input-element input-org-id hidden' type="text" [formControl]='projectControls.orgId' #orgId>
-    <mat-select class='custom-mat-select' placeholder="Organization Name" title='Click to select an organization' (change)='setHiddenInputs("orgId", $event.value)'
+    <mat-select class='custom-mat-select' placeholder="Organization Name" title='Click to select an organization' (change)='setHiddenInputs("orgId", $event)'
       #orgIdPicker>
       <mat-option *ngFor="let org of organizations" [value]="org.id" [textContent]='org.name'></mat-option>
     </mat-select>
     <mat-error *ngIf='projectControls.orgId.errors'>The organization name is<strong>required</strong></mat-error>
-  </mat-form-field>-->
+  </mat-form-field>
 
   <!--Button to save the form or Canceled-->
   <div class='buttons-wrapper'>
     <button mat-raised-button color='warn' (mouseup)='hardReset($event, projectForm)'>Cancel</button>
     <button mat-raised-button color='primary'type='submit'>Validate</button>
-    <!-- <button mat-raised-button color='primary' [routerLink]='[projectListLink]' (mouseup)='saveProject()'>Submit -->
   </div>
 </form>

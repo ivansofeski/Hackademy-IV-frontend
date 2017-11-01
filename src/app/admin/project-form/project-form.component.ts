@@ -16,6 +16,8 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   @ViewChild('projectForm') projectForm: ElementRef;
   organizations: Organization[] = [];
   errors: any[] = [];
+  lat: number;
+  lng: number;
   projForm: {};
   projectControls = {
     descImage:    new FormControl('', []),
@@ -88,30 +90,30 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    // if (this.organizations !== undefined) {
-    //   this._fetcher.getOrganizations().subscribe(
-    //     res => {
-    //       if (res !== undefined && res.length > 0) {
-    //         this.organizations = res;
+    if (this.organizations !== undefined) {
+      this._fetcher.getOrganizations().subscribe(
+        res => {
+          if (res !== undefined && res.length > 0) {
+            this.organizations = res;
 
-    //         this.organizations.sort((a, b) => {
-    //           const _a = a.name.toLowerCase();
-    //           const _b = b.name.toLowerCase();
+            this.organizations.sort((a, b) => {
+              const _a = a.name.toLowerCase();
+              const _b = b.name.toLowerCase();
 
-    //           switch (true) {
-    //             case _a < _b:
-    //               return -1;
-    //             case _a > _b:
-    //               return 1;
-    //             default:
-    //               return 0;
-    //           }
-    //         });
-    //       }
-    //     },
-    //     error => this.errors.push(error)
-    //   );
-    // }
+              switch (true) {
+                case _a < _b:
+                  return -1;
+                case _a > _b:
+                  return 1;
+                default:
+                  return 0;
+              }
+            });
+          }
+        },
+        error => this.errors.push(error)
+      );
+    }
 
     this.projForm = {
       mainImage:           '',
@@ -132,8 +134,11 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   };
   }
   onSubmit() {
-    let lat: number;
-    let long: number;
+    this._geoLocationService.getAddressLocation(this.projectControls.address.value)
+    .subscribe(coords => {
+      this.lat = coords.lat();
+      this.lng = coords.lng();
+    });
     this.projForm = {
       mainImage:           this.projectControls.descImage.value,
       projectName:         this.projectControls.name.value,
@@ -148,12 +153,10 @@ export class ProjectFormComponent implements OnInit, DoCheck {
       description:         this.projectControls.desc.value,
       nationalProject:     this.projectControls.national.value,
       images:         [''],
+      latitude : this.lat,
+      longitude: this.lng
   };
-  this._geoLocationService.getAddressLocation(this.projectControls.address.value)
-  .subscribe(coords => {
-    console.log(coords.lat());
-    console.log(coords.lng());
-  });
+
     console.log('projectForm: ' + JSON.stringify(this.projForm));
 
   }
