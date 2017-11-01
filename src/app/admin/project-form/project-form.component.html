@@ -96,8 +96,8 @@
     <input matInput #national name='NATIONAL_PROJECT' class="input-national-project hidden" [formControl]='projectControls.national'>
     <label class='nat-project-label'>National Project</label>
     <mat-radio-group class="nat-project-radio" (change)='setHiddenInputs("national", $event.value)' #nationalRadios>
-      <mat-radio-button value="Yes">Yes</mat-radio-button>
-      <mat-radio-button [checked]='true' value="No">No</mat-radio-button>
+      <mat-radio-button value="true">Yes</mat-radio-button>
+      <mat-radio-button [checked]='true' value="false">No</mat-radio-button>
     </mat-radio-group>
     <mat-error *ngIf='projectControls.national.hasError("required")'>Set the type of the 
       <strong>project</strong>

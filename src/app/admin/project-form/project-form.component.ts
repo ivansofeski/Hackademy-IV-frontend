@@ -31,7 +31,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     address:      new FormControl('', [NanoValidators.required]),
     shortDesc:    new FormControl('', [NanoValidators.required]),
     desc:         new FormControl('', [NanoValidators.required]),
-    national:     new FormControl('0', [NanoValidators.required])
+    national:     new FormControl('false', [NanoValidators.required])
   };
 
   setImagePath(elm: HTMLInputElement): void {
@@ -131,6 +131,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
       longitude:       0,
   };
   }
+
   onSubmit() {
     this._geoLocationService.getAddressLocation(this.projectControls.address.value)
     .subscribe(coords => {
@@ -148,15 +149,17 @@ export class ProjectFormComponent implements OnInit, DoCheck {
           address:              this.projectControls.address.value,
           description:         this.projectControls.desc.value,
           nationalProject:     this.projectControls.national.value,
-          images:         [],
-          latitude : coords.lat(),
-          longitude: coords.lng()
+          images:              null,
+          latitude :           coords.lat(),
+          longitude:           coords.lng()
         };
       }
 
       console.log('projectForm: ' + JSON.stringify(this.projForm));
+      this._fetcher.postProject(JSON.stringify(this.projForm)).subscribe(
+        response => console.log(response)
+     );
     });
-console.log('outside' + this.projForm);
   }
 
   ngDoCheck(): void {}
