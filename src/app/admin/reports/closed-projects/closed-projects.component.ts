@@ -130,7 +130,7 @@ export class ClosedProjectsComponent implements OnInit {
                     const _closedByFunding = proj.amountToBeRaised && proj.raisedFunding &&
                       proj.raisedFunding === proj.amountToBeRaised ? true : false;
                     const _org = organizations.filter((org, j) => {
-                      return org.id && proj.organizationId && org.id === proj.organizationId;
+                      return org.organizationId && proj.organizationId && org.organizationId === proj.organizationId;
                     })[0];
 
                     proj['organizationName']  = _org.name           ? _org.name : '';
