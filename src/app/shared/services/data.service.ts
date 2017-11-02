@@ -36,7 +36,7 @@ export class DataService {
     projectByProjectId: 'projects/number/',
     saveproject: 'projects/',
 
-    activities: 'getlistofactivities/',
+    activities: 'events/',
 
   };
 
@@ -286,9 +286,9 @@ export class DataService {
   }
 
   /**
-   * Save a new project to the database
+   * update a project in the database
    *
-   * @param {number} id The ID of the new project
+   * @param {number} id The ID of the  project
    * @param {*} data JSON object with the project data
    * @returns an objervable
    * 
@@ -312,6 +312,20 @@ export class DataService {
    */
   getActivities(): Observable<Activity[]> {
     return this._get(this._paths.root + this._paths.activities);
+  }
+
+  getActivityById(activityId: number): Observable<Activity>{
+    return this._get(this._paths.root + this._paths.activities + activityId);
+  }
+
+  postActivity(body: string) {
+    return this._post(this._paths.root + this._paths.activities, body);
+  }
+
+  getActivitiesOfProjectId(projectId: number):Observable<Activity[]> {
+    return this.getActivities().map(
+      response => response.filter((v, k) => v.projectId === projectId )
+    );
   }
 
   /**
