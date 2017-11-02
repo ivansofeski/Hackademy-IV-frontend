@@ -15,8 +15,8 @@
   <a class="fab-item" (click)="donate(donateOption3)">
     {{donateOption3}}:-
   </a>
-  <div  class="swish" *ngIf="hideSwish">
-  <iframe src='swish://paymentrequest'>
-  </iframe>
- </div>'
+      <div  class="swish" *ngIf="openSwish">
+        <iframe src='swish://paymentrequest'>
+        </iframe>
+      </div>
 </div>
