@@ -38,19 +38,19 @@
             <!-- ORG. BANK ACCOUNT -->
             <ng-container matColumnDef="bankAccount">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Bank Account </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="project-cell"> {{row.organization?.billing}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.organization?.accountNumber}} </mat-cell>
             </ng-container>
   
             <!-- COLLECTED AMOUNT -->
             <ng-container matColumnDef="fundsRaised">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Collected Amount </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="project-cell"> {{row.raisedFunding}} / {{row.neededFunding}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.raisedFunding}} / {{row.amountToBeRaised}} </mat-cell>
             </ng-container>
 
             <!-- DUE DATE -->
             <ng-container matColumnDef="dueDate">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Due Date </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="project-cell"> {{row.toDate}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="project-cell"> {{row.toDate | date}} </mat-cell>
             </ng-container>
   
           
