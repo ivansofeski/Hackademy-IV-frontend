@@ -321,7 +321,13 @@ export class DataService {
   postActivity(body: string) {
     return this._post(this._paths.root + this._paths.activities, body);
   }
-  
+
+  getActivitiesOfProjectId(projectId: number):Observable<Activity[]> {
+    return this.getActivities().map(
+      response => response.filter((v, k) => v.projectId === projectId )
+    );
+  }
+
   /**
    * @param http An instance of HttpClient to enable functions in this service to use HTTP requests like GET, POST, PUT etc.
    */
