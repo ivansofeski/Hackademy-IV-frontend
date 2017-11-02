@@ -26,6 +26,9 @@ export class ProjectPageComponent implements OnInit {
 
   set project(value: Project){
     this._project = value;
+    this._dataService.getActivitiesOfProjectId(value.id).subscribe(
+      res => this.projectActivities = res
+    );
     if (value.organizationId > 0 ) {
       this._dataService.getOrganizations().subscribe(
         res => {
@@ -36,16 +39,6 @@ export class ProjectPageComponent implements OnInit {
     } else {
       this._project.organization = null;
     }
-/*
-    this._dataService.getActivities().subscribe(
-      activities => {
-        if (activities && activities.length > 0) {
-          this.projectActivities = activities.filter((v, k) => v.projectId === value.projectId);
-        }
-      },
-      error => this.errors.push(error)
-    );
-*/
   }
 
   get projectId(): number {

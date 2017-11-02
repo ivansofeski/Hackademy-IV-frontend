@@ -34,7 +34,7 @@ export class ProjectPageComponent implements OnInit {
     ngOnInit() {
 
       this._projectId = +this.route.snapshot.paramMap.get('id');
-      const project_activity = this.projectService.getActivities();
+      const project_activity = this.projectService.getActivitiesOfProjectId(this._projectId);
       // By Al: Use the anew interface.
       const project = this.projectService.getProjectById(this._projectId); 
 
@@ -52,9 +52,8 @@ export class ProjectPageComponent implements OnInit {
           this.projectImages[0].visible = true;
 
           project_activity.subscribe(
-            res => {
-               console.log(res);
-              this.projectActivities = res.filter((k, v) => k.projectId === this.project.projectId);
+            response => {
+              this.projectActivities = response;
               // The above line was odified by Al to match the new interfaced.
             },
             error => this.errors.push(error)

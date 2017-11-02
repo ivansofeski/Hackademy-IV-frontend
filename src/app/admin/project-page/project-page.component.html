@@ -79,16 +79,16 @@
         <mat-expansion-panel *ngFor="let activity of projectActivities">
           <mat-expansion-panel-header>
             <mat-panel-title class="activity-title">
-              {{activity.activityTitle}}
+              {{activity.eventTitle}}
             </mat-panel-title>
             <mat-panel-description class="activity-date">
-              {{activity.activityDate}}
+              {{activity.eventDate}}
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div>
-            <img class="activity-image" [src]="activity.activityImage" [alt]="activity.activityTitle">
+            <img class="activity-image" [src]="activity.eventImage" [alt]="activity.eventTitle">
           </div>
-          <div class="activity-description">{{activity.activityDescription}}</div>
+          <div class="activity-description">{{activity.eventDescription}}</div>
         </mat-expansion-panel>
       </mat-accordion>
     </mat-card-content>
