@@ -1,103 +1,115 @@
 <!-- Form for the submission of a new Organization-->
+<div class="container">
+  <mat-card class="organization-card">
+    <mat-card-header>
+      <div class='organization-header'>
+          <mat-card-title>New Organization</mat-card-title>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
 
-<form class="organization-form" (ngSubmit)='onSubmit()'>
+      <form class="organization-form">
+        <!-- Field for the number of the organization limited with 10 character-->
+        <mat-form-field class="organization-number">
+          <input matInput #orgNumber maxlength="11" placeholder=" Organization Number " type="text" [formControl]="formControls.orgNumber">
+          <mat-error *ngIf="formControls.orgNumber.hasError('required')">
+            The Organization number is
+            <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="formControls.orgNumber.hasError('pattern')">
+            The Organization number must be written in this format
+            <strong>XXXXXX-XXXX</strong>
+          </mat-error>
+          <mat-hint align="end">{{orgNumber.value.length}} / 11</mat-hint>
+        </mat-form-field>
 
-
-
-  <!-- Field for the number of the organization limited with 10 character-->
-  <mat-form-field class="organization-number">
-    <input matInput #orgNumber maxlength="11" placeholder=" Organization Number " type="text" [formControl]="formControls.orgNumber">
-    <mat-error *ngIf="formControls.orgNumber.hasError('required')">
-      The Organization number is
-      <strong>required</strong>
-    </mat-error>
-    <mat-error *ngIf="formControls.orgNumber.hasError('pattern')">
-      The Organization number must be written in this format
-      <strong>XXXXXX-XXXX</strong>
-    </mat-error>
-    <mat-hint align="end">{{orgNumber.value.length}} / 11</mat-hint>
-  </mat-form-field>
-
-  <!-- Field for the name of the organization-->
-  <mat-form-field class="organization-name">
-    <input matInput #orgName placeholder=" Organization Name " type="text" [formControl]="formControls.name">
-    <mat-error *ngIf="formControls.name.hasError('required')">
-      Name is
-      <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Field for the information of the contact person in the organization-->
-  <table class="organization-contact" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="organization-contact-name">
-          <input matInput #contactName placeholder=" Contact name " type="text" [formControl]="formControls.contactName">
-          <mat-error *ngIf="formControls.contactName.hasError('required')">
-            Contact Name is
+        <!-- Field for the name of the organization-->
+        <mat-form-field class="organization-name">
+          <input matInput #orgName placeholder=" Organization Name " type="text" [formControl]="formControls.name">
+          <mat-error *ngIf="formControls.name.hasError('required')">
+            Name is
             <strong>required</strong>
           </mat-error>
         </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="organization-contact-email">
-          <input matInput placeholder=" Contact Email " [formControl]="formControls.contactEmail">
-          <mat-error *ngIf="formControls.contactEmail.hasError('required')">
-            Email is
+
+        <!-- Field for the information of the contact person in the organization-->
+        <table class="organization-contact" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="organization-contact-name">
+                <input matInput #contactName placeholder=" Contact name " type="text" [formControl]="formControls.contactName">
+                <mat-error *ngIf="formControls.contactName.hasError('required')">
+                  Contact Name is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="organization-contact-email">
+                <input matInput placeholder=" Contact Email " [formControl]="formControls.contactEmail">
+                <mat-error *ngIf="formControls.contactEmail.hasError('required')">
+                  Email is
+                  <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="formControls.contactEmail.hasError('email')">
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Field for the address of the organization-->
+        <mat-form-field class="organization-address">
+          <textarea matInput #orgaddress placeholder=" Address " type="text" [formControl]="formControls.address"></textarea>
+          <mat-error *ngIf="formControls.address.hasError('required')">
+            Address is
             <strong>required</strong>
           </mat-error>
-          <mat-error *ngIf="formControls.contactEmail.hasError('email')">
-            Please enter a valid email address
+        </mat-form-field>
+
+        <!-- Field for the bank account of the organization-->
+        <mat-form-field class="organization-bankAccount">
+          <textarea matInput #orgbankAccount placeholder=" Bank Account " type="text" [formControl]="formControls.bankAccount"></textarea>
+          <mat-error *ngIf="formControls.bankAccount.hasError('required')">
+            Bank Account is
+            <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="formControls.bankAccount.hasError('pattern')">
+            Bank Account is a NUMBER and must be written in this format
+            <strong>XXXX-XXXX-XXXX-XXXX</strong>
           </mat-error>
         </mat-form-field>
-      </td>
-    </tr>
-  </table>
 
-  <!-- Field for the address of the organization-->
-  <mat-form-field class="organization-address">
-    <textarea matInput #orgaddress placeholder=" Address " type="text" [formControl]="formControls.address"></textarea>
-    <mat-error *ngIf="formControls.address.hasError('required')">
-      Address is
-      <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Field for the bank account of the organization-->
-  <mat-form-field class="organization-bankAccount">
-    <textarea matInput #orgbankAccount placeholder=" Bank Account " type="text" [formControl]="formControls.bankAccount"></textarea>
-    <mat-error *ngIf="formControls.bankAccount.hasError('required')">
-      Bank Account is
-      <strong>required</strong>
-    </mat-error>
-    <mat-error *ngIf="formControls.bankAccount.hasError('pattern')">
-      Bank Account is a NUMBER and must be written in this format
-      <strong>XXXX-XXXX-XXXX-XXXX</strong>
-    </mat-error>
-  </mat-form-field>
-
-  <!--Field to save the billings information of the organisation-->
-  <mat-form-field class="organization-billings">
-    <textarea matInput #orgDesc maxlength="200" placeholder=" billings Information " type="text" [formControl]="formControls.billings"></textarea>
-    <mat-error *ngIf="formControls.billings.hasError('required')">
-      The billings information of the organization is
-      <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
+        <!--Field to save the billings information of the organisation-->
+        <mat-form-field class="organization-billings">
+          <textarea matInput #orgDesc maxlength="200" placeholder=" billings Information " type="text" [formControl]="formControls.billings"></textarea>
+          <mat-error *ngIf="formControls.billings.hasError('required')">
+            The billings information of the organization is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
 
 
 
-  <!--Field to save the description of the organisation-->
-  <mat-form-field class="organization-description">
-    <textarea matInput #orgDesc maxlength="200" placeholder=" Description " type="text" [formControl]="formControls.description"></textarea>
-    <mat-error *ngIf="formControls.description.hasError('required')">
-      The description of the organisation is
-      <strong>required</strong>
-    </mat-error>
-    <mat-hint align="end">{{orgDesc.value.length}} / 200</mat-hint>
-  </mat-form-field>
+        <!--Field to save the description of the organisation-->
+        <mat-form-field class="organization-description">
+          <textarea matInput #orgDesc maxlength="200" placeholder=" Description " type="text" [formControl]="formControls.description"></textarea>
+          <mat-error *ngIf="formControls.description.hasError('required')">
+            The description of the organisation is
+            <strong>required</strong>
+          </mat-error>
+          <mat-hint align="end">{{orgDesc.value.length}} / 200</mat-hint>
+        </mat-form-field>
+      </form>
 
-  <!--Button to save the form or Canceled-->
-  <button mat-raised-button color="warn">Cancel</button>
-  <button mat-raised-button color="primary" type='submit'>Submit</button>
-</form>
+    </mat-card-content>
+    <mat-card-actions>
+      <!--Button to save the form or Canceled-->
+      <div class='buttons-wrapper'>
+        <button mat-raised-button color='warn' (mouseup)='hardReset($event)'>Cancel</button>
+        <button mat-raised-button color='primary' (click)='onSubmit()'>Submit</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
