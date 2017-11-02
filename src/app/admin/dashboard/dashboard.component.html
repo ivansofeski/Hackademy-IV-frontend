@@ -1,13 +1,16 @@
 <div class='dashboard-header' [textContent]='strings.dashboard[lng]'></div>
 <main>
+    
     <ng-container *ngIf='sections'>
         <section *ngFor='let section of sections | keys' class="trans-15s category {{section}}" [attr.for]='section'>
-            <!-- {{section}} : {{sections[section].length}} -->
             <label class='flex row-label'>{{_getSectionLabel(section)}}
                 <span class='breaker'></span>
                 <span class='latest'>Latest {{latest}}</span>
             </label>
-            <div class='row' *ngFor='let row of sections[section]' [ngSwitch]='section'>
+            <div class='trans-15s row' *ngFor='let row of sections[section]' [ngSwitch]='section'>
+                <a target='_blank' [routerLink]='_getRouterLink(section, row)'>
+                    <mat-icon class='no-select flex {{section}}-link-icon' title='Opens a link in a new tab'>open_in_new</mat-icon>
+                </a>
                 <div class='row-wrapper' *ngSwitchCase='"organizations"'>
                     <span>name: </span>
                     <span>{{row?.name}}</span>
@@ -38,7 +41,7 @@
                 </div>
                 <div class='row-wrapper' *ngSwitchCase='"closedProjects"'>
                     <span>funding raised: </span>
-                    <span>{{row?.raisedFunding}}</span>
+                    <span>{{row?.raisedFunding}}<i>/</i>{{row?.amountToBeRaised}} (SEK)</span>
                 </div>
                 <div class='row-wrapper' *ngSwitchCase='"closedProjects"'>
                     <span>closed date: </span>
