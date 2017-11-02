@@ -4,15 +4,18 @@
         <mat-card-title class='card-title'>Closed Projects</mat-card-title>
       </mat-card-header>
       <mat-form-field class='dateFilters' >
-        <mat-select class='filter-year' placeholder="year" (change)='filterClosedProjects({chosenYear: $event.value})' selected='yearNow'>
+        <mat-select #yearsSelect class='filter-year' placeholder="year" (change)='filterClosedProjects({chosenYear: $event.value})' selected='yearNow'>
           <mat-option *ngFor='let year of years' [value]='year' [textContent]='year'></mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class='dateFilters'>
-        <mat-select class='filter-month' placeholder="month" (change)='filterClosedProjects({chosenMonth: $event.value})'>
+        <mat-select #monthsSelect class='filter-month' placeholder="month" (change)='filterClosedProjects({chosenMonth: $event.value})'>
           <mat-option *ngFor='let month of months' [value]='month.value' [textContent]='month.viewValue'></mat-option>
         </mat-select>
       </mat-form-field>
+      <div class='reset-wrapper'>
+        <mat-icon class='no-select flex reset' title='Reset both filters' (mouseup)='$event.button === 0 ? resetFilters(yearsSelect, monthsSelect) : return;'>refresh</mat-icon>
+      </div>
       <mat-card-content>
         <!-- Material Mat-table to display the list of organization-->
         <div class="organization-container mat-elevation-z8">
@@ -26,7 +29,9 @@
             <!-- PROJECT NAME -->
             <ng-container matColumnDef="projectName">
               <mat-header-cell *matHeaderCellDef class="project-header-cell" mat-sort-header> Project Name </mat-header-cell>
-              <mat-cell *matCellDef="let row" class="project-cell"> {{row.projectName}} </mat-cell>
+              <mat-cell *matCellDef="let row" class="project-cell">
+                <a [routerLink]="['/admin/projects/view/', row.id]" title='Click to go to this project detailed page.'>{{row.projectName}}</a>
+              </mat-cell>
             </ng-container>
   
             <!-- ORGANIZATION NAME -->
@@ -53,10 +58,8 @@
               <mat-cell *matCellDef="let row" class="project-cell"> {{row.toDate | date}} </mat-cell>
             </ng-container>
   
-          
-  
             <mat-header-row *matHeaderRowDef="displayedColumns" class="organization-header-row"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;" class="organization-row" title='Double click to go to this project detailed page.' (dblclick)="handleRowClick(row)"></mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="organization-row"></mat-row>
           </mat-table>
         </div>
       </mat-card-content>
