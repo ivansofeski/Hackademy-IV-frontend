@@ -1,6 +1,10 @@
 $menuColor: '#4cb19e ';
 $lighterMenuColor: '#6bc1b1 ';
 
+mat-icon {
+  font-family: 'Material Icons' !important;
+}
+
 /* Structure specific for the organization table*/
 .container{
   background: #eee;
@@ -106,4 +110,41 @@ mat-row:hover {
 } */
 .counter {
   max-width: 50px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.reset-wrapper {
+  position: relative;
+  display: inline-block;
+  
+  .reset {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    border-radius: 50%;
+    outline: none;             
+    color: grey;
+    font-size: 22px;
+    text-align: center;
+    line-height: 1;
+    opacity: .5;
+    z-index: 100;
+    cursor: pointer;
+  }
+  
+  .reset:hover {
+    opacity: 1 !important;
+  }
+  
+  .reset:active {
+    opacity: 1;
+    color: #{$menuColor};
+  }
 }
