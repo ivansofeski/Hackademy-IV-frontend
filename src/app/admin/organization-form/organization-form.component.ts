@@ -1,7 +1,7 @@
 import { DataService } from '../../shared/services/data.service';
 import { Organization } from '../../interfaces/organization';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormControl, Validators } from '@angular/forms';
+import { Form, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NanoValidators } from '../services/nano-validators';
 
 const ORG_REGEX = /^([A-Za-z0-9]{6})+[-]+([A-Za-z0-9]{4})/;
@@ -26,12 +26,14 @@ export class OrganizationFormComponent implements OnInit {
     billings:      new FormControl('', [NanoValidators.required]),
     description:  new FormControl('', [NanoValidators.required])
   };
-  constructor (private _dataservice: DataService) {
+  constructor (private _dataservice: DataService, private ob: FormBuilder) {
 
   }
 
   ngOnInit() {
   }
+
+
   onSubmit() {
     this.newOrganization = {
       organizationNumber:   this.formControls.orgNumber.value,
@@ -47,5 +49,20 @@ export class OrganizationFormComponent implements OnInit {
     this._dataservice.postOrganization(JSON.stringify(this.newOrganization)).subscribe(
       response => console.log(response)
    );
+  }
+  
+  hardReset(evt): void {
+    const form = this.ob.group(
+      this.formControls
+    );
+
+    if (form !== undefined) {
+      for (const name in form.controls) {
+        if (form.controls.hasOwnProperty(name)) {
+          form.controls[name].setValue(null);
+          form.controls[name].setErrors(null);
+        }
+      }
+    }
   }
 }
