@@ -64,6 +64,21 @@
 
 ### Activities
 
+#### Create a new activities
 
++ The form works, and new activities are saved.
++ 
+
+#### activities page
++ we can show all activities fields.
+- Backend does not provide an API to list the activities of an organization. we do this on the client.
+
+
+#### Edit an activities
+- Not implemented, and backend support is not tested.
+
+
+#### Delete an activities
+- Not implemented, and backend support is not tested
 
 ## To do
