@@ -47,9 +47,8 @@ export class DonateButtonComponent implements OnInit {
     if (this.project.raisedFunding + amount < this.project.amountToBeRaised) {
       this.project.raisedFunding +=  amount;
       // the project should be saved here
-      
+      this.openSwish=true;
     }
-    this.openSwish=true;
   }
 }
 
