@@ -157,7 +157,7 @@ export class DataService {
    * @returns an Observable Array of `Organization`(interface).
    */
   getOrganizations(): Observable<Organization[]> {
-    if(environment.demo){
+    if (environment.demo) {
       return Observable.of(testData.orgList);
     }
     return this._get(this._paths.root + this._paths.organizations);
@@ -189,8 +189,8 @@ export class DataService {
    * @memberOf DataService
    */
   getOrganizationById(organizationId: number) {
-    if(environment.demo){
-      return Observable.of(testData.orgList.filter((v,k)=>v.organizationId == organizationId)[0]);
+    if (environment.demo) {
+      return Observable.of(testData.orgList.filter((v, k) => v.organizationId === organizationId)[0]);
     }
 
     return this._get(this._paths.root + this._paths.organisationsbyId + organizationId);
@@ -220,7 +220,7 @@ export class DataService {
    * @returns an Observable Array of `Project`(interface).
    */
   getProjects(): Observable<Project[]> {
-    if(environment.demo) {
+    if (environment.demo) {
       return Observable.of(testData.projectList);
     }
     return this._get(this._paths.root + this._paths.projects);
@@ -230,8 +230,8 @@ export class DataService {
     return project.toDate <= new Date() || project.amountToBeRaised <= project.raisedFunding;
   }
   getClosedProjects(): Observable<Project[]> {
-    if(environment.demo){
-      return Observable.of(testData.projectList.filter((v,k) => this.isClosedProject(v)));
+    if (environment.demo) {
+      return Observable.of(testData.projectList.filter((v, k) => this.isClosedProject(v)));
     }
     return this.getProjects().map(
       res =>  res.filter((v, k) => this.isClosedProject(v))
@@ -239,8 +239,8 @@ export class DataService {
   }
 
   getOpenProjects(): Observable<Project[]> {
-    if(environment.demo){
-      return Observable.of(testData.projectList.filter((v,k) => !this.isClosedProject(v)));
+    if (environment.demo) {
+      return Observable.of(testData.projectList.filter((v, k) => !this.isClosedProject(v)));
     }
     return this.getProjects().map(
       res => {
@@ -277,8 +277,8 @@ export class DataService {
    * @memberOf DataService
    */
   getProjectById(id: number) {
-    if(environment.demo){
-      return Observable.of(testData.projectList.filter((v,k) => v.id === id )[0]);
+    if (environment.demo) {
+      return Observable.of(testData.projectList.filter((v, k) => v.id === id )[0]);
     }
     return this._get(this._paths.root + this._paths.projectById + id);
   }
@@ -313,7 +313,7 @@ export class DataService {
    * @param {number} id The ID of the  project
    * @param {*} data JSON object with the project data
    * @returns an objervable
-   * 
+   *
    * @memberOf DataService
    */
   putProject(id: number, data: any) {
@@ -333,14 +333,14 @@ export class DataService {
    * @returns an Observable Array of `Activity`(interface).
    */
   getActivities(): Observable<Activity[]> {
-    if(environment.demo){
+    if (environment.demo) {
       return Observable.of(testData.activitiesList);
     }
     return this._get(this._paths.root + this._paths.activities);
   }
 
-  getActivityById(activityId: number): Observable<Activity>{
-    if(environment.demo){
+  getActivityById(activityId: number): Observable<Activity> {
+    if (environment.demo) {
       return Observable.of(testData.activitiesList.filter((v, k) => v.eventId === activityId)[0] );
     }
     return this._get(this._paths.root + this._paths.activities + activityId);
@@ -350,8 +350,8 @@ export class DataService {
     return this._post(this._paths.root + this._paths.activities, body);
   }
 
-  getActivitiesOfProjectId(projectId: number):Observable<Activity[]> {
-    if(environment.demo){
+  getActivitiesOfProjectId(projectId: number): Observable<Activity[]> {
+    if (environment.demo) {
       return Observable.of(testData.activitiesList.filter((v, k) => v.projectId === projectId));
     }
     return this.getActivities().map(
