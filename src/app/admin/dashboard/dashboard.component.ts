@@ -59,6 +59,10 @@ export class DashboardComponent implements OnInit {
           if (this._getLatestClosedProjects) {
             this._getLatestClosedProjects(res);
           }
+
+          if (this._getLatestActivities) {
+            this._getLatestActivities();
+          }
         },
         error => {
           this.errors.push(error);
@@ -168,10 +172,9 @@ export class DashboardComponent implements OnInit {
   }
 
   readonly initData: Function = (): void => {
-    if (this._getLatestOrganizations && this._getLatestProjects && this._getLatestActivities) {
+    if (this._getLatestOrganizations && this._getLatestProjects) {
       this._getLatestOrganizations();
       this._getLatestProjects();
-      this._getLatestActivities();
     }
   }
 
