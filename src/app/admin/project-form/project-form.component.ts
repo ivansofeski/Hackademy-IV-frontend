@@ -1,9 +1,12 @@
+import { Project } from '../../interfaces/project';
+import { GeolocationService } from '../../service/geolocation.service';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
 import { DataService } from '../../shared/services/data.service';
 import { NanoValidators } from '../services/nano-validators';
 import { Organization } from '../../interfaces/organization';
 
+declare var google: any;
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
@@ -14,6 +17,9 @@ export class ProjectFormComponent implements OnInit, DoCheck {
   @ViewChild('projectForm') projectForm: ElementRef;
   organizations: Organization[] = [];
   errors: any[] = [];
+  lat: number;
+  lng: number;
+  projForm: Project;
   projectControls = {
     descImage:    new FormControl('', []),
     name:         new FormControl('', [NanoValidators.required]),
@@ -26,16 +32,14 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     address:      new FormControl('', [NanoValidators.required]),
     shortDesc:    new FormControl('', [NanoValidators.required]),
     desc:         new FormControl('', [NanoValidators.required]),
-    national:     new FormControl('0', [NanoValidators.required])
+    national:     new FormControl('false', [NanoValidators.required])
   };
 
   setImagePath(elm: HTMLInputElement): void {
     if (elm === undefined || elm.value === '') {
       return;
     }
-
     const _imgSelector = elm.parentElement.querySelectorAll('img')[0];
-
     if (_imgSelector !== undefined) {
       const fReader = new FileReader();
 
@@ -73,7 +77,7 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     }
   }
 
-  constructor(private _fetcher: DataService, private fb: FormBuilder) {
+  constructor(private _fetcher: DataService, private fb: FormBuilder, private _geoLocationService: GeolocationService) {
     this.projectControls.toDate.setValidators([
       Validators.required,
       (c: AbstractControl) => c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null,
@@ -109,6 +113,56 @@ export class ProjectFormComponent implements OnInit, DoCheck {
         error => this.errors.push(error)
       );
     }
+
+    this.projForm = {
+      mainImage:           '',
+      projectName:         '',
+      projectNumber:       '0',
+      projectManager:      '',
+      organizationId:      0,
+      fromDate:            0,
+      toDate:              0,
+      amountToBeRaised:    0,
+      raisedFunding:        0,
+      address:              '',
+      description:         '',
+      nationalProject:     false,
+      images:         [''],
+      latitude:         0,
+      longitude:       0,
+      recurringProject: false,
+  };
+  }
+
+  onSubmit() {
+    this._geoLocationService.getAddressLocation(this.projectControls.address.value)
+    .subscribe(coords => {
+      if (this.projForm && Object.keys(this.projForm).length > 0) {
+        this.projForm = {
+          mainImage:           this.projectControls.descImage.value,
+          projectName:         this.projectControls.name.value,
+          projectNumber:       this.projectControls.projectId.value,
+          projectManager:      this.projectControls.manager.value,
+          organizationId:      this.projectControls.orgId.value,
+          fromDate:            this.projectControls.fromDate.value,
+          toDate:              this.projectControls.toDate.value,
+          amountToBeRaised:    this.projectControls.goal.value,
+          raisedFunding:        0,
+          address:              this.projectControls.address.value,
+          description:         this.projectControls.desc.value,
+          nationalProject:     this.projectControls.national.value,
+          images:              null,
+          recurringProject: false,
+          latitude :           coords.lat(),
+          longitude:           coords.lng()
+        };
+      }
+
+      console.log('projectForm: ' + JSON.stringify(this.projForm));
+      this._fetcher.postProject(JSON.stringify(this.projForm)).subscribe(
+        response => console.log(response)
+     );
+    });
   }
 
   ngDoCheck(): void {}

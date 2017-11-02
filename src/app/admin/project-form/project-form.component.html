@@ -1,5 +1,5 @@
 <!-- Form for the submission of a new project-->
-<form class='project-form' #projectForm>
+<form class='project-form' #projectForm (ngSubmit) = 'onSubmit()'>
   <!-- FIELD: PROJECT DESCRIPTIVE IMAGE -->
   <div class='image-container' (mouseup)='$event.button === 0 ? descImage.click() : return;'>
     <input #descImage name='DESC_IMAGE' type="file" accept="imege/*" class="input-image" placeholder="Select an image from your device" 
@@ -96,8 +96,8 @@
     <input matInput #national name='NATIONAL_PROJECT' class="input-national-project hidden" [formControl]='projectControls.national'>
     <label class='nat-project-label'>National Project</label>
     <mat-radio-group class="nat-project-radio" (change)='setHiddenInputs("national", $event.value)' #nationalRadios>
-      <mat-radio-button value="1">Yes</mat-radio-button>
-      <mat-radio-button [checked]='true' value="0">No</mat-radio-button>
+      <mat-radio-button value="true">Yes</mat-radio-button>
+      <mat-radio-button [checked]='true' value="false">No</mat-radio-button>
     </mat-radio-group>
     <mat-error *ngIf='projectControls.national.hasError("required")'>Set the type of the 
       <strong>project</strong>
@@ -109,7 +109,7 @@
     <input matInput name='ORG_ID' class='mat-input-element input-org-id hidden' type="text" [formControl]='projectControls.orgId' #orgId>
     <mat-select class='custom-mat-select' placeholder="Organization Name" title='Click to select an organization' (change)='setHiddenInputs("orgId", $event.value)'
       #orgIdPicker>
-      <mat-option *ngFor="let org of organizations" [value]="org.id" [textContent]='org.name'></mat-option>
+      <mat-option *ngFor="let org of organizations" [value]="org.organizationId" [textContent]='org.name'></mat-option>
     </mat-select>
     <mat-error *ngIf='projectControls.orgId.errors'>The organization name is<strong>required</strong></mat-error>
   </mat-form-field>
@@ -117,7 +117,6 @@
   <!--Button to save the form or Canceled-->
   <div class='buttons-wrapper'>
     <button mat-raised-button color='warn' (mouseup)='hardReset($event, projectForm)'>Cancel</button>
-    <button mat-raised-button color='primary'>Validate</button>
-    <!-- <button mat-raised-button color='primary' [routerLink]='[projectListLink]' (mouseup)='saveProject()'>Submit -->
+    <button mat-raised-button color='primary'type='submit'>Validate</button>
   </div>
 </form>
