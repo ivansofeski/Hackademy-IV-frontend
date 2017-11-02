@@ -459,7 +459,7 @@ export class GeolocationComponent implements OnInit {
   default_location() {
     this.currentLocationTab = false;
     this.hide_default = false;
-    if (this.user.userLocation['lat'] !== undefined || this.user.userLocation['lat'] !== null) {
+    if (this.user.userLocation.lat !== undefined || this.user.userLocation.lng !== undefined) {
       this.lat = this.user.userLocation.lat;
       this.lng = this.user.userLocation.lng;
       this.mapElement._mapsWrapper.setZoom(12);
