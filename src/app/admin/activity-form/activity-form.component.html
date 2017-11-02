@@ -61,7 +61,7 @@
     <mat-card-actions>
       <!--Button to save the form or Canceled-->
       <div class='buttons-wrapper'>
-        <button mat-raised-button color='warn' (mouseup)='hardReset($event, activityForm)'>Cancel</button>
+        <button mat-raised-button color='warn' (mouseup)='onCancel()'>Cancel</button>
         <button mat-raised-button color='primary' type='submit' (click)='onSubmit()'>Submit</button>
       </div>
     </mat-card-actions>
