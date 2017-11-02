@@ -44,7 +44,6 @@ export class OrganizationFormComponent implements OnInit {
       description:          this.formControls.description.value
     };
 
-    console.log('organizationsDataInput:' + JSON.stringify(this.newOrganization));
     this._dataservice.postOrganization(JSON.stringify(this.newOrganization)).subscribe(
       response => console.log(response)
    );
