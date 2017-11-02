@@ -74,7 +74,7 @@ export class ClosedProjectsComponent implements OnInit {
     if (Object.keys(date).length > 0) {
       for (const key in date) {
         if (date.hasOwnProperty(key)) {
-          if (date[key] !== '12' && date[key] !== 'all') {
+          if (date[key] !== '12' && date[key] !== 'All') {
             this[key] = date[key];
           } else {
             this[key] = '';
@@ -83,7 +83,7 @@ export class ClosedProjectsComponent implements OnInit {
       }
     }
 
-    const fullPeriod = `${this.chosenYear} ${this.chosenMonth}`;
+    const fullPeriod = `${this.chosenYear} ${this.chosenMonth}`.trim();
 
     this.initDataSource(fullPeriod);
 
@@ -120,8 +120,8 @@ export class ProjectDataSource extends DataSource<any> {
         projects => {
           projects = projects.filter((k, v) => {
             const dateNow = new Date(+k.toDate);
-            if (this.filter) {
-              const filter = this.filter.trim().split(' ');
+            if (this.filter && this.filter.length !== 0) {
+              const filter = this.filter.split(' ');
               if (filter.length > 1) {
                 console.log (dateNow.getMonth().toString());
                 console.log (filter[1]);
@@ -130,7 +130,15 @@ export class ProjectDataSource extends DataSource<any> {
                 return dateNow.getFullYear().toString().indexOf(filter[0]) > -1 &&
                 dateNow.getMonth().toString().indexOf(filter[1]) > -1;
               } else {
-                return dateNow.getFullYear().toString().indexOf(filter[0]) > -1;
+                console.log (dateNow.toString());
+                console.log (filter[0]);
+                console.log(dateNow.toString().split(' '));
+                if (dateNow.getFullYear().toString().indexOf(filter[0]) > -1 || dateNow.getMonth().toString().indexOf(filter[0]) > -1) {
+                  return true;
+                } else {
+                  return false;
+                }
+                
               }
             } else {
               return true;
