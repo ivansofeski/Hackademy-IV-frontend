@@ -66,4 +66,33 @@
 
 
 
+### Login system
+
+
+
+### Donation System
+
+
+
+### Swish system
+
+
+
+### Test coverage
+
+#### Unit tests
++ We have 114 unit tests in the backend.
+- So many components are not unit tested
+
+
+#### End to End tests
+- Not tested
+
+
+
 ## To do
+- Provide meaningful responses from the backend to POST requests.
+- Process backend responses to POST requests on the frontend.
+
+
+## Notes
