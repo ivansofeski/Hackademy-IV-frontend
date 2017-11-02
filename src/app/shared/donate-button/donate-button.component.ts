@@ -11,7 +11,7 @@ export class DonateButtonComponent implements OnInit {
   @Input() donateOption2;
   @Input() donateOption3;
   @Input() project;
-
+  openSwish = false;
   constructor() {
   }
 
@@ -47,6 +47,7 @@ export class DonateButtonComponent implements OnInit {
     if (this.project.raisedFunding + amount < this.project.amountToBeRaised) {
       this.project.raisedFunding +=  amount;
       // the project should be saved here
+      this.openSwish=true;
     }
   }
 }
