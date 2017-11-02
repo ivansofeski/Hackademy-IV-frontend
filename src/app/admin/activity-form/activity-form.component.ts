@@ -21,18 +21,15 @@ export class ActivityFormComponent implements OnInit {
   inputs: Function;
   errorsTwo: QueryList<String>;
   loadedProject: Object;
-  links = {
-    list: '/admin/projects/',
-    new: '/admin/projects/new/'
-  };
+  id: number;
   attributes = INPUT_ATTRIBUTES;
   errors: any[] = [];
-  eventsForm: {};
-  activityControls = {
+  eventsForm: Activity;
 
-    descImage:   new FormControl('', []),
-    name:        new FormControl('', [NanoValidators.required]),
-    projectId:     new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
+  activityControls = {
+    descImage:    new FormControl('', []),
+    name:         new FormControl('', [NanoValidators.required]),
+    projectId:    new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
     activityDate: new FormControl('', [NanoValidators.required]),
     desc:         new FormControl('', [NanoValidators.required]),
   };
@@ -117,7 +114,6 @@ export class ActivityFormComponent implements OnInit {
 
   setProjectId(value: any, input: HTMLInputElement): void {
     this.activityControls.projectId.setValue(value);
-    // this.projectControls.orgId.updateValueAndValidity();
   }
 
   getactivitiesProject: Function = (): void => {
@@ -125,34 +121,25 @@ export class ActivityFormComponent implements OnInit {
       project => {
         if (project !== undefined && Object.keys(project).length > 0) {
           this.loadedProject = project;
-          console.log(project);
+          this.id = project['id'];
+
         } else {
-          const projId = +this._router.snapshot.paramMap.get('id');
-          this._dataService.getProjects().subscribe(
-            projects => {
-              if (projects !== undefined && projects.length > 0) {
-                this.loadedProject = projects.filter((v, k) => {
-                  return v.id = projId;
-                })[0];
-              }
-            }
-          );
+          const newPath = `/${this._routeSnapshot.parent.url['value'][0].path}/${this._routeSnapshot.snapshot.url.slice(0, -1).join('/')}`;
+          
+          if (this._router && this._router.navigateByUrl) {
+            this._router.navigateByUrl(newPath);
+          }
         }
+      },
+      error => {
+        this.errors.push(error);
       }
     );
   }
 
-  constructor(private _router: ActivatedRoute, private _dataService: DataService) { }
+  constructor(private _router: Router, private _routeSnapshot: ActivatedRoute, private _dataService: DataService) { }
 
   ngOnInit() {
-    this.eventsForm = {
-      projectId:            '',
-      activityTitle:        '',
-      activityDescriptopn:  '',
-      activityDate:         '',
-      activityImage:        '',
-    }
-
     this.functions = new ActivityFormFunctions(this.activityForm);
     this.inputs = this.functions.setInputAttributes;
     this.getactivitiesProject();
@@ -162,14 +149,17 @@ export class ActivityFormComponent implements OnInit {
   }
   
   onSubmit() {
+
     this.eventsForm = {
-      projectId:            this.activityControls.projectId.value,
-      activityTitle:        this.activityControls.name.value,
-      activityDescriptopn:  this.activityControls.desc.value,
-      activityDate:         this.activityControls.activityDate.value,
-      activityImage:        this.activityControls.descImage.value,
+      projectId:            this.id,
+      eventTitle:           this.activityControls.name.value,
+      eventDescription:     this.activityControls.desc.value,
+      eventDate:            this.activityControls.activityDate.value,
+      eventImage:           this.activityControls.descImage.value,
     }
-    console.log('events data:' + JSON.stringify(this.eventsForm));
+    
+    this._dataService.postActivity(JSON.stringify(this.eventsForm)).subscribe(
+       response => console.log(response));
   }
 }
 

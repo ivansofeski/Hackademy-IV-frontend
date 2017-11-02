@@ -8,12 +8,10 @@
 
         <!-- FIELD: PROJECT DESCRIPTIVE IMAGE -->
         <div class='image-container' (mouseup)='$event.button === 0 ? descImage.click() : return;'>
-          <!-- <i class='material-icons'>file_upload</i> -->
           <input #descImage name='DESC_IMAGE' placeholder='{{attributes.DESC_IMAGE.placeholder}}' [formControl]='activityControls.descImage'
             (change)='setImagePath($event.currentTarget)'>
           <img #activityImage class='image-holder' src='' alt='' title='Click to upload an image'>
         </div>
-
 
         <!-- FIELD: activity NAME -->
         <mat-form-field class='activity-full-width'>
@@ -22,7 +20,6 @@
             <strong>required</strong>
           </mat-error>
         </mat-form-field>
-
 
         <!-- FIELDS: activity date -->
         <table class='activity-full-width' cellspacing='0'>
@@ -40,7 +37,6 @@
             </td>
           </tr>
         </table>
-
 
         <!--FIELD: activity DESCRIPTION-->
         <mat-form-field class='activity-full-width'>
@@ -67,7 +63,6 @@
       <div class='buttons-wrapper'>
         <button mat-raised-button color='warn' (mouseup)='hardReset($event, activityForm)'>Cancel</button>
         <button mat-raised-button color='primary' type='submit' (click)='onSubmit()'>Submit</button>
-        <!-- <button mat-raised-button color='primary' [routerLink]='[activityListLink]' (mouseup)='saveactivity()'>Submit -->
       </div>
     </mat-card-actions>
   </mat-card>
@@ -75,6 +70,3 @@
 
 </div>
 
-
-
-<!-- Form for the submission of a new actitivity-->
