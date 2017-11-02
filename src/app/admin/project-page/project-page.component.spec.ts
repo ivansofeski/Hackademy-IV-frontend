@@ -41,7 +41,7 @@ describe('ProjectPageComponent', () => {
     const spy2 = spyOn(dataService, 'getProjects').and.returnValue(Observable.of(testData.projectList));
     index = Math.floor(testData.projectList.length * Math.random());
     component._project = testData.projectList[index];
-    component._project.organization = testData.orgList.filter((v, k) => v.id === testData.projectList[index].organizationId)[0];
+    component._project.organization = testData.orgList.filter((v, k) => v.organizationId === testData.projectList[index].organizationId)[0];
 
     // Having an issue with loading the map on the test bed.
     // fixture.detectChanges();
