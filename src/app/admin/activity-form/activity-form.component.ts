@@ -4,6 +4,7 @@ import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractCon
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
 import { INPUT_ATTRIBUTES, NUMBERS, REGEX_UNITS } from './activity-form.constants';
 import { NanoValidators } from '../services/nano-validators';
+import { Location } from '@angular/common';
 
 // Services
 import { DataService } from '../../shared/services/data.service';
@@ -137,7 +138,8 @@ export class ActivityFormComponent implements OnInit {
     );
   }
 
-  constructor(private _router: Router, private _routeSnapshot: ActivatedRoute, private _dataService: DataService) { }
+  constructor(private _router: Router, private _routeSnapshot: ActivatedRoute, private _dataService: DataService,
+                private _location: Location) { }
 
   ngOnInit() {
     this.functions = new ActivityFormFunctions(this.activityForm);
@@ -161,6 +163,11 @@ export class ActivityFormComponent implements OnInit {
     this._dataService.postActivity(JSON.stringify(this.eventsForm)).subscribe(
        response => console.log(response));
   }
+
+  onCancel(){
+    this._location.back();
+  }
+  
 }
 
 export class ActivityFormFunctions {
