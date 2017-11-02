@@ -40,8 +40,7 @@ describe('OrganizationFormComponent', () => {
   it('Should show an error when an empty organization name is supplied', () => {
     component.formControls.name.setValue(' ');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.name.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-name mat-error'));
     el = de.nativeElement;
@@ -57,8 +56,7 @@ describe('OrganizationFormComponent', () => {
   it('Should not show an error when a valid organization name is supplied (BBB)', () => {
     component.formControls.name.setValue('BBB');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.name.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-name mat-error'));
     expect(de).not.toBeTruthy();
@@ -80,8 +78,7 @@ describe('OrganizationFormComponent', () => {
   it('Should show an error when an empty organization number is supplied', () => {
     component.formControls.orgNumber.setValue(' ');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.orgNumber.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-number mat-error'));
     el = de.nativeElement;
@@ -97,8 +94,7 @@ describe('OrganizationFormComponent', () => {
   it('Should show an error when a malformed organization number is supplied (1234567)', () => {
     component.formControls.orgNumber.setValue('1234567');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.orgNumber.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-number mat-error'));
     el = de.nativeElement;
@@ -114,8 +110,7 @@ describe('OrganizationFormComponent', () => {
   it('Should not show an error when a welformedl organization number is supplied (123456-as12)', () => {
     component.formControls.orgNumber.setValue('123456-as12');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.orgNumber.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-number mat-error'));
     expect(de).not.toBeTruthy();
@@ -136,8 +131,7 @@ describe('OrganizationFormComponent', () => {
   it('Should show an error when an empty contact name is supplied', () => {
     component.formControls.contactName.setValue(' ');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.contactName.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-contact-name mat-error'));
     el = de.nativeElement;
@@ -153,8 +147,7 @@ describe('OrganizationFormComponent', () => {
   it('Should not show an error when a contact name is supplied (John doe)', () => {
     component.formControls.contactName.setValue('John doe');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.contactName.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-contact-name mat-error'));
     expect(de).not.toBeTruthy();
@@ -169,8 +162,7 @@ describe('OrganizationFormComponent', () => {
   it('Should show an error when an empty contact email is supplied', () => {
     component.formControls.contactEmail.setValue(' ');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.contactEmail.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-contact-email mat-error'));
     el = de.nativeElement;
@@ -186,8 +178,7 @@ describe('OrganizationFormComponent', () => {
   it('Should show an error when a malformed contact email is supplied', () => {
     component.formControls.contactEmail.setValue('John doe @ john.doe');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.contactEmail.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-contact-email mat-error'));
     el = de.nativeElement;
@@ -203,8 +194,7 @@ describe('OrganizationFormComponent', () => {
   it('Should not show an error when a contact email is supplied (John.doe@john.doe)', () => {
     component.formControls.contactEmail.setValue('John.doe@john.doe');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.contactEmail.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-contact-email mat-error'));
     expect(de).not.toBeTruthy();
@@ -219,8 +209,7 @@ describe('OrganizationFormComponent', () => {
   it('Should show an error when an empty contact address is supplied', () => {
     component.formControls.address.setValue(' ');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.address.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-address mat-error'));
     el = de.nativeElement;
@@ -236,8 +225,7 @@ describe('OrganizationFormComponent', () => {
   it('Should not show an error when a contact address  is supplied (Somewhere 12 Malmö)', () => {
     component.formControls.address.setValue('Somewhere 12 Malmö');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.address.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-address mat-error'));
     expect(de).not.toBeTruthy();
@@ -252,8 +240,7 @@ describe('OrganizationFormComponent', () => {
   it('Should show an error when an empty description is supplied', () => {
     component.formControls.description.setValue(' ');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.description.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-description mat-error'));
     el = de.nativeElement;
@@ -269,8 +256,7 @@ describe('OrganizationFormComponent', () => {
   it('Should not show an error when a valid description is supplied ', () => {
     component.formControls.description.setValue('This is a description');
     fixture.detectChanges();
-    button = fixture.debugElement.query(By.css('button.mat-warn')).nativeElement;
-    button.click();
+    component.formControls.description.markAsTouched();
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('mat-form-field.organization-description mat-error'));
     expect(de).not.toBeTruthy();
