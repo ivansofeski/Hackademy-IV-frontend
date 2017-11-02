@@ -1,4 +1,7 @@
+// Modules
 import { Component, OnInit } from '@angular/core';
+
+// Constants
 import { STRINGS } from './dashboard.constants';
 
 // Interfaces
@@ -115,8 +118,30 @@ export class DashboardComponent implements OnInit {
     return date;
   }
 
-  private checkContent(section: any) {
-    console.log(section);
+  private readonly _getRouterLink: Function = (section: string, row: Object): string => {
+    let _link = '';
+
+    if (!section || typeof section !== 'string' || section.trim().length <= 0 || !row || Object.keys(row).length <= 0) {
+      return;
+    }
+
+    let _id = '';
+
+    switch (section.toLowerCase()) {
+      case 'organizations':
+        _id = row.hasOwnProperty('organizationId') && row['organizationId'] !== undefined ? row['organizationId'] : _id;
+        _link = `/admin/organizations/view/${_id}`;
+        break;
+      case 'projects':
+      case 'closedprojects':
+        _id = row.hasOwnProperty('id') && row['id'] !== undefined ? row['id'] : _id;
+        _link = `/admin/projects/view/${_id}`;
+        break;
+      default:
+        break;
+    }
+
+    return _link;
   }
 
   readonly initData: Function = (): void => {
