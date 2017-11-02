@@ -11,8 +11,6 @@ describe('OrganizationFormComponent', () => {
   let fixture: ComponentFixture<OrganizationFormComponent>;
   let de:      DebugElement;
   let el:      HTMLElement;
-  let button:  HTMLElement;
-  // let des:     DebugElement[];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
