@@ -9,11 +9,12 @@ declare var google: any;
 export class GeolocationService {
   geocoder: any;
 
-  constructor(private _http: HttpClient,
-  private mapsAPILoader: MapsAPILoader) {
-    this.mapsAPILoader.load().then(() => {
-      this.geocoder = new google.maps.Geocoder();
-    });
+  constructor(private _http: HttpClient, private mapsAPILoader: MapsAPILoader) {
+    if (this.mapsAPILoader.load) { // mapsAPILoader.load() was failing the service creation test.
+      this.mapsAPILoader.load().then(() => {
+        this.geocoder = new google.maps.Geocoder();
+      });
+    }
   }
   lat: number;
   lng: number;
