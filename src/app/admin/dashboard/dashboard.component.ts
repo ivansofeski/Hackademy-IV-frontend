@@ -7,6 +7,7 @@ import { STRINGS } from './dashboard.constants';
 // Interfaces
 import { Organization } from '../../interfaces/organization';
 import { Project } from '../../interfaces/project';
+import { Activity } from '../../interfaces/activity';
 
 // Services
 import { DataService } from '../../shared/services/data.service';
@@ -20,23 +21,24 @@ import { DataService } from '../../shared/services/data.service';
 export class DashboardComponent implements OnInit {
   strings                       = STRINGS;
   lng                           = 'US';
-  organizations: Organization[] = [];
-  projects: Project[]           = [];
-  closedProjects: Project[]     = [];
   errors: any[]                 = [];
   latest                        = 5;
-  sections: { organizations: Organization[], projects: Project[], closedProjects: Project[] } = {
+  sections: { organizations: Organization[], projects: Project[], closedProjects: Project[], activities: Activity[] } = {
     organizations: [],
     projects: [],
-    closedProjects: []
+    closedProjects: [],
+    activities: []
   };
+  allProjects: Project[];
+  allOrganizations: Organization[];
 
   private readonly _getLatestOrganizations: Function = (): void => {
     if (this._dataService.getOrganizations) {
       this._dataService.getOrganizations().subscribe(
         res => {
-          this.organizations = res && res.length > this.latest ? res.slice(Math.max(res.length - this.latest, 1)) : res;
-          this.sections.organizations = this.organizations;
+          this.allOrganizations = res;
+          this.sections.organizations = res && res.length > this.latest ? res.slice(Math.max(res.length - this.latest, 1)) : res;
+          this.sections.organizations.reverse();
         },
         error => {
           this.errors.push(error);
@@ -50,8 +52,9 @@ export class DashboardComponent implements OnInit {
     if (this._dataService.getProjects) {
       this._dataService.getProjects().subscribe(
         res => {
-          this.projects = res && res.length > this.latest ? res.slice(Math.max(res.length - this.latest, 1)) : res;
-          this.sections.projects = this.projects;
+          this.allProjects = res;
+          this.sections.projects = res && res.length > this.latest ? res.slice(Math.max(res.length - this.latest, 1)) : res;
+          this.sections.projects.reverse();
 
           if (this._getLatestClosedProjects) {
             this._getLatestClosedProjects(res);
@@ -72,7 +75,7 @@ export class DashboardComponent implements OnInit {
 
     const _today = new Date();
 
-    this.closedProjects = projects.filter((proj, i, obj) => {
+    this.sections.closedProjects = projects.filter((proj, i, obj) => {
       if (proj.hasOwnProperty('raisedFunding') && proj.hasOwnProperty('amountToBeRaised') && proj.hasOwnProperty('toDate')) {
         const _projToDate = new Date(+proj.toDate);
 
@@ -82,13 +85,33 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-    if (this.closedProjects.length > this.latest) {
-      this.closedProjects = this.closedProjects.slice(Math.max(this.closedProjects.length - this.latest, 1));
+    if (this.sections.closedProjects.length > this.latest) {
+      this.sections.closedProjects = this.sections.closedProjects.slice(Math.max(this.sections.closedProjects.length - this.latest, 1));
     }
 
-    this.sections.closedProjects = this.closedProjects;
+    this.sections.closedProjects.reverse();
+  }
 
-    console.log(this.sections);
+  private readonly _getLatestActivities: Function = (): void => {
+    this._dataService.getActivities().subscribe(
+      res => {
+        this.sections.activities = res && res.length > this.latest ? res.slice(Math.max(res.length - this.latest, 1)) : res;
+        this.sections.activities.reverse();
+
+        this.sections.activities.forEach((act, i, obj) => {
+          if (act && act.projectId && this.allProjects && this.allProjects.length > 0) {
+            const _tempProj = this.allProjects.filter((v, k) => {
+              return v.id = act.projectId;
+            })[0];
+
+            if (_tempProj && _tempProj.hasOwnProperty('projectName')) {
+              act['projectName'] = _tempProj.projectName;
+            }
+          }
+        });
+      },
+      error => this.errors.push(error)
+    );
   }
 
   private readonly _getSectionLabel: Function = (section: string): string => {
@@ -145,9 +168,10 @@ export class DashboardComponent implements OnInit {
   }
 
   readonly initData: Function = (): void => {
-    if (this._getLatestOrganizations && this._getLatestProjects) {
+    if (this._getLatestOrganizations && this._getLatestProjects && this._getLatestActivities) {
       this._getLatestOrganizations();
       this._getLatestProjects();
+      this._getLatestActivities();
     }
   }
 
