@@ -29,19 +29,19 @@ export class ClosedProjectsComponent implements OnInit {
   dataSource: ProjectDataSource | null;
   displayedColumns = ['id', 'projectName', 'orgName', 'bankAccount', 'fundsRaised', 'dueDate'];
   months = [
-    { value: '01', viewValue: 'January' },
-    { value: '02', viewValue: 'February' },
-    { value: '03', viewValue: 'March' },
-    { value: '04', viewValue: 'April' },
-    { value: '05', viewValue: 'May' },
-    { value: '06', viewValue: 'June' },
-    { value: '07', viewValue: 'July' },
-    { value: '08', viewValue: 'August' },
-    { value: '09', viewValue: 'September' },
-    { value: '10', viewValue: 'October' },
-    { value: '11', viewValue: 'November' },
-    { value: '12', viewValue: 'December' },
-
+    { value: '12', viewValue: 'All' },
+    { value: '0', viewValue: 'January' },
+    { value: '1', viewValue: 'February' },
+    { value: '2', viewValue: 'March' },
+    { value: '3', viewValue: 'April' },
+    { value: '4', viewValue: 'May' },
+    { value: '5', viewValue: 'June' },
+    { value: '6', viewValue: 'July' },
+    { value: '7', viewValue: 'August' },
+    { value: '8', viewValue: 'September' },
+    { value: '9', viewValue: 'October' },
+    { value: '10', viewValue: 'November' },
+    { value: '11', viewValue: 'December' }
   ];
   @ViewChild(MatSort) sort: MatSort;
 
@@ -61,7 +61,7 @@ export class ClosedProjectsComponent implements OnInit {
     const year = new Date;
     const yearNow = year.getFullYear();
     const years: any[] = [];
-
+    this.years.push('All');
     for (let i = yearNow; i >= 2000; i--) {
       this.years.push(i.toString());
     }
@@ -74,12 +74,16 @@ export class ClosedProjectsComponent implements OnInit {
     if (Object.keys(date).length > 0) {
       for (const key in date) {
         if (date.hasOwnProperty(key)) {
-          this[key] = date[key];
+          if (date[key] !== '12' && date[key] !== 'all') {
+            this[key] = date[key];
+          } else {
+            this[key] = '';
+          }
         }
       }
     }
 
-    const fullPeriod = `${this.chosenYear}/${this.chosenMonth}`;
+    const fullPeriod = `${this.chosenYear} ${this.chosenMonth}`;
 
     this.initDataSource(fullPeriod);
 
@@ -114,6 +118,24 @@ export class ProjectDataSource extends DataSource<any> {
     if (!this.subject.isStopped) {
       this.dataService.getClosedProjects().subscribe(
         projects => {
+          projects = projects.filter((k, v) => {
+            const dateNow = new Date(+k.toDate);
+            if (this.filter) {
+              const filter = this.filter.trim().split(' ');
+              if (filter.length > 1) {
+                console.log (dateNow.getMonth().toString());
+                console.log (filter[1]);
+                console.log (dateNow.getMonth().toString().indexOf(filter[1]) > -1);
+                console.log(dateNow.getFullYear().toString().indexOf(filter[0]) > -1);
+                return dateNow.getFullYear().toString().indexOf(filter[0]) > -1 &&
+                dateNow.getMonth().toString().indexOf(filter[1]) > -1;
+              } else {
+                return dateNow.getFullYear().toString().indexOf(filter[0]) > -1;
+              }
+            } else {
+              return true;
+            }
+          });
           this.dataService.getOrganizations().subscribe(
             orgs => {
               for (const proj of projects) {
@@ -158,8 +180,8 @@ export class ProjectDataSource extends DataSource<any> {
     }
 
     return data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
+      let propertyA: any = '';
+      let propertyB: any = '';
 
       switch (this._sorter.active) {
         case 'id': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
@@ -167,7 +189,7 @@ export class ProjectDataSource extends DataSource<any> {
         case 'orgName': [propertyA, propertyB] = [a['organization'].name, b['organization'].name]; break;
         case 'bankAccount': [propertyA, propertyB] = [a['organization'].billing, b['organization'].billing]; break;
         case 'fundsRaised': [propertyA, propertyB] = [a.raisedFunding, b.raisedFunding]; break;
-//        case 'dueDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
+        case 'dueDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
 /*         case 'closedDate': [propertyA, propertyB] = [<string>a.closedDate, <string>b.closedDate]; break;
  */      }
 

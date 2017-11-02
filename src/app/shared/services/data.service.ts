@@ -227,7 +227,8 @@ export class DataService {
   }
 
   isClosedProject(project: Project): Boolean {
-    return project.toDate <= new Date() || project.amountToBeRaised <= project.raisedFunding;
+    const projectToDate = new Date(+project.toDate);
+    return projectToDate <= new Date() || project.amountToBeRaised <= project.raisedFunding;
   }
   getClosedProjects(): Observable<Project[]> {
     if (environment.demo) {
