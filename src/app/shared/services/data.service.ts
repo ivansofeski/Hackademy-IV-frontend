@@ -62,10 +62,14 @@ export class DataService {
 
 
   /**
+   * Function that retrieves data from an API (or a string path) with HttpClient GET method.
+   * It provides both parameterized and non-parameterized call methods depending on what use provide.
+   *
+   *
    * @argument path as a string e.g. (API) `'/someurlsegment/api/'` or (file) `'/somepath/somefile.json'`
    * @argument options as JS Object as optional
    * E.g. `{ id: 1 }` or multiple properties `{ name: 'someName', 'date': '2018/01/01' }`
-   * @description
+   *
    * Function that retrieves data from an API (or a string path) with HttpClient GET method.
    * It provides both parameterized and non-parameterized call methods depending on what use provide.
    * @returns an `Observable` of any depending on where or what API was provided in the request.
@@ -96,31 +100,10 @@ export class DataService {
     });
   }
 
-  /**
-   * @argument path as string e.g. (API) '/someurlsegment/api/' or (file) '/somepath/somefile.json'
-   * 'options' as JS Object as optional e.g. { id: 1 } or multiple properties { name: 'someName', 'date': '2018/01/01' }
-   *
-   * @description
-   * Function that sends data to an API (or a string path) with HttpClient POST/PUT method(s).
-   * It provides both parameterized and non-parameterized call methods depending on what use provide.
-   *
-   * @experimental
-   * Under construction!
-   *
-   * @returns an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
-   */
-  private _set(path: string, data: any): boolean {
-    const _inserted = false;
-
-    return _inserted;
-  }
-
 
   /**
-   * @description
    * Post a json object to the backend
    *
-   * @private
    * @param {string} path the path that we are posting to
    * @param {*} data a json object in text format
    * @returns an observable for the http response.
@@ -136,12 +119,19 @@ export class DataService {
     });
   }
 
+  /**
+   * Update a record in the dabase
+   *
+   * @private
+   * @param {string} path The path to use.
+   * @param {*} body the object to be updated
+   * @returns an Observable to the response.
+   *
+   * @memberOf DataService
+   */
   private _put(path: string, body: any) {
     const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.put(path, body, {'headers': headers} )
-    .do((data: Response) => {
-      return data !== undefined ? data : [];
-    })
     .catch((error: Response) => {
       return Observable.throw(error || 'Server error');
     });
@@ -150,7 +140,7 @@ export class DataService {
 
   /**
    * @description
-   * GET all Projects records.
+   * GET all organization records.
    *
    * Returns an Observable Array of `Organization`(interface).
    *
@@ -199,7 +189,7 @@ export class DataService {
   /**
    * create a new organization
    *
-   * @param {*} data the organization data as json
+   * @param {string} data the organization data as json
    * @returns an observable.
    *
    * @memberOf DataService
@@ -212,7 +202,6 @@ export class DataService {
 
 
   /**
-   * @description
    * GET all Projects records.
    *
    * Returns an Observable Array of `Project`(interface).
@@ -226,9 +215,26 @@ export class DataService {
     return this._get(this._paths.root + this._paths.projects);
   }
 
+  /**
+   * Check if a project is closed, according to the business definition of closed projects.
+   *
+   * @param {Project} project the project to check.
+   * @returns {Boolean} true if the project is closed.
+   *
+   * @memberOf DataService
+   */
   isClosedProject(project: Project): Boolean {
     return project.toDate <= new Date() || project.amountToBeRaised <= project.raisedFunding;
   }
+  /**
+   * Get a list of closed projects.
+   * Note that we get all the projects and filter them in the client.
+   * This is awkward, but we had to do it because backend did accept to do it there.
+   *
+   * @returns {Observable<Project[]>}
+   *
+   * @memberOf DataService
+   */
   getClosedProjects(): Observable<Project[]> {
     if (environment.demo) {
       return Observable.of(testData.projectList.filter((v, k) => this.isClosedProject(v)));
@@ -238,6 +244,15 @@ export class DataService {
     );
   }
 
+  /**
+   * Get a list of closed projects.
+   * Note that we get all the projects and filter them in the client.
+   * This is awkward, but we had to do it because backend did accept to do it there.
+   *
+   * @returns {Observable<Project[]>}
+   *
+   * @memberOf DataService
+   */
   getOpenProjects(): Observable<Project[]> {
     if (environment.demo) {
       return Observable.of(testData.projectList.filter((v, k) => !this.isClosedProject(v)));

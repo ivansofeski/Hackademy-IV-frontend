@@ -477,23 +477,3 @@ export class GeolocationComponent implements OnInit {
     this._localStorageService.updateCurrnetUser(this.user);
   }
 }
-
-@Directive({
-  // tslint:disable-next-line:directive-selector
-  selector: 'my-custom-extension'
-})
-// tslint:disable-next-line:directive-class-suffix
-export class MyCustomExtension implements AfterViewInit {
-  constructor(private _wrapper: GoogleMapsAPIWrapper) {
-    console.log('constructor');
-  }
-
-  ngAfterViewInit() {
-    console.log('ngAfterViewInit');
-    this._wrapper.getNativeMap().then((m) => {
-      console.log('native map', m);
-    }, err => {
-      console.log('error', err);
-    });
-  }
-}
