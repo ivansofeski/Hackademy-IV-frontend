@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 
 // Services
 import { LocalStorageService } from '../service/local-storage.service';
+import { GoogleMapsAPIWrapper } from '@agm/core';
 
 describe('GeolocationComponent', () => {
   let component: GeolocationComponent;
@@ -20,7 +21,7 @@ describe('GeolocationComponent', () => {
         HttpClientModule,
         SharedModule
       ],
-      providers: [ LocalStorageService ]
+      providers: [ LocalStorageService, GoogleMapsAPIWrapper ]
     })
     .compileComponents();
   }));

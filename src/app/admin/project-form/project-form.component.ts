@@ -158,7 +158,6 @@ export class ProjectFormComponent implements OnInit, DoCheck {
         };
       }
 
-      console.log('projectForm: ' + JSON.stringify(this.projForm));
       this._fetcher.postProject(JSON.stringify(this.projForm)).subscribe(
         response => console.log(response)
      );
