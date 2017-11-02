@@ -3,6 +3,6 @@ export interface Activity {
     projectId: number;
     eventTitle: string;
     eventDescription: string;
-    eventDate: Date;
+    eventDate: Date | number;
     eventImage: string;
 }
