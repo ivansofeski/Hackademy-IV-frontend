@@ -19,10 +19,10 @@ import { DataService } from '../../shared/services/data.service';
 })
 
 export class DashboardComponent implements OnInit {
-  strings                       = STRINGS;
-  lng                           = 'US';
-  errors: any[]                 = [];
-  latest                        = 5;
+  strings = STRINGS;
+  lng = 'US';
+  errors: any[] = [];
+  latest = 5;
   sections: { organizations: Organization[], projects: Project[], closedProjects: Project[], activities: Activity[] } = {
     organizations: [],
     projects: [],
@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
         this.sections.activities = res && res.length > this.latest ? res.slice(Math.max(res.length - this.latest, 1)) : res;
         this.sections.activities.reverse();
 
-        this.sections.activities.forEach((act, i, obj) => {
+        for (const act of this.sections.activities) {
           if (act && act.projectId && this.allProjects && this.allProjects.length > 0) {
             const _tempProj = this.allProjects.filter((v, k) => {
               return v.id = act.projectId;
@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit {
               act['projectName'] = _tempProj.projectName;
             }
           }
-        });
+        }
       },
       error => this.errors.push(error)
     );
