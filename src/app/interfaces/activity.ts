@@ -1,5 +1,5 @@
 export interface Activity {
-    eventIdId?: number;
+    eventId?: number;
     projectId: number;
     eventTitle: string;
     eventDescription: string;
