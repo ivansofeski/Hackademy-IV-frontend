@@ -178,7 +178,7 @@ export class DataService {
    *
    * @memberOf DataService
    */
-  getOrganizationById(organizationId: number) {
+  getOrganizationById(organizationId: number): Observable<Organization> {
     if (environment.demo) {
       return Observable.of(testData.orgList.filter((v, k) => v.organizationId === organizationId)[0]);
     }
@@ -198,7 +198,10 @@ export class DataService {
     return this._post(this._paths.root + this._paths.organizations, data);
   }
 
-
+  putOrganization(organizationId: number, body: string) {
+    // The API currently does not allow putting to the organization url.
+    return this._put(this._paths.root + this._paths.organizations /* + organizationId */, body);
+  }
 
 
   /**
