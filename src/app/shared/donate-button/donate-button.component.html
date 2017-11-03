@@ -16,7 +16,7 @@
     {{donateOption3}}:-
   </a>
       <div  class="swish" *ngIf="openSwish">
-        <iframe src='swish://paymentrequest'>
+        <iframe src='swish://paymentrequest/token=token&callback=callback'>
         </iframe>
       </div>
 </div>

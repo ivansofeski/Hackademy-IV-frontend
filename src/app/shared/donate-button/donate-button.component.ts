@@ -1,4 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-donate-button',
@@ -7,12 +8,13 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 
 export class DonateButtonComponent implements OnInit {
+  token: any;
   @Input() donateOption1;
   @Input() donateOption2;
   @Input() donateOption3;
   @Input() project;
   openSwish = false;
-  constructor() {
+  constructor(private dataService: DataService) {
   }
 
   toggleAmounts(elm: HTMLElement): void {
@@ -48,6 +50,15 @@ export class DonateButtonComponent implements OnInit {
       this.project.raisedFunding +=  amount;
       // the project should be saved here
       this.openSwish=true;
+
+      const swishData = {
+        payeePaymentReference: '',
+        amount: amount,
+      }
+      this.dataService.postSwish(JSON.stringify(swishData)).subscribe(
+        Response => {console.log(Response)
+        this.token = Response;
+        });
     }
   }
 }

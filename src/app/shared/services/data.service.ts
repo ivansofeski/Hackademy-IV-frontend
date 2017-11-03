@@ -41,6 +41,7 @@ export class DataService {
 
     activities: 'events/',
 
+    swish: '/nanoSwishAPI/paymentRequest/',
   };
 
   /**
@@ -117,6 +118,10 @@ export class DataService {
     .catch((error: Response) => {
       return Observable.throw(error || 'Server error');
     });
+  }
+
+  postSwish(body:string){
+    return this._post(this._paths.root + this._paths.swish,body);
   }
 
   /**
