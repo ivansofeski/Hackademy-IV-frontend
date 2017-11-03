@@ -62,5 +62,4 @@ describe('OrganizationListComponent', () => {
     el = de.nativeElement;
     expect(el.textContent).toContain(testData.orgList[index].contactPersonName);
   });
-
 });

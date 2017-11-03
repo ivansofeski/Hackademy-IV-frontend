@@ -1,0 +1,26 @@
+<div [class.not-loaded]='tableData ? true : false'>
+  <mat-table #table [dataSource]="dataSource" class="admin-table" matSort>
+    <ng-container *ngFor='let col of columns.all; let i = index;' [matColumnDef]='col?.label'>
+      <mat-header-cell *matHeaderCellDef [ngClass]='{"table-header-cell": true, "counter": i===0}' [innerHtml]='col?.value' [attr.sorted]='false' title='Click to sort' mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let row" [ngClass]='{"table-data-cell": true, "counter": i===0}'
+        [title]='col?.value'>
+        <ng-container [ngSwitch]="col?.label.trim()">
+          <a *ngSwitchCase='"name"' class='admin-link' [routerLink]='getLink(col?.label, row)' [textContent]='row[col?.label]'
+            title='Click to open the detailed page as a link'></a>
+          <a *ngSwitchCase='"projectName"' class='admin-link' [routerLink]='getLink(col?.label, row)' [textContent]='row[col?.label]'
+            title='Click to open the detailed page as a link'></a>
+          <a *ngSwitchCase='"organizationName"' class='admin-link' [routerLink]='getLink(col?.label, row)' [textContent]='row[col?.label]'
+            title='Click to open the detailed page as a link'></a>
+          <a *ngSwitchCase='"activityTitle"' class='admin-link' [routerLink]='getLink(col?.label, row)' [textContent]='row[col?.label]'
+            title='Click to open the detailed page as a link'></a>
+          <div *ngSwitchDefault [innerHtml]='insertValues(col?.label, row)'></div>
+        </ng-container>
+        <!-- <div *ngIf='col?.label.toLowerCase().indexOf("name") <= -1' [innerHtml]='insertValues(col?.label, row)'></div>
+        <a class='admin-link' *ngIf='checkColumn(col?.label)' [routerLink]='getLink(col?.label, row)' [textContent]='row[col?.label]' title='Click to open the detailed page as a link'></a> -->
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="columns.visible" class="table-header-row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns.visible;" class="table-data-row"></mat-row>
+  </mat-table>
+  <div class='no-record' *ngIf='tableData.length === 0'>No record found!</div>
+</div>
