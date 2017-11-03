@@ -18,6 +18,7 @@ const routes: Routes = [
       { path: 'organizations', component: OrganizationListComponent },
       { path: 'organizations/new', component: OrganizationFormComponent },
       { path: 'organizations/view/:id', component: OrganizationPageComponent },
+      { path: 'organizations/edit/:id', component: OrganizationFormComponent },
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/new', component: ProjectFormComponent },
       { path: 'projects/view/:id', component: ProjectPageComponent },
