@@ -1,3 +1,6 @@
+.mat-card-header-text {
+    width: 0;
+}
 
 .activity-form {
     min-width: 150px;
@@ -14,11 +17,31 @@
 	width: 100%;
 	padding-bottom: 10px;
 }
+
 .activity-header{
 	margin: auto;
-	font-size:16;
 	padding-bottom: 10px;
 }
+
+.header-label {
+	font-size: 26px;
+	text-align: center;
+	margin: 0;
+}
+
+.under-header-label {
+	position: relative;
+	display: block;
+	width: 100%;
+	font-size: 14px;
+	color: grey;
+	opacity: .75;
+	text-align: center;
+	padding: 5px 10px;
+
+	box-sizing: border-box;
+}
+
 .image-container {
 	position: relative;
     display: flex;
