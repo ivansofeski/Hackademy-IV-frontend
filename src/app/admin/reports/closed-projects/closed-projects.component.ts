@@ -79,11 +79,13 @@ export class ClosedProjectsComponent implements OnInit {
       return;
     }
 
-    yearsSelect.value = undefined;
-    monthsSelect.value = undefined;
+    if (yearsSelect.value || monthsSelect.value) {
+      yearsSelect.value = monthsSelect.value = undefined;
+      this.chosenYear = this.chosenMonth = '';
 
-    if (this.initDataSource) {
-      this.initDataSource();
+      if (this.initDataSource) {
+        this.initDataSource();
+      }
     }
   }
 

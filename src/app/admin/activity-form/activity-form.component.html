@@ -1,7 +1,10 @@
 <div class="container">
   <mat-card class="activity-card">
     <mat-card-header>
-      <div class='activity-header' [textContent]='loadedProject?.projectName'></div>
+      <div class='activity-header'>
+        <mat-card-title class='header-label'>New activity</mat-card-title>
+        <div class='under-header-label'>for ({{loadedProject?.projectName}})</div>
+      </div>
     </mat-card-header>
     <mat-card-content>
       <form class='activity-form' #activityForm>
