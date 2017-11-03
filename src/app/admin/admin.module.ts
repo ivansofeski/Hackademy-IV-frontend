@@ -1,11 +1,7 @@
-import { MatTableModule, MatSortModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
-
-// Services
-import { DataService } from './services/data.service';
-import { ActivitiesService } from './services/activities.service';
+import { ReportsModule } from './reports/reports.module';
 
 // Components
 import { AdminComponent } from './admin.component';
@@ -18,15 +14,15 @@ import { OrganizationListComponent } from './organization-list/organization-list
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ProjectListComponent } from './project-list/project-list.component';
-import { ReportsModule } from './reports/reports.module';
 import { ActivityFormComponent } from './activity-form/activity-form.component';
+
+// Pipes
+import { KeysPipe } from './dashboard/keys.pipe';
 
 @NgModule({
   imports: [
     AdminRoutingModule,
     SharedModule,
-    MatTableModule,
-    MatSortModule,
     ReportsModule
   ],
   exports: [
@@ -43,8 +39,9 @@ import { ActivityFormComponent } from './activity-form/activity-form.component';
     SidebarComponent,
     DashboardComponent,
     ActivityFormComponent,
+    KeysPipe,
   ],
-  providers: [DataService, ActivitiesService]
+  providers: []
 })
 
 export class AdminModule { }

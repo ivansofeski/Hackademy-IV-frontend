@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx';
 import { SharedModule } from '../../../shared/shared.module';
 
 // Services
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../../shared/services/data.service';
 
 // Components
 import { testData } from '../../test-data';

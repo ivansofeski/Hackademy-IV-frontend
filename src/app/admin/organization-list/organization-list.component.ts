@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { DataSource } from '@angular/cdk/table';
 import { MatPaginator, MatSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -9,7 +9,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
-import { Organization } from '../interface/organization';
+import { Organization } from '../../interfaces/organization';
 
 /**
  *
@@ -27,7 +27,7 @@ import { Organization } from '../interface/organization';
 /** */
 export class OrganizationListComponent implements OnInit, OnDestroy {
   dataSource: OrganizationDataSource | null;
-  displayedColumns = ['id', 'name', 'address', 'person', 'phone'];
+  displayedColumns = [ 'number', 'name', 'address', 'person'];
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -98,10 +98,12 @@ export class OrganizationDataSource extends DataSource<any> {
       let propertyB: number | string = '';
 
       switch (this._sorter.active) {
-        case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'orgId': [propertyA, propertyB] = [a.orgId, b.orgId]; break;
+        case 'id': [propertyA, propertyB] = [a.organizationId, b.organizationId]; break;
+        case 'number': [propertyA, propertyB] = [a.organizationNumber, b.organizationNumber]; break;
         case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
         case 'address': [propertyA, propertyB] = [a.address, b.address]; break;
+        case 'person': [propertyA, propertyB] = [a.contactPersonName, b.contactPersonName]; break;
+        case 'email': [propertyA, propertyB] = [a.contactPersonEmail, b.contactPersonEmail]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

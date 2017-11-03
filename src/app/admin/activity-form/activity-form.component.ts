@@ -1,43 +1,36 @@
-import { ActivitiesService } from './../services/activities.service';
 import { constructDependencies } from '@angular/core/src/di/reflective_provider';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
-import { Activity } from '../interface/activity';
 import { INPUT_ATTRIBUTES, NUMBERS, REGEX_UNITS } from './activity-form.constants';
-import { DataService } from '../services/data.service';
 import { NanoValidators } from '../services/nano-validators';
+import { Location } from '@angular/common';
+
+// Services
+import { DataService } from '../../shared/services/data.service';
+import { Activity } from '../../interfaces/activity';
 
 @Component({
   selector: 'app-activity-form',
   templateUrl: './activity-form.component.html',
   styleUrls: ['./activity-form.component.scss']
 })
+
 export class ActivityFormComponent implements OnInit {
   @ViewChild('activityForm') activityForm: ElementRef;
   functions: ActivityFormFunctions;
   inputs: Function;
   errorsTwo: QueryList<String>;
   loadedProject: Object;
-  newActivity: Activity = {
-    projectId: 0,
-    activityId: 1,
-    activityTitle: '',
-    activityDescription: '',
-    activityDate: '',
-    activityImage: '',
-  };
-  links = {
-    list: '/admin/projects/',
-    new: '/admin/projects/new/'
-  };
+  id: number;
   attributes = INPUT_ATTRIBUTES;
   errors: any[] = [];
-  activityControls = {
+  eventsForm: Activity;
 
-    descImage:   new FormControl('', []),
-    name:        new FormControl('', [NanoValidators.required]),
-    projectId:     new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
+  activityControls = {
+    descImage:    new FormControl('', []),
+    name:         new FormControl('', [NanoValidators.required]),
+    projectId:    new FormControl('', [Validators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
     activityDate: new FormControl('', [NanoValidators.required]),
     desc:         new FormControl('', [NanoValidators.required]),
   };
@@ -122,42 +115,59 @@ export class ActivityFormComponent implements OnInit {
 
   setProjectId(value: any, input: HTMLInputElement): void {
     this.activityControls.projectId.setValue(value);
-    // this.projectControls.orgId.updateValueAndValidity();
   }
 
   getactivitiesProject: Function = (): void => {
-    this._activitiesService.project.subscribe(
+    this._dataService.project.subscribe(
       project => {
         if (project !== undefined && Object.keys(project).length > 0) {
           this.loadedProject = project;
-          console.log(project);
+          this.id = project['id'];
+
         } else {
-          const projId = +this._router.snapshot.paramMap.get('id');
-          this._dataService.getProjects().subscribe(
-            projects => {
-              if (projects !== undefined && projects.length > 0) {
-                this.loadedProject = projects.filter((v, k) => {
-                  return v.id = projId;
-                })[0];
-              }
-            }
-          );
+          const newPath = `/${this._routeSnapshot.parent.url['value'][0].path}/${this._routeSnapshot.snapshot.url.slice(0, -1).join('/')}`;
+          
+          if (this._router && this._router.navigateByUrl) {
+            this._router.navigateByUrl(newPath);
+          }
         }
+      },
+      error => {
+        this.errors.push(error);
       }
     );
   }
 
-  constructor(private _router: ActivatedRoute, private _dataService: DataService, private _activitiesService: ActivitiesService) { }
+  constructor(private _router: Router, private _routeSnapshot: ActivatedRoute, private _dataService: DataService,
+                private _location: Location) { }
 
   ngOnInit() {
-    this.functions = new ActivityFormFunctions(this.activityForm, this._activitiesService);
+    this.functions = new ActivityFormFunctions(this.activityForm);
     this.inputs = this.functions.setInputAttributes;
     this.getactivitiesProject();
     if (this.inputs !== undefined) {
       this.inputs();
     }
   }
+  
+  onSubmit() {
 
+    this.eventsForm = {
+      projectId:            this.id,
+      eventTitle:           this.activityControls.name.value,
+      eventDescription:     this.activityControls.desc.value,
+      eventDate:            this.activityControls.activityDate.value,
+      eventImage:           this.activityControls.descImage.value,
+    }
+    
+    this._dataService.postActivity(JSON.stringify(this.eventsForm)).subscribe(
+       response => console.log(response));
+  }
+
+  onCancel(){
+    this._location.back();
+  }
+  
 }
 
 export class ActivityFormFunctions {
@@ -185,14 +195,5 @@ export class ActivityFormFunctions {
     }
   }
 
-  /* getactivitiesProject: Function = (proj: Object): void => {
-    this._activitiesService.project.subscribe(
-      project => {
-         proj = project;
-         console.log(project);
-      }
-    );
-  } */
-
-  constructor(private _form: ElementRef, private _activitiesService: ActivitiesService) { }
+  constructor(private _form: ElementRef) { }
 }

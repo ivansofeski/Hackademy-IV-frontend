@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {DonorOverviewService} from './donor-overview.service';
-import {Donor} from '../donor.interface';
-import {ProjectService} from '../../projects/project.service';
+// import {DonorOverviewService} from './donor-overview.service';
+
+// Interfaces
+import { Donor } from '../../interfaces/donor';
+
+// Services
 import {LocalStorageService} from '../../service/local-storage.service';
+import { DataService } from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-donor-overview',
@@ -16,29 +20,23 @@ export class DonorOverviewComponent implements OnInit {
   donor: Donor;
   projectList: any[] = [];
 
-  constructor(private _donorList: DonorOverviewService,
-              private _localStorageService: LocalStorageService,
-              private _projectService: ProjectService) { }
+  constructor(private _localStorageService: LocalStorageService,
+              private _dataService: DataService) { }
 
   ngOnInit() {
-    this.currentUser = this._localStorageService.getCurrentUser();
+    this.donor = this._localStorageService.getCurrentUser();
 
-    this._donorList.getDonors().subscribe(
+    this._dataService.getProjects().subscribe(
       res => {
         console.log(res);
-        this.donorList = res;
-        this.donor = res[0];
-        console.log(this.donor);
-      },
-      error => this.errors.push(error)
-    );
-
-    this._projectService.getTargettedProjects(this.currentUser.savedProject).subscribe(
-      res => {
-        console.log(res);
-        this.projectList = res;
-      }
-    );
+        this.projectList = res.filter((k, v) => {
+          for (const id of this.donor.savedProject) {
+            if (k.id === id) {
+              return true;
+            }
+          }
+        });
+        console.log(this.projectList);
+      });
   }
-
 }

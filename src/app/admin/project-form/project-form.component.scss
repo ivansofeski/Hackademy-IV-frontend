@@ -1,3 +1,7 @@
+.mat-card-header-text {
+    width: 0;
+}
+
 .material-icons {
 	position: absolute;
 }
@@ -11,7 +15,17 @@
 }
   
 .project-full-width {
-    width: 100%;
+	width: 100%;
+	padding-top: 10px;
+}
+.project-header {
+	margin: auto;
+	padding-bottom: 10px;
+}
+
+.header-label {
+	font-size: 26px;
+	text-align: center;
 }
 
 .image-container {
@@ -117,3 +131,11 @@
 	margin: 0 10px;
 	padding: 0 40px;
 }
+.container{
+    background-color: #eee;
+}
+.project-card {
+    width: 600px;
+    margin: auto;
+    background-size: cover;
+  }

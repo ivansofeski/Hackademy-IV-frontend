@@ -1,14 +1,16 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {ProjectService} from '../project.service';
-import {LocalStorageService} from '../../service/local-storage.service';
-import {Project} from '../project.interface';
-import { GeolocationService } from '../../service/geolocation.service';
+import {Project} from '../../interfaces/project';
+import { Observable } from 'rxjs/Observable';
 
+// Services
+import {LocalStorageService} from '../../service/local-storage.service';
+import { GeolocationService } from '../../service/geolocation.service';
+import { DataService } from '../../shared/services/data.service';
 
 @Component({
   // selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.scss','./_project-list.component-theme.scss']
+  styleUrls: ['./project-list.component.scss', './_project-list.component-theme.scss']
 })
 export class ProjectListComponent implements OnInit {
   errors: any[] = [];
@@ -23,8 +25,8 @@ export class ProjectListComponent implements OnInit {
   donateOption1 = 10;
   donateOption2 = 25;
   donateOption3 = 50;
-
-  constructor(private _projectService: ProjectService,
+  geocoder;
+  constructor(private _projectService: DataService,
               private _localStorageService: LocalStorageService,
               private _geolocationService: GeolocationService) {
   }
@@ -32,24 +34,24 @@ export class ProjectListComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this._localStorageService.getCurrentUser();
     this._geolocationService.getIPLocation().subscribe(location => {
-      this.currentUser.userLocation.lat = location.lat;
-      this.currentUser.userLocation.lng = location.lon;
-      const user = JSON.stringify(this.currentUser);
-      localStorage.setItem(this.localStorageKey, user);
-      this._projectService.getProjects().subscribe(
-        res => {
-          console.log(res);
-          this.projectList = res.filter((v, k) => {
-            return v.open === 'true';
-          },
-            error => this.errors.push(error)
-          );
-        }
-      );
+      // this.currentUser.userLocation.lat = location.lat;
+      // this.currentUser.userLocation.lng = location.lon;
+      // const user = JSON.stringify(this.currentUser);
+      // localStorage.setItem(this.localStorageKey, user);
+      this._projectService.getOrganizations().subscribe(orgs => {
+        this._projectService.getOpenProjects().subscribe(
+          projects => {
+            console.log(projects);
+            projects.forEach(project => {
+              project['organizationName'] = orgs.find(org => org.organizationId === project.organizationId).name;
+            });
+            this.projectList = projects;
+          });
+      });
     });
   }
 
-  
+
 
   /**
    * this function will return a class that is responsible for activating and deactivating the color red in the

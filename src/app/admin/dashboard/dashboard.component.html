@@ -1,1 +1,65 @@
 <div class='dashboard-header' [textContent]='strings.dashboard[lng]'></div>
+<main>
+    <ng-container *ngIf='sections'>
+        <section *ngFor='let section of sections | keys' class="trans-15s category {{section}}" [attr.for]='section'>
+            <label class='flex row-label'>{{_getSectionLabel(section)}}
+                <span class='breaker'></span>
+                <span class='latest'>Latest {{latest}}</span>
+            </label>
+            <div class='trans-15s row' *ngFor='let row of sections[section]' [ngSwitch]='section'>
+                <a target='_blank' *ngIf='section !== "activities"' [routerLink]='_getRouterLink(section, row)'>
+                    <mat-icon class='no-select flex {{section}}-link-icon' title='Opens a link in a new tab'>open_in_new</mat-icon>
+                </a>
+                <div class='row-wrapper' *ngSwitchCase='"organizations"'>
+                    <span>name: </span>
+                    <span>{{row?.name}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"organizations"'>
+                    <span>number: </span>
+                    <span>{{row?.organizationNumber}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"organizations"'>
+                    <span>contact person: </span>
+                    <span>{{row?.contactPersonName}}</span>
+                </div>
+                <div class='row-wrapper'*ngSwitchCase='"projects"'>
+                    <span>name: </span>
+                    <span>{{row?.projectName}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"projects"'>
+                    <span>number: </span>
+                    <span>{{row?.projectNumber}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"projects"'>
+                    <span>funding goal: </span>
+                    <span>{{row?.amountToBeRaised}}</span>
+                </div>
+                <div class='row-wrapper'*ngSwitchCase='"closedProjects"'>
+                    <span>name: </span>
+                    <span>{{row?.projectName}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"closedProjects"'>
+                    <span>funding raised: </span>
+                    <span>{{row?.raisedFunding}}<i>/</i>{{row?.amountToBeRaised}} (SEK)</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"closedProjects"'>
+                    <span>closed date: </span>
+                    <span>{{_getPropertDateFormat(row?.toDate)}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"activities"'>
+                    <span>title: </span>
+                    <span>{{row?.eventTitle}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"activities"'>
+                    <span>published: </span>
+                    <span>{{_getPropertDateFormat(row?.eventDate)}}</span>
+                </div>
+                <div class='row-wrapper' *ngSwitchCase='"activities"'>
+                    <span>project: </span>
+                    <span>{{row?.projectName}}</span>
+                </div>
+            </div>
+            <div class='row no-data' *ngIf='sections[section].length <= 0'>No data!</div>
+        </section>
+    </ng-container>
+</main>

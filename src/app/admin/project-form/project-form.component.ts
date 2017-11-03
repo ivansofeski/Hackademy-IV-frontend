@@ -1,11 +1,12 @@
+import { Project } from '../../interfaces/project';
+import { GeolocationService } from '../../service/geolocation.service';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, ElementRef, ViewChild, DoCheck, QueryList } from '@angular/core';
-import { Project } from '../interface/project';
-import { INPUT_ATTRIBUTES, NUMBERS, REGEX_UNITS } from './project-form.constants';
-import { Organization } from '../interface/organization';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { NanoValidators } from '../services/nano-validators';
+import { Organization } from '../../interfaces/organization';
 
+declare var google: any;
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
@@ -14,40 +15,31 @@ import { NanoValidators } from '../services/nano-validators';
 
 export class ProjectFormComponent implements OnInit, DoCheck {
   @ViewChild('projectForm') projectForm: ElementRef;
-  errorsTwo: QueryList<String>;  //@bani: Is this use anywhere?
-  links = {  //@bani: Is this use anywhere?
-    list: '/admin/projects/',
-    new: '/admin/projects/new/'
-  };
-  attributes = INPUT_ATTRIBUTES;
   organizations: Organization[] = [];
   errors: any[] = [];
+  lat: number;
+  lng: number;
+  projForm: Project;
   projectControls = {
     descImage:    new FormControl('', []),
     name:         new FormControl('', [NanoValidators.required]),
-    projectId:    new FormControl('', [NanoValidators.required, Validators.pattern(REGEX_UNITS.PROJECT)]),
+    projectId:    new FormControl('', [NanoValidators.required, Validators.pattern(/^([A-Za-z0-9]{6})+[-]+([A-Za-z0-9]{4})/)]),
     manager:      new FormControl('', [NanoValidators.required]),
     orgId:        new FormControl('', [NanoValidators.required]),
     fromDate:     new FormControl(new Date(), [Validators.required]),
     toDate:       new FormControl(null, []),
-    goal:         new FormControl('', [NanoValidators.required]),
+    goal:         new FormControl('', [NanoValidators.required, Validators.min(1), NanoValidators.NaN]),
     address:      new FormControl('', [NanoValidators.required]),
     shortDesc:    new FormControl('', [NanoValidators.required]),
     desc:         new FormControl('', [NanoValidators.required]),
-    national:     new FormControl('0', [NanoValidators.required])
+    national:     new FormControl('false', [NanoValidators.required])
   };
-
-  setAttributes(options: any): void { //@bani: Is this use anywhere?
-//    console.log(options);
-  }
 
   setImagePath(elm: HTMLInputElement): void {
     if (elm === undefined || elm.value === '') {
       return;
     }
-
     const _imgSelector = elm.parentElement.querySelectorAll('img')[0];
-
     if (_imgSelector !== undefined) {
       const fReader = new FileReader();
 
@@ -59,69 +51,6 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     }
   }
 
-  // This function provides a white list of characters/symbols/numbers and etc.
-  // Specific inputs use this function to enable or disable the user on Client side depending on the pattern forseen.
-  // Switch statement checks which Input by it's "name" attribute and applies a set of statements and then sets _validate.
-  // Then in the end of the function depending if it validates to TRUE or FALSE we set e.preventDefault()
-  inputWhiteList(e) {
-    let _validate = true;
-    const _target = e.currentTarget;
-
-    switch (_target.name) {
-      case 'GOAL':
-        if (!NUMBERS.hasOwnProperty(e.keyCode)) {
-          _validate = false;
-        }
-
-        if ((e.shiftKey || e.altKey) && NUMBERS.hasOwnProperty(e.keyCode)) {
-          _validate = false;
-        }
-
-        if (e.ctrlKey) {
-          if (e.keyCode === 65) {
-            _validate = true;
-          }
-        }
-        break;
-      case 'FROM_DATE':
-      case 'TO_DATE':
-        if (!NUMBERS.hasOwnProperty(e.keyCode)) {
-          _validate = false;
-        }
-
-        if ((e.shiftKey || e.altKey) && NUMBERS.hasOwnProperty(e.keyCode)) {
-          _validate = false;
-        }
-
-        if (e.ctrlKey) {
-          if (e.keyCode === 65) {
-            _validate = true;
-          }
-        }
-
-        if (e.keyCode === 191 || e.keyCode === 111) {
-          const _currValue = _target.value.trim();
-
-          if (_currValue.length > 0) {
-            const _lastChar = _currValue.charAt(_currValue.length - 1);
-
-            _validate = _lastChar === '/' ? false : true;
-
-            if (_currValue.split('/').length > 2) {
-              _validate = false;
-            }
-          }
-        }
-        break;
-      default:
-        break;
-    }
-
-    if (!_validate) {
-      e.preventDefault();
-    }
-  }
-
   setHiddenInputs(inputName: string, value: any): void {
     if (this.projectControls[inputName] !== undefined) {
       this.projectControls[inputName].setValue(value);
@@ -130,30 +59,11 @@ export class ProjectFormComponent implements OnInit, DoCheck {
 
   setOrganizationId(value: any, input: HTMLInputElement): void {
     this.projectControls.orgId.setValue(value);
-    // this.projectControls.orgId.updateValueAndValidity();
   }
 
-  // Not implemented fully!
-  saveProject() {
-    this._fetcher.getProjects().subscribe(
-      res => {
-        if (res !== undefined && res.length > 0) {
-          const last_project = res[res.length - 1];
-
-          const all_inputs = document.querySelectorAll('input:not([type="hidden"]), textarea');
-
-          if (all_inputs !== undefined) {
-            for (const input in all_inputs) {
-            }
-          }
-        }
-      },
-      error => this.errors.push(error)
-    );
-  }
 
   hardReset(evt): void {
-    let form = this.fb.group(
+    const form = this.fb.group(
       this.projectControls
     );
 
@@ -167,12 +77,13 @@ export class ProjectFormComponent implements OnInit, DoCheck {
     }
   }
 
-  constructor(private _fetcher: DataService, private fb: FormBuilder) {
+  constructor(private _fetcher: DataService, private fb: FormBuilder, private _geoLocationService: GeolocationService) {
     this.projectControls.toDate.setValidators([
       Validators.required,
       (c: AbstractControl) => c.value < new Date() ?  {'wrongdate': 'Wrong Date'} : null,
       (c: AbstractControl): ValidationErrors | null => {
-        return this.projectControls.toDate.value && this.projectControls.fromDate.value && this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate': true} : null;
+        return this.projectControls.toDate.value && this.projectControls.fromDate.value &&
+        this.projectControls.toDate.value < this.projectControls.fromDate.value ? {'impossibleDate': true} : null;
       }
     ]);
   }
@@ -197,38 +108,60 @@ export class ProjectFormComponent implements OnInit, DoCheck {
                   return 0;
               }
             });
-//            console.log(this.organizations);
           }
         },
         error => this.errors.push(error)
       );
     }
 
-    if (this.projectForm !== undefined) {
-      const inputs = this.projectForm.nativeElement.querySelectorAll('input:not([type="hidden"]), textarea');
+    this.projForm = {
+      mainImage:           '',
+      projectName:         '',
+      projectNumber:       '0',
+      projectManager:      '',
+      organizationId:      0,
+      fromDate:            0,
+      toDate:              0,
+      amountToBeRaised:    0,
+      raisedFunding:        0,
+      address:              '',
+      description:         '',
+      nationalProject:     false,
+      images:         [''],
+      latitude:         0,
+      longitude:       0,
+      recurringProject: false,
+  };
+  }
 
-      if (inputs !== undefined && inputs.length > 0) {
-        for (const input of inputs) {
-          const _name = input['name'];
-
-          if (INPUT_ATTRIBUTES.hasOwnProperty(_name)) {
-            const attributes = INPUT_ATTRIBUTES[_name];
-
-            for (const key in attributes) {
-              if (attributes.hasOwnProperty(key)) {
-                if (key !== 'placeholder') {
-                  input.setAttribute(key, attributes[key]);
-                }
-              }
-            }
-          }
-
-          if (input.name === 'GOAL' || input.name.indexOf('DATE') > -1) {
-            input.addEventListener('keydown', this.inputWhiteList);
-          }
-        }
+  onSubmit() {
+    this._geoLocationService.getAddressLocation(this.projectControls.address.value)
+    .subscribe(coords => {
+      if (this.projForm && Object.keys(this.projForm).length > 0) {
+        this.projForm = {
+          mainImage:           this.projectControls.descImage.value,
+          projectName:         this.projectControls.name.value,
+          projectNumber:       this.projectControls.projectId.value,
+          projectManager:      this.projectControls.manager.value,
+          organizationId:      this.projectControls.orgId.value,
+          fromDate:            this.projectControls.fromDate.value,
+          toDate:              this.projectControls.toDate.value,
+          amountToBeRaised:    this.projectControls.goal.value,
+          raisedFunding:        0,
+          address:              this.projectControls.address.value,
+          description:         this.projectControls.desc.value,
+          nationalProject:     this.projectControls.national.value,
+          images:              null,
+          recurringProject: false,
+          latitude :           coords.lat(),
+          longitude:           coords.lng()
+        };
       }
-    }
+
+      this._fetcher.postProject(JSON.stringify(this.projForm)).subscribe(
+        response => console.log(response)
+     );
+    });
   }
 
   ngDoCheck(): void {}

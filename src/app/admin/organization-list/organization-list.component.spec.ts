@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { OrganizationListComponent } from './organization-list.component';
 import { DebugElement } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { testData } from '../test-data';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -42,14 +42,7 @@ describe('OrganizationListComponent', () => {
     expect(des.length).toBe(testData.orgList.length);
   });
 
-  it('should display organization row number', () => {
-    const index = Math.floor(testData.orgList.length * Math.random());
-    de = fixture.debugElement.query(By.css('mat-table'));
-    el = de.nativeElement;
-    expect(el.textContent).toContain(testData.orgList[index].id.toString());
-  });
-
-  it('should display organization names', () => {
+  it('should display organization name', () => {
     const index = Math.floor(testData.orgList.length * Math.random());
     de = fixture.debugElement.query(By.css('mat-table'));
     el = de.nativeElement;
@@ -67,13 +60,7 @@ describe('OrganizationListComponent', () => {
     const index = Math.floor(testData.orgList.length * Math.random());
     de = fixture.debugElement.query(By.css('mat-table'));
     el = de.nativeElement;
-    expect(el.textContent).toContain(testData.orgList[index].contact.person);
+    expect(el.textContent).toContain(testData.orgList[index].contactPersonName);
   });
 
-  it('should display organization contact phones', () => {
-    const index = Math.floor(testData.orgList.length * Math.random());
-    de = fixture.debugElement.query(By.css('mat-table'));
-    el = de.nativeElement;
-    expect(el.textContent).toContain(testData.orgList[index].contact.phone);
-  });
 });

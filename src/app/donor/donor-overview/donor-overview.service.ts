@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {Donor} from '../donor.interface';
+import {Donor} from '../../interfaces/donor';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/Observable/throw';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class DonorOverviewService {

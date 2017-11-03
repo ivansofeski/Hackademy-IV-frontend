@@ -28,21 +28,24 @@
              [longitude]="lng"
              [zoom]="zoom"
              [styles]="style"
-             (mapClick)="mapClicked($event)">
+             (mapClick)="mapClicked($event)"
+             #agmMap>
 
-      <agm-marker [latitude]="lat"
+      <agm-marker *ngIf = "user"
+                  [latitude]="lat"
                   [longitude]="lng"
                   [iconUrl]="iconUrl"
                   [markerDraggable]="true"
                   (dragEnd)="dragEnd($event)"></agm-marker>
-      <agm-circle [latitude]="lat"
+      <agm-circle *ngIf = "user"
+                  [latitude]="lat"
                   [longitude]="lng"
                   [radius]="radius"
                   fillOpacity="0.05"></agm-circle>
 
       <agm-marker *ngFor="let m of projects"
-                  [latitude]="m.location.lat"
-                  [longitude]="m.location.lng"
+                  [latitude]="m.latitude"
+                  [longitude]="m.longitude"
                   (markerClick)='goToProjectPage(m)'
                   [iconUrl]="iconUrlProject">
       </agm-marker>
@@ -52,7 +55,6 @@
 
   <div class="confirm-container"
        *ngIf="center_changed"
-       [hidden]="hide_default"
        (click)="confirm_location()">
     <button mat-button class="confirm-button">Confirm</button>
   </div>

@@ -1,12 +1,16 @@
-import {Component, OnInit, ViewChild, ElementRef, NgZone} from '@angular/core';
-import {ProjectService} from '../projects/project.service';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, AfterViewInit, Directive } from '@angular/core';
 import {} from 'googlemaps';
-import {MapsAPILoader} from '@agm/core';
+import { MapsAPILoader, GoogleMapsAPIWrapper } from '@agm/core';
 import {Observable} from 'rxjs/Observable';
-import {GeolocationService} from '../service/geolocation.service';
-import {Project} from '../projects/project.interface';
+import {Project} from '../interfaces/project';
 import {Router} from '@angular/router';
+
+// Services
+import {GeolocationService} from '../service/geolocation.service';
 import {LocalStorageService} from '../service/local-storage.service';
+import { DataService } from '../shared/services/data.service';
+import { GoogleMap } from '@agm/core/services/google-maps-types';
+
 
 declare var google: any;
 
@@ -17,15 +21,23 @@ declare var google: any;
     './_geolocation.component-theme.scss']
 })
 export class GeolocationComponent implements OnInit {
+  @ViewChild('agmMap') mapElement: any;
+  map: GoogleMap;
   lat: number;
   lng: number;
   zoom: number;
   radius: number;
   projects = [];
-  position;
+  currentlat: number;
+  currentlng: number;
   inputAddressElm;
   hide_default = true;
   center_changed = false;
+  user;
+  showUser = true;
+  currentLocationTab = true;
+  geocoder;
+
   style = [
     {
       'featureType': 'all',
@@ -297,16 +309,11 @@ export class GeolocationComponent implements OnInit {
       width: 35
     }
   };
-  iconUrlProject = {
-    url: '../assets/icons/project-icon.png',
-    scaledSize: {
-      height: 45,
-      width: 45
-    }
-  };
+  iconUrlProject;
 
-  constructor(private _projectService: ProjectService,
+  constructor(private _dataService: DataService,
               private mapsAPILoader: MapsAPILoader,
+              private _mapsWrapper: GoogleMapsAPIWrapper,
               private ngZone: NgZone,
               private _geolocationService: GeolocationService,
               public router: Router,
@@ -314,10 +321,24 @@ export class GeolocationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showPosition();
-    this.inputAddressElm = this.searchElementRef.nativeElement;
-    const searchButtElm = document.getElementById('searchButton');
+    if (this.showUser === true) {
+      this.user = this._localStorageService.getCurrentUser();
+      this.inputAddressElm = this.searchElementRef.nativeElement;
+      const searchButtElm = document.getElementById('searchButton');
+    }
     this.mapsAPILoader.load().then(() => {
+      this.iconUrlProject = {
+        url: '../assets/icons/project-icon.png',
+        size: new google.maps.Size(45, 45),
+        anchor: new google.maps.Point(22.5, 22.5)
+      };
+
+      // google.maps.addListener('zoom_changed', () => {
+      //   this.zoom = 1;
+      // });
+      // this.geocoder = new google.maps.Geocoder();
+      this.showUserPosition();
+      this.loadProjects();
       const autocomplete = new google.maps.places.Autocomplete(this.inputAddressElm, {
         types: ['address']
       });
@@ -337,76 +358,87 @@ export class GeolocationComponent implements OnInit {
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
           this.zoom = 12;
+          if (this.currentLocationTab === false) {
+            this.center_changed = true;
+          }
         });
       });
     });
   }
 
-  showPosition() {
+  // ngAfterViewInit() {
+  //   this._mapsWrapper.getNativeMap().then(returnedMap => {
+  //     this.map = returnedMap;
+  //   });
+  // }
+
+  showUserPosition() {
     this.radius = 4000;
     this.zoom = 12;
     this._geolocationService.getGeolocation().subscribe(location => {
       this.lat = location.lat;
       this.lng = location.lng;
+      this.currentlat = this.lat;
+      this.currentlng = this.lng;
     });
-    this._projectService.getProjects().subscribe(
-      res => {
-        console.log(res);
-        this.projects = res;
-      });
   }
 
+  loadProjects(): any {
+    this._dataService.getProjects()
+      .subscribe( projectsList => {
+        console.log(projectsList);
+          projectsList.forEach(project => {
+            if (project.latitude === null || project.longitude === null) {
+              this._geolocationService.getAddressLocation(project.address)
+                .subscribe(projectLocation => {
+                  project.latitude = projectLocation.lat();
+                  project.longitude = projectLocation.lng();
+                });
+            }
+            // if (project.id === 13) {
+            //   this._geolocationService.getAddressLocation(project.address)
+            //   .subscribe(projectLocation => {
+            //     console.log(project.id);
+            //     console.log('latitude: ' + projectLocation.lat() + ',' + 'longitude: ' + projectLocation.lng() + ',' );
+            //   });
+            // }
+        });
+        this.projects = projectsList;
+      });
+    }
+
   dragEnd(event) {
-    console.log(this.lat);
     this.lat = event.coords.lat;
-    console.log(this.lat);
-    console.log(this.lng);
     this.lng = event.coords.lng;
-    console.log(this.lng);
-    this.center_changed = true;
+    if (this.currentLocationTab === false) {
+      this.center_changed = true;
+    }
   }
 
   mapClicked(event) {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
-    this.center_changed = true;
+    if (this.currentLocationTab === false) {
+      this.center_changed = true;
+    }
   }
 
   onClick() {
     console.log('an address has been searched');
-    console.log(this.inputAddressElm.value);
-    this.getLatLan(this.inputAddressElm.value).subscribe(
+    this._geolocationService.getAddressLocation(this.inputAddressElm.value).subscribe(
       result => {
         // needs to run inside zone to update the map
         this.ngZone.run(() => {
-          console.log(this.lat);
           this.lat = result.lat();
-          console.log(this.lat);
-          console.log(this.lng);
           this.lng = result.lng();
-          console.log(this.lng);
+          if (this.currentLocationTab === false) {
+            this.center_changed = true;
+          }
         });
       },
       error => console.log(error),
       () => console.log('Geocoding completed!')
     );
-  }
-
-  getLatLan(address: string) {
-    console.log('Getting Address - ', address);
-    const geocoder = new google.maps.Geocoder();
-    return Observable.create(observer => {
-      geocoder.geocode({'address': address}, function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-          observer.next(results[0].geometry.location);
-          observer.complete();
-        } else {
-          console.log('Error - ', results, ' & Status - ', status);
-          observer.next({});
-          observer.complete();
-        }
-      });
-    });
   }
 
   goToProjectPage(project: Project) {
@@ -415,18 +447,33 @@ export class GeolocationComponent implements OnInit {
   }
 
   current_location() {
+    this.currentLocationTab = true;
     this.hide_default = true;
+    this.center_changed = false;
+    this.lat = this.currentlat;
+    this.lng = this.currentlng;
+    this.mapElement._mapsWrapper.setZoom(12);
+    this.mapElement._mapsWrapper.setCenter({lat: this.lat, lng: this.lng});
   }
 
   default_location() {
+    this.currentLocationTab = false;
     this.hide_default = false;
+    if (this.user.userLocation.lat !== undefined || this.user.userLocation.lng !== undefined) {
+      this.lat = this.user.userLocation.lat;
+      this.lng = this.user.userLocation.lng;
+      this.mapElement._mapsWrapper.setZoom(12);
+      this.mapElement._mapsWrapper.setCenter({lat: this.lat, lng: this.lng});
+      this.center_changed = false;
+    } else {
+      this.center_changed = true;
+    }
   }
 
   confirm_location() {
     this.center_changed = false;
-    const user = this._localStorageService.getCurrentUser();
-    user.userLocation.lat = this.lat;
-    user.userLocation.lng = this.lng;
-    this._localStorageService.updateCurrnetUser(user);
+    this.user.userLocation.lat = this.lat;
+    this.user.userLocation.lng = this.lng;
+    this._localStorageService.updateCurrnetUser(this.user);
   }
 }

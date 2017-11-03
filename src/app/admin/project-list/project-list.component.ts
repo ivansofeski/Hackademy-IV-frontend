@@ -3,13 +3,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DataSource } from '@angular/cdk/table';
 import { MatSort } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from '../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project } from '../interface/project';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+
+// Services
+import { DataService } from '../../shared/services/data.service';
+import { Project } from '../../interfaces/project';
 
 @Component({
   selector: 'app-project-list',
@@ -34,7 +36,6 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new ProjectDataSource(this._dataService, this.sort);
-    console.log('this.datasource', this.dataSource);
   }
 
   ngOnDestroy(): void { }
@@ -69,7 +70,6 @@ export class ProjectDataSource extends DataSource<any> {
     if (!this.subject.isStopped) {
       this._serviceFetch.getProjects()
         .subscribe(res => {
-          console.log('Value', this.subject);
           this.subject.next(res);
         });
       return Observable.merge(...displayDataChanges).map(() => {
@@ -81,7 +81,6 @@ export class ProjectDataSource extends DataSource<any> {
   disconnect() {
     this.subject.complete();
     this.subject.observers = [];
-    console.log('disconnected!');
   }
 
   getSortedData(): Project[] {
@@ -97,9 +96,9 @@ export class ProjectDataSource extends DataSource<any> {
 
       switch (this._sorter.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'todate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
+//        case 'fromDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
+//        case 'toDate': [propertyA, propertyB] = [a.toDate, b.toDate]; break;
         case 'projectName': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
-        case 'address': [propertyA, propertyB] = [a.address, b.address]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

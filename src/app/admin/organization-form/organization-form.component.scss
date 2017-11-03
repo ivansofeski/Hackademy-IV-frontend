@@ -5,39 +5,53 @@
     margin: auto;
     padding-bottom: 10px;
   }
-  
-  .organization-name {
+
+mat-form-field {
     width: 100%;
-  }
-  .organization-number {
-    width: 100%;
-  }
-  .organization-contact {
-    width: 100%;
-  }
-  .organization-contact-name {
-    width: 100%;
-  }
-  .organization-contact-email {
-    width: 100%;
-  }
-  .organization-address {
-    width: 100%;
-  }
-  .organization-location {
-    width: 100%;
-  }
-  .organization-postalCode {
-    width: 100%;
-  }
-  .organization-city {
-    width: 100%;
-  }
-  .organization-description {
-    width: 100%;
-  }
-  .organization-bankAccount {
-    width: 100%;
-  }
- 
-  
+    padding-top:10px;
+	}
+	
+.mat-card-header-text {
+    width: 0;
+}
+
+.organization-contact {
+	width: 100%;
+}
+
+.organization-header{
+	margin: auto;
+	padding-bottom: 10px;
+}
+
+.header-label {
+	font-size: 26px;
+	text-align: center;
+}
+
+.container{
+  background-color: #eee;
+}
+.organization-card {
+  width: 600px;
+  margin: auto;
+  background-size: cover;
+}
+
+.buttons-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 10px 0;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.buttons-wrapper > button {
+	position: relative;
+	margin: 0 10px;
+	padding: 0 40px;
+}
