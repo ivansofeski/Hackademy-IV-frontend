@@ -123,7 +123,7 @@ export class ProjectDataSource extends DataSource<any> {
               orgs => {
                 const _closed = projects.filter((proj, i, obj) => {
                   proj['organization'] = orgs.filter((org, j) => {
-                    return org.organizationId = proj.organizationId;
+                    return org.organizationId === proj.organizationId;
                   })[0];
 
                   if (proj.hasOwnProperty('raisedFunding') && proj.hasOwnProperty('amountToBeRaised') && proj.hasOwnProperty('toDate')) {
