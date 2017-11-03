@@ -3,7 +3,7 @@ import { Organization } from '../../interfaces/organization';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NanoValidators } from '../services/nano-validators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const ORG_REGEX = /^([A-Za-z0-9]{6})+[-]+([A-Za-z0-9]{4})/;
 const CITY_REGEX = /^([A-Za-z])/;
@@ -28,7 +28,7 @@ export class OrganizationFormComponent implements OnInit {
     billings:      new FormControl('', [NanoValidators.required]),
     description:  new FormControl('', [NanoValidators.required])
   };
-  constructor (public route: ActivatedRoute, private _dataservice: DataService, private ob: FormBuilder) {
+  constructor (public route: ActivatedRoute, private router: Router, private _dataservice: DataService, private ob: FormBuilder) {
 
   }
 
@@ -80,7 +80,9 @@ export class OrganizationFormComponent implements OnInit {
     const form = this.ob.group(
       this.formControls
     );
-
+    if (this.organizationId && this.organizationId > 0) {
+      this.router.navigateByUrl('/admin/organizations/view/' + this.organizationId)
+    }
     if (form !== undefined) {
       for (const name in form.controls) {
         if (form.controls.hasOwnProperty(name)) {
