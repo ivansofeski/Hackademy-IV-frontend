@@ -58,6 +58,7 @@
     <br>
     <h4>About {{organization.name}}</h4>
     <div class="org-desc">{{organization.description}}</div>
+    <button mat-raised-button [routerLink]="['/admin/organizations/edit/',organization.organizationId]">Edit</button>
   </mat-card>
 </div>
 
