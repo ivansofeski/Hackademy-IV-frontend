@@ -3,13 +3,13 @@
     <mat-card-header>
       <mat-card-title class='card-title'>Closed Projects</mat-card-title>
     </mat-card-header>
-    <mat-form-field class='dateFilters'>
+    <mat-form-field class='date-filters'>
       <mat-select #yearsSelect class='filter-year' placeholder="year" (change)='filterClosedProjects({chosenYear: $event.value})'
         selected='yearNow'>
         <mat-option *ngFor='let year of years' [value]='year' [textContent]='year'></mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class='dateFilters'>
+    <mat-form-field class='date-filters'>
       <mat-select #monthsSelect class='filter-month' placeholder="month" (change)='filterClosedProjects({chosenMonth: $event.value})'>
         <mat-option *ngFor='let month of months' [value]='month.value' [textContent]='month.viewValue'></mat-option>
       </mat-select>

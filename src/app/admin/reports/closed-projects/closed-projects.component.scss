@@ -26,7 +26,7 @@ mat-card {
 
 .container {
   background: #eee;
-  padding: 15vh 0;
+  padding: 50px 0;
 }
 
 .card-title {
@@ -36,6 +36,10 @@ mat-card {
   text-align: center;
   font-size: 24px;
   text-transform: uppercase;
+}
+
+.date-filters {
+  margin: 0 15px 0 5px;
 }
 
 .reset-wrapper {
@@ -56,6 +60,12 @@ mat-card {
     opacity: .5;
     z-index: 100;
     cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
   }
   
   .reset:hover {

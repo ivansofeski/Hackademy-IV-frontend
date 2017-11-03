@@ -78,8 +78,8 @@ export class ClosedProjectsComponent implements OnInit {
   public errors: any[] = [];
 
   years: number[] = [];
-  chosenYear: number;
-  chosenMonth: number;
+  chosenYear = '';
+  chosenMonth = '';
 
   yearsGenerator: Function = (): void => {
     const yearNow = new Date().getFullYear();
@@ -104,7 +104,7 @@ export class ClosedProjectsComponent implements OnInit {
 
     const fullPeriod = `${this.chosenYear}/${this.chosenMonth}`;
 
-    this.initDataLoad(new Date(fullPeriod));
+    this.initDataLoad(fullPeriod);
   }
 
   resetFilters: Function = (yearsSelect, monthsSelect): void => {
@@ -112,11 +112,13 @@ export class ClosedProjectsComponent implements OnInit {
       return;
     }
 
-    yearsSelect.value = undefined;
-    monthsSelect.value = undefined;
+    if (yearsSelect.value || monthsSelect.value) {
+      yearsSelect.value = monthsSelect.value = undefined;
+      this.chosenYear = this.chosenMonth = '';
 
-    if (this.initDataLoad) {
-      this.initDataLoad();
+      if (this.initDataLoad) {
+        this.initDataLoad();
+      }
     }
   }
 
@@ -128,7 +130,9 @@ export class ClosedProjectsComponent implements OnInit {
    * `filter` Optional argument. Whenever user sets a period of time from both Date Pickers it will trigger a filtering on the table data
    * source. This `filter` is type of string when initiated.
    */
-  initDataLoad: Function = (filterDate?: Date | string): void => {
+  initDataLoad: Function = (filterDate?: string | Date ): void => {
+    this.tableData = [];
+
     if (this._dataService) {
       this._dataService.getProjects().subscribe(
         projects => {
@@ -151,13 +155,16 @@ export class ClosedProjectsComponent implements OnInit {
 
                     let _validate = false;
 
-                    if (_closedByDate || _closedByFunding) {
-                      _validate = true;
-                    }
-
                     if (filterDate) {
-                      _validate = (filterDate <= _dateNow && filterDate <= _projectToDate) &&
-                        (proj.toDate.toString().trim().slice(0, -2).indexOf(filterDate.toString()) > -1);
+                      _validate = _projectToDate
+                                    .toISOString()
+                                    .split('T')[0]
+                                    .slice(0, -3)
+                                    .replace(/-/g, '/')
+                                    .indexOf(filterDate.toString()) > -1 &&
+                                    (_closedByDate || _closedByFunding);
+                    } else {
+                      _validate = _closedByDate || _closedByFunding;
                     }
 
                     if (_validate) {

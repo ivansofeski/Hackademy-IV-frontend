@@ -28,11 +28,11 @@ import { FormsModule,
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { GeolocationComponent } from '../geolocation/geolocation.component';
+import { TableComponent } from './table/table.component';
 
 // Services
 import { DataService } from './services/data.service';
 import { GeolocationService } from '../service/geolocation.service';
-import { TableComponent } from './table/table.component';
 
 @NgModule({
   imports: [
@@ -92,7 +92,8 @@ import { TableComponent } from './table/table.component';
     ReactiveFormsModule,
     AgmCoreModule,
     DonateButtonComponent,
-    GeolocationComponent
+    GeolocationComponent,
+    TableComponent
   ],
   declarations: [
     NavbarComponent,
