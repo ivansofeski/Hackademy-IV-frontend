@@ -2,9 +2,13 @@
 <div class="container">
   <mat-card class="organization-card">
     <mat-card-header>
-      <div class='organization-header'>
+      <div *ngIf="!organizationId" class='organization-header'>
           <mat-card-title>New Organization</mat-card-title>
       </div>
+      <div *ngIf="organizationId" class='organization-header'>
+        <mat-card-title>Edit Organization {{ formControls.name.value }}</mat-card-title>
+    </div>
+
     </mat-card-header>
     <mat-card-content>
 
